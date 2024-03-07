@@ -2,18 +2,18 @@
 
 require '../emails/index.php';
 session_start();
-class DatabaseConnection
+abstract class DatabaseConnection
 {
     private $username = "Admin1";
     private $password = "a123";
     private $database_name = "alwasit";
     private $host = "localhost";
-
+    protected $conn;
     public function __construct()
     {
         try {
-            $DB_conn = new PDO("mysql:host=$this->host;dbname=$this->database_name", $this->username, $this->password);
-            $DB_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database_name", $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             $mailBody = "
                     <!DOCTYPE html>
@@ -29,7 +29,6 @@ class DatabaseConnection
                     </body>
                     </html>
                             ";
-
             $send_email = new EmailSender("alwasit.real.estate@gmail.com", "DataBase Connection failed", $mailBody);
             $send_email->sendEmail();
             header("Location:../Not Found.php");
