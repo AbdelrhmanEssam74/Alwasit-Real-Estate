@@ -22,4 +22,9 @@ class RegisterTable extends DatabaseConnection
         $insert->execute();
         header("Location: $path");
     }
+    public function checkPhoneNumber($num)
+    {
+        $regex = '/^(010|011|012|015)\d{8}$/';
+        return preg_match($regex, $num);
+    }
 }

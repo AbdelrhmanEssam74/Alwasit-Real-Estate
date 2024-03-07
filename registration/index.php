@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,17 +45,15 @@
                 <p>مرحباً بكم في <br /><span><strong>الوسيط</strong></span></p>
                 <p class="info">قم بإنشاء حساب جديد للوصول الي خدمات الوسيط</p>
 
-                <form action="../auth/register.php" method="post" id="form">
+                <form action="../auth/register.php" method="POST" id="form">
                     <div class="input-box-name">
                         <div class="first-name">
-                            <input class="name" name="FName" id="firstName" type="text" dir="rtl"
-                                placeholder=" الأسم الأول">
+                            <input class="name" name="FName" id="firstName" type="text" dir="rtl" placeholder=" الأسم الأول">
                             <i class='bx bx-user'></i>
                             <span class="error_message"></span>
                         </div>
                         <div class="last-name">
-                            <input class="name" id="lastName" name="LName" type="text" dir="rtl"
-                                placeholder=" الأسم الأخير">
+                            <input class="name" id="lastName" name="LName" type="text" dir="rtl" placeholder=" الأسم الأخير">
                             <i class='bx bx-user'></i>
                             <span class="error_message"></span>
                         </div>
@@ -78,14 +74,13 @@
                         <span class="error_message"></span>
                     </div>
                     <div class="input-box">
-                        <input id="confirmPassword" type="password" name="confirmPassword" dir="rtl"
-                            placeholder="تأكيد كلمه المرور">
+                        <input id="confirmPassword" type="password" name="confirmPassword" dir="rtl" placeholder="تأكيد كلمه المرور">
                         <i class='bx bx-lock-open'></i>
                         <span class="error_message"></span>
 
                     </div>
                     <div class="input-box">
-                        <input type="tel" dir="rtl" id="phone" name="phone" placeholder="+20">
+                        <input type="tel" oninput="validateInput()" dir="rtl" id="phone" name="phone" placeholder="+20">
                         <i class='bx bx-phone-call'></i>
                         <span class="error_message"></span>
 

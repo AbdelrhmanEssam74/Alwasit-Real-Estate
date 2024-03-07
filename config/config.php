@@ -1,7 +1,6 @@
 <?php
 
 require '../emails/index.php';
-session_start();
 abstract class DatabaseConnection
 {
     private $username = "Admin1";

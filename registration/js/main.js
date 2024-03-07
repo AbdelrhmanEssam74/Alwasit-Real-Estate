@@ -86,12 +86,13 @@ const validateInputs = () => {
     }
     if (phonevalue === "") {
         setErrors(phone, "ادخل الرقم الخاص بك")
-    } else {
+    }
+    else {
         setSuccess(phone);
 
     }
-}
 
+}
 
 function isFormValid() {
     const error = form.querySelectorAll(".error_message");
