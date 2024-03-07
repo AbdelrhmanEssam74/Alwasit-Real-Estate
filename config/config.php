@@ -1,6 +1,6 @@
 <?php
 
-
+require '../emails/index.php';
 session_start();
 class DatabaseConnection
 {
@@ -29,9 +29,11 @@ class DatabaseConnection
                     </body>
                     </html>
                             ";
-            // $_SESSION['DB_Error_mail'] = $mailBody;
-            // header("Location:sendEmails.php");
-            // exit();
+
+            $send_email = new EmailSender("alwasit.real.estate@gmail.com", "DataBase Connection failed", $mailBody);
+            $send_email->sendEmail();
+            header("Location:../Not Found.php");
+            exit();
         }
     }
 }
