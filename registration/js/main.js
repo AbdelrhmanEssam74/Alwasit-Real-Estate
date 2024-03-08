@@ -93,19 +93,7 @@ const validateInputs = () => {
     }
 
 }
-console.log("hi");
-last_name.addEventListener('keyup', function (event) {
-    const enteredValue = event.target.value;
-    const namePattern = /^[a-zA-Z'-]{2,50}$/;
-    if (enteredValue.length < 2) {
-        setErrors(last_name, "اقل من 2 حرف");
-    } else if (enteredValue.length > 13) {
-        setErrors(last_name, "اكثر من 13 حرف");
 
-    } else {
-        setSuccess(last_name)
-    }
-});
 phone.addEventListener('keyup', function (event) {
     if (event.key.match(/[^0-9]/g)) {
         setErrors(phone, "ادخل رقم صحيح")
@@ -157,6 +145,7 @@ const menuicon = document.querySelector(".toggle_menu");
 const menu = document.getElementById("menu");
 menuicon.addEventListener("click", () => {
     menu.classList.toggle("show_menu");
+    menuicon.classList.toggle("fouced");
 });
 
 

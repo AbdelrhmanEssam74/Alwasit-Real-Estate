@@ -1,3 +1,34 @@
+<?php
+session_start();
+// check if the phone number is valid or not
+$invalid_phone = "";
+$Exists_EMAIL = "";
+$Exists_Phone = "";
+$firstName = "";
+$lastName = "";
+$email = "";
+if (isset($_SESSION)) :
+    if (isset($_SESSION['Invalid_PHONE'])) :
+        $invalid_phone = $_SESSION['Invalid_PHONE'];
+    endif;
+    if (isset($_SESSION['Exists_EMAIL'])) :
+        $Exists_EMAIL = $_SESSION['Exists_EMAIL'];
+    endif;
+    if (isset($_SESSION['Exists_Phone'])) :
+        $Exists_Phone = $_SESSION['Exists_Phone'];
+    endif;
+    if (isset($_SESSION['old_data'])) :
+        $old_data = json_decode($_SESSION['old_data'], true);
+        $firstName = $old_data['FName'];
+        $lastName = $old_data['LName'];
+        $email = $old_data['email'];
+    endif;
+    session_unset();
+    session_destroy();
+endif;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,25 +74,32 @@
         <div class="back_img">
             <div class="form_content">
                 <p>مرحباً بكم في <br /><span><strong>الوسيط</strong></span></p>
-                <p class="info">قم بإنشاء حساب جديد للوصول الي خدمات الوسيط</p>
-
+                <?php
+                if (!empty($invalid_phone)) {
+                    echo "<p class='message'>{$invalid_phone}</p>";
+                } elseif (!empty($Exists_EMAIL)) {
+                    echo "<p class='message'>{$Exists_EMAIL}</p>";
+                } elseif (!empty($Exists_Phone)) {
+                    echo "<p class='message'>{$Exists_Phone}</p>";
+                } else {
+                    echo '<p class="info">قم بإنشاء حساب جديد للوصول الي خدمات الوسيط</p>';
+                }
+                ?>
                 <form action="../auth/register.php" method="POST" id="form">
                     <div class="input-box-name">
                         <div class="first-name">
-                            <input class="name" name="FName" id="firstName" type="text" dir="rtl" placeholder=" الأسم الأول">
+                            <input class="name" name="FName" id="firstName" value="<?php echo $firstName ?>" type="text" dir="rtl" placeholder=" الأسم الأول">
                             <i class='bx bx-user'></i>
                             <span class="error_message"></span>
                         </div>
                         <div class="last-name">
-                            <input class="name" id="lastName" name="LName" type="text" dir="rtl" placeholder=" الأسم الأخير">
+                            <input class="name" id="lastName" name="LName" value="<?php echo $lastName ?>" type="text" dir="rtl" placeholder=" الأسم الأخير">
                             <i class='bx bx-user'></i>
                             <span class="error_message"></span>
                         </div>
                     </div>
-
-
                     <div class="input-box">
-                        <input id="email" type="email" name="email" dir="rtl" placeholder="البريد الالكتروني">
+                        <input id="email" type="email" name="email" dir="rtl" value="<?php echo $email ?>" placeholder="البريد الالكتروني">
                         <i class='bx bxs-envelope'></i>
                         <span class="error_message"></span>
                     </div>
@@ -80,10 +118,9 @@
 
                     </div>
                     <div class="input-box">
-                        <input type="tel" dir="rtl" id="phone" name="phone" placeholder="+20" >
+                        <input type="tel" dir="rtl" id="phone" name="phone" placeholder="+20">
                         <i class='bx bx-phone-call'></i>
                         <span class="error_message"></span>
-
                     </div>
                     <div class="Note">
                         <ul dir="rtl">
