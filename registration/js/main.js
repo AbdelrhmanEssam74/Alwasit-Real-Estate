@@ -93,6 +93,15 @@ const validateInputs = () => {
     }
 
 }
+console.log("hii");
+phone.addEventListener('keyup', function (event) {
+    if (event.key.match(/[^0-9]/g)) {
+        setErrors(phone, "ادخل رقم صحيح")
+        phone.value = phone.value.replace(/\D/g, ''); // Remove non-digit character
+    } else {
+        setSuccess(phone)
+    }
+});
 
 function isFormValid() {
     const error = form.querySelectorAll(".error_message");

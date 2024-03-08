@@ -1,74 +1,77 @@
-const form = document.querySelector('form')
-const inputs = form.querySelectorAll('input')
-const KEYBOARDS = {
-    backspace: 8,
-    arrowLeft: 37,
-    arrowRight: 39,
-}
+//Initial references
+const input = document.querySelectorAll(".input");
+const inputField = document.querySelector(".inputfield");
+const submitButton = document.getElementById("submit");
+let inputCount = 0,
+    finalInput = "";
 
-function handleInput(e) {
-    const input = e.target
-    const nextInput = input.nextElementSibling
-    if (nextInput && input.value) {
-        nextInput.focus()
-        if (nextInput.value) {
-            nextInput.select()
+//Update input
+const updateInputConfig = (element, disabledStatus) => {
+    element.disabled = disabledStatus;
+    if (!disabledStatus) {
+        element.focus();
+    } else {
+        element.blur();
+    }
+};
+
+input.forEach((element) => {
+    element.addEventListener("keyup", (e) => {
+        e.target.value = e.target.value.replace(/[^0-9]/g, "");
+        let { value } = e.target;
+
+        if (value.length == 1) {
+            updateInputConfig(e.target, true);
+            if (inputCount <= 3 && e.key != "Backspace") {
+                finalInput += value;
+                if (inputCount < 3) {
+                    updateInputConfig(e.target.nextElementSibling, false);
+                }
+            }
+            inputCount += 1;
+        } else if (value.length == 0 && e.key == "Backspace") {
+            finalInput = finalInput.substring(0, finalInput.length - 1);
+            if (inputCount == 0) {
+                updateInputConfig(e.target, false);
+                return false;
+            }
+            updateInputConfig(e.target, true);
+            e.target.previousElementSibling.value = "";
+            updateInputConfig(e.target.previousElementSibling, false);
+            inputCount -= 1;
+        } else if (value.length > 1) {
+            e.target.value = value.split("")[0];
+        }
+        submitButton.classList.add("hide");
+    });
+});
+
+window.addEventListener("keyup", (e) => {
+    if (inputCount > 3) {
+        submitButton.classList.remove("hide");
+        submitButton.classList.add("show");
+        if (e.key == "Backspace") {
+            finalInput = finalInput.substring(0, finalInput.length - 1);
+            updateInputConfig(inputField.lastElementChild, false);
+            inputField.lastElementChild.value = "";
+            inputCount -= 1;
+            submitButton.classList.add("hide");
         }
     }
-}
+});
 
-function handlePaste(e) {
-    e.preventDefault()
-    const paste = e.clipboardData.getData('text')
-    inputs.forEach((input, i) => {
-        input.value = paste[i] || ''
-    })
-}
+const validateOTP = () => {
+    alert("Success");
+};
 
-function handleBackspace(e) {
-    const input = e.target
-    if (input.value) {
-        input.value = ''
-        return
-    }
+//Start
+const startInput = () => {
+    inputCount = 0;
+    finalInput = "";
+    input.forEach((element) => {
+        element.value = "";
+    });
+    updateInputConfig(inputField.firstElementChild, false);
+};
 
-    input.previousElementSibling.focus()
-}
-
-function handleArrowLeft(e) {
-    const previousInput = e.target.previousElementSibling
-    if (!previousInput) return
-    previousInput.focus()
-}
-
-function handleArrowRight(e) {
-    const nextInput = e.target.nextElementSibling
-    if (!nextInput) return
-    nextInput.focus()
-}
-
-form.addEventListener('input', handleInput)
-inputs[0].addEventListener('paste', handlePaste)
-
-inputs.forEach(input => {
-    input.addEventListener('focus', e => {
-        setTimeout(() => {
-            e.target.select()
-        }, 0)
-    })
-
-    input.addEventListener('keydown', e => {
-        switch (e.keyCode) {
-            case KEYBOARDS.backspace:
-                handleBackspace(e)
-                break
-            case KEYBOARDS.arrowLeft:
-                handleArrowLeft(e)
-                break
-            case KEYBOARDS.arrowRight:
-                handleArrowRight(e)
-                break
-            default:
-        }
-    })
-})
+window.onload = startInput();

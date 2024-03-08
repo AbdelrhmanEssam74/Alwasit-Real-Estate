@@ -2,25 +2,26 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/verification.css">
-    <title>Verification Your Email</title>
+    <!-- Design by foolishdeveloper.com -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Input</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/verification.css" />
 </head>
 
 <body>
-    <form action="#">
-        <h4 class="text-center mb-4">Enter your code</h4>
-        <div class="d-flex mb-3">
-            <input type="tel" maxlength="1" pattern="[0-9]" class="form-control">
-            <input type="tel" maxlength="1" pattern="[0-9]" class="form-control">
-            <input type="tel" maxlength="1" pattern="[0-9]" class="form-control">
-            <input type="tel" maxlength="1" pattern="[0-9]" class="form-control">
-            <input type="tel" maxlength="1" pattern="[0-9]" class="form-control">
-            <input type="tel" maxlength="1" pattern="[0-9]" class="form-control">
+    <div class="container">
+        <div class="inputfield">
+            <input type="number" maxlength="1" class="input" disabled />
+            <input type="number" maxlength="1" class="input" disabled />
+            <input type="number" maxlength="1" class="input" disabled />
+            <input type="number" maxlength="1" class="input" disabled />
         </div>
-        <button type="submit" class="w-100 btn btn-primary">Verify account</button>
-    </form>
+        <button class="hide" id="submit" onclick="validateOTP()">Submit</button>
+    </div>
+    <!-- Script -->
     <script src="js/verification.js"></script>
 </body>
 

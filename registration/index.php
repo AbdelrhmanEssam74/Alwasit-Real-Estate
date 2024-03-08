@@ -80,7 +80,7 @@
 
                     </div>
                     <div class="input-box">
-                        <input type="tel" oninput="validateInput()" dir="rtl" id="phone" name="phone" placeholder="+20">
+                        <input type="tel" dir="rtl" id="phone" name="phone" placeholder="+20" >
                         <i class='bx bx-phone-call'></i>
                         <span class="error_message"></span>
 
