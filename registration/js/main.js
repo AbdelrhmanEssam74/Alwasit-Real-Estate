@@ -98,7 +98,10 @@ phone.addEventListener('keyup', function (event) {
     if (event.key.match(/[^0-9]/g)) {
         setErrors(phone, "ادخل رقم صحيح")
         phone.value = phone.value.replace(/\D/g, ''); // Remove non-digit character
-    } else {
+    } else if (phone.value[0] != "0" || phone.value.length < 11 || phone.value.length > 11) {
+        setErrors(phone, "ادخل رقم مصري صحيح")
+    }
+    else {
         setSuccess(phone)
     }
 });
