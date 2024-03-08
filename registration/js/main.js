@@ -71,8 +71,8 @@ const validateInputs = () => {
     } else {
         setSuccess(password);
     }
-    if (passwordValue.length < 5) {
-        setErrors(password, " كلمة السر اقل من 5 حروف")
+    if (passwordValue.length < 8) {
+        setErrors(password, " كلمة السر اقل من 8 حروف")
     } else {
         setSuccess(password);
     }
