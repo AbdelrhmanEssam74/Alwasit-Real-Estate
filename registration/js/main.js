@@ -77,7 +77,7 @@ const validateInputs = () => {
         setSuccess(password);
     }
     if (ConfirmPasswordValue === "") {
-        setErrors(confirmPassword, "ادخل كلمة السر")
+        setErrors(confirmPassword, " اعد ادخال كلمة السر")
     } else if (passwordValue !== ConfirmPasswordValue) {
         setErrors(confirmPassword, "كلمة السر غير مطابقة");
     } else {
