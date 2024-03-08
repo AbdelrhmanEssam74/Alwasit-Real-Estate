@@ -93,13 +93,23 @@ const validateInputs = () => {
     }
 
 }
-console.log("hii");
+console.log("hi");
+last_name.addEventListener('keyup', function (event) {
+    const enteredValue = event.target.value;
+    const namePattern = /^[a-zA-Z'-]{2,50}$/;
+    if (enteredValue.length < 2) {
+        setErrors(last_name, "اقل من 2 حرف");
+    } else if (enteredValue.length > 13) {
+        setErrors(last_name, "اكثر من 13 حرف");
+
+    } else {
+        setSuccess(last_name)
+    }
+});
 phone.addEventListener('keyup', function (event) {
     if (event.key.match(/[^0-9]/g)) {
         setErrors(phone, "ادخل رقم صحيح")
         phone.value = phone.value.replace(/\D/g, ''); // Remove non-digit character
-    } else if (phone.value[0] != "0" || phone.value.length < 11 || phone.value.length > 11) {
-        setErrors(phone, "ادخل رقم مصري صحيح")
     }
     else {
         setSuccess(phone)
