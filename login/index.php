@@ -1,3 +1,11 @@
+<?php
+$email  = " ";
+session_start();
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +53,7 @@
                 <p>مرحباً بكم في <br /><span><strong>الوسيط</strong></span></p>
                 <form action="" method="POST" id="form">
                     <div class="input-box">
-                        <input id="email" name="email" type="email" dir="rtl" placeholder="البريد الالكتروني">
+                        <input id="email" name="email" type="email" dir="rtl" value="<?php echo $email ?>" placeholder="البريد الالكتروني">
                         <i class='bx bxs-envelope'></i>
                         <span class="error_message"></span>
 

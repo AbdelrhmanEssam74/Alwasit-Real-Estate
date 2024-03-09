@@ -7,6 +7,8 @@ $Exists_Phone = "";
 $firstName = "";
 $lastName = "";
 $email = "";
+$phone = "";
+$old_data = [];
 if (isset($_SESSION)) :
     if (isset($_SESSION['Invalid_PHONE'])) :
         $invalid_phone = $_SESSION['Invalid_PHONE'];
@@ -19,14 +21,17 @@ if (isset($_SESSION)) :
     endif;
     if (isset($_SESSION['old_data'])) :
         $old_data = json_decode($_SESSION['old_data'], true);
+        $old_data = $old_data[0];
         $firstName = $old_data['FName'];
         $lastName = $old_data['LName'];
         $email = $old_data['email'];
+        $phone = $old_data['phone'];
     endif;
     session_unset();
     session_destroy();
-endif;
 
+
+endif;
 ?>
 
 <!DOCTYPE html>
@@ -118,7 +123,7 @@ endif;
 
                     </div>
                     <div class="input-box">
-                        <input type="tel" dir="rtl" id="phone" name="phone" placeholder="+20">
+                        <input type="tel" dir="rtl" id="phone" value="<?php echo $phone ?>" name="phone" placeholder="+20">
                         <i class='bx bx-phone-call'></i>
                         <span class="error_message"></span>
                     </div>
