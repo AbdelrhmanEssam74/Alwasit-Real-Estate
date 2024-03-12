@@ -34,15 +34,15 @@ if (isset($_SESSION['email'])) {
             <nav class="navigation">
                 <i class="bx bx-menu toggle_menu black" id="menuicon"></i>
                 <ul id="menu" class="menu">
-                    <li><a href="../تواصل_معنا.html">تواصل معنا</a></li>
+                    <li><a href="../تواصل_معنا.php">تواصل معنا</a></li>
                     <li> <a href="#">عنا</a></li>
                     <li> <a href="#">تجاريه</a></li>
                     <li> <a href="#">للطلاب</a></li>
-                    <li> <a href="../عقارات_للإيجار.html">للإيجار</a></li>
-                    <li> <a href="../عقارات_للبيع.html">للبيع</a></li>
+                    <li> <a href="../عقارات_للإيجار.php">للإيجار</a></li>
+                    <li> <a href="../عقارات_للبيع.php">للبيع</a></li>
                 </ul>
             </nav>
-            <a href="../index.html" class="logo"><img src="../images/logo.png" alt="Logo"></a>
+            <a href="../index.php" class="logo"><img src="../images/logo.png" alt="Logo"></a>
         </div>
     </header>
     <!-- End Header -->
@@ -74,7 +74,7 @@ if (isset($_SESSION['email'])) {
                     <div class="submit_btn">
                         <button id="submit" class="btn2" name="submit" type="submit">تسجيل الدخول</button>
                     </div>
-                    <a href="../registration/index.html">انشاء حساب جديد</a>
+                    <a href="../registration/index.php">انشاء حساب جديد</a>
                 </form>
             </div>
         </div>
