@@ -1,3 +1,4 @@
+<?php include 'init.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,23 +9,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Main External Css file -->
-    <link rel="stylesheet" href="css/rent.css">
+    <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>rent.css">
     <!-- Reader all elements nomarlly -->
-    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="<?php echo $css ?>normalize.css" />
     <!-- Font awesome library -->
-    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="<?php echo $css ?>all.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- animate text  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <title>buy page</title>
+    <title>Buy</title>
 </head>
 
 <body>
@@ -34,22 +31,22 @@
     <header>
         <div class="container">
             <div class="login">
-                <a class="LoginBtn" href="login/index.html">
+                <a class="LoginBtn" href="login/index.php">
                     تسجيل الدخول
                 </a>
             </div>
             <nav class="navigation">
                 <span id="menuicon"><i class="bx bx-menu toggle_menu black"></i></span>
                 <ul id="menu" class="menu">
-                    <li><a href="تواصل_معنا.html">تواصل معنا</a></li>
+                    <li><a href="<?php echo $contactus ?>">تواصل معنا</a></li>
                     <li> <a href="#">عنا</a></li>
                     <li> <a href="#">تجاريه</a></li>
                     <li> <a href="#">للطلاب</a></li>
-                    <li> <a href="عقارات_للإيجار.html">للإيجار</a></li>
-                    <li> <a href="عقارات_للبيع.html">للبيع</a></li>
+                    <li> <a href="<?php echo $forRent ?>">للإيجار</a></li>
+                    <li> <a href="<?php echo $forBuy ?>">للبيع</a></li>
                 </ul>
             </nav>
-            <a href="index.html" class="logo"><img src="images/logo.png" alt="Logo"></a>
+            <a href="index.php" class="logo"><img src="<?php echo $images ?>logo.png" alt="Logo"></a>
         </div>
     </header>
     <!-- End Header -->
@@ -70,8 +67,7 @@
                 </div>
                 <div class="search_inputs">
                     <div class="input_control_search">
-                        <input type="text" required name="q" oninput="showSuggestions()" id="searchInput"
-                            placeholder="الحي او المنطقة">
+                        <input type="text" required name="q" oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
                         <p class="no-suggestion-message" id="noSuggestionMessage"></p>
                         <ul class="suggestion-list" id="suggestionList">
                         </ul>
@@ -736,11 +732,9 @@
         </footer>
     </div>
     <!-- End Footer -->
-    <script src="js/main.js"></script>
-    <script src="js/rent.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
-        integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="<?php echo $js ?>main.js"></script>
+    <script src="<?php echo $js ?>rent.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
 </body>
 
