@@ -4,7 +4,7 @@
         if (isset($DefultPage))
             echo <<< _END
             <div class="login">
-                <a class="LoginBtn" href="<?php echo $login ?>">
+                <a class="LoginBtn" href='$login'>
                     تسجيل الدخول
                 </a>
             </div>

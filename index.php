@@ -1,4 +1,6 @@
-<?php include 'init.php'; ?>
+<?php include 'init.php';
+$DefultPage = '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
