@@ -1,6 +1,8 @@
 <?php
 class loginTable extends DatabaseConnection
 {
+    private $user_id;
+    private $email;
     public function insert($query, $arr)
     {
         $insert = $this->conn->prepare($query);
@@ -30,6 +32,11 @@ class loginTable extends DatabaseConnection
         $prepare = $this->conn->prepare($qry);
         $prepare->execute();
         $rows = $prepare->fetch();
+        $this->user_id = $rows['user_id'];
         return password_verify($pass,  $rows['Password']);
+    }
+    public function GetUserID()
+    {
+        return $this->user_id;
     }
 }

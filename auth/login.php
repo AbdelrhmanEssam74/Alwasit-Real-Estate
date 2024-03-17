@@ -31,15 +31,14 @@ if (!$row_count) {
     } else {
         // check if user want login for 1 month
         if (isset($_POST["remember"])) {
-
             // Generate a secure token (you can choose any method)
             $token = bin2hex(random_bytes(16)); // 32-character token
-            $expiration_time = time() + 2592000; // 2592000 seconds = 30 days
-            setcookie("rem", $token, $expiration_time , '/');
+            setcookie("rem", $token, strtotime("+1 month"), '/');
+            // set login True in session and save the username to be used later
+            $_SESSION['loggedIn'] = true;
+            $_SESSION['uID'] = $userObj->GetUserID();
+            print_r($_SESSION);
             // Save the token in the database (along with user ID and expiration)
-
-            // Return the token to the user (e.g., in JSON response)
-            echo json_encode(['token' => $token]);
         }
     }
 }
