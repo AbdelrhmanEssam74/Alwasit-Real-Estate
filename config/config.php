@@ -1,5 +1,4 @@
 <?php
-
 abstract class DatabaseConnection
 {
     private $username = "Admin1";
@@ -13,7 +12,7 @@ abstract class DatabaseConnection
             $this->conn = new PDO("mysql:host=$this->host;dbname=$this->database_name", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            include_once '../emails/index.php';
+            include_once $email . 'index.php';
             $mailBody = "
                     <!DOCTYPE html>
                     <html>
@@ -30,7 +29,7 @@ abstract class DatabaseConnection
                             ";
             $send_email = new EmailSender("alwasit.real.estate@gmail.com", "DataBase Connection failed", $mailBody);
             $send_email->sendEmail();
-            header("Location:../Not Found.php");
+            header("Location:" . $notFound);
             exit();
         }
     }

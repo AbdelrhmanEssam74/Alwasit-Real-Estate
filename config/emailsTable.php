@@ -1,6 +1,5 @@
 <?php
 
-require_once 'config.php';
 class EmailsTable extends DatabaseConnection
 {
     public function generate_activation_code(): string
@@ -45,4 +44,3 @@ class EmailsTable extends DatabaseConnection
 
 }
 
-$ob = new EmailsTable();

@@ -1,3 +1,4 @@
+<?php include 'init.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,68 +10,45 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Main External Css file -->
-  <link rel="stylesheet" href="css/property details.css">
+  <link rel="stylesheet" href="<?php echo $css ?>property_details.css">
   <!-- Reader all elements nomarlly -->
-  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="<?php echo $css ?>normalize.css" />
   <!-- Font awesome library -->
-  <link rel="stylesheet" href="css/all.min.css" />
+  <link rel="stylesheet" href="<?php echo $css ?>all.min.css" />
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- light box gallery -->
   <!-- <link rel="stylesheet" href="css/lightbox.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
 </head>
 
 <body>
-  <!-- Start Header -->
   <!-- Button to top -->
   <span class="up"><i class="fa-regular fa-circle-up"></i></span>
-  <header>
-    <div class="container">
-      <div class="login">
-        <a class="LoginBtn" href="login/index.html">
-          تسجيل الدخول
-        </a>
-      </div>
-      <nav class="navigation">
-        <span id="menuicon"><i class="bx bx-menu toggle_menu black"></i></span>
-        <ul id="menu" class="menu">
-          <li><a href="تواصل_معنا.html">تواصل معنا</a></li>
-          <li> <a href="#">عنا</a></li>
-          <li> <a href="#">تجاريه</a></li>
-          <li> <a href="#">للطلاب</a></li>
-          <li> <a href="عقارات_للإيجار.html">للإيجار</a></li>
-          <li> <a href="عقارات_للبيع.html">للبيع</a></li>
-        </ul>
-      </nav>
-      <a href="index.html" class="logo"><img src="images/logo.png" alt="Logo"></a>
-    </div>
-  </header>
+  <!-- Start Header -->
+  <?php include $templates . 'header.php' ?>
   <!-- End Header -->
   <!--start gallery-->
   <div class="image-gallery">
     <div class="container">
       <div class="main-image">
         <div>
-          <img data-index="1" src="images/img1.jpg" alt="Image 1">
+          <img data-index="1" src="<?php echo $images ?>img1.jpg" alt="Image 1">
         </div>
       </div>
       <div class="other-images">
-        <div> <img data-index="2" src="images/img2.jpg" alt="Image 1"></div>
-        <div><img data-index="3" src="images/img3.jpg" alt="Image 1"></div>
-        <div> <img data-index="4" src="images/img4.jpg" alt="Image 1"></div>
-        <div> <img data-index="5" src="images/img5.jpg" alt="Image 1"></div>
+        <div> <img data-index="2" src="<?php echo $images ?>img2.jpg" alt="Image 1"></div>
+        <div><img data-index="3" src="<?php echo $images ?>img3.jpg" alt="Image 1"></div>
+        <div> <img data-index="4" src="<?php echo $images ?>img4.jpg" alt="Image 1"></div>
+        <div> <img data-index="5" src="<?php echo $images ?>img5.jpg" alt="Image 1"></div>
       </div>
     </div>
     <div class="popup-img">
-      <span class="close">&times;</span>
+      <span class="close"> <i class="fa fa-close" aria-hidden="true"></i> </span>
       <span class="next"><i class="fa-solid fa-angle-right"></i></span>
       <span class="prev"><i class="fa-solid fa-angle-left"></i></span>
       <img src="images/img3.jpg" alt="Image 1">
@@ -102,15 +80,15 @@
             <div class="divTableBody">
               <div class="divTableRow">
                 <div class="divTableCell">
-                  <i class="fa-solid fa-tag"></i>
+                  <i class='bx bxs-purchase-tag'></i>
                   <p>السعر<span> : 3,000,000</span></p>
                 </div>
                 <div class="divTableCell">
-                  <i class="fa-solid fa-building"></i>
+                  <i class='bx bxs-building'></i>
                   <p>حالة العقار <span> : للبيع</span></p>
                 </div>
                 <div class="divTableCell">
-                  <i class="fa-solid fa-building"></i>
+                  <i class='bx bxs-building'></i>
                   <p>نوع العقار<span> : فيلا</span></p>
                 </div>
               </div>
@@ -140,11 +118,11 @@
           <div class="content">
             <div class="comment">
               <div class="image">
-                <img src="images/person1.jpg" alt="">
+                <img src="<?php echo $images ?>person1.jpg" alt="">
               </div>
               <div class="details">
                 <div class="rate">
-                  <h5>رضوي</h5>
+                  <h5>user</h5>
                   <div class="starts">
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-solid fa-star"></i>
@@ -159,11 +137,11 @@
             </div>
             <div class="comment">
               <div class="image">
-                <img src="images/person1.jpg" alt="">
+                <img src="<?php echo $images ?>person1.jpg" alt="">
               </div>
               <div class="details">
                 <div class="rate">
-                  <h5>رضوي</h5>
+                  <h5>user</h5>
                   <div class="starts">
                     <i class="fa-regular fa-star"></i>
                     <i class="fa-solid fa-star"></i>
@@ -202,16 +180,15 @@
         <div class="owner box">
           <div class="owner-details">
             <div class="info">
-              <h4>ٌRadwa</h4>
+              <h4>User</h4>
               <a href="">25 عقار</a>
             </div>
-            <img src="images/person1.jpg" alt="">
+            <img src="<?php echo $images ?>person1.jpg" alt="">
           </div>
           <div class="connection-links">
             <a class="connection-btn phone-link" data-phone="+201028492181" href="tel:+201007816670">إتصل</a>
             <a class="connection-btn email-link" href="mailto:abdelrhmanroshdy8@gmail.com">بريد إلكتروني</a>
-            <button onclick="send_handle()" class="connection-btn button-whatsapp" data-phone="+201028492181"
-              data-propertyLink="https://www.propertyfinder.eg/to/4585462/ar">
+            <button onclick="send_handle()" class="connection-btn button-whatsapp" data-phone="+201028492181" data-propertyLink="">
               واتس أب
             </button>
           </div>
@@ -238,7 +215,7 @@
           <div>
             <a href="" role="rowgroup">
               <div class="img">
-                <img src="images/img1.jpg" alt="">
+                <img src="<?php echo $images ?>img1.jpg" alt="">
               </div>
               <div class="info">
                 <p class="type">شقة | للإيجار</p>
@@ -261,7 +238,7 @@
             </a>
             <a href="" role="rowgroup">
               <div class="img">
-                <img src="images/img1.jpg" alt="">
+                <img src="<?php echo $images ?>img1.jpg" alt="">
               </div>
               <div class="info">
                 <p class="type">شقة | للإيجار</p>
@@ -284,7 +261,7 @@
             </a>
             <a href="" role="rowgroup">
               <div class="img">
-                <img src="images/img1.jpg" alt="">
+                <img src="<?php echo $images ?>img1.jpg" alt="">
               </div>
               <div class="info">
                 <p class="type">شقة | للإيجار</p>
@@ -311,50 +288,4 @@
       </div>
     </div>
   </div>
-  <!-- Start Footer -->
-  <div class="footer_container">
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="footer-col">
-            <h4>الوسيط</h4>
-            <ul>
-              <li><a href="#">عنا</a></li>
-              <li><a href="#">خدماتنا</a></li>
-              <li><a href="#">سياسة الخصوصية</a></li>
-              <li><a href="login/index.html">إنضم الينا</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>احصل عل المساعده</h4>
-            <ul>
-              <li><a href="#">التعليمات</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>تابعنا</h4>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
-  <!-- End Footer -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
-    integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-  <script src="js/propery_details.js"></script>
-  <script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA372PcuJQKYrKADjhHTLLDVcfsoCzF-4M&callback=initMap"></script>
-</body>
-
-</html>
+  <?php include $templates . 'footer.php'; ?>

@@ -1,7 +1,8 @@
 <?php
 session_start();
-
-include 'config/emailsTable.php';
+include 'init.php';
+include $config . 'config.php';
+include $config . 'emailsTable.php';
 $email = new EmailsTable();
 
 // Function to generate the HTML model
@@ -62,14 +63,14 @@ if (isset($_GET['vc']) && $_GET['uID']) {
     $_SESSION['email'] = $emailData['email'];
     if ($emailData['active'] == 1) {
         echo generateModel("لقد قمت بعملية التأكيد من قبل");
-        header("refresh:2;url=login/index.php");
+        header("refresh:2;url=" . $login);
     } else {
         if (password_verify($emailData['code'], $hashed_code)) {
             // Prepare update statement
             $updateQuery = "UPDATE `email_verification` SET `active` = 1 WHERE user_id = :id";
             if ($email->update($updateQuery, $data)) {
                 echo generateModel("تم تأكيد البريد الإلكتروني بنجاح.<br>سيتم توجيهك إلى صفحة تسجيل الدخول.");
-                header("refresh:2;url=login/index.php");
+                header("refresh:2;url=" . $login);
                 exit();
             } else {
                 echo generateModel("حدث خطأ ما، يرجى المحاولة مرة أخرى لاحقًا.");

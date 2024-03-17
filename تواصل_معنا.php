@@ -1,3 +1,4 @@
+<?php include 'init.php'; ?>
 <!DOCTYPE html>
 <html>
 
@@ -9,19 +10,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Main External Css file -->
-    <link rel="stylesheet" id="stylesheet" href="css/contactus.css">
+    <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>contactus.css">
+    <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>footer.css">
     <!-- Reader all elements nomarlly -->
-    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="<?php echo $css ?>normalize.css" />
     <!-- Font awesome library -->
-    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="<?php echo $css ?>all.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>تواصل معنا</title>
 </head>
@@ -33,7 +31,7 @@
     <header>
         <div class="container">
             <div class="login">
-                <a class="LoginBtn" href="login/index.html">
+                <a class="LoginBtn" href="login.php">
                     تسجيل الدخول
                 </a>
             </div>
@@ -42,15 +40,15 @@
                     <i class="bx bx-menu toggle_menu black"></i>
                 </span>
                 <ul id="menu" class="menu">
-                    <li><a href="تواصل_معنا.html">تواصل معنا</a></li>
-                    <li> <a href="#">عنا</a></li>
-                    <li> <a href="#">تجاريه</a></li>
-                    <li> <a href="#">للطلاب</a></li>
-                    <li> <a href="عقارات_للإيجار.html">للإيجار</a></li>
-                    <li> <a href="عقارات_للبيع.html">للبيع</a></li>
+                    <li><a href="<?php echo $contactus ?>">تواصل معنا</a></li>
+                    <li> <a href="<?php echo $about ?>">عنا</a></li>
+                    <li> <a href="<?php echo $commercial ?>">تجاريه</a></li>
+                    <li> <a href="<?php echo $students ?>">للطلاب</a></li>
+                    <li> <a href="<?php echo $forRent ?>">للإيجار</a></li>
+                    <li> <a href="<?php echo $forBuy ?>">للبيع</a></li>
                 </ul>
             </nav>
-            <a href="index.html" class="logo"><img src="images/logo_white.png" alt="Logo"></a>
+            <a href="index.php" class="logo"><img src="<?php echo $images ?>logo_white.png" alt="Logo"></a>
         </div>
     </header>
     <!-- End Header -->
@@ -61,7 +59,7 @@
             <div class="contact">
                 <div class="left">
                     <div class="contact_img">
-                        <img src="images/Group 114.png" alt="">
+                        <img src="<?php echo $images ?>Group 114.png" alt="">
                     </div>
                     <div class="info">
                         <div class="box">
@@ -96,41 +94,4 @@
         </div>
     </section>
     <!-- End Contact -->
-    <!-- Start Footer -->
-    <div class="footer_container">
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col">
-                        <h4>الوسيط</h4>
-                        <ul>
-                            <li><a href="#">عنا</a></li>
-                            <li><a href="#">خدماتنا</a></li>
-                            <li><a href="#">سياسة الخصوصية</a></li>
-                            <li><a href="login/index.html">إنضم الينا</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>احصل عل المساعده</h4>
-                        <ul>
-                            <li><a href="#">التعليمات</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>تابعنا</h4>
-                        <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-    <!-- End Footer -->
-    <script src="js/contactus.js"></script>
-</body>
-
-</html>
+    <?php include $templates . 'footer.php'; ?>

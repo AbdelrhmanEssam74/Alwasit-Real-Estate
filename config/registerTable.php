@@ -1,6 +1,5 @@
 <?php
 
-require 'config.php';
 class RegisterTable extends DatabaseConnection
 {
     public function insert($query, $arr)

@@ -1,11 +1,4 @@
-//NOTE - toggle_menu
-//menu icon
-const menuicon = document.querySelector(".toggle_menu");
-//menu
-const menu = document.getElementById("menu");
-menuicon.addEventListener("click", () => {
-    menu.classList.toggle("show_menu");
-});
+
 
 
 // Get Slider items
@@ -70,26 +63,6 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-//button to go to the top of the page
-//get the button element
-const btn = document.querySelector(".up");
-//using windo.onscroll() method
-document.onscroll = () => {
-    if (this.scrollY >= 400) {
-        //add className to the butoon "show"
-        btn.classList.add("show");
-    } else {
-        //remove className to the butoon "show"
-        btn.classList.remove("show");
-    }
-};
-//then click on the button to go to the top of page
-btn.onclick = function () {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-    });
-};
 
 // fixed navbar
 window.addEventListener("scroll", function () {
@@ -256,41 +229,53 @@ formElement.addEventListener("submit", (e) => {
     }
 })
 
-// map api
 
-/**
- * @license
- * Copyright 2019 Google LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- */
-let map;
-const chicago = { lat: 42.3601, lng: -71.0589 }
-
-/**
- * Creates a control that recenters the map on Chicago.
- */
-function createCenterControl(map) {
-    const controlButton = document.createElement("button");
-
-    // Set CSS for the control.
-    controlButton.classList.add('buttonStyle');
-
-    controlButton.textContent = "Center Map";
-    controlButton.title = "Click to recenter the map";
-    controlButton.type = "button";
-    // Setup the click event listeners: simply set the map to Chicago.
-    controlButton.addEventListener("click", () => {
-        map.setCenter(chicago);
-    });
-    return controlButton;
-}
+$.ajax({
+    url: 'test.php',
+    type: 'POST',
+    success: function (coordinates) {
+        var values = coordinates.split("|");
+        var lat_value = values[0]
+        var lang_value = values[1]
+        console.log(lat_value.type());
+        console.log(lang_value);
+    },
+    error: function () {
+        console.log('error');
+    }
+});
 
 //SECTION - google map api
 function initMap() {
+    // map options
     var options = {
-        zoom: 8,
-        center: { lat: 42.3601, lng: -71.0589 }
+        zoom: 18,
+        center: { lat: 29.07136598167721, lng: 31.095339506442322 }
     }
+    // new map
     var map = new google.maps.Map(document.getElementById("map"), options);
 
+    // add marker
+    var marker = new google.maps.Marker({
+        position: { lat: lat_value, lng: lang_value },
+        map: map
+    });
+
+    // function to add marker dynamice
+    function addMarker(pos) {
+        var marker = new google.maps.Marker({
+            position: pos.coords,
+            map: map
+        });
+        var infoWindow = new google.maps.InfoWindow({
+            content: pos.content
+        })
+        marker.addListener("click", function () {
+            infoWindow.open(map, marker)
+        })
+    }
+    addMarker({
+        coords: { lat: 29.07136598167721, lng: 31.095339506442322 },
+    })
 }
+

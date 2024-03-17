@@ -1,3 +1,4 @@
+<?php include 'init.php'; ?>
 <?php
 session_start();
 // check if the phone number is valid or not
@@ -45,11 +46,11 @@ endif;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
     <!-- Main External Css file -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?php echo $css ?>register.css">
     <!-- Reader all elements nomarlly -->
-    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="<?php echo $css ?>normalize.css" />
     <!-- Font awesome library -->
-    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="<?php echo $css ?>all.min.css" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <title>Register</title>
@@ -57,22 +58,7 @@ endif;
 
 <body>
     <!-- Start Header -->
-    <header>
-        <div class="container">
-            <nav class="navigation">
-                <i class="bx bx-menu toggle_menu black" id="menuicon"></i>
-                <ul id="menu" class="menu">
-                    <li><a href="../تواصل_معنا.html">تواصل معنا</a></li>
-                    <li> <a href="#">عنا</a></li>
-                    <li> <a href="#">تجاريه</a></li>
-                    <li> <a href="#">للطلاب</a></li>
-                    <li> <a href="../عقارات_للإيجار.html">للإيجار</a></li>
-                    <li> <a href="../عقارات_للبيع.html">للبيع</a></li>
-                </ul>
-            </nav>
-            <a href="../index.html" class="logo"><img src="../images/logo.png" alt="Logo"></a>
-        </div>
-    </header>
+    <?php include $templates . 'header.php'; ?>
     <!-- End Header -->
     <!-- Start Login Form -->
     <div class="form_box">
@@ -138,7 +124,7 @@ endif;
                     <div class="submit_btn">
                         <input value="إنشاء حساب" id="submit" class="BTN_submit" name="submit" type="submit">
                     </div>
-                    <a href="../login/index.html"> لدى حساب بالفعل </a>
+                    <a href="<?php echo $login ?>"> لدى حساب بالفعل </a>
                 </form>
             </div>
         </div>
@@ -146,7 +132,7 @@ endif;
 
 
     <!-- End Login Form -->
-    <script src="js/main.js"></script>
+    <script src="<?php echo $js ?>register.js"></script>
 </body>
 
 </html>

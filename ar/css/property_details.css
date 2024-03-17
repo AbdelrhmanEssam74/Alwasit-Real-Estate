@@ -408,9 +408,9 @@ header nav ul {
 
 .image-gallery .popup-img .close {
     position: absolute;
-    top: 0;
-    right: 50px;
-    font-size: 60px;
+    top: 5%;
+    right: 10%;
+    font-size: 30px;
     color: #fff;
     cursor: pointer;
     z-index: 100;

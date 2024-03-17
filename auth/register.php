@@ -1,14 +1,14 @@
 <?php
-// Define the base URL of your application
-define("AppURL", 'http://localhost/Graduation_Project');
+include '../init.php';
+
 
 session_start();
-require_once  '../config/registerTable.php';
-require_once  '../config/emailsTable.php';
-require_once  '../emails/index.php';
+include '../' . $config . 'config.php';
+include '../' . $config . 'registerTable.php';
+include '../' . $config . 'emailsTable.php';
+include '../' . $emails_libs . 'index.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== "POST") {
-    // Redirect to a specific page (e.g., an error page)
     header("Location: " . $_SERVER['HTTP_REFERER']);
     exit();
 }
@@ -21,7 +21,7 @@ $email = $_POST['email'];
 // Validate phone number
 if (!$userObj->checkPhoneNumber($phone)) {
     $_SESSION['Invalid_PHONE'] = "من فضلك أدخل رقم صحيح";
-    header("Location: " . AppURL . "/registration/index.php");
+    header("Location:/" . $register);
     exit();
 }
 
@@ -29,7 +29,7 @@ if (!$userObj->checkPhoneNumber($phone)) {
 if ($userObj->checkEmailExists($email) > 0) {
     $_SESSION['Exists_EMAIL'] = "هذا البريد الإلكتروني مسجل بالفعل";
     $_SESSION['old_data'] = json_encode(array($_POST));
-    header("Location: " . AppURL . "/registration/index.php");
+    header("Location:/" . $register);
     exit();
 }
 
@@ -37,7 +37,7 @@ if ($userObj->checkEmailExists($email) > 0) {
 if ($userObj->checkPhoneExists($phone) > 0) {
     $_SESSION['Exists_Phone'] = "هذا الرقم مسجل بالفعل";
     $_SESSION['old_data'] = json_encode(array($_POST));
-    header("Location: " . AppURL . "/registration/index.php");
+    header("Location:/" . $register);
     exit();
 }
 
@@ -100,5 +100,5 @@ $data_email = [
 $insertQuery_email = "INSERT INTO `alwasit`.`email_verification` (user_id, email, code, active , activation_expiry) 
                 VALUES (:id,:em, :code, :active , :activation_expir_at)";
 $email_obj->insert($insertQuery_email, $data_email);
-header("Location: " . AppURL . "/verification.php?send=true");
+header("Location:/" . $verification_page . "?send=true");
 exit();

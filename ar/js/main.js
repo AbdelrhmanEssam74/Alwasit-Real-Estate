@@ -3,16 +3,15 @@
 const menuicon = document.querySelector(".toggle_menu");
 //menu
 const menu = document.getElementById("menu");
+
 menuicon.addEventListener("click", () => {
     menu.classList.toggle("show_menu");
 });
 
-
-
 const newSearchInputs = document.querySelector(".search_inputs");
 const newInputs = `
     <div class="input_control_search">
-        <input type="text" name="q" required oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
+        <input type="text" name="q"  oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
         <p class="no-suggestion-message" id="noSuggestionMessage"></p>
         <ul class="suggestion-list" id="suggestionList"></ul>
         <i class='bx bx-search'></i>
@@ -30,7 +29,7 @@ function updateMenuAndSearchInputs() {
     } else {
         newSearchInputs.innerHTML = `
     <div class="input_control_search">
-        <input type="text" name="q" required oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
+        <input type="text" name="q"  oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
         <p class="no-suggestion-message" id="noSuggestionMessage"></p>
         <ul class="suggestion-list" id="suggestionList"></ul>
         <i class='bx bx-search'></i>
@@ -359,98 +358,69 @@ if (minPriceInput) {
 
 
 
-
-// animate property body
+// Animate property body
 window.addEventListener("scroll", function () {
-    let header = document.querySelector("header")
+    const header = document.querySelector("header");
     header.classList.toggle("sticky", window.scrollY);
-    let propertyBodies = document.querySelectorAll(".property-body");
-    let windowHeight = window.innerHeight;
-    let windowWidth = window.innerWidth;
+
+    const propertyBodies = document.querySelectorAll(".property-body");
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
 
     if (windowWidth > 768) {
-        // Apply animation only if window width is larger than 768px (example value)
         propertyBodies.forEach(function (body) {
-            let bodyTop = body.getBoundingClientRect().top;
+            const bodyTop = body.getBoundingClientRect().top;
 
             if (bodyTop < windowHeight) {
                 body.classList.add("show");
                 body.classList.remove("hide");
-            }
-            else {
+            } else {
                 body.classList.remove("show");
                 body.classList.add("hide");
-
-
             }
         });
     }
 });
-//button to go to the top of the page
-//get the button element
+
+// Button to go to the top of the page
 const btn = document.querySelector(".up");
-//using windo.onscroll() method
-document.onscroll = () => {
-    if (this.scrollY >= 400) {
-        //add className to the butoon "show"
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY >= 400) {
         btn.classList.add("show");
     } else {
-        //remove className to the butoon "show"
         btn.classList.remove("show");
     }
-};
-//then click on the button to go to the top of page
-btn.onclick = function () {
+});
+
+btn.addEventListener("click", () => {
     window.scrollTo({
         top: 0,
         behavior: "smooth",
     });
-};
-
-let startBoxs = document.querySelectorAll(".stats .box .number")
-let statsSection = document.querySelector('.stats');
-let started = false; // function started ? no
-function startCounter(el) {
-    let goal = el.dataset.goal;
-    let counter = setInterval(() => {
-        el.textContent++;
-        if (el.textContent == goal) {
-            clearInterval(counter)
-        }
-    }, 2000 / goal)
-}
-if (statsSection) {
-    window.onscroll = function () {
-        if (window.scrollY >= statsSection.offsetTop - 350) {
-            if (!started) {
-                startBoxs.forEach(element => startCounter(element));
-            }
-            started = true;
-        }
-    }
-}
-
-
-//NOTE - dark mode
-/* const toggleCheckbox = document.querySelector('.toggle-checkbox');
-const stylesheet = document.getElementById('stylesheet');
-
-toggleCheckbox.addEventListener('change', () => {
-    if (toggleCheckbox.checked) {
-        stylesheet.href = 'css/homeDarkmode.css';
-        localStorage.setItem('darkMode', 'enabled');
-    } else {
-        stylesheet.href = 'css/home.css';
-        localStorage.setItem('darkMode', 'disabled');
-    }
 });
 
-// Apply user preference on page load
-const userPreference = localStorage.getItem('darkMode');
-if (userPreference === 'enabled') {
-    toggleCheckbox.checked = true;
-    stylesheet.href = 'css/homeDarkmode.css';
-} else {
-    toggleCheckbox.checked = false;
-    stylesheet.href = 'css/home.css';
-} */
+const startBoxs = document.querySelectorAll(".stats .box .number");
+const statsSection = document.querySelector('.stats');
+let started = false;
+
+function startCounter(el) {
+    const goal = parseInt(el.dataset.goal);
+    let count = 0;
+    const counter = setInterval(() => {
+        count++;
+        el.textContent = count;
+        if (count === goal) {
+            clearInterval(counter);
+        }
+    }, 2000 / goal);
+}
+
+if (statsSection) {
+    window.addEventListener("scroll", () => {
+        if (window.scrollY >= statsSection.offsetTop - 350 && !started) {
+            startBoxs.forEach(element => startCounter(element));
+            started = true;
+        }
+    });
+}
