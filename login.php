@@ -4,6 +4,17 @@ $email  = " ";
 session_start();
 (isset($_SESSION['email'])) ? $email = $_SESSION['email'] : $email = "";
 ?>
+<?php
+$emailNotFound = '';
+if (isset($_SESSION['notFound'])) {
+    $emailNotFound = $_SESSION['notFound'];
+}
+$wrongPassword = '';
+if (isset($_SESSION['wrongPass'])) {
+    $wrongPassword = $_SESSION['wrongPass'];
+}
+session_unset();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,12 +46,20 @@ session_start();
         <div class="back_img">
             <div class="form_content">
                 <p>مرحباً بكم في <br /><span><strong>الوسيط</strong></span></p>
-                <form action="" method="POST" id="form">
+                <?php
+
+                if (!empty($emailNotFound)) {
+                    echo "<p class='message'>{$emailNotFound}</p>";
+                }
+                if (!empty($wrongPassword)) {
+                    echo "<p class='message'>{$wrongPassword}</p>";
+                }
+                ?>
+                <form action="auth/login.php" method="POST" id="form">
                     <div class="input-box">
                         <input id="email" name="email" type="email" dir="rtl" value="<?php echo $email ?>" placeholder="البريد الالكتروني">
                         <i class='bx bxs-envelope'></i>
                         <span class="error_message"></span>
-
                     </div>
                     <div class="input-box">
                         <input id="password" name="password" type="password" dir="rtl" placeholder="كلمه المرور ">
@@ -53,7 +72,7 @@ session_start();
 
                     <div class="check-box">
                         <label dir="rtl" for="LoginForMonth">تسجيل الدخول لمده شهر</label>
-                        <input class="checkbox" name="loginForMonth" id="LoginForMonth" type="checkbox">
+                        <input class="checkbox" name="remember" id="LoginForMonth" type="checkbox">
                     </div>
                     <div class="submit_btn">
                         <button id="submit" class="btn2" name="submit" type="submit">تسجيل الدخول</button>

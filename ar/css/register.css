@@ -316,7 +316,7 @@ header nav ul {
 .form_box .form_content .message {
     background-color: var(--danger);
     width: 100%;
-    text-align: center;
+    text-align: right;
     padding: 3px 0px;
     border-radius: 5px;
     font-size: 20px;

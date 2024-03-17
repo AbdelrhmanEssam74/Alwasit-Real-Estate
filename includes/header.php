@@ -1,10 +1,15 @@
 <header>
     <div class="container">
-        <div class="login">
-            <a class="LoginBtn" href="<?php echo $login ?>">
-                تسجيل الدخول
-            </a>
-        </div>
+        <?php
+        if (isset($DefultPage))
+            echo <<< _END
+            <div class="login">
+                <a class="LoginBtn" href="<?php echo $login ?>">
+                    تسجيل الدخول
+                </a>
+            </div>
+        _END;
+        ?>
         <nav class="navigation">
             <span id="menuicon"><i class="bx bx-menu toggle_menu black"></i></span>
             <ul id="menu" class="menu">

@@ -76,7 +76,7 @@ endif;
                     echo '<p class="info">قم بإنشاء حساب جديد للوصول الي خدمات الوسيط</p>';
                 }
                 ?>
-                <form action="../auth/register.php" method="POST" id="form">
+                <form action="<?php echo $auth .'register.php' ?>" method="POST" id="form">
                     <div class="input-box-name">
                         <div class="first-name">
                             <input class="name" name="FName" id="firstName" value="<?php echo $firstName ?>" type="text" dir="rtl" placeholder=" الأسم الأول">

@@ -1,16 +1,39 @@
 :root {
     --color1: #37797C;
     --color2: #A25C32;
+    --color3: #FF9A33;
     --color3hover: #e68a19;
     --color4: #00C0B7;
     --color5: #A25C32;
     --color6: #446D6E;
     --color7: #F9F9F6;
+    --color8: #04363e;
+    --color9: #2F6B6E;
     --hover: #2F6B6E;
     --success: #00B73F;
     --success-hover: #008b31;
     --danger: #ff3860;
     --danger-hover: #bb2443;
+    --third-color: #777;
+    --sectina-padding: 100px;
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color6);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--hover);
+    cursor: grab;
 }
 
 body {
@@ -331,6 +354,15 @@ header nav ul {
     }
 }
 
+.form_box .form_content .message {
+    background-color: rgb(255, 65, 103);
+    width: 100%;
+    text-align: right;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
 
 .form_box .back_img form {
     display: flex;

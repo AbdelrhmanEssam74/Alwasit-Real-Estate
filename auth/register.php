@@ -1,10 +1,8 @@
 <?php
 include '../init.php';
-
-
 session_start();
 include '../' . $config . 'config.php';
-include '../' . $config . 'registerTable.php';
+include '../' . $config . 'usersTable.php';
 include '../' . $config . 'emailsTable.php';
 include '../' . $emails_libs . 'index.php';
 
@@ -56,7 +54,7 @@ $data = [
     "phone" => $phone,
 ];
 
-$insertQuery = "INSERT INTO `alwasit`.`register` (user_id, username, F_Name, L_Name, email, user_phone, Password) 
+$insertQuery = "INSERT INTO `alwasit`.`users` (user_id, username, F_Name, L_Name, email, user_phone, Password) 
                 VALUES (:id, :username, :FN, :LN, :em, :phone, :pass)";
 $userObj->insert($insertQuery, $data);
 
@@ -100,5 +98,5 @@ $data_email = [
 $insertQuery_email = "INSERT INTO `alwasit`.`email_verification` (user_id, email, code, active , activation_expiry) 
                 VALUES (:id,:em, :code, :active , :activation_expir_at)";
 $email_obj->insert($insertQuery_email, $data_email);
-header("Location:/" . $verification_page . "?send=true");
+header("Location:../" . $verification_page . "?send=true");
 exit();

@@ -1,4 +1,5 @@
 <?php
+
 # Routes
 $templates = 'includes/';
 $css = 'ar/css/';
@@ -20,3 +21,4 @@ $register = 'register.php';
 $emails_libs = 'libs/emails/';
 $config = 'config/';
 $verification_page = 'verification.php';
+$auth = 'auth/';

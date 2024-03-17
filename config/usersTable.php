@@ -1,5 +1,4 @@
 <?php
-
 class RegisterTable extends DatabaseConnection
 {
     public function insert($query, $arr)
@@ -32,7 +31,7 @@ class RegisterTable extends DatabaseConnection
     }
     public function checkEmailExists($email)
     {
-        $getEmailQuery = "SELECT * FROM register WHERE email = :email";
+        $getEmailQuery = "SELECT * FROM users WHERE email = :email";
         $checkEmailExist = $this->conn->prepare($getEmailQuery);
         $checkEmailExist->bindParam(':email', $email);
         $checkEmailExist->execute();
@@ -40,7 +39,7 @@ class RegisterTable extends DatabaseConnection
     }
     public function checkPhoneExists($phone)
     {
-        $getPhoneQuery = "SELECT * FROM register WHERE user_phone = :phone";
+        $getPhoneQuery = "SELECT * FROM users WHERE user_phone = :phone";
         $checkPhoneExist = $this->conn->prepare($getPhoneQuery);
         $checkPhoneExist->bindParam(':phone', $phone);
         $checkPhoneExist->execute();
