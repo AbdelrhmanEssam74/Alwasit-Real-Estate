@@ -424,3 +424,12 @@ if (statsSection) {
         }
     });
 }
+
+
+
+
+var dropdown = document.querySelector(".dropbtn");
+var dropdown_list = document.querySelector(".dropdown-content");
+dropdown.addEventListener("click", function () {
+    dropdown_list.classList.toggle('show')
+})

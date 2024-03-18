@@ -1,10 +1,17 @@
 <?php include 'init.php'; ?>
 <?php
-$email  = " ";
 session_start();
+$email  = " ";
 (isset($_SESSION['email'])) ? $email = $_SESSION['email'] : $email = "";
 ?>
 <?php
+// check if the user is already logged in, if so redirect them to their home page
+
+if ((isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) || isset($_COOKIE['rem'])) {
+    header("Location:" . $home);
+    exit();
+}
+
 $emailNotFound = '';
 if (isset($_SESSION['notFound'])) {
     $emailNotFound = $_SESSION['notFound'];

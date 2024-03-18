@@ -1,6 +1,4 @@
 
-
-
 // Get Slider items
 let images = Array.from(document.querySelectorAll('.image-gallery .container img'));
 let sizeOfArr = images.length;
@@ -11,8 +9,12 @@ let nextButton = document.querySelector(".next");
 let prevButton = document.querySelector(".prev");
 
 // Handle click on prev and next button
-nextButton.onclick = NextSlide;
-prevButton.onclick = PrevSlide;
+if (nextButton) {
+    nextButton.onclick = NextSlide;
+}
+if (prevButton) {
+    prevButton.onclick = PrevSlide;
+}
 
 // Next slide function
 function NextSlide() {

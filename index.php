@@ -1,5 +1,7 @@
 <?php include 'init.php';
 $DefultPage = '';
+session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -199,7 +201,7 @@ $DefultPage = '';
             <div class="design_content">
                 <p>قم بإنشاء حسابك ونشر العقارات الخاصة بك
                     للوصول لأكبر عدد من مستخدمي الوسيط</p>
-                <a class="LoginBtn" href="login/index.html">
+                <a class="LoginBtn" href='<?php echo $login ?>'>
                     تسجيل الدخول
                 </a>
             </div>

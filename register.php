@@ -1,6 +1,12 @@
 <?php include 'init.php'; ?>
 <?php
 session_start();
+
+if (isset($_COOKIE['rem']) && $_SESSION['loggedIn'] == true) {
+    header("Location:" . $home);
+    exit();
+}
+
 // check if the phone number is valid or not
 $invalid_phone = "";
 $Exists_EMAIL = "";
@@ -76,7 +82,7 @@ endif;
                     echo '<p class="info">قم بإنشاء حساب جديد للوصول الي خدمات الوسيط</p>';
                 }
                 ?>
-                <form action="<?php echo $auth .'register.php' ?>" method="POST" id="form">
+                <form action="<?php echo $auth . 'register.php' ?>" method="POST" id="form">
                     <div class="input-box-name">
                         <div class="first-name">
                             <input class="name" name="FName" id="firstName" value="<?php echo $firstName ?>" type="text" dir="rtl" placeholder=" الأسم الأول">
