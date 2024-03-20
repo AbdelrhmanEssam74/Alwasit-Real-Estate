@@ -1,4 +1,16 @@
 :root {
+    /* This sections hues */
+    --head-line: #00214d;
+    --sub-head-line: #1b2d45;
+    --paragraph: #1b2d45;
+    --card-paragraph: #1b2d45;
+    --background: #f2f4f6;
+    --card-background: #fffffe;
+    --button: #00ebc7;
+    --button-text: #00214d;
+    --secondary: #ff5470;
+    --tertiary: #fde24f;
+    --card-highlitght: #ff5470;
     --color1: #37797C;
     --color2: #A25C32;
     --color3: #FF9A33;
@@ -28,7 +40,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--color6);
+    background-color: var(--head-line);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -283,6 +295,7 @@ header nav ul {
         font-size: 35px;
         cursor: pointer;
     }
+
     header nav .toggle_menu.active {
         transition: 0.5s all;
         background-color: var(--color9);
