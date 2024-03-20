@@ -1,20 +1,22 @@
 :root {
-    --color1: #37797C;
+    --head-line: #00214d;
+    --head-line-hover: #003170;
+    --sub-head-line: #1b2d45;
+    --paragraph: #1b2d45;
+    --card-paragraph: #1b2d45;
+    --background: #f2f4f6;
+    --card-background: #fffffe;
+    --button: #00ebc7;
+    --highlight: #00ebc7;
+    --button-hover: rgb(1, 226, 192);
+    --button-text: #00214d;
+    --secondary: #ff5470;
+    --tertiary: #FF9A33;
+    --tertiary-hover: #e68a19;
+    --card-highlitght: #ff5470;
+    --card-tag-background: #2F6B6E;
+    --color7: #e7e7e3;
     --color2: #A25C32;
-    --color3: #FF9A33;
-    --color3hover: #e68a19;
-    --color4: #00C0B7;
-    --color5: #A25C32;
-    --color6: #446D6E;
-    --color7: #F9F9F6;
-    --color8: #04363e;
-    --color9: #2F6B6E;
-    --hover: #2F6B6E;
-    --success: #00B73F;
-    --success-hover: #008b31;
-    --danger: #ff3860;
-    --danger-hover: #bb2443;
-    --third-color: #777;
     --sectina-padding: 100px;
 }
 
@@ -28,17 +30,17 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--color6);
+    background-color: var(--head-line);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--hover);
+    background-color: var(--head-line-hover);
     cursor: grab;
 }
 
 body {
-    background-color: var(--color7);
-    font-family: "Cairo";
+    background-color: var(--background) !important;
+
 }
 
 * {
@@ -47,6 +49,7 @@ body {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: "Cairo";
 }
 
 ul {
@@ -101,33 +104,6 @@ header {
     background-color: #fff;
 }
 
-.LoginBtn {
-    margin-top: 15px;
-    padding: 10px 20px;
-    border-radius: 7px;
-    background-color: var(--color9);
-    transition: 0.5s all;
-    text-decoration: none;
-    color: #fff;
-    text-align: center;
-}
-
-.LoginBtn:hover {
-    background-color: var(--color8);
-}
-
-header.sticky {
-    top: 0;
-    position: fixed;
-    z-index: 5;
-    -webkit-box-shadow: 0px 12px 15px -9px rgba(186, 196, 209, 1);
-    -moz-box-shadow: 0px 12px 15px -9px rgba(186, 196, 209, 1);
-    box-shadow: 0px 12px 15px -9px rgba(186, 196, 209, 1);
-
-}
-
-
-
 header .container {
     display: flex;
     justify-content: space-between;
@@ -135,13 +111,8 @@ header .container {
     position: relative;
     border-radius: 15px;
     height: 70px;
-
 }
 
-header .container .login .LoginBtn {
-    margin: 0;
-    padding: 5px 10px;
-}
 
 header nav {
     display: flex;
@@ -389,7 +360,7 @@ header nav ul {
 }
 
 .form_box .back_img form .input-box input:focus {
-    border: 1px solid var(--color4);
+    border: 1px solid var(--success);
 }
 
 @media (max-width: 450px) {
@@ -407,7 +378,7 @@ header nav ul {
     top: 50%;
     right: 0;
     transform: translate(-65%, -50%);
-    color: var(--color4);
+    color: var(--highlight);
     font-size: 20px;
 }
 
@@ -439,13 +410,13 @@ header nav ul {
     outline: none;
     border: none;
     border-radius: 30px;
-    color: #fff;
-    background-color: var(--color1);
+    color: var(--button-text);
+    background-color: var(--button);
     transition: 0.5s;
 }
 
 .form_box .back_img form .submit_btn button:hover {
-    background-color: var(--hover);
+    background-color: var(--button-hover);
 }
 
 .form_box .back_img form a {
@@ -458,7 +429,7 @@ header nav ul {
 
 .form_box .back_img form a:hover {
     text-decoration: underline;
-    color: var(--color7);
+    color: #eeeeee;
 }
 
 /* show password */
@@ -466,7 +437,7 @@ header nav ul {
     top: 50%;
     left: 0;
     transform: translate(50%, -50%);
-    color: var(--color4);
+    color: var(--head-line);
     font-size: 20px;
     cursor: pointer;
     width: fit-content;
@@ -476,7 +447,7 @@ header nav ul {
     top: 50%;
     left: 0;
     transform: translate(50%, -50%);
-    color: var(--color4);
+    color: var(--head-line);
     font-size: 20px;
     cursor: pointer;
     width: fit-content;

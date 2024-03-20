@@ -198,7 +198,7 @@ header nav ul {
 
 ul a {
     display: block;
-    color: var(--card-paragraph);
+    color: var(--paragraph);
     text-decoration: none;
     font-size: 20px;
     transition: 0.3s all;

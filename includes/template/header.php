@@ -45,12 +45,28 @@
     endif;
     ?>
     <?php
-    // assign rent2 stylesheet to 
+    // assign rent2 stylesheet to prop_details_page
     if (isset($prop_details_page)) :
     ?>
         <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>property_details.css">
         <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>main.css">
 
+    <?php
+    endif;
+    ?>
+    <?php
+    // assign rent2 stylesheet to login page
+    if (isset($login_page)) :
+    ?>
+        <link rel="stylesheet" href="<?php echo $css ?>login.css">
+    <?php
+    endif;
+    ?>
+    <?php
+    // assign rent2 stylesheet to register page
+    if (isset($register_page)) :
+    ?>
+        <link rel="stylesheet" href="<?php echo $css ?>register.css">
     <?php
     endif;
     ?>
@@ -70,4 +86,7 @@
 
 <body>
     <!-- Button to top -->
-    <span class="up"><i class="fa-regular fa-circle-up"></i></span>
+    <?php if (!isset($login_page) && !isset($register_page)) :
+    ?>
+        <span class="up"><i class="fa-regular fa-circle-up"></i></span>
+    <?php endif; ?>

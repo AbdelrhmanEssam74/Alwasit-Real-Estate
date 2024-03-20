@@ -53,7 +53,7 @@ $commercial_page = '';
                     <div class="details-top">
                         <div class="details-type">
                             <div class="type1">مفروش</div>
-                            <div class="buy">للبيع</div>
+                            <div class="rent">للإيجار</div>
                         </div>
                         <div class="favorite-box">
                             <a href='#' title="اضف للمفضلة" class='property-favorite'>

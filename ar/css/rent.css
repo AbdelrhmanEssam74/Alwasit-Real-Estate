@@ -19,7 +19,7 @@
 /* End Landing */
 /* start desgin*/
 .design {
-    background-color: #fff;
+    background-color: var(--card-background);
     width: 100%;
     height: 100px;
     margin-top: 50px;
@@ -42,7 +42,7 @@
 }
 
 .design .container .text p {
-    color: var(--third-color);
+    color: var(--paragraph);
     padding: 10px;
     font-size: 20px;
 }
@@ -60,7 +60,7 @@
     padding: 5px 10px;
     width: 150px;
     height: 40px;
-    border: 1px solid var(--color4);
+    border: 1px solid var(--highlight);
     border-radius: 5px;
     cursor: pointer;
     user-select: none;
@@ -82,7 +82,7 @@
 }
 
 .design .sort-by .sort_by_btn:hover::after {
-    color: var(--color3);
+    color: var(--tertiary);
 }
 
 
@@ -93,7 +93,7 @@
     transform: translate(0, 105%);
     display: none;
     flex-direction: column;
-    border: 1px solid var(--color4);
+    border: 1px solid var(--highlight);
     width: 100%;
     padding: 5px 5px;
     border-radius: 5px;

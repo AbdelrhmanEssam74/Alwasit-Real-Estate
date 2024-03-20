@@ -27,472 +27,13 @@
     border-radius: 10px
 }
 
-/* start form  */
-.langing form {
-    margin-top: 140px;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    width: 100%;
-    padding: 10px 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    border-radius: 15px;
-}
-
-form .check_btn {
-    display: flex;
-    flex-direction: row-reverse;
-    margin-bottom: 10px;
-    gap: 13px;
-}
-
-form .check_btn input[type=radio] {
-    display: none;
-}
-
-form .check_btn .toggle-radio {
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-form .check_btn .toggle-buy,
-form .check_btn .toggle-rent {
-    background-color: #f1f1f1;
-    width: 50px;
-    height: 35px;
-    border-radius: 5px;
-    position: relative;
-    transition: 0.3s;
-    cursor: pointer;
-    padding: 20px;
-    outline: none;
-}
-
-form .check_btn .toggle-buy::before {
-    position: absolute;
-    content: "للبيع";
-    width: 95%;
-    height: 95%;
-    border-radius: 5px;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000000;
-}
-
-form .check_btn .toggle-rent::before {
-    position: absolute;
-    content: "للإيجار";
-    width: 95%;
-    height: 95%;
-    border-radius: 5px;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000000;
-}
-
-.toggle-radio:checked+.toggle-rent::before,
-.toggle-radio:checked+.toggle-buy::before {
-    border: 2px solid var(--color4);
-
-}
-
-form .search_inputs {
-    width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    padding: 10px 0px;
-    justify-content: space-between;
-}
-
-
-form .search_inputs .input_control_search {
-    position: relative;
-}
-
-
-
-form .search_inputs .input_control_search #searchInput {
-    padding: 10px;
-    width: 485px;
-    height: 50px;
-    text-align: right;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    padding-right: 30px;
-    user-select: none;
-}
-
-form .search_inputs .input_control_search #searchInput::placeholder {
-    text-align: right;
-}
-
-
-
-form .search_inputs .input_control_search i {
-    color: #a1a1a1;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-12%, 63%);
-    font-size: 24px;
-}
-
-
-/* start suggestion list */
-.suggestion-list {
-    position: absolute;
-    width: 100%;
-    list-style-type: none;
-    margin: 0;
-    padding-right: 5px;
-    max-height: 150px;
-    overflow-y: auto;
-    background-color: #dddddd;
-    text-align: right;
-    z-index: 3;
-}
-
-.suggestion-list li {
-    padding: 5px;
-    cursor: pointer;
-}
-
-.suggestion-list li:hover {
-    background-color: #d6d6d6;
-}
-
-.no-suggestion-message {
-    background-color: #fff;
-    position: absolute;
-    color: red;
-    font-style: italic;
-    text-align: right;
-    width: 100%;
-    padding: 0px 4px 4px 2px;
-    top: 97%;
-    left: 0%;
-    border-radius: 5px;
-    z-index: 3;
-    ;
-}
-
-/* end suggestion list */
-
-
-/* Remove IE arrow */
-form .select select::-ms-expand {
-    display: none;
-}
-
-/* Custom Select wrapper */
-form .select_type {
-    position: relative;
-    display: flex;
-    width: 150px;
-    height: 3em;
-    border-radius: .25em;
-    overflow: hidden;
-    margin-right: 10px;
-}
-
-form .select_type select {
-    appearance: none;
-    outline: none;
-    border: none;
-    box-shadow: none;
-    flex: 1;
-    padding: 0 0.5em;
-    color: #fff;
-    background-image: none;
-    cursor: pointer;
-    text-align: right;
-    color: #000;
-    user-select: none;
-}
-
-/* Arrow */
-form .select_area p::after,
-form .select_price p::after,
-form .select_type::after {
-    content: '\25BC';
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 1em;
-    color: #000;
-    transition: .25s all ease;
-    pointer-events: none;
-
-}
-
-/* Transition */
-form .select_area p:hover::after,
-form .select_price p:hover::after,
-form .select_type:hover::after {
-    color: var(--color3);
-}
-
-form .select_area,
-form .select_price {
-    background-color: #fff;
-    height: fit-content;
-    text-align: right;
-    width: 150px;
-    height: 3em;
-    border-radius: .25em;
-    position: relative;
-}
-
-form .select_area p,
-form .select_price p {
-    outline: none;
-    border: none;
-    box-shadow: none;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    color: #000;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    padding: 5px 10px;
-    border-radius: .25em;
-    user-select: none;
-}
-
-form .select_area p span {
-    font-size: 12px;
-}
-
-form .select_area .area_input,
-form .select_price .price_input {
-    position: absolute;
-    display: none;
-    border-radius: .25em;
-    bottom: 0;
-    left: 0;
-    transform: translate(0, 105%);
-    gap: 7px;
-    padding: 10px 20px;
-    background-color: #fff;
-    align-items: center;
-    flex-direction: row-reverse;
-}
-
-form .select_area .area_input .input_field,
-form .select_price .price_input .input_field {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-form .select_area .area_input .rest_area_input,
-form .select_price .price_input .rest_price_input {
-    user-select: none;
-    padding: 7px 10px;
-    margin-top: 5px;
-    cursor: pointer;
-    background-color: var(--color6);
-    color: #fff;
-    border-radius: 5px;
-}
-
-form .select_area .area_input .input_field_max,
-form .select_area .area_input .input_field_min,
-form .select_price .price_input .input_field_max,
-form .select_price .price_input .input_field_min {
-    position: relative;
-}
-
-form .select_area .area_input .input_field_max ul,
-form .select_area .area_input .input_field_min ul,
-form .select_price .price_input .input_field_max ul,
-form .select_price .price_input .input_field_min ul {
-    position: absolute;
-    width: 100%;
-    list-style-type: none;
-    margin: 0;
-    padding-right: 10px;
-    max-height: 150px;
-    overflow-y: auto;
-    background-color: rgb(255, 255, 255);
-    text-align: right;
-    z-index: 3;
-}
-
-form .select_area .area_input .input_field_max ul li,
-form .select_area .area_input .input_field_min ul li,
-form .select_price .price_input .input_field_max ul li,
-form .select_price .price_input .input_field_min ul li {
-    margin-top: 10px;
-    transition: 0.3s all;
-    cursor: pointer;
-    font-size: 20px;
-    text-align: right;
-}
-
-form .select_area .area_input .input_field_max ul li:hover,
-form .select_area .area_input .input_field_min ul li:hover,
-form .select_price .price_input .input_field_max ul li:hover,
-form .select_price .price_input .input_field_min ul li:hover {
-    background-color: var(--color7);
-}
-
-form .select_area .area_input input,
-form .select_price .price_input input {
-    outline: none;
-    box-shadow: none;
-    cursor: text;
-    text-align: right;
-    font-size: 15px;
-    padding: 13px 5px;
-    border: 0.1px solid var(--color8);
-}
-
-
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    /* Safari, Chrome */
-    -moz-appearance: none;
-    /* Firefox */
-    appearance: none;
-    /* Standard property */
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-form .select_price .show_price_list {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: end;
-}
-
-form .select_area .show_area_list {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: end;
-}
-
-
-
-form .search_inputs .submit_btn {
-    position: relative;
-    margin-right: 10px;
-}
-
-form .search_inputs .submit_btn button {
-    width: 100px;
-    height: 50px;
-    background-color: var(--color3);
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s all;
-}
-
-form .search_inputs .submit_btn button:hover {
-    background-color: var(--color3hover);
-
-}
-
-form .search_inputs .submit_btn button svg {
-    font-size: 30px;
-    color: #fff;
-}
-
-
-
-/* end search_inputs */
-/* media for form */
-
-@media (max-width: 1115px) {
-
-    form .search_inputs .input_control_search,
-    form .search_inputs .input_control_search #searchInput {
-        width: 280px;
-    }
-
-    form .select_type {
-        width: 150px;
-    }
-
-    form .select_price {
-        width: 150px;
-    }
-
-}
-
-@media (max-width: 992px) {
-
-    form .search_inputs .input_control_search,
-    form .search_inputs .input_control_search #searchInput {
-        width: 200px;
-    }
-
-    form .select_type {
-        width: 120px;
-    }
-
-    form .select_price {
-        width: 90px;
-    }
-
-}
-
-@media (max-width: 767px) {
-
-    form .search_inputs .input_control_search {
-        position: relative;
-    }
-
-    form .search_inputs .input_control_search,
-    form .search_inputs .input_control_search #searchInput {
-        width: 100%;
-    }
-
-    .no-suggestion-message {
-        width: 100%;
-        left: 0%;
-        background-color: var(--color7);
-    }
-
-    form .search_inputs .submit_btn button {
-        position: absolute;
-        width: 66px;
-        height: 45px;
-        top: 0;
-        left: 0;
-        transform: translate(20%, 7%);
-    }
-
-    form .search_inputs .submit_btn button svg {
-        font-size: 20px;
-    }
-}
-
-/* end form */
 /* End Landing */
 /* start desgin*/
 .design {
-    background-color: #fff;
+    background-color: var(--card-background);
     width: 100%;
-    padding: 30px 0 10px 0;
-    margin-top: 100px;
-
+    height: 100px;
+    margin-top: 50px;
 }
 
 .design .container {
@@ -512,7 +53,7 @@ form .search_inputs .submit_btn button svg {
 }
 
 .design .container .text p {
-    color: var(--third-color);
+    color: var(--paragraph);
     padding: 10px;
     font-size: 20px;
 }
@@ -530,7 +71,7 @@ form .search_inputs .submit_btn button svg {
     padding: 5px 10px;
     width: 150px;
     height: 40px;
-    border: 1px solid var(--color4);
+    border: 1px solid var(--highlight);
     border-radius: 5px;
     cursor: pointer;
     user-select: none;
@@ -552,7 +93,7 @@ form .search_inputs .submit_btn button svg {
 }
 
 .design .sort-by .sort_by_btn:hover::after {
-    color: var(--color3);
+    color: var(--tertiary);
 }
 
 
@@ -563,7 +104,7 @@ form .search_inputs .submit_btn button svg {
     transform: translate(0, 105%);
     display: none;
     flex-direction: column;
-    border: 1px solid var(--color4);
+    border: 1px solid var(--highlight);
     width: 100%;
     padding: 5px 5px;
     border-radius: 5px;
@@ -613,14 +154,20 @@ form .search_inputs .submit_btn button svg {
 
 }
 
+/* end design*/
+
 .info-content {
     padding: 60px 0;
 }
 
 .info-content div {
-    background-color: white;
+    background-color: var(--card-background);
     padding: 30px;
     border-radius: 10px;
+}
+
+.info-content div h1 {
+    color: var(--head-line);
 }
 
 .info-content ol {
@@ -643,12 +190,10 @@ form .search_inputs .submit_btn button svg {
 
 .info-content p {
     margin-top: 20px;
-    color: var(--color8);
+    color: var(--paragraph);
     position: relative;
-    line-height: 1.5;
+    line-height: 2;
 }
-
-
 
 
 /* start serv */
@@ -660,6 +205,10 @@ form .search_inputs .submit_btn button svg {
     justify-content: center;
     align-items: end;
     margin-top: 50px;
+}
+
+.ag-format-container h1 {
+    color: var(--head-line);
 }
 
 
@@ -687,7 +236,7 @@ form .search_inputs .submit_btn button svg {
 .ag-courses-item_link {
     display: block;
     padding: 30px 20px;
-    background-color: #ffffff;
+    background-color: var(--card-background);
     overflow: hidden;
     position: relative;
     height: 220px;
@@ -713,6 +262,7 @@ form .search_inputs .submit_btn button svg {
     min-height: 87px;
     overflow: hidden;
     z-index: 2;
+
 }
 
 .ag-courses-item_title p {
@@ -720,7 +270,7 @@ form .search_inputs .submit_btn button svg {
     font-size: 15px;
     text-align: center;
     line-height: 1.8;
-    color: #474747;
+    color: var(--paragraph);
     transition: 0.6s all;
 }
 
@@ -743,7 +293,7 @@ form .search_inputs .submit_btn button svg {
 .ag-courses-item_bg {
     height: 128px;
     width: 128px;
-    background-color: #f9b234;
+    background-color: var(--tertiary);
     z-index: 1;
     position: absolute;
     top: -75px;
@@ -755,7 +305,7 @@ form .search_inputs .submit_btn button svg {
 }
 
 .ag-courses_item .ag-courses-item_bg {
-    background-color: var(--color3);
+    background-color: var(--tertiary);
 }
 
 
@@ -799,4 +349,3 @@ form .search_inputs .submit_btn button svg {
         font-size: 16px;
     }
 }
-

@@ -56,8 +56,8 @@
     .langing .container .content h1 {
         background-color: #fff;
         padding: 10px 50px;
-        color: var(--color3);
         border-radius: 15px;
+        color: var(--tertiary);
         margin-bottom: 10px;
         width: 100%;
     }
@@ -80,7 +80,6 @@
     .langing .container .content h1 {
         background-color: #fff;
         padding: 10px 50px;
-        color: var(--color3);
         border-radius: 15px;
         margin-bottom: 20px;
         font-size: 20px;
@@ -94,7 +93,7 @@
 .design {
     padding-top: 30px;
     padding-bottom: 30px;
-    background-color: #fff;
+    background-color: var(--card-background);
 }
 
 .design .container {
@@ -127,11 +126,8 @@
     font-size: 35px;
     line-height: 1.8;
     font-weight: 600;
+    color: var(--paragraph);
 }
-
-
-
-
 
 
 @media (max-width: 765px) {
@@ -176,7 +172,7 @@
 }
 
 .stats .container .box {
-    color: var(--color8);
+    color: var(--paragraph);
     padding: 25px;
     background-color: #fff;
 }
@@ -213,7 +209,7 @@
     width: 25px;
     height: 25px;
     display: flex;
-    color: var(--color3);
+    color: var(--tertiary);
     justify-content: center;
     align-items: center;
     border-radius: 50%;
