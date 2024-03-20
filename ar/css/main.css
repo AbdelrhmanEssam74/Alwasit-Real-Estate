@@ -1,32 +1,22 @@
 :root {
-    /* This sections hues */
     --head-line: #00214d;
+    --head-line-hover: #003170;
     --sub-head-line: #1b2d45;
     --paragraph: #1b2d45;
     --card-paragraph: #1b2d45;
     --background: #f2f4f6;
     --card-background: #fffffe;
     --button: #00ebc7;
+    --highlight: #00ebc7;
+    --button-hover: rgb(1, 226, 192);
     --button-text: #00214d;
     --secondary: #ff5470;
-    --tertiary: #fde24f;
+    --tertiary: #FF9A33;
+    --tertiary-hover: #e68a19;
     --card-highlitght: #ff5470;
-    --color1: #37797C;
+    --card-tag-background: #2F6B6E;
+    --color7: #e7e7e3;
     --color2: #A25C32;
-    --color3: #FF9A33;
-    --color3hover: #e68a19;
-    --color4: #00C0B7;
-    --color5: #A25C32;
-    --color6: #446D6E;
-    --color7: #F9F9F6;
-    --color8: #04363e;
-    --color9: #2F6B6E;
-    --hover: #2F6B6E;
-    --success: #00B73F;
-    --success-hover: #008b31;
-    --danger: #ff3860;
-    --danger-hover: #bb2443;
-    --third-color: #777;
     --sectina-padding: 100px;
 }
 
@@ -44,18 +34,17 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--hover);
+    background-color: var(--head-line-hover);
     cursor: grab;
 }
 
 /*Button top*/
-
 .up {
     position: fixed;
     color: white;
     bottom: 50px;
     right: 0;
-    background-color: var(--color8);
+    background-color: var(--head-line);
     font-weight: bold;
     font-size: 20px;
     border-radius: 10px;
@@ -76,12 +65,10 @@
 
 .up.show:hover {
     bottom: 55px;
-
 }
 
 body {
-    background-color: var(--color7);
-    font-family: "Cairo";
+    background-color: var(--background);
 }
 
 * {
@@ -90,6 +77,7 @@ body {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: "Cairo";
 }
 
 ul {
@@ -120,7 +108,6 @@ html {
 }
 
 /*larger*/
-
 @media (min-width: 1200px) {
     .container {
         width: 1170px;
@@ -135,11 +122,7 @@ html {
     margin-right: auto;
 }
 
-
-
 /* Start Header */
-
-
 header {
     width: 100%;
     height: 90px;
@@ -153,15 +136,16 @@ header {
     margin-top: 15px;
     padding: 10px 20px;
     border-radius: 7px;
-    background-color: var(--color9);
+    background-color: var(--button);
     transition: 0.5s all;
     text-decoration: none;
-    color: #fff;
+    color: var(--button-text);
     text-align: center;
+    font-weight: 600;
 }
 
 .LoginBtn:hover {
-    background-color: var(--color8);
+    background-color: var(--button-hover);
 }
 
 header.sticky {
@@ -173,8 +157,6 @@ header.sticky {
     box-shadow: 0px 12px 15px -9px rgba(186, 196, 209, 1);
 
 }
-
-
 
 header .container {
     display: flex;
@@ -216,7 +198,7 @@ header nav ul {
 
 ul a {
     display: block;
-    color: var(--color9);
+    color: var(--card-paragraph);
     text-decoration: none;
     font-size: 20px;
     transition: 0.3s all;
@@ -229,7 +211,7 @@ header nav a::before {
     content: "";
     position: absolute;
     width: 0%;
-    background-color: var(--color3hover);
+    background-color: var(--tertiary);
     height: 1px;
     bottom: 20%;
     right: 0;
@@ -241,13 +223,12 @@ header nav li:hover a::before {
 }
 
 header nav li:hover a {
-    color: var(--color4);
+    color: var(--highlight);
 }
 
 header .logo img {
     height: 35px;
 }
-
 
 @media (min-width: 768px) {
     header nav .toggle_menu {
@@ -298,7 +279,7 @@ header nav ul {
 
     header nav .toggle_menu.active {
         transition: 0.5s all;
-        background-color: var(--color9);
+        background-color: var(--head-line);
         color: #Fff;
         border-radius: 2px;
     }
@@ -337,21 +318,13 @@ header nav ul {
         right: 0;
     }
 
-
-    header nav .menu li:hover a {
-        color: var(--color4);
-    }
-
     header ul li a {
         color: #000000;
     }
 
-
     header nav ul li a:not(:first-child) {
         padding: 15px !important;
     }
-
-
 }
 
 /* End Header */
@@ -363,7 +336,7 @@ form {
     align-items: end;
     width: 100%;
     padding: 10px 20px;
-    background-color: var(--color8);
+    background-color: var(--paragraph);
     border: none;
     border-radius: 15px;
 }
@@ -427,7 +400,7 @@ form .check_btn .toggle-rent::before {
 
 .toggle-radio:checked+.toggle-rent::before,
 .toggle-radio:checked+.toggle-buy::before {
-    border: 2px solid var(--color4);
+    border: 2px solid var(--highlight);
 }
 
 form .search_inputs {
@@ -438,12 +411,9 @@ form .search_inputs {
     justify-content: space-between;
 }
 
-
 form .search_inputs .input_control_search {
     position: relative;
 }
-
-
 
 form .search_inputs .input_control_search #searchInput {
     padding: 10px;
@@ -461,8 +431,6 @@ form .search_inputs .input_control_search #searchInput::placeholder {
     text-align: right;
 }
 
-
-
 form .search_inputs .input_control_search i {
     color: #a1a1a1;
     position: absolute;
@@ -471,7 +439,6 @@ form .search_inputs .input_control_search i {
     transform: translate(-12%, 63%);
     font-size: 24px;
 }
-
 
 /* start suggestion list */
 .suggestion-list {
@@ -499,7 +466,7 @@ form .search_inputs .input_control_search i {
 .no-suggestion-message {
     background-color: #fff;
     position: absolute;
-    color: red;
+    color: var(--secondary);
     font-style: italic;
     text-align: right;
     width: 100%;
@@ -512,8 +479,6 @@ form .search_inputs .input_control_search i {
 }
 
 /* end suggestion list */
-
-
 /* Remove IE arrow */
 form .select select::-ms-expand {
     display: none;
@@ -564,7 +529,7 @@ form .select_type::after {
 form .select_area p:hover::after,
 form .select_price p:hover::after,
 form .select_type:hover::after {
-    color: var(--color3);
+    color: var(--tertiary);
 }
 
 form .select_area,
@@ -629,8 +594,8 @@ form .select_price .price_input .rest_price_input {
     padding: 7px 10px;
     margin-top: 5px;
     cursor: pointer;
-    background-color: var(--color6);
-    color: #fff;
+    background-color: var(--button);
+    color: var(--button-text);
     border-radius: 5px;
 }
 
@@ -666,6 +631,7 @@ form .select_price .price_input .input_field_min ul li {
     cursor: pointer;
     font-size: 20px;
     text-align: right;
+    padding: 5px;
 }
 
 form .select_area .area_input .input_field_max ul li:hover,
@@ -683,10 +649,8 @@ form .select_price .price_input input {
     text-align: right;
     font-size: 15px;
     padding: 13px 5px;
-    border: 0.1px solid var(--color8);
+    border: 0.1px solid var(--head-line);
 }
-
-
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -713,8 +677,6 @@ form .select_area .show_area_list {
     align-items: end;
 }
 
-
-
 form .search_inputs .submit_btn {
     position: relative;
     margin-right: 10px;
@@ -723,7 +685,7 @@ form .search_inputs .submit_btn {
 form .search_inputs .submit_btn button {
     width: 100px;
     height: 50px;
-    background-color: var(--color3);
+    background-color: var(--tertiary);
     border: none;
     outline: none;
     border-radius: 5px;
@@ -732,7 +694,7 @@ form .search_inputs .submit_btn button {
 }
 
 form .search_inputs .submit_btn button:hover {
-    background-color: var(--color3hover);
+    background-color: var(--tertiary-hover);
 
 }
 
@@ -741,11 +703,8 @@ form .search_inputs .submit_btn button svg {
     color: #fff;
 }
 
-
-
 /* end search_inputs */
 /* media for form */
-
 @media (max-width: 1115px) {
 
     form .search_inputs .input_control_search,
@@ -760,7 +719,6 @@ form .search_inputs .submit_btn button svg {
     form .select_price {
         width: 150px;
     }
-
 }
 
 @media (max-width: 992px) {
@@ -777,7 +735,6 @@ form .search_inputs .submit_btn button svg {
     form .select_price {
         width: 90px;
     }
-
 }
 
 @media (max-width: 767px) {
@@ -797,7 +754,7 @@ form .search_inputs .submit_btn button svg {
     .no-suggestion-message {
         width: 100%;
         left: 0%;
-        background-color: var(--color7);
+        background-color: var(--card-background);
     }
 
     form .search_inputs .submit_btn button {
@@ -822,8 +779,6 @@ form .search_inputs .submit_btn button svg {
     padding-bottom: var(--sectina-padding);
 }
 
-
-
 .widget-container .container .widgets {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -837,7 +792,6 @@ form .search_inputs .submit_btn button svg {
     text-align: center;
 
 }
-
 
 .widget-container .container .main-heading h2 {
     font-weight: normal;
@@ -871,9 +825,9 @@ form .search_inputs .submit_btn button svg {
     bottom: -37px;
 }
 
-
 .widgets .property-body {
     transition: 0.5s all;
+    background-color: var(--card-background);
 }
 
 .widgets .property-body:hover {
@@ -919,9 +873,9 @@ form .search_inputs .submit_btn button svg {
 
 .widgets .property-body .images-details .details-top .details-type .rent {
     width: 90px;
-    color: #ffffff;
+    color: var(--sub-head-line);
     text-align: center;
-    background-color: var(--color4);
+    background-color: var(--highlight);
     padding: 5px 0px;
     border-radius: 7px;
 }
@@ -953,7 +907,7 @@ form .search_inputs .submit_btn button svg {
 }
 
 .widgets .property-body .images-details .details-top .favorite-box:hover {
-    background-color: var(--danger);
+    background-color: var(--secondary);
 }
 
 .widgets .property-body .images-details .details-top .favorite-box a span svg {
@@ -974,7 +928,6 @@ form .search_inputs .submit_btn button svg {
     bottom: 5px;
     width: 100%;
     padding: 5px;
-
 }
 
 .widgets .property-body .images-details .details-bottom .property-details {
@@ -994,9 +947,9 @@ form .search_inputs .submit_btn button svg {
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 5px;
     color: #fff;
-    background-color: var(--color9);
+    background-color: var(--card-tag-background);
 }
 
 .widgets .property-body .images-details .details-bottom .property-details .rooms,
@@ -1019,11 +972,10 @@ form .search_inputs .submit_btn button svg {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    background-color: var(--color9);
+    background-color: var(--card-tag-background);
     height: 30px;
     color: #fff;
-    border-radius: 10px;
-
+    border-radius: 5px;
 }
 
 .widgets .property-body .proparty-info {
@@ -1033,8 +985,6 @@ form .search_inputs .submit_btn button svg {
     text-align: right;
     align-items: end;
     border-radius: 0 0 10px 10px;
-    background-color: #fff;
-
 }
 
 .widgets .property-body .proparty-info .location {
@@ -1048,19 +998,21 @@ form .search_inputs .submit_btn button svg {
 
 .widgets .property-body .proparty-info .location p {
     margin-right: 10px;
+    color: var(--sub-head-line);
 }
 
 .widgets .property-body .proparty-info .location svg {
-    color: var(--color9);
+    color: var(--card-tag-background);
 }
 
 .widgets .property-body .proparty-info .description {
     margin-bottom: 10px;
     padding: 5px 0px;
+
 }
 
 .widgets .property-body .proparty-info .description p {
-    color: var(--third-color);
+    color: var(--card-paragraph);
 }
 
 .widgets .property-body .proparty-info .price {
@@ -1071,7 +1023,7 @@ form .search_inputs .submit_btn button svg {
 
 .widgets .property-body .proparty-info .price p {
     font-size: 25px;
-    color: var(--color9);
+    color: var(--sub-head-line);
     display: flex;
     gap: 10px;
     flex-direction: row-reverse;
@@ -1090,20 +1042,20 @@ form .search_inputs .submit_btn button svg {
 }
 
 .widgets .property-body .proparty-info .owner p {
-    color: var(--color9);
+    color: var(--card-tag-background);
     font-size: 20px;
     margin-left: 10px;
 }
 
 .widgets .property-body .proparty-info .owner a span {
     text-decoration: none;
-    color: var(--color8);
+    color: var(--sub-head-line);
     font-size: 20px;
     transition: 0.2s all;
 }
 
 .widgets .property-body .proparty-info .owner a:hover span {
-    color: var(--color4);
+    color: var(--highlight);
 }
 
 /* animate property body */
@@ -1120,7 +1072,6 @@ form .search_inputs .submit_btn button svg {
 }
 
 /* ُEnd widget  */
-
 /* Dropdown Button */
 .dropbtn {
     border: none;
