@@ -32,13 +32,23 @@
         </footer>
     </div>
     <!-- End Footer -->
-    <script src="<?php echo $js ?>contactus.js"></script>
-    <script src="<?php echo $js ?>main.js"></script>
-    <script src="<?php echo $js ?>rent.js"></script>
-    <script src="<?php echo $js ?>property_details.js"></script>
+    <?php
+    if (isset($prop_details_page)) :
+    ?>
+        <script src="<?php echo $js ?>property_details.js"></script>
+    <?php
+    else :
+    ?>
+        <script src="<?php echo $js ?>contactus.js"></script>
+        <script src="<?php echo $js ?>main.js"></script>
+        <script src="<?php echo $js ?>rent.js"></script>
+    <?php
+    endif;
+    ?>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- propery_details page js links -->
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFHz-7hKCyzYx2kWfY-S_kSi6Hm8pZ8jk&callback=initMap"></script>
     </body>

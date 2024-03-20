@@ -1,97 +1,52 @@
-<?php include 'init.php'; ?>
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/images/contactus.png">
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Main External Css file -->
-    <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>contactus.css">
-    <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>footer.css">
-    <!-- Reader all elements nomarlly -->
-    <link rel="stylesheet" href="<?php echo $css ?>normalize.css" />
-    <!-- Font awesome library -->
-    <link rel="stylesheet" href="<?php echo $css ?>all.min.css" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <title>تواصل معنا</title>
-</head>
-
-<body>
-    <!-- Button to top -->
-    <span class="up"><i class="fa-regular fa-circle-up"></i></span>
-    <!-- Start Header -->
-    <header>
-        <div class="container">
-            <div class="login">
-                <a class="LoginBtn" href="login.php">
-                    تسجيل الدخول
-                </a>
-            </div>
-            <nav class="navigation">
-                <span id="menuicon">
-                    <i class="bx bx-menu toggle_menu black"></i>
-                </span>
-                <ul id="menu" class="menu">
-                    <li><a href="<?php echo $contactus ?>">تواصل معنا</a></li>
-                    <li> <a href="<?php echo $about ?>">عنا</a></li>
-                    <li> <a href="<?php echo $commercial ?>">تجاريه</a></li>
-                    <li> <a href="<?php echo $students ?>">للطلاب</a></li>
-                    <li> <a href="<?php echo $forRent ?>">للإيجار</a></li>
-                    <li> <a href="<?php echo $forBuy ?>">للبيع</a></li>
-                </ul>
-            </nav>
-            <a href="index.php" class="logo"><img src="<?php echo $images ?>logo_white.png" alt="Logo"></a>
-        </div>
-    </header>
-    <!-- End Header -->
-    <!-- Start Contact -->
-    <section class="background"></section>
-    <section class="main_section">
-        <div class="container">
-            <div class="contact">
-                <div class="left">
-                    <div class="contact_img">
-                        <img src="<?php echo $images ?>Group 114.png" alt="">
-                    </div>
-                    <div class="info">
-                        <div class="box">
-                            <span><i class="fa-solid fa-envelope"></i></span>
-                            <a href="mailto:alwasit.real.estate@gmail.com">Alwasit.Real.Estate@gmail.com</a>
-                        </div>
-                        <div class="box">
-                            <span><i class="fa-brands fa-square-facebook"></i></span>
-                            <a href="https://www.facebook.com" target="_blank">Alwasit.Real.Estate</a>
-                        </div>
-                        <div class="box">
-                            <span><i class="fa-brands fa-linkedin"></i></span>
-                            <a href="https://www.linkedin.com" target="_blank">Alwasit.Real.Estate</a>
-                        </div>
-                    </div>
+<?php include 'init.php';
+$DefultPage = '';
+$pageTitel = 'الوسيط | نواصل معنا';
+$contactus_page = '';
+?>
+<?php include $templates . 'header.php' ?>
+<!-- Start Header -->
+<?php include $templates . 'navbar.php' ?>
+<!-- End Header -->
+<!-- Start Contact -->
+<section class="background"></section>
+<section class="main_section">
+    <div class="container">
+        <div class="contact">
+            <div class="left">
+                <div class="contact_img">
+                    <img src="<?php echo $images ?>Group 114.png" alt="">
                 </div>
-                <div class="right">
-                    <div class="text">
-                        <h2>ابق علي تواصل معنا</h2>
-                        <p>نحن هنا من اجلك ! كيف يمكن أن نساعدك</p>
+                <div class="info">
+                    <div class="box">
+                        <span><i class="fa-solid fa-envelope"></i></span>
+                        <a href="mailto:alwasit.real.estate@gmail.com">Alwasit.Real.Estate@gmail.com</a>
                     </div>
-                    <div class="content">
-                        <form action="">
-                            <input type="text" name="name" class="main-input" placeholder="الأسم">
-                            <input type="email" name="email" class="main-input" placeholder="البريد الإلكتروني">
-                            <textarea name="message" class="main-input" placeholder="نحن نستمع إليك"></textarea>
-                            <input type="submit" value="إرسال">
-                        </form>
+                    <div class="box">
+                        <span><i class="fa-brands fa-square-facebook"></i></span>
+                        <a href="https://www.facebook.com" target="_blank">Alwasit.Real.Estate</a>
+                    </div>
+                    <div class="box">
+                        <span><i class="fa-brands fa-linkedin"></i></span>
+                        <a href="https://www.linkedin.com" target="_blank">Alwasit.Real.Estate</a>
                     </div>
                 </div>
             </div>
+            <div class="right">
+                <div class="text">
+                    <h2>ابق علي تواصل معنا</h2>
+                    <p>نحن هنا من اجلك ! كيف يمكن أن نساعدك</p>
+                </div>
+                <div class="content">
+                    <form action="">
+                        <input type="text" name="name" class="main-input" placeholder="الأسم">
+                        <input type="email" name="email" class="main-input" placeholder="البريد الإلكتروني">
+                        <textarea name="message" class="main-input" placeholder="نحن نستمع إليك"></textarea>
+                        <input type="submit" value="إرسال">
+                    </form>
+                </div>
+            </div>
         </div>
-    </section>
-    <!-- End Contact -->
-    <?php include $templates . 'footer.php'; ?>
+    </div>
+</section>
+<!-- End Contact -->
+<?php include $templates . 'footer.php'; ?>

@@ -1,237 +1,137 @@
 <?php include 'init.php';
 $DefultPage = '';
-session_start();
-
+$pageTitel = 'الوسيط | Alwasit';
+$main_page  = '';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Main External Css file -->
-    <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>main.css">
-    <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>home.css">
-    <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>footer.css">
-    <!-- Reader all elements nomarlly -->
-    <link rel="stylesheet" href="<?php echo $css ?>normalize.css" />
-    <!-- Font awesome library -->
-    <link rel="stylesheet" href="<?php echo $css ?>all.min.css" />
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- animate text  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <title>Home</title>
-</head>
-
-<body>
-
-    <!-- Button to top -->
-    <span class="up"><i class="fa-regular fa-circle-up"></i></span>
-    <!-- Start Header -->
-    <?php include $templates . 'header.php' ?>
-    <!-- End Header -->
-    <!-- Start Landing -->
-    <div class="langing">
-        <div class="container">
-            <div class="content">
-                <h1 id="h2">خاص بمحافظة بني سويف</h1>
-                <p id="info">
-                    شراء او استئجار العقارات <br> بدون عمولة
-                </p>
-            </div>
-
-            <!-- start Form -->
-            <form action="">
-                <div class="check_btn">
-                    <label>
-                        <input type="radio" class="toggle-radio" name="c" value="1" id="buy" checked>
-                        <div class="toggle-buy"></div>
-                    </label>
-                    <label>
-                        <input type="radio" class="toggle-radio" name="c" value="2" id="rent">
-                        <div class="toggle-rent"></div>
-                    </label>
-                </div>
-                <div class="search_inputs">
-                    <div class="input_control_search">
-                        <input type="text" name="q" oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
-                        <p class="no-suggestion-message" id="noSuggestionMessage"></p>
-                        <ul class="suggestion-list" id="suggestionList">
-                        </ul>
-                        <i class='bx bx-search'></i>
-                    </div>
-                    <div class="select_type">
-                        <select name="t" id="propertyTypeSelect">
-                            <option value="all">نوع العقار</option>
-                            <option value="1">شقة</option>
-                            <option value="2">فيلا</option>
-                        </select>
-                    </div>
-                    <div class="select_price">
-                        <p class="price_text">السعر</p>
-                        <div class="price_input">
-                            <div class="input_field">
-                                <div class="input_field_min">
-                                    <input type="number" name="pmi" placeholder="الحد الادني للسعر" id="minPriceInput">
-                                    <ul class="suggestion_min_price">
-                                    </ul>
-                                </div>
-                                <span>-</span>
-                                <div class="input_field_max">
-                                    <input type="number" name="pmx" placeholder="الحد الاقصي للسعر" id="maxPriceInput">
-                                    <ul class="suggestion_max_price">
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="rest_price_input">إعادة ضبط</div>
-                        </div>
-                    </div>
-                    <div class="select_area">
-                        <p class="area_text">المساحه <span>(متر مربع)</span></p>
-                        <div class="area_input">
-                            <div class="input_field">
-                                <div class="input_field_min">
-                                    <input type="number" name="ami" placeholder="اقل مساحه" id="minAreaInput">
-                                    <ul class="suggestion_min_area">
-                                    </ul>
-                                </div>
-                                <span>-</span>
-                                <div class="input_field_max">
-                                    <input type="number" name="amx" placeholder="اكبر مساحه" id="maxAreaInput">
-                                    <ul class="suggestion_max_area">
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="rest_area_input">إعادة ضبط</div>
-                        </div>
-                    </div>
-                    <div class="submit_btn">
-                        <button type="submit" value=""><i class="fa fa-search"></i></button>
-                    </div>
-                </div>
-            </form>
-            <!-- End Form -->
-
+<?php include $templates . 'header.php' ?>
+<!-- Start Header -->
+<?php include $templates . 'navbar.php' ?>
+<!-- End Header -->
+<!-- Start Landing -->
+<div class="langing">
+    <div class="container">
+        <div class="content">
+            <h1 id="h2">خاص بمحافظة بني سويف</h1>
+            <p id="info">
+                شراء او استئجار العقارات <br> بدون عمولة
+            </p>
         </div>
+        <!-- start Form -->
+        <?php include $templates . 'searchform.php' ?>
+        <!-- End Form -->
     </div>
-    <!-- End Landing -->
-    <!-- Start widget -->
-    <div class="widget-container">
-        <div class="container">
-            <div class="main-heading animate__bounceInLeft">
-                <h2 class="heading2">عقارات مميزة</h2>
-            </div>
-            <div class="widgets">
-                <div class="property-body">
-                    <a href="<?php echo $prop_details ?>" class="property-link">
-                        <div class="images-details">
-                            <img src="<?php echo $images ?>item1.jpg" alt="">
-                            <div class="details-top">
-                                <div class="details-type">
-                                    <div class="type1">سكني</div>
-                                    <div class="rent">للإيجار</div>
-                                </div>
-                                <div class="favorite-box">
-                                    <a href='#' title="اضف للمفضلة" class='property-favorite'>
-                                        <span class='icon-heart-o'>
-                                            <i class="fa-regular fa-heart"></i>
-                                        </span>
-                                    </a>
-                                </div>
+</div>
+<!-- End Landing -->
+<!-- Start widget -->
+<div class="widget-container">
+    <div class="container">
+        <div class="main-heading animate__bounceInLeft">
+            <h2 class="heading2">عقارات مميزة</h2>
+        </div>
+        <div class="widgets">
+            <div class="property-body">
+                <a href="<?php echo $prop_details ?>" class="property-link">
+                    <div class="images-details">
+                        <img src="<?php echo $images ?>item1.jpg" alt="">
+                        <div class="details-top">
+                            <div class="details-type">
+                                <div class="type1">سكني</div>
+                                <div class="rent">للإيجار</div>
                             </div>
-                            <div class="details-bottom">
-                                <div class="property-details">
-                                    <div class="bath">
-                                        <p>2</p>
-                                        <i class='bx bx-bath'></i>
-                                    </div>
-                                    <div class="rooms">
-                                        <p>4</p>
-                                        <i class='bx bx-bed'></i>
-                                    </div>
-                                    <div class="area">
-                                        <p>200 m<sup>2</sup> </p>
-                                        <i class='bx bx-layout'></i>
-                                    </div>
-                                </div>
-                                <div class="photos">
-                                    <p>5</p>
-                                    <i class="fa-solid fa-camera"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="proparty-info">
-                            <div class="location">
-                                <i class="fa-solid fa-location-dot"></i>
-                                <p>location</p>
-                            </div>
-                            <div class="description">
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, quae.</p>
-                            </div>
-                            <div class="price">
-                                <p>3,000 <span>جنيه</span></p>
-                            </div>
-                            <hr>
-                            <div class="owner">
-                                <a href="">
-                                    <p> : المالك </p>
-                                    <span> ابراهيم عبد الرحمن</span>
+                            <div class="favorite-box">
+                                <a href='#' title="اضف للمفضلة" class='property-favorite'>
+                                    <span class='icon-heart-o'>
+                                        <i class="fa-regular fa-heart"></i>
+                                    </span>
                                 </a>
                             </div>
                         </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End widget -->
-    <!-- Start Design -->
-    <div class="design">
-        <div class="container">
-            <div class="design_img">
-                <img src="<?php echo $images ?>item3.jpg" alt="">
-            </div>
-            <div class="design_content">
-                <p>قم بإنشاء حسابك ونشر العقارات الخاصة بك
-                    للوصول لأكبر عدد من مستخدمي الوسيط</p>
-                <a class="LoginBtn" href='<?php echo $login ?>'>
-                    تسجيل الدخول
+                        <div class="details-bottom">
+                            <div class="property-details">
+                                <div class="bath">
+                                    <p>2</p>
+                                    <i class='bx bx-bath'></i>
+                                </div>
+                                <div class="rooms">
+                                    <p>4</p>
+                                    <i class='bx bx-bed'></i>
+                                </div>
+                                <div class="area">
+                                    <p>200 m<sup>2</sup> </p>
+                                    <i class='bx bx-layout'></i>
+                                </div>
+                            </div>
+                            <div class="photos">
+                                <p>5</p>
+                                <i class="fa-solid fa-camera"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="proparty-info">
+                        <div class="location">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p>location</p>
+                        </div>
+                        <div class="description">
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, quae.</p>
+                        </div>
+                        <div class="price">
+                            <p>3,000 <span>جنيه</span></p>
+                        </div>
+                        <hr>
+                        <div class="owner">
+                            <a href="">
+                                <p> : المالك </p>
+                                <span> ابراهيم عبد الرحمن</span>
+                            </a>
+                        </div>
+                    </div>
                 </a>
             </div>
         </div>
     </div>
-    <!-- End Design -->
-    <!-- start stats -->
-    <div class="stats" id="stats-section">
-        <div class="container">
-            <div class="box">
-                <i class="fa-solid fa-building"></i>
-                <div class="number" data-goal="450">0</div>
-                <p>عقار للإيجار</p>
-            </div>
-            <div class="box">
-                <i class="fa-solid fa-building"></i>
-                <div class="number" data-goal="256">0</div>
-                <p>عقار للبيع</p>
-            </div>
-            <div class="box">
-                <i class="fa-solid fa-person"></i>
-                <div class="number" data-goal="210">0</div>
-                <p>عميل</p>
-            </div>
-            <div class="box">
-                <i class="fa-solid fa-eye"></i>
-                <div class="number" data-goal="600">0</div>
-                <p>زائر</p>
-            </div>
+</div>
+<!-- End widget -->
+<!-- Start Design -->
+<div class="design">
+    <div class="container">
+        <div class="design_img">
+            <img src="<?php echo $images ?>item3.jpg" alt="">
+        </div>
+        <div class="design_content">
+            <p>قم بإنشاء حسابك ونشر العقارات الخاصة بك
+                للوصول لأكبر عدد من مستخدمي الوسيط</p>
+            <a class="LoginBtn" href='<?php echo $login ?>'>
+                تسجيل الدخول
+            </a>
         </div>
     </div>
-    <!-- End stats -->
-    <?php include $templates . 'footer.php'; ?>
+</div>
+<!-- End Design -->
+<!-- start stats -->
+<div class="stats" id="stats-section">
+    <div class="container">
+        <div class="box">
+            <i class="fa-solid fa-building"></i>
+            <div class="number" data-goal="450">0</div>
+            <p>عقار للإيجار</p>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-building"></i>
+            <div class="number" data-goal="256">0</div>
+            <p>عقار للبيع</p>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-person"></i>
+            <div class="number" data-goal="210">0</div>
+            <p>عميل</p>
+        </div>
+        <div class="box">
+            <i class="fa-solid fa-eye"></i>
+            <div class="number" data-goal="600">0</div>
+            <p>زائر</p>
+        </div>
+    </div>
+</div>
+<!-- End stats -->
+<?php include $templates . 'footer.php'; ?>

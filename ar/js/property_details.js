@@ -1,3 +1,30 @@
+$(document).ready(function () {
+    'use strict';
+
+    $('.toggle_menu').click(function () {
+        $("#menu").toggleClass("show_menu");
+        $(this).toggleClass("active");
+    })
+    if ($("#menu").hasClass("show_menu")) {
+        $('body').on('click', function () {
+            $('#menu').css('display', 'none')
+        });
+    }
+    if (!$("#menu").hasClass("show_menu")) {
+        $('.toggle_menu').remove("active");
+
+    }
+    let header = $('header .container');
+    let login_box = $('.login_box');
+    $(window).resize(function () {
+        if ($(window).width() >= 767) {
+            login_box.remove(); // Remove .login_box
+        } else {
+            header.append(login_box); // Append .login_box
+        }
+    });
+});
+
 
 // Get Slider items
 let images = Array.from(document.querySelectorAll('.image-gallery .container img'));
@@ -232,20 +259,20 @@ formElement.addEventListener("submit", (e) => {
 })
 
 
-$.ajax({
-    url: 'test.php',
-    type: 'POST',
-    success: function (coordinates) {
-        var values = coordinates.split("|");
-        var lat_value = values[0]
-        var lang_value = values[1]
-        console.log(lat_value.type());
-        console.log(lang_value);
-    },
-    error: function () {
-        console.log('error');
-    }
-});
+// $.ajax({
+//     url: 'test.php',
+//     type: 'POST',
+//     success: function (coordinates) {
+//         var values = coordinates.split("|");
+//         var lat_value = values[0]
+//         var lang_value = values[1]
+//         console.log(lat_value.type());
+//         console.log(lang_value);
+//     },
+//     error: function () {
+//         console.log('error');
+//     }
+// });
 
 //SECTION - google map api
 function initMap() {

@@ -32,7 +32,6 @@ if (isset($_SESSION['uID'])) {
             </div>
         _END;
         }
-
         ?>
         <nav class="navigation">
             <span id="menuicon"><i class="bx bx-menu toggle_menu black"></i></span>
@@ -44,7 +43,17 @@ if (isset($_SESSION['uID'])) {
                 <li> <a href="<?php echo $forRent ?>">للإيجار</a></li>
                 <li> <a href="<?php echo $forBuy ?>">للبيع</a></li>
             </ul>
+            <?php
+            if (isset($contactus_page)) :
+            ?>
+                <a href="index.php" class="logo"><img src="<?php echo $images ?>logo_white.png" alt="Logo"></a>
+            <?php
+            else :
+            ?>
+                <a href="index.php" class="logo"><img src="<?php echo $images ?>logo.png" alt="Logo"></a>
+            <?php
+            endif;
+            ?>
         </nav>
-        <a href="index.php" class="logo"><img src="<?php echo $images ?>logo.png" alt="Logo"></a>
     </div>
 </header>

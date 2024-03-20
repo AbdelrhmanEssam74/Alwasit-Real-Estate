@@ -1,7 +1,8 @@
 <?php
 
+$function = 'includes/functions/';
 # Routes
-$templates = 'includes/';
+$templates = 'includes/template/';
 $css = 'ar/css/';
 $js = 'ar/js/';
 $images = 'ar/images/';
