@@ -1,4 +1,36 @@
-<?php include $function . 'function.php'; ?>
+<?php include $function . 'function.php';
+session_start();
+if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
+    $hashed_id = $_COOKIE['u'];
+    include $config . 'config.php';
+    include $config . 'loginTable.php';
+    include $config . 'usersTable.php';
+    // check if the user is still in the database, otherwise delete the cookie and redirect to login page
+    $users_obj = new RegisterTable();
+    $login_user_obj = new loginTable();
+    $user_id = "";
+    $AllUsers = $users_obj->getAll();
+    foreach ($AllUsers as $user) :
+        if (password_verify($user['user_id'], $hashed_id)) {
+            $user_id = $user['user_id'];
+            break;
+        } else {
+            continue;
+        }
+    endforeach;
+    // get the user's information from the users table using their id
+    $user_data = $login_user_obj->getLoginUser($user_id);
+    if (!empty($user_data)) {
+        if ($user_data['expire_date'] < date("Y-m-d H:i:s")) {
+            // update cookies and sesssions
+            setcookie("rem", $user_data['token'], $user_data['expire_date'], '/');
+            $_SESSION['loggedIn'] = true;
+            $_SESSION['uID'] = $user_id;
+            $_SESSION['email'] = $user_data['email'];
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

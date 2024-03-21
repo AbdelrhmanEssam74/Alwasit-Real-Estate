@@ -31,7 +31,7 @@ class loginTable extends DatabaseConnection
         $this->email = $rows['email'];
         return $prepare->rowCount();
     }
-    
+
     public function checkPassword($e, $pass)
     {
         $qry = "SELECT * FROM users WHERE email='" . $e . "'";
@@ -55,6 +55,17 @@ class loginTable extends DatabaseConnection
         $prepare = $this->conn->prepare($qry);
         $prepare->execute();
         $rows = $prepare->fetch();
-        return $rows['token'];
+        return $rows;
+    }
+    public function getLoginUser($id)
+    {
+        $qry = "SELECT * FROM `login`
+                INNER JOIN `remember_tokens` ON `login`.`user_id` = `remember_tokens`.`user_id`
+                WHERE `login`.`user_id` = :id";
+        $prepare = $this->conn->prepare($qry);
+        $prepare->bindValue(':id', $id);
+        $prepare->execute();
+        $rows = $prepare->fetch();
+        return $rows;
     }
 }

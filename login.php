@@ -2,7 +2,7 @@
 <?php
 $pageTitel = 'تسجيل الدخول';
 $login_page = '';
-session_start();
+
 
 if ((isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) || isset($_COOKIE['rem'])) {
     header("Location:" . $home);

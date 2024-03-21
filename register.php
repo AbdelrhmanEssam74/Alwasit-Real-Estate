@@ -1,6 +1,5 @@
 <?php include 'init.php'; ?>
 <?php
-session_start();
 $register_page = '';
 $pageTitel = 'انشاء حساب جديد';
 if ((isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) || isset($_COOKIE['rem'])) {

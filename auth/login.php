@@ -19,7 +19,7 @@ $user_id = $userObj->GetUserID();
 
 // Check if user already logged in with "Remember Me" cookie
 if (isset($_COOKIE['rem'])) {
-    if ($userObj->GetUserToken($user_id) === $_COOKIE['rem']) {
+    if ($userObj->GetUserToken($user_id)['token'] === $_COOKIE['rem']) {
         $_SESSION['loggedIn'] = true;
         $_SESSION['uID'] = $user_id;
         $_SESSION['email'] = $email;
@@ -58,6 +58,8 @@ $userObj->insert($insertQuery_user, $user_data);
 if (isset($_POST["remember"])) {
     // Generate a secure token 
     $token = bin2hex(random_bytes(16)); // 32-character token
+    // store user id in cookie 
+    setcookie('u', password_hash($user_id, PASSWORD_DEFAULT), strtotime("+1 month"), "/");
     setcookie("rem", $token, strtotime("+1 month"), '/');
     $expire_date = date("Y-m-d H:i:s", strtotime("+1 month"));
 

@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     }
 
+    // add and remove login button in small screen
     let header = $('header .container');
     let login_box = $('.login_box');
     $(window).resize(function () {
@@ -24,13 +25,13 @@ $(document).ready(function () {
             header.append(login_box); // Append .login_box
         }
     });
-    let droptn = $('.dropbtn img')
+    // toggle menu for user
+    let droptn = $('.dropbtn img');
+    let dropDown_list = $('.dropdown-content');
     droptn.click(function () {
-        console.log("[[]]");
-    })
+        dropDown_list.toggleClass('show');
+    });
 });
-
-
 
 const newSearchInputs = document.querySelector(".search_inputs");
 const newInputs = `

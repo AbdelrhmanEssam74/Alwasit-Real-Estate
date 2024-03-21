@@ -1,5 +1,6 @@
 <?php
 // user profile image
+
 $img = $images . 'person1.jpg';
 $user_id = '';
 if (isset($_SESSION['uID'])) {
@@ -17,8 +18,8 @@ if (isset($_SESSION['uID'])) {
                         <img src='$img' alt='Profile Picture'>
                     </button>
                     <div id="myDropdown" class="dropdown-content">
-                        <a href="#">Edit Profile</a>
-                        <a href="$logout?uID=$user_id=">Logout</a>
+                        <a href="#">تعديل البيانات </a>
+                        <a href="$logout">تسجيل الخروج</a>
                     </div>
                 </div>
             _END;

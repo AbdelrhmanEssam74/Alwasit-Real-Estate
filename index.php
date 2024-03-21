@@ -5,7 +5,8 @@ $main_page  = '';
 ?>
 <?php include $templates . 'header.php' ?>
 <!-- Start Header -->
-<?php include $templates . 'navbar.php' ?>
+<?php include $templates . 'navbar.php'
+?>
 <!-- End Header -->
 <!-- Start Landing -->
 <div class="langing">
