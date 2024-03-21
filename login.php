@@ -3,16 +3,16 @@
 $pageTitel = 'تسجيل الدخول';
 $login_page = '';
 session_start();
-$email  = " ";
-(isset($_SESSION['email'])) ? $email = $_SESSION['email'] : $email = "";
-?>
-<?php
-// check if the user is already logged in, if so redirect them to their home page
 
 if ((isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) || isset($_COOKIE['rem'])) {
     header("Location:" . $home);
     exit();
 }
+$email  = " ";
+(isset($_SESSION['email'])) ? $email = $_SESSION['email'] : $email = "";
+?>
+<?php
+// check if the user is already logged in, if so redirect them to their home page
 
 $emailNotFound = '';
 if (isset($_SESSION['notFound'])) {
@@ -33,7 +33,7 @@ session_unset();
 <div class="form_box">
     <div class="back_img">
         <div class="form_content">
-            <p>مرحباً بكم في <br /><span><strong>الوسيط</strong></span></p>
+            <p class="title">مرحباً بكم في <br /><span><strong>الوسيط</strong></span></p>
             <?php
 
             if (!empty($emailNotFound)) {
@@ -47,14 +47,14 @@ session_unset();
                 <div class="input-box">
                     <input id="email" name="email" type="email" dir="rtl" value="<?php echo $email ?>" placeholder="البريد الالكتروني">
                     <i class='bx bxs-envelope'></i>
-                    <span class="error_message"></span>
+                    <p class="error_message"></p>
                 </div>
                 <div class="input-box">
                     <input id="password" name="password" type="password" dir="rtl" placeholder="كلمه المرور ">
                     <i class='bx bx-lock-open'></i>
                     <i class='bx bx-show-alt ' id="eyeShowPassword"></i>
                     <i class='bx bx-hide ' id="eyeHidePassword"></i>
-                    <span class="error_message"></span>
+                    <p class="error_message"></p>
 
                 </div>
 

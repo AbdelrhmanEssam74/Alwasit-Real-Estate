@@ -1,119 +1,86 @@
-//SECTION -  start form validation
+$(document).ready(function () {
+    const form = $("#form");
+    const inputs = {
+        firstName: $("#firstName"),
+        lastName: $("#lastName"),
+        email: $("#email"),
+        password: $("#password"),
+        confirmPassword: $("#confirmPassword"),
+        phone: $("#phone")
+    };
 
-let form = document.getElementById('form');
-let first_name = document.getElementById("firstName");
-let last_name = document.getElementById("lastName");
-let email = document.getElementById("email");
-let password = document.getElementById("password");
-let confirmPassword = document.getElementById("confirmPassword");
-let phone = document.getElementById("phone");
-
-form.addEventListener("submit", (e) => {
-    validateInputs();
-    let result = isFormValid();
-    if (result == true) {
-        form.submit();
-    } else {
-        e.preventDefault();
-    }
-});
-const setErrors = (e, m) => {
-    const inputControl = e.parentElement;
-    const errorDisplay = inputControl.querySelector(".error_message");
-    const input_icon = inputControl.querySelector("i");
-    errorDisplay.innerText = m;
-    errorDisplay.style.display = "block";
-    e.style.border = "1px solid var(--danger)"
-    input_icon.style.color = "var(--danger)";
-    form.addEventListener("click", () => {
-        errorDisplay.style.display = "none";
-    });
-
-}
-
-
-const setSuccess = (e) => {
-    const inputControl = e.parentElement;
-    const errorDisplay = inputControl.querySelector(".error_message");
-    const input_icon = inputControl.querySelector("i");
-    errorDisplay.style.display = "none";
-    e.style.border = "1px solid var(--success)"
-    input_icon.style.color = "var(--success)";
-    errorDisplay.innerText = "";
-};
-const validateInputs = () => {
-    const first_nameValue = first_name.value.trim();
-    const last_nameValue = last_name.value.trim();
-    const emailValue = email.value.trim();
-    const passwordValue = password.value.trim();
-    const ConfirmPasswordValue = confirmPassword.value.trim();
-    const phonevalue = phone.value.trim();
-    if (first_nameValue === "") {
-        setErrors(first_name, "ما اسمك؟")
-    } else {
-        setSuccess(first_name);
-
-    }
-    if (last_nameValue === "") {
-        setErrors(last_name, "ما اسمك؟")
-    } else {
-        setSuccess(last_name);
-
-    }
-    if (emailValue === "") {
-        setErrors(email, "ادخل بريدك الالكتروني")
-    } else {
-        setSuccess(email);
-
-    }
-    if (passwordValue === "") {
-        setErrors(password, "ادخل كلمة السر")
-    } else {
-        setSuccess(password);
-    }
-    if (passwordValue.length < 8) {
-        setErrors(password, " كلمة السر اقل من 8 حروف")
-    } else {
-        setSuccess(password);
-    }
-    if (ConfirmPasswordValue === "") {
-        setErrors(confirmPassword, " اعد ادخال كلمة السر")
-    } else if (passwordValue !== ConfirmPasswordValue) {
-        setErrors(confirmPassword, "كلمة السر غير مطابقة");
-    } else {
-        setSuccess(confirmPassword);
-
-    }
-    if (phonevalue === "") {
-        setErrors(phone, "ادخل الرقم الخاص بك")
-    }
-    else {
-        setSuccess(phone);
-
-    }
-
-}
-
-phone.addEventListener('keyup', function (event) {
-    if (event.key.match(/[^0-9]/g)) {
-        setErrors(phone, "ادخل رقم صحيح")
-        phone.value = phone.value.replace(/\D/g, ''); // Remove non-digit character
-    }
-    else {
-        setSuccess(phone)
-    }
-});
-
-function isFormValid() {
-    const error = form.querySelectorAll(".error_message");
-    let result = true;
-    error.forEach((container) => {
-        if (container.style.display === "block") {
-            result = false;
+    form.on("submit", function (e) {
+        validateInputs();
+        if (isFormValid()) {
+            form.submit();
+        } else {
+            e.preventDefault(); // Prevent form submission by default
         }
     });
-    return result;
-}
+
+    function setErrors($input, message) {
+        const $inputControl = $input.parent();
+        const $errorDisplay = $inputControl.find(".error_message");
+        const $inputIcon = $inputControl.find("i");
+        $errorDisplay.text(message).show();
+        $input.css("border", "1px solid var(--danger)");
+        $inputIcon.css("color", "var(--danger)");
+    }
+
+    function setSuccess($input) {
+        const $inputControl = $input.parent();
+        const $errorDisplay = $inputControl.find(".error_message");
+        const $inputIcon = $inputControl.find("i");
+        $errorDisplay.hide();
+        $input.css("border", "1px solid var(--success)");
+        $inputIcon.css("color", "var(--success)");
+    }
+
+    function validateInputs() {
+        for (const inputKey in inputs) {
+            if (inputs.hasOwnProperty(inputKey)) {
+                const $input = inputs[inputKey];
+                const value = $input.val().trim();
+                if (value === "") {
+                    setErrors($input, "ما اسمك؟");
+                } else {
+                    setSuccess($input);
+                }
+            }
+        }
+
+        const passwordValue = inputs.password.val().trim();
+        const confirmPasswordValue = inputs.confirmPassword.val().trim();
+
+        if (passwordValue.length < 8) {
+            setErrors(inputs.password, "كلمة السر أقل من 8 حروف");
+        } else {
+            setSuccess(inputs.password);
+        }
+
+        if (confirmPasswordValue === "") {
+            setErrors(inputs.confirmPassword, "أعد إدخال كلمة السر");
+        } else if (passwordValue !== confirmPasswordValue) {
+            setErrors(inputs.confirmPassword, "كلمة السر غير مطابقة");
+        } else {
+            setSuccess(inputs.confirmPassword);
+        }
+    }
+
+    inputs.phone.on("input", function () {
+        const $phone = $(this);
+        $phone.val($phone.val().replace(/\D/g, ""));
+        if (!/^\d*$/.test($phone.val())) {
+            setErrors($phone, "أدخل رقمًا صحيحًا");
+        } else {
+            setSuccess($phone);
+        }
+    });
+
+    function isFormValid() {
+        return form.find(".error_message:visible").length === 0;
+    }
+});
 //SECTION -  end form validation
 
 
@@ -155,3 +122,15 @@ setTimeout(() => {
     }
 
 }, 5000);
+
+
+$(document).ready(function () {
+    'user strike';
+    $('[placeholder]').focus(function () {
+        $($(this).attr('data-text', $(this).attr('placeholder')));
+        $(this).attr('placeholder', " ")
+    }).blur(function () {
+        $(this).attr('placeholder', $(this).attr('data-text'))
+    })
+
+})

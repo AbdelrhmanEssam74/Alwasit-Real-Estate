@@ -16,7 +16,10 @@
     --card-highlitght: #ff5470;
     --card-tag-background: #2F6B6E;
     --color7: #e7e7e3;
-    --color2: #A25C32;
+    --success: #00B73F;
+    --success-hover: #008b31;
+    --danger: #ff3860;
+    --danger-hover: #bb2443;
     --sectina-padding: 100px;
 }
 
@@ -139,7 +142,7 @@ header nav ul {
 
 ul a {
     display: block;
-    color: var(--color9);
+    color: var(--paragraph);
     text-decoration: none;
     font-size: 20px;
     transition: 0.3s all;
@@ -152,7 +155,7 @@ header nav a::before {
     content: "";
     position: absolute;
     width: 0%;
-    background-color: var(--color3hover);
+    background-color: var(--tertiary);
     height: 1px;
     bottom: 20%;
     right: 0;
@@ -164,7 +167,7 @@ header nav li:hover a::before {
 }
 
 header nav li:hover a {
-    color: var(--color4);
+    color: var(--highlight);
 }
 
 
@@ -234,7 +237,7 @@ header nav ul {
     }
 
     header nav .menu li:hover a {
-        color: var(--color4);
+        color: var(--tertiary);
     }
 
     header ul li a {
@@ -285,7 +288,7 @@ header nav ul {
     color: #fff;
 }
 
-.form_box .form_content p {
+.form_box .form_content .title {
     text-align: right;
     font-size: 40px;
     line-height: 1.5;
@@ -319,7 +322,7 @@ header nav ul {
 
     }
 
-    .form_box .form_content p {
+    .form_box .form_content .title {
         font-size: 30px;
 
     }
@@ -339,7 +342,7 @@ header nav ul {
     display: flex;
     flex-direction: column;
     padding: 10px 25px;
-    gap: 15px;
+    gap: 17px;
     justify-content: end;
     align-items: end;
 }
@@ -348,7 +351,9 @@ header nav ul {
     width: 100%;
     position: relative;
 }
-
+.form_box .back_img form .input-box input:not(:last-child){
+    margin-bottom: 5px;
+}
 .form_box .back_img form .input-box input {
     width: 300px;
     height: 45px;
@@ -457,31 +462,27 @@ header nav ul {
 /* Error message */
 
 
-.error_message {
+p.error_message {
     display: none;
     position: absolute;
     transition: 0.5s all;
     font-size: 13px;
-    width: 50%;
-    text-align: center;
-    padding: 7px 5px;
-    border-radius: 10px;
-    background-color: var(--danger);
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -100%);
+    width: 100%;
+    text-align: right;
+    padding: 0px 30px;
+    bottom: 0;
+    right: 0;
+    color: #ffffff;
+    transform: translate(0, 80%);
 }
 
-.error_message::before {
-    content: "";
+p.error_message::before {
+    content: "\2a";
     position: absolute;
-    top: 85%;
-    right: 36%;
-    transform: translate(0%, 0%);
-    border-bottom: solid 10px transparent;
-    border-top: solid 10px var(--danger);
-    border-left: solid 10px transparent;
-    border-right: solid 10px transparent;
+    color: var(--danger);
+    font-size: 36px;
+    right: 3%;
+    top: -41%;
 }
 
 @media (max-width: 500px) {

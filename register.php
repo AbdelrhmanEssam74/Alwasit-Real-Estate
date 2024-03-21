@@ -3,11 +3,10 @@
 session_start();
 $register_page = '';
 $pageTitel = 'انشاء حساب جديد';
-if (isset($_COOKIE['rem']) && $_SESSION['loggedIn'] == true) {
+if ((isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) || isset($_COOKIE['rem'])) {
     header("Location:" . $home);
     exit();
 }
-
 // check if the phone number is valid or not
 $invalid_phone = "";
 $Exists_EMAIL = "";
@@ -50,55 +49,59 @@ endif;
 <div class="form_box">
     <div class="back_img">
         <div class="form_content">
-            <p>مرحباً بكم في <br /><span><strong>الوسيط</strong></span></p>
-            <?php
-            if (!empty($invalid_phone)) {
-                echo "<p class='message'>{$invalid_phone}</p>";
-            } elseif (!empty($Exists_EMAIL)) {
-                echo "<p class='message'>{$Exists_EMAIL}</p>";
-            } elseif (!empty($Exists_Phone)) {
-                echo "<p class='message'>{$Exists_Phone}</p>";
-            } else {
-                echo '<p class="info">قم بإنشاء حساب جديد للوصول الي خدمات الوسيط</p>';
-            }
-            ?>
+            <p class="title">مرحباً بكم في <br /><span><strong>الوسيط</strong></span></p>
+            <p class="info">قم بإنشاء حساب جديد للوصول الي خدمات الوسيط</p>
             <form action="<?php echo $auth . 'register.php' ?>" method="POST" id="form">
                 <div class="input-box-name">
                     <div class="first-name">
                         <input class="name" name="FName" id="firstName" value="<?php echo $firstName ?>" type="text" dir="rtl" placeholder=" الأسم الأول">
                         <i class='bx bx-user'></i>
-                        <span class="error_message"></span>
+                        <p class="error_message"></p>
                     </div>
                     <div class="last-name">
                         <input class="name" id="lastName" name="LName" value="<?php echo $lastName ?>" type="text" dir="rtl" placeholder=" الأسم الأخير">
                         <i class='bx bx-user'></i>
-                        <span class="error_message"></span>
+                        <p class="error_message"></p>
                     </div>
                 </div>
                 <div class="input-box">
                     <input id="email" type="email" name="email" dir="rtl" value="<?php echo $email ?>" placeholder="البريد الالكتروني">
                     <i class='bx bxs-envelope'></i>
-                    <span class="error_message"></span>
+                    <p class="error_message"></p>
                 </div>
+                <?php
+                if (!empty($Exists_EMAIL)) {
+                    echo "<p class='message'>{$Exists_EMAIL}</p>";
+                }
+                ?>
                 <div class="input-box">
                     <input id="password" type="password" name="password" dir="rtl" placeholder="كلمه المرور ">
                     <i class='bx bx-lock-open'></i>
+
                     <i class='bx bx-show-alt eyeShowPassword' id="eyeShowPassword"></i>
                     <i class='bx bx-hide eyeHidePassword' id="eyeHidePassword"></i>
 
-                    <span class="error_message"></span>
+                    <p class="error_message"></p>
                 </div>
                 <div class="input-box">
                     <input id="confirmPassword" type="password" name="confirmPassword" dir="rtl" placeholder="تأكيد كلمه المرور">
                     <i class='bx bx-lock-open'></i>
-                    <span class="error_message"></span>
+                    <p class="error_message"></p>
 
                 </div>
                 <div class="input-box">
                     <input type="tel" dir="rtl" id="phone" value="<?php echo $phone ?>" name="phone" placeholder="+20">
                     <i class='bx bx-phone-call'></i>
-                    <span class="error_message"></span>
+                    <p class="error_message"></p>
                 </div>
+                <?php
+                if (!empty($invalid_phone)) {
+                    echo "<p class='message'>{$invalid_phone}</p>";
+                }
+                if (!empty($Exists_Phone)) {
+                    echo "<p class='message'>{$Exists_Phone}</p>";
+                }
+                ?>
                 <div class="Note">
                     <ul dir="rtl">
                         <li>

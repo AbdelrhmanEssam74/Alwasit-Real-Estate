@@ -24,8 +24,12 @@ $(document).ready(function () {
             header.append(login_box); // Append .login_box
         }
     });
+    let droptn = $('.dropbtn img')
+    console.log(droptn);
+    droptn.click(function () {
+        console.log("Drop");
+    })
 });
-
 
 
 

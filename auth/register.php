@@ -19,7 +19,7 @@ $email = $_POST['email'];
 // Validate phone number
 if (!$userObj->checkPhoneNumber($phone)) {
     $_SESSION['Invalid_PHONE'] = "من فضلك أدخل رقم صحيح";
-    header("Location:/" . $register);
+    header("Location:" . APPURL . $register);
     exit();
 }
 
@@ -27,7 +27,7 @@ if (!$userObj->checkPhoneNumber($phone)) {
 if ($userObj->checkEmailExists($email) > 0) {
     $_SESSION['Exists_EMAIL'] = "هذا البريد الإلكتروني مسجل بالفعل";
     $_SESSION['old_data'] = json_encode(array($_POST));
-    header("Location:/" . $register);
+    header("Location:" . APPURL . $register);
     exit();
 }
 
@@ -35,7 +35,7 @@ if ($userObj->checkEmailExists($email) > 0) {
 if ($userObj->checkPhoneExists($phone) > 0) {
     $_SESSION['Exists_Phone'] = "هذا الرقم مسجل بالفعل";
     $_SESSION['old_data'] = json_encode(array($_POST));
-    header("Location:/" . $register);
+    header("Location:" . APPURL . $register);
     exit();
 }
 
@@ -72,11 +72,11 @@ $mailBody = "
 مرحبًا <h3>{$firstName} {$lastName}</h3>
 <p>شكرًا لك على تسجيل حساب معنا! قبل أن تتمكن من استخدام حسابك، يُرجى التحقق من عنوان بريدك الإلكتروني عن طريق النقر علي هذا الرابط:
 </p>
-<p><a href='http://localhost/Graduation_Project/verification.php?vc={$activation_code_hashed}&uID={$id}'>
-http://localhost/Graduation_Project/verification.php?vc={$activation_code_hashed}&uID={$id}
+<p><a href='http://localhost/Alwasit/verification.php?vc={$activation_code_hashed}&uID={$id}'>
+http://localhost/Alwasit/verification.php?vc={$activation_code_hashed}&uID={$id}
 </a></p>
 <p>فريق الوسيط</p>
-<a href='http://localhost/Graduation_Project' target='_blank'>Alwasit</a>
+<a href='http://localhost/Alwasit' target='_blank'>Alwasit</a>
 </body>
 </html>
         ";

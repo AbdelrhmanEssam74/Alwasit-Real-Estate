@@ -1,5 +1,5 @@
 <?php
-
+define("APPURL", "http://localhost/Alwasit/");
 $function = 'includes/functions/';
 # Routes
 $templates = 'includes/template/';

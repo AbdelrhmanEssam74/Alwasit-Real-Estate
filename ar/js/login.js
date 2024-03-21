@@ -1,70 +1,58 @@
-//SECTION -  start form validation
+$(document).ready(function () {
+    const form = $("#form");
+    const email = $("#email");
+    const password = $("#password");
 
-let form = document.getElementById('form');
-let email = document.getElementById("email");
-let password = document.getElementById("password");
-
-form.addEventListener("submit", (e) => {
-    validateInputs();
-    let result = isFormValid();
-    if (result == true) {
-        form.submit();
-    } else {
-        e.preventDefault();
-    }
-});
-const setErrors = (e, m) => {
-    const inputControl = e.parentElement;
-    const errorDisplay = inputControl.querySelector(".error_message");
-    const input_icon = inputControl.querySelector("i");
-    errorDisplay.innerText = m;
-    errorDisplay.style.display = "block";
-    e.style.border = "1px solid var(--danger)"
-    input_icon.style.color = "var(--danger)";
-    form.addEventListener("click", () => {
-        errorDisplay.style.display = "none";
-    });
-
-}
-
-
-const setSuccess = (e) => {
-    const inputControl = e.parentElement;
-    const errorDisplay = inputControl.querySelector(".error_message");
-    const input_icon = inputControl.querySelector("i");
-    errorDisplay.style.display = "none";
-    e.style.border = "1px solid var(--success)"
-    input_icon.style.color = "var(--success)";
-    errorDisplay.innerText = "";
-};
-const validateInputs = () => {
-    const emailValue = email.value.trim();
-    const passwordValue = password.value.trim();
-    if (emailValue === "") {
-        setErrors(email, "ادخل بريدك الالكتروني")
-    } else {
-        setSuccess(email);
-    }
-    if (passwordValue === "") {
-        setErrors(password, "ادخل كلمة السر")
-    } else {
-        setSuccess(password);
-    }
-}
-
-
-function isFormValid() {
-    const error = form.querySelectorAll(".error_message");
-    let result = true;
-    error.forEach((container) => {
-        if (container.style.display === "block") {
-            result = false;
+    form.on("submit", function (e) {
+        validateInputs();
+        if (isFormValid()) {
+            form.submit();
+        } else {
+            e.preventDefault(); // Prevent form submission by default
         }
     });
-    return result;
-}
-//SECTION -  end form validation
 
+    function setErrors($input, message) {
+        const $inputControl = $input.parent();
+        const $errorDisplay = $inputControl.find(".error_message");
+        const $inputIcon = $inputControl.find("i");
+        $errorDisplay.text(message).show();
+        $input.css("border", "1px solid var(--danger)");
+        $inputIcon.css("color", "var(--danger)");
+    }
+
+    function setSuccess($input) {
+        const $inputControl = $input.parent();
+        const $errorDisplay = $inputControl.find(".error_message");
+        const $inputIcon = $inputControl.find("i");
+        $errorDisplay.hide();
+        $input.css("border", "1px solid var(--success)");
+        $inputIcon.css("color", "var(--success)");
+    }
+
+    function validateInputs() {
+        const emailValue = email.val().trim();
+        const passwordValue = password.val().trim();
+
+        if (emailValue === "") {
+            setErrors(email, "ادخل بريدك الالكتروني");
+        } else {
+            setSuccess(email);
+        }
+
+        if (passwordValue === "") {
+            setErrors(password, "ادخل كلمة السر");
+        } else {
+            setSuccess(password);
+        }
+    }
+
+    function isFormValid() {
+        const errors = form.find(".error_message:visible");
+        return errors.length === 0;
+    }
+});
+//SECTION -  end form validation
 
 //NOTE - show and hide the password
 var eyeShowPassword = document.querySelector('#eyeShowPassword');
@@ -100,3 +88,16 @@ setTimeout(() => {
     }
 
 }, 5000);
+
+
+$(document).ready(function () {
+    'user strike';
+    $('[placeholder]').focus(function () {
+        $($(this).attr('data-text', $(this).attr('placeholder')));
+        $(this).attr('placeholder', " ")
+    }).blur(function () {
+        $(this).attr('placeholder', $(this).attr('data-text'))
+    })
+
+})
+console.log("i");
