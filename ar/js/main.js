@@ -25,9 +25,8 @@ $(document).ready(function () {
         }
     });
     let droptn = $('.dropbtn img')
-    console.log(droptn);
     droptn.click(function () {
-        console.log("Drop");
+        console.log("[[]]");
     })
 });
 
