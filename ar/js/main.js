@@ -33,7 +33,7 @@ $(document).ready(function () {
     });
 });
 
-const newSearchInputs = document.querySelector(".search_inputs");
+const newSearchInputs = $(".search_inputs");
 const newInputs = `
     <div class="input_control_search">
         <input type="text" name="q"  oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
@@ -46,15 +46,13 @@ const newInputs = `
     </div>
 `;
 
-
-
-if (newSearchInputs) {
+if (newSearchInputs.length) {
     function updateMenuAndSearchInputs() {
-        const websiteWidth = window.innerWidth || document.documentElement.clientWidth;
+        const websiteWidth = $(window).width();
         if (websiteWidth <= 767) {
-            newSearchInputs.innerHTML = newInputs;
+            newSearchInputs.html(newInputs);
         } else {
-            newSearchInputs.innerHTML = `
+            newSearchInputs.html(`
         <div class="input_control_search">
             <input type="text" name="q"  oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
             <p class="no-suggestion-message" id="noSuggestionMessage"></p>
@@ -109,12 +107,12 @@ if (newSearchInputs) {
         <div class="submit_btn">
             <button type="submit" value=""><i class="fa fa-search"></i></button>
         </div>
-        `;
+        `);
         }
     }
-    window.addEventListener('resize', updateMenuAndSearchInputs);
+    $(window).resize(updateMenuAndSearchInputs);
     // Check the width of the website on window resize
-    updateMenuAndSearchInputs()
+    updateMenuAndSearchInputs();
 }
 
 //SECTION - suggestions list for search input
@@ -128,11 +126,11 @@ const suggestions = [
 ];
 
 function showSuggestions() {
-    const userInput = document.getElementById("searchInput").value.toLowerCase();
-    const suggestionList = document.getElementById("suggestionList");
-    const noSuggestionMessage = document.getElementById("noSuggestionMessage");
-    suggestionList.innerHTML = "";
-    noSuggestionMessage.textContent = "";
+    const userInput = $("#searchInput").val().toLowerCase();
+    const suggestionList = $("#suggestionList");
+    const noSuggestionMessage = $("#noSuggestionMessage");
+    suggestionList.empty();
+    noSuggestionMessage.text("");
 
     if (userInput.length === 0) {
         return;
@@ -143,25 +141,23 @@ function showSuggestions() {
     );
 
     matchingSuggestions.forEach(suggestion => {
-        const li = document.createElement("li");
-        li.textContent = suggestion;
-        li.addEventListener("click", () => {
-            document.getElementById("searchInput").value = suggestion;
-            suggestionList.innerHTML = "";
+        const li = $("<li></li>").text(suggestion);
+        li.on("click", () => {
+            $("#searchInput").val(suggestion);
+            suggestionList.empty();
         });
-        suggestionList.appendChild(li);
+        suggestionList.append(li);
     });
 
     if (matchingSuggestions.length === 0) {
-        noSuggestionMessage.textContent = "لا يمكننا العثور على استعلام البحث الخاص بك. جرب موقعًا مختلفًا.";
+        noSuggestionMessage.text("لا يمكننا العثور على استعلام البحث الخاص بك. جرب موقعًا مختلفًا.");
     }
 }
-document.querySelector('body').addEventListener('click', function hideSuggestions() {
-    const suggestionList = document.getElementById("suggestionList");
-    suggestionList.innerHTML = "";
 
-})
-
+$("body").on("click", function hideSuggestions() {
+    const suggestionList = $("#suggestionList");
+    suggestionList.empty();
+});
 
 
 
@@ -386,7 +382,7 @@ if (minPriceInput) {
 
 
 
-// Animate property body
+//SECTION -  Animate property body
 window.addEventListener("scroll", function () {
     const header = document.querySelector("header");
     header.classList.toggle("sticky", window.scrollY);
@@ -410,46 +406,57 @@ window.addEventListener("scroll", function () {
     }
 });
 
-// Button to go to the top of the page
-const btn = document.querySelector(".up");
 
-window.addEventListener("scroll", () => {
-    if (window.scrollY >= 400) {
-        btn.classList.add("show");
-    } else {
-        btn.classList.remove("show");
+
+$(document).ready(function () {
+    const btn = $(".up");
+    //NOTE -  Button to go to the top of the page
+    $(window).scroll(function () {
+        if ($(window).scrollTop() >= 400) {
+            btn.addClass("show");
+        } else {
+            btn.removeClass("show");
+        }
+    });
+    btn.click(function () {
+        $("html, body").animate(
+            {
+                scrollTop: 0
+            },
+            "smooth"
+        );
+    });
+
+
+    const startBoxs = $(".stats .box .number");
+    const statsSection = $(".stats");
+    let started = false;
+
+    function startCounter(el) {
+        const goal = parseInt(el.data("goal"));
+        let count = 0;
+        const counter = setInterval(() => {
+            count++;
+            el.text(count);
+            if (count === goal) {
+                clearInterval(counter);
+            }
+        }, 2000 / goal);
+    }
+
+    if (statsSection.length) {
+        $(window).scroll(function () {
+            if (
+                $(window).scrollTop() >=
+                statsSection.offset().top - 350 &&
+                !started
+            ) {
+                startBoxs.each(function () {
+                    startCounter($(this));
+                });
+                started = true;
+            }
+        });
     }
 });
-
-btn.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-    });
-});
-
-const startBoxs = document.querySelectorAll(".stats .box .number");
-const statsSection = document.querySelector('.stats');
-let started = false;
-
-function startCounter(el) {
-    const goal = parseInt(el.dataset.goal);
-    let count = 0;
-    const counter = setInterval(() => {
-        count++;
-        el.textContent = count;
-        if (count === goal) {
-            clearInterval(counter);
-        }
-    }, 2000 / goal);
-}
-
-if (statsSection) {
-    window.addEventListener("scroll", () => {
-        if (window.scrollY >= statsSection.offsetTop - 350 && !started) {
-            startBoxs.forEach(element => startCounter(element));
-            started = true;
-        }
-    });
-}
 

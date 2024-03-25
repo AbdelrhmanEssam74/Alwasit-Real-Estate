@@ -1094,6 +1094,15 @@ form .search_inputs .submit_btn button svg {
     display: inline-block;
 }
 
+.dropdown::after {
+    position: absolute;
+    content: "\f078";
+    font-family: "FontAwesome";
+    right: 0;
+    bottom: 0%;
+    cursor: pointer;
+}
+
 .dropdown img {
     border-radius: 50%;
     width: 50px;
@@ -1110,7 +1119,7 @@ form .search_inputs .submit_btn button svg {
     z-index: 1;
     top: 111%;
     border-radius: 5px;
-    text-align: right;
+    text-align: left;
     border: 1px solid var(--highlight);
 }
 

@@ -18,8 +18,9 @@ if (isset($_SESSION['uID'])) {
                         <img src='$img' alt='Profile Picture'>
                     </button>
                     <div id="myDropdown" class="dropdown-content">
-                        <a href="#">تعديل البيانات </a>
-                        <a href="$logout">تسجيل الخروج</a>
+                        <a href="owner/index.php">Dashboard</a>
+                        <a href="#">Settings</a>
+                        <a href="$logout">Logout</a>
                     </div>
                 </div>
             _END;

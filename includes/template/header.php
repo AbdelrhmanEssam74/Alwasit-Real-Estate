@@ -20,10 +20,11 @@ if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
     endforeach;
     // get the user's information from the users table using their id
     $user_data = $login_user_obj->getLoginUser($user_id);
-    if (!empty($user_data)) {
-        if ($user_data['expire_date'] < date("Y-m-d H:i:s")) {
+    $expiryDate = strtotime($user_data['expire_date']);
+    if (isset($user_data)) {
+        if ($user_data['expire_date'] > date("Y-m-d H:i:s")) {
             // update cookies and sesssions
-            setcookie("rem", $user_data['token'], $user_data['expire_date'], '/');
+            setcookie("rem", $user_data['token'], $expiryDate, '/');
             $_SESSION['loggedIn'] = true;
             $_SESSION['uID'] = $user_id;
             $_SESSION['email'] = $user_data['email'];
@@ -120,5 +121,6 @@ if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
     <!-- Button to top -->
     <?php if (!isset($login_page) && !isset($register_page)) :
     ?>
+
         <span class="up"><i class="fa-regular fa-circle-up"></i></span>
     <?php endif; ?>
