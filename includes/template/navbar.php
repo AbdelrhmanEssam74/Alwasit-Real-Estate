@@ -2,6 +2,7 @@
 // user profile image
 
 $img = $images . 'person1.jpg';
+$setting_page = $setting . 'general-info.php';
 $user_id = '';
 if (isset($_SESSION['uID'])) {
     $user_id = $_SESSION['uID'];
@@ -19,7 +20,7 @@ if (isset($_SESSION['uID'])) {
                     </button>
                     <div id="myDropdown" class="dropdown-content">
                         <a href="owner/index.php">Dashboard</a>
-                        <a href="setting.php">Settings</a>
+                        <a href="$setting_page">Settings</a>
                         <a href="$logout">Logout</a>
                     </div>
                 </div>

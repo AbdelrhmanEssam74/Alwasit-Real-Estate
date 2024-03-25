@@ -26,3 +26,4 @@ $config = 'config/';
 $verification_page = 'verification.php';
 $auth = 'auth/';
 $logout = 'auth/logout.php';
+$setting = 'setting/';
