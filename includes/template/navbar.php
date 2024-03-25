@@ -19,7 +19,7 @@ if (isset($_SESSION['uID'])) {
                     </button>
                     <div id="myDropdown" class="dropdown-content">
                         <a href="owner/index.php">Dashboard</a>
-                        <a href="#">Settings</a>
+                        <a href="setting.php">Settings</a>
                         <a href="$logout">Logout</a>
                     </div>
                 </div>

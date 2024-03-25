@@ -1,5 +1,5 @@
         <!-- start Form -->
-        <form action="">
+        <form class="form_search" action="">
             <div class="check_btn">
                 <label>
                     <input type="radio" class="toggle-radio" name="c" value="1" id="buy" checked>

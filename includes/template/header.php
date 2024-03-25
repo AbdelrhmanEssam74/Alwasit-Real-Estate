@@ -20,11 +20,10 @@ if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
     endforeach;
     // get the user's information from the users table using their id
     $user_data = $login_user_obj->getLoginUser($user_id);
-    $expiryDate = strtotime($user_data['expire_date']);
-    if (isset($user_data)) {
-        if ($user_data['expire_date'] > date("Y-m-d H:i:s")) {
+    if (!empty($user_data)) {
+        if ($user_data['expire_date'] < date("Y-m-d H:i:s")) {
             // update cookies and sesssions
-            setcookie("rem", $user_data['token'], $expiryDate, '/');
+            setcookie("rem", $user_data['token'], $user_data['expire_date'], '/');
             $_SESSION['loggedIn'] = true;
             $_SESSION['uID'] = $user_id;
             $_SESSION['email'] = $user_data['email'];
@@ -46,6 +45,12 @@ if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
     <!-- Main External Css file -->
 
     <?php
+    if (isset($setting_page)) {
+    ?>
+        <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>main.css">
+        <link rel="stylesheet" href="ar/css/setting.css">
+    <?php
+    }
     // assign rent stylesheet to rent page and buy page
     if (isset($main_page)) {
     ?>
@@ -121,6 +126,5 @@ if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
     <!-- Button to top -->
     <?php if (!isset($login_page) && !isset($register_page)) :
     ?>
-
         <span class="up"><i class="fa-regular fa-circle-up"></i></span>
     <?php endif; ?>

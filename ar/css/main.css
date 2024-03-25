@@ -329,7 +329,7 @@ header nav ul {
 
 /* End Header */
 /* start form  */
-form {
+.form_search {
     margin-top: 100px;
     display: flex;
     flex-direction: column;
@@ -341,24 +341,24 @@ form {
     border-radius: 15px;
 }
 
-form .check_btn {
+.form_search .check_btn {
     display: flex;
     flex-direction: row-reverse;
     margin-bottom: 10px;
     gap: 13px;
 }
 
-form .check_btn input[type=radio] {
+.form_search .check_btn input[type=radio] {
     display: none;
 }
 
-form .check_btn .toggle-radio {
+.form_search .check_btn .toggle-radio {
     -webkit-appearance: none;
     appearance: none;
 }
 
-form .check_btn .toggle-buy,
-form .check_btn .toggle-rent {
+.form_search .check_btn .toggle-buy,
+.form_search .check_btn .toggle-rent {
     background-color: #f1f1f1;
     width: 50px;
     height: 35px;
@@ -370,7 +370,7 @@ form .check_btn .toggle-rent {
     outline: none;
 }
 
-form .check_btn .toggle-buy::before {
+.form_search .check_btn .toggle-buy::before {
     position: absolute;
     content: "للبيع";
     width: 95%;
@@ -384,7 +384,7 @@ form .check_btn .toggle-buy::before {
     color: #000000;
 }
 
-form .check_btn .toggle-rent::before {
+.form_search .check_btn .toggle-rent::before {
     position: absolute;
     content: "للإيجار";
     width: 95%;
@@ -403,7 +403,7 @@ form .check_btn .toggle-rent::before {
     border: 2px solid var(--highlight);
 }
 
-form .search_inputs {
+.form_search .search_inputs {
     width: 100%;
     display: flex;
     flex-direction: row-reverse;
@@ -411,11 +411,11 @@ form .search_inputs {
     justify-content: space-between;
 }
 
-form .search_inputs .input_control_search {
+.form_search .search_inputs .input_control_search {
     position: relative;
 }
 
-form .search_inputs .input_control_search #searchInput {
+.form_search .search_inputs .input_control_search #searchInput {
     padding: 10px;
     width: 485px;
     height: 50px;
@@ -427,11 +427,11 @@ form .search_inputs .input_control_search #searchInput {
     user-select: none;
 }
 
-form .search_inputs .input_control_search #searchInput::placeholder {
+.form_search .search_inputs .input_control_search #searchInput::placeholder {
     text-align: right;
 }
 
-form .search_inputs .input_control_search i {
+.form_search .search_inputs .input_control_search i {
     color: #a1a1a1;
     position: absolute;
     top: 0;
@@ -480,12 +480,12 @@ form .search_inputs .input_control_search i {
 
 /* end suggestion list */
 /* Remove IE arrow */
-form .select select::-ms-expand {
+.form_search .select select::-ms-expand {
     display: none;
 }
 
 /* Custom Select wrapper */
-form .select_type {
+.form_search .select_type {
     position: relative;
     display: flex;
     width: 150px;
@@ -495,7 +495,7 @@ form .select_type {
     margin-right: 10px;
 }
 
-form .select_type select {
+.form_search .select_type select {
     appearance: none;
     outline: none;
     border: none;
@@ -511,9 +511,9 @@ form .select_type select {
 }
 
 /* Arrow */
-form .select_area p::after,
-form .select_price p::after,
-form .select_type::after {
+.form_search .select_area p::after,
+.form_search .select_price p::after,
+.form_search .select_type::after {
     content: '\25BC';
     position: absolute;
     top: 0;
@@ -526,14 +526,14 @@ form .select_type::after {
 }
 
 /* Transition */
-form .select_area p:hover::after,
-form .select_price p:hover::after,
-form .select_type:hover::after {
+.form_search .select_area p:hover::after,
+.form_search .select_price p:hover::after,
+.form_search .select_type:hover::after {
     color: var(--tertiary);
 }
 
-form .select_area,
-form .select_price {
+.form_search .select_area,
+.form_search .select_price {
     background-color: #fff;
     height: fit-content;
     text-align: right;
@@ -543,8 +543,8 @@ form .select_price {
     position: relative;
 }
 
-form .select_area p,
-form .select_price p {
+.form_search .select_area p,
+.form_search .select_price p {
     outline: none;
     border: none;
     box-shadow: none;
@@ -560,12 +560,12 @@ form .select_price p {
     user-select: none;
 }
 
-form .select_area p span {
+.form_search .select_area p span {
     font-size: 12px;
 }
 
-form .select_area .area_input,
-form .select_price .price_input {
+.form_search .select_area .area_input,
+.form_search .select_price .price_input {
     position: absolute;
     display: none;
     border-radius: .25em;
@@ -579,8 +579,8 @@ form .select_price .price_input {
     flex-direction: row-reverse;
 }
 
-form .select_area .area_input .input_field,
-form .select_price .price_input .input_field {
+.form_search .select_area .area_input .input_field,
+.form_search .select_price .price_input .input_field {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
@@ -588,8 +588,8 @@ form .select_price .price_input .input_field {
     gap: 10px;
 }
 
-form .select_area .area_input .rest_area_input,
-form .select_price .price_input .rest_price_input {
+.form_search .select_area .area_input .rest_area_input,
+.form_search .select_price .price_input .rest_price_input {
     user-select: none;
     padding: 7px 10px;
     margin-top: 5px;
@@ -599,17 +599,17 @@ form .select_price .price_input .rest_price_input {
     border-radius: 5px;
 }
 
-form .select_area .area_input .input_field_max,
-form .select_area .area_input .input_field_min,
-form .select_price .price_input .input_field_max,
-form .select_price .price_input .input_field_min {
+.form_search .select_area .area_input .input_field_max,
+.form_search .select_area .area_input .input_field_min,
+.form_search .select_price .price_input .input_field_max,
+.form_search .select_price .price_input .input_field_min {
     position: relative;
 }
 
-form .select_area .area_input .input_field_max ul,
-form .select_area .area_input .input_field_min ul,
-form .select_price .price_input .input_field_max ul,
-form .select_price .price_input .input_field_min ul {
+.form_search .select_area .area_input .input_field_max ul,
+.form_search .select_area .area_input .input_field_min ul,
+.form_search .select_price .price_input .input_field_max ul,
+.form_search .select_price .price_input .input_field_min ul {
     position: absolute;
     width: 100%;
     list-style-type: none;
@@ -622,10 +622,10 @@ form .select_price .price_input .input_field_min ul {
     z-index: 3;
 }
 
-form .select_area .area_input .input_field_max ul li,
-form .select_area .area_input .input_field_min ul li,
-form .select_price .price_input .input_field_max ul li,
-form .select_price .price_input .input_field_min ul li {
+.form_search .select_area .area_input .input_field_max ul li,
+.form_search .select_area .area_input .input_field_min ul li,
+.form_search .select_price .price_input .input_field_max ul li,
+.form_search .select_price .price_input .input_field_min ul li {
     margin-top: 10px;
     transition: 0.3s all;
     cursor: pointer;
@@ -634,15 +634,15 @@ form .select_price .price_input .input_field_min ul li {
     padding: 5px;
 }
 
-form .select_area .area_input .input_field_max ul li:hover,
-form .select_area .area_input .input_field_min ul li:hover,
-form .select_price .price_input .input_field_max ul li:hover,
-form .select_price .price_input .input_field_min ul li:hover {
+.form_search .select_area .area_input .input_field_max ul li:hover,
+.form_search .select_area .area_input .input_field_min ul li:hover,
+.form_search .select_price .price_input .input_field_max ul li:hover,
+.form_search .select_price .price_input .input_field_min ul li:hover {
     background-color: var(--color7);
 }
 
-form .select_area .area_input input,
-form .select_price .price_input input {
+.form_search .select_area .area_input input,
+.form_search .select_price .price_input input {
     outline: none;
     box-shadow: none;
     cursor: text;
@@ -663,26 +663,26 @@ input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-form .select_price .show_price_list {
+.form_search .select_price .show_price_list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: end;
 }
 
-form .select_area .show_area_list {
+.form_search .select_area .show_area_list {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: end;
 }
 
-form .search_inputs .submit_btn {
+.form_search .search_inputs .submit_btn {
     position: relative;
     margin-right: 10px;
 }
 
-form .search_inputs .submit_btn button {
+.form_search .search_inputs .submit_btn button {
     width: 100px;
     height: 50px;
     background-color: var(--tertiary);
@@ -693,12 +693,12 @@ form .search_inputs .submit_btn button {
     transition: 0.3s all;
 }
 
-form .search_inputs .submit_btn button:hover {
+.form_search .search_inputs .submit_btn button:hover {
     background-color: var(--tertiary-hover);
 
 }
 
-form .search_inputs .submit_btn button svg {
+.form_search .search_inputs .submit_btn button svg {
     font-size: 30px;
     color: #fff;
 }
@@ -707,47 +707,47 @@ form .search_inputs .submit_btn button svg {
 /* media for form */
 @media (max-width: 1115px) {
 
-    form .search_inputs .input_control_search,
-    form .search_inputs .input_control_search #searchInput {
+    .form_search .search_inputs .input_control_search,
+    .form_search .search_inputs .input_control_search #searchInput {
         width: 280px;
     }
 
-    form .select_type {
+    .form_search .select_type {
         width: 150px;
     }
 
-    form .select_price {
+    .form_search .select_price {
         width: 150px;
     }
 }
 
 @media (max-width: 992px) {
 
-    form .search_inputs .input_control_search,
-    form .search_inputs .input_control_search #searchInput {
+    .form_search .search_inputs .input_control_search,
+    .form_search .search_inputs .input_control_search #searchInput {
         width: 200px;
     }
 
-    form .select_type {
+    .form_search .select_type {
         width: 120px;
     }
 
-    form .select_price {
+    .form_search .select_price {
         width: 90px;
     }
 }
 
 @media (max-width: 767px) {
-    form {
+    .form_search {
         background: none;
     }
 
-    form .search_inputs .input_control_search {
+    .form_search .search_inputs .input_control_search {
         position: relative;
     }
 
-    form .search_inputs .input_control_search,
-    form .search_inputs .input_control_search #searchInput {
+    .form_search .search_inputs .input_control_search,
+    .form_search .search_inputs .input_control_search #searchInput {
         width: 100%;
     }
 
@@ -757,7 +757,7 @@ form .search_inputs .submit_btn button svg {
         background-color: var(--card-background);
     }
 
-    form .search_inputs .submit_btn button {
+    .form_search .search_inputs .submit_btn button {
         position: absolute;
         width: 66px;
         height: 45px;
@@ -766,7 +766,7 @@ form .search_inputs .submit_btn button svg {
         transform: translate(20%, 7%);
     }
 
-    form .search_inputs .submit_btn button svg {
+    .form_search .search_inputs .submit_btn button svg {
         font-size: 20px;
     }
 }

@@ -10,5 +10,6 @@ $userObj->delete($delete_query);
 session_unset();
 session_destroy();
 setcookie('rem', "", -1, '/');
+setcookie('u', "", -1, '/');
 header("Location:../" . $home);
 exit();
