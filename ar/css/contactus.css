@@ -213,9 +213,29 @@ header nav ul {
     transition: 0.5s all;
   }
 
-  header nav {
+  header .container {
     display: flex;
     justify-content: space-between;
+  }
+
+  header .LoginBtn {
+    padding: 5px 10px;
+    font-size: 13px;
+  }
+
+  header .logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  header nav {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    z-index: 6;
+    flex: 1;
   }
 
   header.sticky {
@@ -481,3 +501,76 @@ header nav ul {
 }
 
 /* End Contact Us */
+/* Dropdown Button */
+.dropbtn {
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: var(--color1);
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown::after {
+  position: absolute;
+  content: "\f078";
+  font-family: "FontAwesome";
+  right: 0;
+  bottom: 0%;
+  cursor: pointer;
+}
+
+.dropdown img {
+  border-radius: 50%;
+  width: 50px;
+  border: 1px solid var(--color1);
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  top: 111%;
+  border-radius: 5px;
+  text-align: left;
+  border: 1px solid var(--highlight);
+}
+
+.show {
+  display: block;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+  border-bottom: 1px solid var(--head-line);
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+  display: block;
+}

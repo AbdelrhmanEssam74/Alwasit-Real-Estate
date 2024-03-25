@@ -48,11 +48,11 @@ if (isset($_SESSION['uID'])) {
             <?php
             if (isset($contactus_page)) :
             ?>
-                <a href="index.php" class="logo"><img src="<?php echo $images ?>logo_white.png" alt="Logo"></a>
+                <div class="logo"><a href="index.php"><img src="<?php echo $images ?>logo_white.png" alt="Logo"></a></div>
             <?php
             else :
             ?>
-                <a href="index.php" class="logo"><img src="<?php echo $images ?>logo.png" alt="Logo"></a>
+                <div class="logo"><a href="index.php"><img src="<?php echo $images ?>logo.png" alt="Logo"></a></div>
             <?php
             endif;
             ?>
