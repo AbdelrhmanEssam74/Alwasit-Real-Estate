@@ -123,140 +123,111 @@ phone_btn.addEventListener("click", () => {
 });
 
 
-// Create the main container div
-const reportModelDiv = document.createElement('div');
-reportModelDiv.classList.add('report-model');
 
-// Create the title paragraph
-const titleParagraph = document.createElement('p');
-titleParagraph.classList.add('title');
-titleParagraph.textContent = 'الإبلاغ عن هذا العقار';
-reportModelDiv.appendChild(titleParagraph);
 
-// Create the form container div
-const formDiv = document.createElement('div');
-formDiv.classList.add('form');
-reportModelDiv.appendChild(formDiv);
+$(document).ready(function () {
+    'use strict';
+    // Create the main container div
+    const reportModelDiv = $('<div>').addClass('report-model');
 
-// Create the form element
-const formElement = document.createElement('form');
-formElement.action = '';
-formDiv.appendChild(formElement);
+    // Create the title paragraph
+    const titleParagraph = $('<p>').addClass('title').text('الإبلاغ عن هذا العقار');
+    reportModelDiv.append(titleParagraph);
 
-// Create the select dropdown item div
-const selectDropdownItemDiv = document.createElement('div');
-selectDropdownItemDiv.classList.add('select-dropdown__item');
-formElement.appendChild(selectDropdownItemDiv);
+    // Create the form container div
+    const formDiv = $('<div>').addClass('form');
+    reportModelDiv.append(formDiv);
 
-// Create the reason select element
-const reasonSelect = document.createElement('select');
-reasonSelect.name = 'reason';
-reasonSelect.classList.add('select-resson');
-selectDropdownItemDiv.appendChild(reasonSelect);
+    // Create the form element
+    const formElement = $('<form>').attr('action', '');
+    formDiv.append(formElement);
 
-// Create the default option for the reason select
-const defaultOption = document.createElement('option');
-defaultOption.value = '';
-defaultOption.textContent = 'إختر السبب';
-reasonSelect.appendChild(defaultOption);
+    // Create the select dropdown item div
+    const selectDropdownItemDiv = $('<div>').addClass('select-dropdown__item');
+    formElement.append(selectDropdownItemDiv);
 
-// Create the other options for the reason select
-const reasons = [
-    'العقار غير متوافر',
-    'السعر غير دقيق',
-    'لم أتسلم رد من الوسيط العقاري',
-    'لا توجد تفاصيل للعقار',
-    'نوعية الصور رديئة',
-    'نص الوصف ضعيف جداً',
-    'الموقع غير صحيح',
-    'العقار المدرج غير موجود فعلياً',
-    'خطأ في نوع العقار المدرج'
-];
+    // Create the reason select element
+    const reasonSelect = $('<select>').attr('name', 'reason').addClass('select-resson');
+    selectDropdownItemDiv.append(reasonSelect);
 
-reasons.forEach((reason, index) => {
-    const option = document.createElement('option');
-    option.value = index + 1;
-    option.textContent = reason;
-    reasonSelect.appendChild(option);
+    // Create the default option for the reason select
+    const defaultOption = $('<option>').val('').text('إختر السبب');
+    reasonSelect.append(defaultOption);
+
+    // Create the other options for the reason select
+    const reasons = [
+        'العقار غير متوافر',
+        'السعر غير دقيق',
+        'لم أتسلم رد من الوسيط العقاري',
+        'لا توجد تفاصيل للعقار',
+        'نوعية الصور رديئة',
+        'نص الوصف ضعيف جداً',
+        'الموقع غير صحيح',
+        'العقار المدرج غير موجود فعلياً',
+        'خطأ في نوع العقار المدرج'
+    ];
+
+    reasons.forEach((reason, index) => {
+        const option = $('<option>').val(index + 1).text(reason);
+        reasonSelect.append(option);
+    });
+
+    // Create the input message div
+    const inputMessageDiv = $('<div>').addClass('input__message').text('يرجى تحديد السبب');
+    selectDropdownItemDiv.append(inputMessageDiv);
+
+    // Create the textarea for the message
+    const messageTextarea = $('<textarea>').attr('name', 'message').addClass('main-input').attr('placeholder', 'تعليق إضافي');
+    formElement.append(messageTextarea);
+
+    // Create the submit button
+    const submitButton = $('<button>').addClass('submit-report').text('إرسال');
+    formElement.append(submitButton);
+
+    // Create the image container div
+    const imgDiv = $('<div>').addClass('img');
+    reportModelDiv.append(imgDiv);
+
+    // Create the image element
+    const imageElement = $('<img>').attr('src', 'images/report-property.png').attr('alt', '');
+    imgDiv.append(imageElement);
+
+    // Create the description paragraph
+    const descriptionParagraph = $('<p>').text('هل هناك مشكلة في هذا العقار؟ يرجى تزويدنا بمزيد من المعلومات حتى نتمكن من حل المشكلة');
+    imgDiv.append(descriptionParagraph);
+
+    // Append the model box to the desired container in your HTML
+    $('.report-property').append(reportModelDiv);
+
+
+
+
+    // Get the property paragraph element
+    const propertyRepor = $('#property');
+
+    // Get the report model element
+    const reportModel = $('.report');
+
+    // Add a click event listener to the property paragraph
+    propertyRepor.on('click', (event) => {
+        // event.stopPropagation(); // Stop the click event from propagating to the document
+        // Show the report model
+        reportModel.fadeToggle();
+        reportModel.css('display', 'flex');
+    });
+    let close_model = $('.close-report-model');
+    close_model.on('click', () => {
+        reportModel.fadeOut();
+        reportModel.css('display', 'none');
+    });
+    // toggle menu for user
+    let droptn = $('.dropbtn img');
+    let dropDown_list = $('.dropdown-content');
+    droptn.click(function () {
+        dropDown_list.toggleClass('show');
+    });
+    
 });
-
-
-// Create the input message div
-const inputMessageDiv = document.createElement('div');
-inputMessageDiv.classList.add('input__message');
-inputMessageDiv.textContent = 'يرجى تحديد السبب';
-selectDropdownItemDiv.appendChild(inputMessageDiv);
-
-// Create the textarea for the message
-const messageTextarea = document.createElement('textarea');
-messageTextarea.name = 'message';
-messageTextarea.classList.add('main-input');
-messageTextarea.placeholder = 'تعليق إضافي';
-formElement.appendChild(messageTextarea);
-
-// Create the submit button
-const submitButton = document.createElement('button');
-submitButton.classList.add('submit-report')
-submitButton.textContent = 'إرسال';
-formElement.appendChild(submitButton);
-
-// Create the image container div
-const imgDiv = document.createElement('div');
-imgDiv.classList.add('img');
-reportModelDiv.appendChild(imgDiv);
-
-// Create the image element
-const imageElement = document.createElement('img');
-imageElement.src = 'images/report-property.png';
-imageElement.alt = '';
-imgDiv.appendChild(imageElement);
-
-// Create the description paragraph
-const descriptionParagraph = document.createElement('p');
-descriptionParagraph.textContent = 'هل هناك مشكلة في هذا العقار؟ يرجى تزويدنا بمزيد من المعلومات حتى نتمكن من حل المشكلة';
-imgDiv.appendChild(descriptionParagraph);
-
-// Append the model box to the desired container in your HTML
-const container = document.querySelector('.report-property');
-container.appendChild(reportModelDiv);
-
-
-
-
-
-// Get the property paragraph element
-const propertyRepor = document.getElementById('property');
-
-// Get the report model element
-const reportModel = document.querySelector('.report');
-
-// Add a click event listener to the property paragraph
-propertyRepor.addEventListener('click', (event) => {
-    event.stopPropagation(); // Stop the click event from propagating to the document
-    // Show the report model
-    reportModel.style.display = 'flex';
-});
-
-let close_model = document.querySelector(".close-report-model")
-close_model.addEventListener("click", () => {
-    if (reportModel.style.display === 'flex') {
-        reportModel.style.display = 'none'
-    }
-})
-
-// validate report from
-let validate = false;
-
-formElement.addEventListener("submit", (e) => {
-    if (reasonSelect.value != "") {
-        validate = true
-    } else {
-        inputMessageDiv.classList.add("input__message--invalid")
-    }
-    if (!validate) {
-        e.preventDefault();
-    }
-})
 
 
 // $.ajax({

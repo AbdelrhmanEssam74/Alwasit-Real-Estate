@@ -658,6 +658,8 @@ div.divTable {
     display: none;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
+
 }
 
 .report-property {
@@ -668,12 +670,12 @@ div.divTable {
     z-index: 666;
 }
 
-.report i {
+.report svg {
     position: absolute;
     font-size: 2em;
     color: #fff;
     top: 4%;
-    right: 24%;
+    right: 22%;
     transform: translate(0%, 115%);
     cursor: pointer;
 }

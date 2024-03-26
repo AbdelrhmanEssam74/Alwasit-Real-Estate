@@ -31,10 +31,8 @@ $(document).ready(function () {
     droptn.click(function () {
         dropDown_list.toggleClass('show');
     });
-});
-
-const newSearchInputs = $(".search_inputs");
-const newInputs = `
+    const newSearchInputs = $(".search_inputs");
+    const newInputs = `
     <div class="input_control_search">
         <input type="text" name="q"  oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
         <p class="no-suggestion-message" id="noSuggestionMessage"></p>
@@ -46,13 +44,13 @@ const newInputs = `
     </div>
 `;
 
-if (newSearchInputs.length) {
-    function updateMenuAndSearchInputs() {
-        const websiteWidth = $(window).width();
-        if (websiteWidth <= 767) {
-            newSearchInputs.html(newInputs);
-        } else {
-            newSearchInputs.html(`
+    if (newSearchInputs.length) {
+        function updateMenuAndSearchInputs() {
+            const websiteWidth = $(window).width();
+            if (websiteWidth <= 767) {
+                newSearchInputs.html(newInputs);
+            } else {
+                newSearchInputs.html(`
         <div class="input_control_search">
             <input type="text" name="q"  oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
             <p class="no-suggestion-message" id="noSuggestionMessage"></p>
@@ -108,56 +106,59 @@ if (newSearchInputs.length) {
             <button type="submit" value=""><i class="fa fa-search"></i></button>
         </div>
         `);
+            }
+        }
+        $(window).resize(updateMenuAndSearchInputs);
+        // Check the width of the website on window resize
+        updateMenuAndSearchInputs();
+    }
+
+    //SECTION - suggestions list for search input
+    const suggestions = [
+        "الرمد",
+        "الحميات",
+        "الكورنيش",
+        "المدينة",
+        "الحي الاول",
+        "الواسطي",
+    ];
+
+    function showSuggestions() {
+        const userInput = $("#searchInput").val().toLowerCase();
+        const suggestionList = $("#suggestionList");
+        const noSuggestionMessage = $("#noSuggestionMessage");
+        suggestionList.empty();
+        noSuggestionMessage.text("");
+
+        if (userInput.length === 0) {
+            return;
+        }
+
+        const matchingSuggestions = suggestions.filter(suggestion =>
+            suggestion.toLowerCase().startsWith(userInput)
+        );
+
+        matchingSuggestions.forEach(suggestion => {
+            const li = $("<li></li>").text(suggestion);
+            li.on("click", () => {
+                $("#searchInput").val(suggestion);
+                suggestionList.empty();
+            });
+            suggestionList.append(li);
+        });
+
+        if (matchingSuggestions.length === 0) {
+            noSuggestionMessage.text("لا يمكننا العثور على استعلام البحث الخاص بك. جرب موقعًا مختلفًا.");
         }
     }
-    $(window).resize(updateMenuAndSearchInputs);
-    // Check the width of the website on window resize
-    updateMenuAndSearchInputs();
-}
 
-//SECTION - suggestions list for search input
-const suggestions = [
-    "الرمد",
-    "الحميات",
-    "الكورنيش",
-    "المدينة",
-    "الحي الاول",
-    "الواسطي",
-];
-
-function showSuggestions() {
-    const userInput = $("#searchInput").val().toLowerCase();
-    const suggestionList = $("#suggestionList");
-    const noSuggestionMessage = $("#noSuggestionMessage");
-    suggestionList.empty();
-    noSuggestionMessage.text("");
-
-    if (userInput.length === 0) {
-        return;
-    }
-
-    const matchingSuggestions = suggestions.filter(suggestion =>
-        suggestion.toLowerCase().startsWith(userInput)
-    );
-
-    matchingSuggestions.forEach(suggestion => {
-        const li = $("<li></li>").text(suggestion);
-        li.on("click", () => {
-            $("#searchInput").val(suggestion);
-            suggestionList.empty();
-        });
-        suggestionList.append(li);
+    $("body").on("click", function hideSuggestions() {
+        const suggestionList = $("#suggestionList");
+        suggestionList.empty();
     });
-
-    if (matchingSuggestions.length === 0) {
-        noSuggestionMessage.text("لا يمكننا العثور على استعلام البحث الخاص بك. جرب موقعًا مختلفًا.");
-    }
-}
-
-$("body").on("click", function hideSuggestions() {
-    const suggestionList = $("#suggestionList");
-    suggestionList.empty();
 });
+
+
 
 
 
