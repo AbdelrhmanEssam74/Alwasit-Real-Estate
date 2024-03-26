@@ -328,15 +328,7 @@ header nav ul {
     }
 }
 
-.form_box .form_content .message {
-    background-color: rgb(255, 65, 103);
-    width: 100%;
-    text-align: right;
-    padding: 5px 15px;
-    border-radius: 5px;
-    font-size: 15px;
-    margin-bottom: 15px;
-}
+
 
 .form_box .back_img form {
     display: flex;
@@ -351,9 +343,22 @@ header nav ul {
     width: 100%;
     position: relative;
 }
-.form_box .back_img form .input-box input:not(:last-child){
+
+.form_box .back_img form .input-box input:not(:last-child) {
     margin-bottom: 5px;
 }
+
+.message {
+    background-color: rgb(255, 65, 103, 0.6);
+    width: 100%;
+    text-align: right;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 15px;
+    margin: -15px 0px -5px 0px;
+
+}
+
 .form_box .back_img form .input-box input {
     width: 300px;
     height: 45px;
@@ -363,6 +368,7 @@ header nav ul {
     border: none;
     text-indent: 30px;
 }
+
 
 .form_box .back_img form .input-box input:focus {
     border: 1px solid var(--success);

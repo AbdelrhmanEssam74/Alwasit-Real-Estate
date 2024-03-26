@@ -1,7 +1,7 @@
 <?php
 class loginTable extends DatabaseConnection
 {
-    private $user_id;
+    private $user_id = "";
     private $email;
     private $token;
     public function insert($query, $arr)
@@ -15,7 +15,7 @@ class loginTable extends DatabaseConnection
         $insert = $this->conn->prepare($query);
         $insert->execute($arr);
     }
-    public function delete($query,)
+    public function delete($query, )
     {
         $insert = $this->conn->prepare($query);
         $r = $insert->execute();
@@ -27,8 +27,10 @@ class loginTable extends DatabaseConnection
         $prepare = $this->conn->prepare($qry);
         $prepare->execute();
         $rows = $prepare->fetch();
-        $this->user_id = $rows['user_id'];
-        $this->email = $rows['email'];
+        if (!empty ($rows)) {
+            $this->user_id = $rows['user_id'];
+            $this->email = $rows['email'];
+        }
         return $prepare->rowCount();
     }
 
@@ -39,7 +41,7 @@ class loginTable extends DatabaseConnection
         $prepare->execute();
         $rows = $prepare->fetch();
 
-        return password_verify($pass,  $rows['Password']);
+        return password_verify($pass, $rows['Password']);
     }
     public function GetUserID(): string
     {
