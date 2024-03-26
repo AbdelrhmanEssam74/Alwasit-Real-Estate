@@ -3,8 +3,6 @@
 $pageTitel = 'تسجيل الدخول';
 $login_page = '';
 session_start();
-print_r($_SESSION);
-
 if ((isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) || isset($_COOKIE['rem'])) {
     header("Location:" . $home);
     exit();

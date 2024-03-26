@@ -45,12 +45,21 @@ class RegisterTable extends DatabaseConnection
         $checkPhoneExist->execute();
         return $checkPhoneExist->rowCount();
     }
-    public function getAll()
+    public function getAll($id = null)
     {
-        $sql_query = "SELECT * FROM `users` where user_id = '65fc5b048e3bc'";
-        $data = $this->conn->prepare($sql_query);
-        $data->execute();
-        $data = $data->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
+        $sql_query = '';
+        if ($id == null) {
+            $sql_query = "SELECT * FROM `users`";
+            $data = $this->conn->prepare($sql_query);
+            $data->execute();
+            $data = $data->fetchAll(PDO::FETCH_ASSOC);
+            return $data;
+        } else {
+            $sql_query = "SELECT * FROM `users` WHERE user_id = ?";
+            $data = $this->conn->prepare($sql_query);
+            $data->execute([$id]);
+            $data = $data->fetchAll(PDO::FETCH_OBJ);
+            return $data;
+        }
     }
 }

@@ -1,5 +1,4 @@
 <?php include $function . 'function.php';
-session_start();
 if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
     $hashed_id = $_COOKIE['u'];
     include $config . 'config.php';
