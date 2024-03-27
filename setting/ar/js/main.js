@@ -35,40 +35,114 @@ $(function () {
     droptn.click(function () {
         dropDown_list.toggleClass('show');
     });
-
-    // update the user in the DB
+    // update the user personal info in the DB
     $('.personal_info_save_btn').on('click', function () {
         let user_id = $('.personal_info_save_btn').attr('data-UID');
         let oldImg = $('.oldimg').attr('value').split('/').pop();
-        // Check if a new image has been selected
+
         let newImg = $('#newProfileImage').prop('files')[0]?.name || null;
-        let username = $('#username').attr('value');
-        let first_name = $('#first_name').attr('value');
-        let last_name = $('#last_name').attr('value');
+
         let formData = new FormData();
+
+        // Iterate through all input fields with the class 'dynamic-input'
+        $('.dynamic-input').each(function () {
+            let inputId = $(this).attr('id');
+            let inputValue = $(this).val();
+            formData.append(inputId, inputValue);
+        });
+
+        // Append common form data
+        formData.append('submit', 'personal_info');
+        formData.append('id', user_id);
+        formData.append('oldImg', oldImg);
+
         if (newImg) {
-            formData.append('id', user_id);
-            formData.append('oldImg', oldImg);
             formData.append('newImg', newImg);
-            formData.append('username', username);
-            formData.append('first_name', first_name);
-            formData.append('last_name', last_name);
         }
-        else {
-            formData.append('id', user_id);
-            formData.append('oldImg', oldImg);
-            formData.append('username', username);
-            formData.append('first_name', first_name);
-            formData.append('last_name', last_name);
-        }
+
+        let success_message = $('.success-message');
+
         $.ajax({
-            method: "POST",
+            method: 'POST',
             url: 'update.php',
             data: formData,
             processData: false,
             contentType: false,
             success: function (data) {
-                console.log(data);
+                if (data === '1') {
+                    success_message.addClass('show-success').text("Saved Successfully");
+                    setTimeout(function () {
+                        success_message.removeClass('show-success');
+                    }, 5000);
+                } else {
+                    success_message.addClass('show-failed').text("Save Failed");
+                    setTimeout(function () {
+                        success_message.removeClass('show-failed');
+                    }, 5000);
+                }
+
+                $(".invalid-username-value, .invalid-fName-value, .invalid-lName-value").css("display", "none");
+
+                if (data === 'nameEmpty') {
+                    $(".invalid-username-value").css("display", "block");
+                }
+                if (data === 'fNameEmpty') {
+                    $(".invalid-fName-value").css("display", "block");
+                }
+                if (data === 'lNameEmpty') {
+                    $(".invalid-lName-value").css("display", "block");
+                }
+
+                success_message.click(function () {
+                    $(this).removeClass('show-failed show-success');
+                });
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr);
+            }
+        });
+    });
+    $('.contact_info_save_btn').on('click', function () {
+        let user_id = $('.contact_info_save_btn').attr('data-UID');
+        let phoneInput = $('#phone_num');
+        let phoneValue = phoneInput.val();
+        let formData = new FormData();
+        // Append common form data
+        formData.append('phone', phoneValue);
+        formData.append('submit', 'contact_info');
+        formData.append('id', user_id);
+        let success_message = $('.success-message');
+        $.ajax({
+            method: 'POST',
+            url: 'update.php',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                if (data === '1') {
+                    success_message.addClass('show-success').text("Saved Successfully");
+                    setTimeout(function () {
+                        success_message.removeClass('show-success');
+                    }, 5000);
+                } else {
+                    success_message.addClass('show-failed').text("Save Failed");
+                    setTimeout(function () {
+                        success_message.removeClass('show-failed');
+                    }, 5000);
+                }
+                $(".invalid-num-value").css("display", "none");
+
+
+                if (data === 'Cant Be Empty') {
+                    $(".invalid-num-value").css("display", "block").text(data);
+                }
+                if (data === 'Invalid Phone Number') {
+                    $(".invalid-num-value").css("display", "block").text(data);
+                }
+
+                success_message.click(function () {
+                    $(this).removeClass('show-failed show-success');
+                });
             },
             error: function (xhr, status, error) {
                 console.error(xhr);

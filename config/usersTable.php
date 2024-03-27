@@ -7,11 +7,11 @@ class RegisterTable extends DatabaseConnection
         $r = $insert->execute($arr);
         return $r;
     }
-    public function update($query, $arr, $path)
+    public function update($query, $arr)
     {
         $insert = $this->conn->prepare($query);
         $insert->execute($arr);
-        header("Location: $path");
+        return $insert->rowCount();
     }
     public function delete($query, $path)
     {

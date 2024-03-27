@@ -17,6 +17,10 @@
     --card-tag-background: #2F6B6E;
     --color7: #e7e7e3;
     --color2: #A25C32;
+    --success: #00B73F;
+    --success-hover: #008b31;
+    --danger: #ff3860;
+    --danger-hover: #bb2443;
     --sectina-padding: 100px;
 }
 
@@ -501,7 +505,6 @@ header nav ul {
     right: 5%;
 }
 
-
 .form-control input:not(input[type='file']) {
     font-size: 15px;
     width: 100%;
@@ -519,28 +522,11 @@ header nav ul {
     outline: none;
 }
 
-.contact_info input[type="email"] {
+.contact_info #email {
     border: none;
+    user-select: none;
 }
 
-/* .custom-file-input::-webkit-file-upload-button {
-    visibility: hidden;
-}
-
-.custom-file-input::before {
-    content: 'Change Photo';
-    display: inline-block;
-    background: linear-gradient(top, #f9f9f9, #e3e3e3);
-    border: 1px solid #999;
-    border-radius: 3px;
-    padding: 5px 8px;
-    outline: none;
-    white-space: nowrap;
-    cursor: pointer;
-    text-shadow: 1px 1px #fff;
-    font-weight: 700;
-    font-size: 10pt;
-} */
 
 .custom-file-input:hover::before {
     border-color: black;
@@ -596,4 +582,94 @@ header nav ul {
     top: 7%;
     right: 3%;
 
+}
+
+.success-message {
+    position: fixed;
+    color: rgb(0, 0, 0);
+    right: -27%;
+    padding: 15px 10px;
+    border-radius: 0px 5px 5px 0px;
+    font-weight: 500;
+    transition: 0.7s all;
+    z-index: 999;
+    width: 250px;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+
+.success-message.show-success {
+    right: 5%;
+    background-color: rgb(250, 250, 250);
+    border-top: 5px solid var(--success);
+    border-bottom: 5px solid var(--success);
+}
+
+.success-message.show-failed {
+    right: 4%;
+    background-color: rgb(250, 250, 250);
+    border-top: 5px solid var(--danger);
+    border-bottom: 5px solid var(--danger);
+}
+
+.success-message.show-success::after,
+.success-message.show-failed::after {
+    position: absolute;
+    font-weight: 900;
+    font-family: 'Font Awesome 5 Free';
+    content: "\f00d";
+    color: #000;
+    top: 36%;
+    right: 8%;
+}
+
+.success-message.show-failed::before {
+    position: absolute;
+    font-weight: 900;
+    font-family: 'Font Awesome 5 Free';
+    content: "\f06a";
+    color: var(--danger);
+    top: 38%;
+    left: 8%;
+}
+
+.success-message.show-success::before {
+    position: absolute;
+    font-weight: 900;
+    font-family: 'Font Awesome 5 Free';
+    content: "\f058";
+    top: 38%;
+    left: 8%;
+    color: var(--success);
+}
+
+@media only screen and (max-width: 767px) {
+    .success-message {
+        left: -55%;
+    }
+}
+
+.invalid-num-value,
+.invalid-username-value,
+.invalid-lName-value,
+.invalid-fName-value {
+    margin-top: -20px;
+    font-size: 14px;
+    margin-left: 15px;
+    color: var(--danger);
+    position: relative;
+    display: none;
+}
+
+.invalid-num-value::before,
+.invalid-username-value::before,
+.invalid-lName-value::before,
+.invalid-fName-value::before {
+    position: absolute;
+    content: "*";
+    left: -4%;
+    top: -34%;
+    font-size: 30px;
 }

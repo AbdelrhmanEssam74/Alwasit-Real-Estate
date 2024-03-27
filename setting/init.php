@@ -1,4 +1,5 @@
 <?php
+session_start();
 define("APPURL", "http://localhost/Alwasit/");
 $function = '../includes/functions/';
 # Routes

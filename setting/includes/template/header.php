@@ -1,6 +1,5 @@
 <?php include $function . 'function.php';
-session_start();
-if (isset ($_COOKIE['u']) && !isset ($_SESSION['loggedIn'])) {
+if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
     $hashed_id = $_COOKIE['u'];
     include_once $config . 'config.php';
     include_once $config . 'loginTable.php';
@@ -20,7 +19,7 @@ if (isset ($_COOKIE['u']) && !isset ($_SESSION['loggedIn'])) {
     endforeach;
     // get the user's information from the users table using their id
     $user_data = $login_user_obj->getLoginUser($user_id);
-    if (!empty ($user_data)) {
+    if (!empty($user_data)) {
         if ($user_data['expire_date'] < date("Y-m-d H:i:s")) {
             // update cookies and sesssions
             setcookie("rem", $user_data['token'], $user_data['expire_date'], '/');
@@ -30,7 +29,7 @@ if (isset ($_COOKIE['u']) && !isset ($_SESSION['loggedIn'])) {
         }
     }
 }
-if (empty ($_SESSION['loggedIn'])) {
+if (empty($_SESSION['loggedIn'])) {
     header("Location:" . APPURL);
 }
 ?>

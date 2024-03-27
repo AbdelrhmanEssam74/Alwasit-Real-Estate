@@ -11,12 +11,13 @@ include_once $config . 'config.php';
 include_once $config . 'loginTable.php';
 include_once $config . 'usersTable.php';
 // get all user information
-$user_id = (isset ($_SESSION['uID'])) ? $_SESSION['uID'] : 0;
+$user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : 0;
 $users_obj = new RegisterTable;
 $user_data = $users_obj->getAll($user_id)[0];
 ?>
 <!-- End Header -->
 <div class="setting">
+    <p class="success-message">sadsadasd</p>
     <div class="container">
         <div class="parent">
             <nva class="sidebar">
@@ -41,21 +42,25 @@ $user_data = $users_obj->getAll($user_id)[0];
                         </div>
                         <label for="username">Username:</label>
                         <div class="form-control">
-                            <input type="text" id="username" name="username" value="<?php echo $user_data->username ?>"
-                                placeholder="Enter your username" required="required">
+                            <input type="text" id="username" class="dynamic-input" name="username"
+                                value="<?php echo $user_data->username ?>" placeholder="Enter your username"
+                                required="required">
+                            <p class="invalid-username-value">Can't Be Empty</p>
                         </div>
                         <div class="full_name">
                             <div class="form-control">
                                 <label for="first_name">First Name:</label>
-                                <input type="text" id="first_name" name="first_name"
+                                <input type="text" id="first_name" class="dynamic-input" name="first_name"
                                     value="<?php echo $user_data->F_Name ?>" placeholder="Enter your first name"
                                     required="required">
+                                <p class="invalid-fName-value">Can't Be Empty</p>
                             </div>
                             <div class="form-control">
                                 <label for="last_name">Last Name:</label>
-                                <input type="text" id="last_name" name="last_name"
+                                <input type="text" id="last_name" class="dynamic-input" name="last_name"
                                     value="<?php echo $user_data->L_Name ?>" placeholder="Enter your last name"
                                     required="required">
+                                <p class="invalid-lName-value">Can't Be Empty</p>
                             </div>
                         </div>
                         <button class="personal_info_save_btn" data-UID="<?php echo $user_data->user_id; ?>"
@@ -67,15 +72,18 @@ $user_data = $users_obj->getAll($user_id)[0];
                     <div class="form">
                         <label for="email">Mobile Number:</label>
                         <div class="form-control">
-                            <input type="tel" id="phone" name="phone" value="<?php echo $user_data->user_phone ?>"
-                                placeholder="Enter your Mobile Number" required="required">
+                            <input type="tel" id="phone_num" class="dynamic-input-phone" name="phone"
+                                value="<?php echo $user_data->user_phone ?>" placeholder="Enter your Mobile Number"
+                                required="required">
+                            <p class="invalid-num-value"></p>
                         </div>
                         <label for="email">Email:</label>
                         <div class="form-control">
                             <input type="email" id="email" name="email" disabled value="<?php echo $user_data->email ?>"
                                 placeholder="Enter your email">
                         </div>
-                        <button class="contact_info_save_brn" type="submit">Save</button>
+                        <button class="contact_info_save_btn" data-UID="<?php echo $user_data->user_id; ?>"
+                            type="submit">Save</button>
                     </div>
                 </div>
             </div>
