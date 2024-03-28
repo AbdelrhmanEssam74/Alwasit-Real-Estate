@@ -52,3 +52,35 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'contact_info') {
     }
 }
 
+if (isset($_POST['submit']) && $_POST['submit'] == 'Password-info') {
+    $user_id = $_POST['id'];
+    $user_data = $user_obj->getAll($user_id)[0];
+    $oldpass = $_POST['oldpass'];
+    $oldPassInput = (isset($_POST['pass_old_input'])) ? $_POST['pass_old_input'] : '';
+    $newpass = $_POST['newpass'];
+    if (empty($oldPassInput)) {
+        echo 'Cant Be Empty';
+    } else if (!password_verify($oldPassInput, $user_data->Password)) {
+        echo 'Wrong Password';
+    }
+    // Checking old password is correct or not
+    else if (empty($newpass)) {
+        echo 'New Password Cant be empty';
+    } elseif (strcmp($oldPassInput, $newpass) === 0) {
+        echo "You Use This Password Before! Try Another One.";
+    } else {
+        $update_query_users_table = "UPDATE users SET Password = :pass  WHERE user_id = :id";
+        $update_query_login_table = "UPDATE login SET Password = :pass  WHERE user_id = :id";
+        $data = [
+            "pass" => password_hash($newpass, PASSWORD_DEFAULT),
+            "id" => $user_id,
+        ];
+        if ($user_obj->update($update_query_users_table, $data) || $login_obj->update($update_query_login_table, $data)) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
+}
+
+

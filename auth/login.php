@@ -49,7 +49,7 @@ $user_data = [
     'email' => $email,
     'pass' => password_hash($password, PASSWORD_DEFAULT)
 ];
-$insertQuery_user = "INSERT INTO `alwasit`.`login` (user_id, email, password) 
+$insertQuery_user = "INSERT INTO `alwasit`.`login` (user_id, email, Password) 
                     VALUES (:id, :email, :pass)";
 $userObj->insert($insertQuery_user, $user_data);
 // Set login status in session and save the user ID

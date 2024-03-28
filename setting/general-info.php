@@ -1,6 +1,6 @@
 <?php include_once 'init.php';
 $DefultPage = '';
-$pageTitel = 'الوسيط | Alwasit';
+$pageTitel = 'General Info | Alwasit';
 $setting_page = '';
 ?>
 <?php include_once $templates . 'header.php' ?>
@@ -17,7 +17,7 @@ $user_data = $users_obj->getAll($user_id)[0];
 ?>
 <!-- End Header -->
 <div class="setting">
-    <p class="success-message">sadsadasd</p>
+    <p class="success-message"></p>
     <div class="container">
         <div class="parent">
             <nva class="sidebar">

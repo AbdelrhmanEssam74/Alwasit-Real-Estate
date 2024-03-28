@@ -557,10 +557,22 @@ header nav ul {
     border-radius: 5px;
 }
 
-.contact_info input[type="submit"]:hover,
-.personal-info input[type="submit"]:hover {
-    background-color: #0056b3;
+.restPass {
+    text-decoration: none;
+    font-size: 13px;
+    margin-top: -15px;
+    
 }
+
+.restPass:hover {
+    color: #71aaff;
+}
+
+button.disabled {
+    background-color: #a3d0ff;
+    cursor: not-allowed;
+}
+
 
 
 
@@ -651,6 +663,8 @@ header nav ul {
     }
 }
 
+.invalid-newpass-value,
+.invalid-pass-value,
 .invalid-num-value,
 .invalid-username-value,
 .invalid-lName-value,
@@ -663,6 +677,8 @@ header nav ul {
     display: none;
 }
 
+.invalid-newpass-value::before,
+.invalid-pass-value::before,
 .invalid-num-value::before,
 .invalid-username-value::before,
 .invalid-lName-value::before,
