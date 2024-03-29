@@ -7,8 +7,8 @@ include '../' . $config . 'emailsTable.php';
 include '../' . $emails_libs . 'index.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== "POST") {
-    header("Location: " . $_SERVER['HTTP_REFERER']);
-    exit();
+  header("Location: " . $_SERVER['HTTP_REFERER']);
+  exit();
 }
 
 $userObj = new RegisterTable();
@@ -18,25 +18,25 @@ $email = $_POST['email'];
 
 // Validate phone number
 if (!$userObj->checkPhoneNumber($phone)) {
-    $_SESSION['Invalid_PHONE'] = "من فضلك أدخل رقم صحيح";
-    header("Location:" . APPURL . $register);
-    exit();
+  $_SESSION['Invalid_PHONE'] = "من فضلك أدخل رقم صحيح";
+  header("Location:" . APPURL . $register);
+  exit();
 }
 
 // Check if the email address is already registered
 if ($userObj->checkEmailExists($email) > 0) {
-    $_SESSION['Exists_EMAIL'] = "هذا البريد الإلكتروني مسجل بالفعل";
-    $_SESSION['old_data'] = json_encode(array($_POST));
-    header("Location:" . APPURL . $register);
-    exit();
+  $_SESSION['Exists_EMAIL'] = "هذا البريد الإلكتروني مسجل بالفعل";
+  $_SESSION['old_data'] = json_encode(array($_POST));
+  header("Location:" . APPURL . $register);
+  exit();
 }
 
 // Check if the phone number is already registered
 if ($userObj->checkPhoneExists($phone) > 0) {
-    $_SESSION['Exists_Phone'] = "هذا الرقم مسجل بالفعل";
-    $_SESSION['old_data'] = json_encode(array($_POST));
-    header("Location:" . APPURL . $register);
-    exit();
+  $_SESSION['Exists_Phone'] = "هذا الرقم مسجل بالفعل";
+  $_SESSION['old_data'] = json_encode(array($_POST));
+  header("Location:" . APPURL . $register);
+  exit();
 }
 
 $firstName = trim($_POST['FName']);
@@ -45,13 +45,13 @@ $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $id = uniqid();
 $_SESSION['user_id'] = $id;
 $data = [
-    "id" => $id,
-    "username" => trim(strstr($email, '@', true)),
-    "FN" => $firstName,
-    "LN" => $lastName,
-    "em" => $email,
-    "pass" => $password,
-    "phone" => $phone,
+  "id" => $id,
+  "username" => trim(strstr($email, '@', true)),
+  "FN" => $firstName,
+  "LN" => $lastName,
+  "em" => $email,
+  "pass" => $password,
+  "phone" => $phone,
 ];
 
 $insertQuery = "INSERT INTO `alwasit`.`users` (user_id, username, F_Name, L_Name, email, user_phone, Password) 
@@ -60,21 +60,24 @@ $userObj->insert($insertQuery, $data);
 
 // send verification  code to user's email
 $email_obj = new EmailsTable();
-$activation_code = $email_obj->generate_activation_code();
+$activation_code = $email_obj->generate_code();
 $activation_code_hashed  = password_hash($activation_code, PASSWORD_DEFAULT);
 $email_subject  = 'قم بتأكيد عنوان بريدك الإلكتروني';
 $mailBody = "
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+
+</style>
 </head>
 <body>
 مرحبًا <h3>{$firstName} {$lastName}</h3>
 <p>شكرًا لك على تسجيل حساب معنا! قبل أن تتمكن من استخدام حسابك، يُرجى التحقق من عنوان بريدك الإلكتروني عن طريق النقر علي هذا الرابط:
 </p>
-<p><a href='http://localhost/Alwasit/verification.php?vc={$activation_code_hashed}&uID={$id}'>
-http://localhost/Alwasit/verification.php?vc={$activation_code_hashed}&uID={$id}
-</a></p>
+<a href='http://localhost/Alwasit/verification.php?vc={$activation_code_hashed}&uID={$id}'>
+Active
+</a>
 <p>فريق الوسيط</p>
 <a href='http://localhost/Alwasit' target='_blank'>Alwasit</a>
 </body>
@@ -88,11 +91,11 @@ $send_email_obj = new EmailSender($email, $email_subject, $mailBody);
 $send_email_obj->sendEmail();
 
 $data_email = [
-    "id" => $id,
-    "em" => $email,
-    "code" => $activation_code,
-    "active" => 0,
-    "activation_expir_at" => $next_day_formatted
+  "id" => $id,
+  "em" => $email,
+  "code" => $activation_code,
+  "active" => 0,
+  "activation_expir_at" => $next_day_formatted
 ];
 
 $insertQuery_email = "INSERT INTO `alwasit`.`email_verification` (user_id, email, code, active , activation_expiry) 

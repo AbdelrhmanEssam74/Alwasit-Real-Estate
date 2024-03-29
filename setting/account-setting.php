@@ -17,42 +17,39 @@ $user_data = $users_obj->getAll($user_id)[0];
 ?>
 <!-- End Header -->
 <div class="setting">
-    <p class="success-message"></p>
-    <div class="container">
-        <div class="parent">
-            <nva class="sidebar">
-                <a href="general-info.php" class="sidebar__list-item "> <i class="fa fa-user" aria-hidden="true"></i>
-                    General Info</a>
-                <a href="account-setting.php" class="sidebar__list-item is_active"> <i class="fa fa-gear"
-                        aria-hidden="true"></i> Account Settings </a>
-            </nva>
-            <div class="">
-                <div class="Password-info">
-                    <h2>Change Password</h2>
-                    <p>To change your account password, enter your current password, then enter your new password and
-                        confirm it.</p>
-                    <div class="form">
-                        <label for="profileImage">Current Password:</label>
-                        <div class="form-control">
-                            <input type="password" id="currentpass" name="currentpass" required="required">
-                            <input type="hidden" id="oldpassword" value="<?php echo $user_data->Password; ?>"
-                                name="oldpassword">
-                            <a class="restPass" href="<?php echo $restPass ?>">Forget Passoword?</a>
-                            <p class="invalid-pass-value"></p>
-                        </div>
-
-                        <label for="username">New Password:</label>
-                        <div class="form-control">
-                            <input type="password" id="newpassword" name="newpassword" required="required">
-                            <p class="invalid-newpass-value"></p>
-                        </div>
-                        <button type="submit" class="pass_info_save_btn"
-                            data-UID="<?php echo $user_data->user_id; ?>">Save</button>
-                    </div>
-                </div>
+  <p class="success-message"></p>
+  <div class="container">
+    <div class="parent">
+      <nva class="sidebar">
+        <a href="general-info.php" class="sidebar__list-item "> <i class="fa fa-user" aria-hidden="true"></i>
+          General Info</a>
+        <a href="account-setting.php" class="sidebar__list-item is_active"> <i class="fa fa-gear" aria-hidden="true"></i> Account Settings </a>
+      </nva>
+      <div class="">
+        <div class="Password-info">
+          <h2>Change Password</h2>
+          <p>To change your account password, enter your current password, then enter your new password and
+            confirm it.</p>
+          <div class="form">
+            <label for="profileImage">Current Password:</label>
+            <div class="form-control">
+              <input type="password" id="currentpass" name="currentpass" required="required">
+              <input type="hidden" id="oldpassword" value="<?php echo $user_data->Password; ?>" name="oldpassword">
+              <a class="restPass" href="<?php echo $auth ?>rest-password.php?_action=verification">Forget Passoword?</a>
+              <p class="invalid-pass-value"></p>
             </div>
+
+            <label for="username">New Password:</label>
+            <div class="form-control">
+              <input type="password" id="newpassword" name="newpassword" required="required">
+              <p class="invalid-newpass-value"></p>
+            </div>
+            <button type="submit" class="pass_info_save_btn" data-UID="<?php echo $user_data->user_id; ?>">Save</button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 <script src="<?php echo $js ?>main.js"></script>
 </body>

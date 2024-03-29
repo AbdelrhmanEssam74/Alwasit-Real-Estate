@@ -11,4 +11,4 @@ $main_link = APPURL;
 $auth = APPURL . 'auth/';
 $dashboard = APPURL . 'owner/';
 $config = '../config/';
-$restPass = '../auth/rest Password.php';
+$libs = '../libs/';

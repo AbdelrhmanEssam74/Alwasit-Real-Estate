@@ -2,7 +2,7 @@
 
 class EmailsTable extends DatabaseConnection
 {
-    public function generate_activation_code(): string
+    public function generate_code(): string
     {
         $code = '';
         for ($i = 0; $i < 6; $i++) {
