@@ -2,8 +2,8 @@
 // function to set the title for each page contain pageTitle variable
 function PageTitle()
 {
-    global $pageTitel;
-    echo (isset($pageTitel))  ? $pageTitel : "Defult";
+  global $pageTitel;
+  echo (isset($pageTitel))  ? $pageTitel : "Defult";
 }
 /*
 	** Check Items Function v1.0
@@ -16,15 +16,15 @@ function PageTitle()
 function checkItem($select, $from, $value)
 {
 
-    global $conn;
+  global $conn;
 
-    $statement = $conn->prepare("SELECT $select FROM $from WHERE $select = ?");
+  $statement = $conn->prepare("SELECT $select FROM $from WHERE $select = ?");
 
-    $statement->execute(array($value));
+  $statement->execute(array($value));
 
-    $count = $statement->rowCount();
+  $count = $statement->rowCount();
 
-    return $count;
+  return $count;
 }
 
 /*
@@ -34,12 +34,12 @@ function checkItem($select, $from, $value)
 	** $table = The Table To Choose From
 	*/
 
-function countItems($item, $table)
+function countItems($item, $table, $coulmn)
 {
-    global $conn;
-    $stmt2 = $conn->prepare("SELECT COUNT($item) FROM $table");
-    $stmt2->execute();
-    return $stmt2->fetchColumn();
+  global $conn;
+  $stmt2 = $conn->prepare("SELECT COUNT($item) FROM $table WHERE $coulmn = 1");
+  $stmt2->execute();
+  return $stmt2->fetchColumn();
 }
 
 /*
@@ -51,16 +51,17 @@ function countItems($item, $table)
 	** $limit = Number Of Records To Get
 	*/
 
-function getLatest($select, $table, $order, $limit = 5)
+function getLatest($select, $table, $order,  $limit = 5)
 {
 
-    global $conn;
+  global $conn;
 
-    $getStmt = $conn->prepare("SELECT $select FROM $table ORDER BY $order DESC LIMIT $limit");
+  $getStmt = $conn->prepare("SELECT $select FROM $table ORDER BY $order  DESC LIMIT $limit");
 
-    $getStmt->execute();
+  $getStmt->execute();
 
-    $rows = $getStmt->fetchAll(PDO::FETCH_OBJ);
+  $rows = $getStmt->fetchAll(PDO::FETCH_OBJ);
 
-    return $rows;
+  return $rows;
 }
+

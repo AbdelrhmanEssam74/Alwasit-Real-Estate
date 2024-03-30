@@ -13,7 +13,10 @@
                     <a class="nav-link" aria-current="page" href="#"><?php echo lang('ITEMS') ?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="users.php"><?php echo lang('MEMBERS') ?></a>
+                    <a class="nav-link" aria-current="page" href="users.php"><?php echo lang('Owners') ?></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="users.php?action=Manage-Members"><?php echo lang('MEMBERS') ?></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="#"><?php echo lang('COMMENTS') ?></a>
@@ -26,7 +29,7 @@
                         <?php echo $_SESSION['Username'] ?>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="users.php?action=Edit&uID=<?php echo $_SESSION['ID'] ?>">Edit Profile</a></li>
+                        <li><a class="dropdown-item" href="users.php?action=Edit&uID=<?php echo $_SESSION['admin_id'] ?>">Edit Profile</a></li>
                         <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                     </ul>

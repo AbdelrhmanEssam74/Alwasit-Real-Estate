@@ -2,7 +2,9 @@
 include 'init.php';
 include $config . 'config.php';
 include $config . 'emailsTable.php';
+include $config . 'usersTable.php';
 $email = new EmailsTable();
+$users = new RegisterTable();
 
 // Function to generate the HTML model
 function generateModel($text)
@@ -58,7 +60,7 @@ if (isset($_GET['vc']) && $_GET['uID']) {
     "id" => $id,
   ];
   // Check if the email is active or not
-  $emailData = $email->GetOneColumnById($id);
+  $emailData = $email->GetByID($id);
   $_SESSION['email'] = $emailData['email'];
   if ($emailData['active'] == 1) {
     echo generateModel("لقد قمت بعملية التأكيد من قبل");
@@ -67,6 +69,7 @@ if (isset($_GET['vc']) && $_GET['uID']) {
     if (password_verify($emailData['code'], $hashed_code)) {
       // Prepare update statement
       $updateQuery = "UPDATE `email_verification` SET `active` = 1 WHERE user_id = :id";
+      $users->update("UPDATE `users` SET `email_active` = 1 WHERE user_id = :id", $data);
       if ($email->update($updateQuery, $data)) {
         echo generateModel("تم تأكيد البريد الإلكتروني بنجاح.<br>سيتم توجيهك إلى صفحة تسجيل الدخول.");
         header("refresh:2;url=" . $login);

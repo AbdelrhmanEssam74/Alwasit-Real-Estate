@@ -54,8 +54,8 @@ $data = [
   "phone" => $phone,
 ];
 
-$insertQuery = "INSERT INTO `alwasit`.`users` (user_id, username, F_Name, L_Name, email, user_phone, Password) 
-                VALUES (:id, :username, :FN, :LN, :em, :phone, :pass)";
+$insertQuery = "INSERT INTO `alwasit`.`users` (user_id, username, F_Name, L_Name, email, user_phone, Password , reg_status) 
+                VALUES (:id, :username, :FN, :LN, :em, :phone, :pass , 1)";
 $userObj->insert($insertQuery, $data);
 
 // send verification  code to user's email
