@@ -19,7 +19,7 @@ if ($count > 0) :
   <html>
   <body style='display: flex;flex-direction: column;align-items: center;gap: 15px;'>
   <h3 style='margin: 0; text-align: right;'>$row->F_Name  $row->L_Name,</h3>
-  <p style='text-align: right; padding: 20px; background-color: #003481; color: #fff; width: 100%; margin: 15px 0;'>
+  <p style='text-align: right; padding: 20px;  width: 100%; margin: 15px 0;'>
     ناسف لقد تم رفض الطلب الخاص بك ,برجاء مراجعة البيانات الخاصه بك
   </p>
   <p style='text-align: right; width: 100%;'>فريق الوسيط</p>
