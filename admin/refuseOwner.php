@@ -17,15 +17,13 @@ if ($count > 0) :
   $mailBody = "
   <!DOCTYPE html>
   <html>
-  <head>
-  </head>
   <body style='display: flex;flex-direction: column;align-items: center;gap: 15px;'>
-  مرحبًا  <h3 style='text-align:right ; width:100%'>$row->F_Name  $row->L_Name,</h3>
-  <p style='text-align:right ; width:100% ; padding: 20px ; background-color:#003481 ; color :#fff'>
+  <h3 style='margin: 0; text-align: right;'>$row->F_Name  $row->L_Name,</h3>
+  <p style='text-align: right; padding: 20px; background-color: #003481; color: #fff; width: 100%; margin: 15px 0;'>
     ناسف لقد تم رفض الطلب الخاص بك ,برجاء مراجعة البيانات الخاصه بك
   </p>
-  <p style='text-align:right ; width:100%'>فريق الوسيط</p>
-  <a style='text-align:right ; width:100%' href='http://localhost/Alwasit' target='_blank'>Alwasit</a>
+  <p style='text-align: right; width: 100%;'>فريق الوسيط</p>
+  <a style='text-align: right; width: 100%;' href='http://localhost/Alwasit' target='_blank'>Alwasit</a>
   </body>
   </html>
   ";
