@@ -4,7 +4,7 @@ $pageTitel = 'delete';
 include 'init.php';
 include $libs . "emails/index.php";
 $user_id =  (isset($_POST['id'])) ? $_POST['id'] : 0;
-$stmt = $conn->prepare("SELECT *  FROM  users WHERE user_id = ?");
+$stmt = $conn->prepare("SELECT *  FROM  onwer_requests WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $row = $stmt->fetchObject();
 $count = $stmt->rowCount();
