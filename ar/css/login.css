@@ -326,6 +326,9 @@ header nav ul {
 #restPass {
   width: 100%;
   text-align: right;
+  margin: -17px 7px;
+  font-size: 13px;
+  color: var(--highlight);
 }
 .form_box .back_img form .input-box input:not(:last-child) {
   margin-bottom: 5px;

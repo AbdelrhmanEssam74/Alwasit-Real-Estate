@@ -34,64 +34,67 @@ $(function () {
     return confirm("Are you sure?");
   });
 
-  /*   delete the row from table and from database using ajax call
-  $('.deleteBtn').on('click', function () {
-      let element = $(this);
-      let user_id = element.attr('data-UID');
-      let success_message = $('.success-message');
-      $.ajax({
-          method: "POST",
-          url: 'delete.php',
-          data: { id: user_id },
-          success: function (data) {
-              if (data == 1) {
-                  success_message.addClass('show-success').text("Row Deleted Successfully");
-                  $('#row_' + user_id).remove();
-                  setTimeout(function () {
-                      success_message.removeClass('show-success');
-                  }, 1500);
-              } else {
-                  success_message.addClass('show-failed').text("Row Deletion Failed");
-                  setTimeout(function () {
-                      success_message.removeClass('show-failed');
-                  }, 1500);
-              }
-          },
-          error: function (xhr, status, error) {
-              console.error(xhr);
-          }
-      });
+  //  delete the row from table and from database using ajax call
+  $(".deleteBtn").on("click", function () {
+    let element = $(this);
+    let user_id = element.attr("data-UID");
+    let success_message = $(".success-message");
+    $.ajax({
+      method: "POST",
+      url: "delete.php",
+      data: { id: user_id },
+      success: function (data) {
+        if (data == 1) {
+          success_message
+            .addClass("show-success")
+            .text("User Deleted Successfully");
+          $("#row_" + user_id).remove();
+          setTimeout(function () {
+            success_message.removeClass("show-success");
+          }, 1500);
+        } else {
+          success_message.addClass("show-failed").text("User Deleted Failed");
+          setTimeout(function () {
+            success_message.removeClass("show-failed");
+          }, 1500);
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
   });
 
-  // Active the user in the system
-  $('.activeBtn').on('click', function () {
-      let element = $(this);
-      let user_id = element.attr('data-UID');
-      let success_message = $('.success-message');
-      $.ajax({
-          method: "POST",
-          url: 'activeMember.php',
-          data: { id: user_id },
-          success: function (data) {
-              console.log(data);
-              if (data == 1) {
-                  success_message.addClass('show-success').text("Member Active Successfully");
-                  $('#row_' + user_id).remove();
-                  setTimeout(function () {
-                      success_message.removeClass('show-success');
-                  }, 1500);
-              } else {
-                  success_message.addClass('show-failed').text("Member Active Failed");
-                  setTimeout(function () {
-                      success_message.removeClass('show-failed');
-                  }, 1500);
-              }
-          },
-          error: function (xhr, status, error) {
-              console.error(xhr);
-          }
-      });
-  }); */
+  //  delete owner from table and from database using ajax call
+  $(".deleteOwner").on("click", function () {
+    let element = $(this);
+    let owner_id = element.attr("data-OID");
+    let success_message = $(".success-message");
+    $.ajax({
+      method: "POST",
+      url: "delete.php",
+      data: { owner_id: owner_id },
+      success: function (data) {
+        if (data == 1) {
+          success_message
+            .addClass("show-success")
+            .text("User Deleted Successfully");
+          $("#row_" + owner_id).remove();
+          setTimeout(function () {
+            success_message.removeClass("show-success");
+          }, 1500);
+        } else {
+          success_message.addClass("show-failed").text("User Deleted Failed");
+          setTimeout(function () {
+            success_message.removeClass("show-failed");
+          }, 1500);
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
+  });
 
   // accept user request to be an owner
   $(".acceptRequest").on("click", function () {

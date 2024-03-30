@@ -47,6 +47,16 @@ switch ($action) {
           gap: 15px;
         }
 
+        p {
+          text-align: center;
+          background-color: #ff4d4d;
+          width: 100%;
+          font-size: 18px;
+          color: #fff;
+          padding: 15px 0px;
+          border-radius: 5px;
+        }
+
         label {
           font-weight: bold;
           display: block;
@@ -82,6 +92,12 @@ switch ($action) {
 
     <body>
       <div class="container">
+        <?php
+        if (isset($_SESSION['email_not_found'])) {
+          echo "<p> {$_SESSION['email_not_found']} </p>";
+          unset($_SESSION['email_not_found']);
+        }
+        ?>
         <form method="POST" action="?_action=Verified">
           <label for="email"> أدخل البريد الإلكتروني الخاص بك</label>
           <input type="email" id="email" name="email" placeholder="أدخل البريد الالكتروني">
@@ -95,33 +111,40 @@ switch ($action) {
     break;
   case 'Verified':
     $email_from_post = $_POST['email'];
-    $_SESSION['newEmial'] = $email_from_post;
-    $token = bin2hex(random_bytes(32)); // Generate a 32-character random token
-    $expiryTime = date('Y-m-d H:i:s', strtotime('+12 hour'));
-    $_SESSION['privacy_token'] = $token; // Store the generated token in session for later comparison
-    $_SESSION['expiryTime'] = $expiryTime; // Store the expiration time of this token
-    $mailBody = "
-    <!DOCTYPE html>
-    <html>
-    <head>
-    </head>
-    <body style='display: flex;flex-direction: column;align-items: center;gap: 15px;'>
-    مرحبًا  <h3>$full_name</h3>
-    <p>
-    يمكن إعادة تعيين كلمة المرور الخاصة بك عن طريق النقر على الزر أدناه. إذا لم تكن قد طلبت كلمة مرور جديدة، يرجى تجاهل هذا البريد الإلكتروني
-    </p>
-    <a style='display: inline-block;padding: 10px 20px;background-color: #007BFF;color: #fff;text-decoration: none;border-radius: 5px;transition: background-color 0.3s ease;' href='http://localhost/Alwasit/auth/rest-password.php?token=$token&_action=check-token'>
-    Change Password
-    </a>
-    <p>هذا الايميل صالح لمدة 12 ساعه فقط</p>
-    <p>فريق الوسيط</p>
-    <a href='http://localhost/Alwasit' target='_blank'>Alwasit</a>
-    </body>
-    </html>
-    ";
-    $email_subject  = 'هذا طلب إعادة تعيين كلمة المرور لـ الوسيط';
-    $send_email_obj = new EmailSender($email_from_post, $email_subject, $mailBody);
-    $send_email_obj->sendEmail();
+    $userObj = new loginTable();
+    $row_count = $userObj->checkIfUserExist($email_from_post);
+    if ($row_count) :
+      $_SESSION['newEmial'] = $email_from_post;
+      $token = bin2hex(random_bytes(32)); // Generate a 32-character random token
+      $expiryTime = date('Y-m-d H:i:s', strtotime('+12 hour'));
+      $_SESSION['privacy_token'] = $token; // Store the generated token in session for later comparison
+      $_SESSION['expiryTime'] = $expiryTime; // Store the expiration time of this token
+      $mailBody = "
+      <!DOCTYPE html>
+      <html>
+      <head>
+      </head>
+      <body style='display: flex;flex-direction: column;align-items: center;gap: 15px;'>
+      مرحبًا  <h3>$full_name</h3>
+      <p>
+      يمكن إعادة تعيين كلمة المرور الخاصة بك عن طريق النقر على الزر أدناه. إذا لم تكن قد طلبت كلمة مرور جديدة، يرجى تجاهل هذا البريد الإلكتروني
+      </p>
+      <a style='display: inline-block;padding: 10px 20px;background-color: #007BFF;color: #fff;text-decoration: none;border-radius: 5px;transition: background-color 0.3s ease;' href='http://localhost/Alwasit/auth/rest-password.php?token=$token&_action=check-token'>
+      Change Password
+      </a>
+      <p>هذا الايميل صالح لمدة 12 ساعه فقط</p>
+      <p>فريق الوسيط</p>
+      <a href='http://localhost/Alwasit' target='_blank'>Alwasit</a>
+      </body>
+      </html>
+      ";
+      $email_subject  = 'هذا طلب إعادة تعيين كلمة المرور لـ الوسيط';
+      $send_email_obj = new EmailSender($email_from_post, $email_subject, $mailBody);
+      $send_email_obj->sendEmail();
+    else :
+      $_SESSION['email_not_found'] = "لا يوجد حساب بهذا البريد الالكتروني";
+      header("location: " . $_SERVER["HTTP_REFERER"]);
+    endif;
   ?>
     <!DOCTYPE html>
     <html lang='ar'>

@@ -36,9 +36,9 @@ $r = $inset_query->execute();
 // Update The is_owner in userts talbe in database
 $stmt_users = $conn->prepare("UPDATE users SET `is_owner` = :ow , `owner_id` = :owner_id WHERE user_id = :id");
 $r = $stmt_users->execute(array(
-  'ow'     => 1,
-  'owner_id' => $owner_id,
-  'id'     => $user_id,
+  'ow'        => 1,
+  'owner_id'  => $owner_id,
+  'id'        => $user_id,
 ));
 
 // Update The active in owner_requests talbe in database
