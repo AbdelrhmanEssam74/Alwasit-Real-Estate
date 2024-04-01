@@ -14,9 +14,18 @@ include_once $config . 'usersTable.php';
 $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : 0;
 $users_obj = new RegisterTable;
 $user_data = $users_obj->getAll($user_id)[0];
-$_SESSION['full_name'] = $user_data->F_Name . ' ' . $user_data->L_Name ;
+$_SESSION['full_name'] = $user_data->F_Name . ' ' . $user_data->L_Name;
 ?>
 <!-- End Header -->
+<div class="modal-container overlay">
+  <div class="modal-content">
+    <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
+    <h2></h2>
+    <hr />
+    <p></p>
+    <button class="modal-content-btn send-access-permission " for="modal-toggle"></button>
+  </div>
+</div>
 <div class="setting">
   <p class="success-message"></p>
   <div class="container">
