@@ -18,11 +18,13 @@ if (isset($_SESSION['uID'])) {
                     <button  class="dropbtn">
                         <img src='$img' alt='Profile Picture'>
                     </button>
-                    <div id="myDropdown" class="dropdown-content">
+                    <div class="dropMenuContainer">
+                      <div id="myDropdown" class="dropdown-content">
                         <button class="checkOwner" >Dashboard</button>
                         <a href="$setting_page">Settings</a> 
                         <a href="$logout">Logout</a>
-                    </div>
+                      </div>
+                    </div>  
                 </div>
             _END;
     } else {

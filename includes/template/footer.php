@@ -37,9 +37,12 @@
     ?>
       <script src="<?php echo $js ?>property_details.js"></script>
     <?php
-    else :
+    elseif (isset($contactus_page)) :
     ?>
       <script src="<?php echo $js ?>contactus.js"></script>
+    <?php
+    else :
+    ?>
       <script src="<?php echo $js ?>main.js"></script>
       <script src="<?php echo $js ?>rent.js"></script>
     <?php

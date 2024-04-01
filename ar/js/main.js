@@ -26,9 +26,18 @@ $(document).ready(function () {
   });
   // toggle menu for user
   let droptn = $(".dropbtn img");
-  let dropDown_list = $(".dropdown-content");
+  let dropDown_list = $(".dropMenuContainer");
   droptn.click(function () {
-    dropDown_list.toggleClass("show");
+    if (dropDown_list.hasClass("show")) {
+      dropDown_list.removeClass("show");
+    } else {
+      dropDown_list.addClass("show");
+    }
+  });
+  $(".dropMenuContainer").click(function () {
+    if (dropDown_list.hasClass("show")) {
+      dropDown_list.removeClass("show");
+    }
   });
 
   // send ajax request to owner index file to check if the user has permission or not
