@@ -25,7 +25,12 @@ if (isset($_COOKIE['rem'])) {
     exit();
   }
 }
-
+// check if user is has owner permission and try to log him in as an owner
+if ($userObj->isOwner()) {
+  $_SESSION['owner'] = true;
+} else {
+  $_SESSION['owner'] = false;
+}
 // // Check if user has an account
 if (!$row_count) {
   $_SESSION['notFound'] = "البريد الإلكتروني غير صحيح";
