@@ -80,8 +80,3 @@ if (isset($data)) :
     }
   endif;
 endif;
-
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
-// echo "request from here";

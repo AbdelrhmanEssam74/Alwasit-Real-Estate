@@ -48,29 +48,22 @@ $(function () {
   $(".personal_info_save_btn").on("click", function () {
     let user_id = $(".personal_info_save_btn").attr("data-UID");
     let oldImg = $(".oldimg").attr("value").split("/").pop();
-
     let newImg = $("#newProfileImage").prop("files")[0]?.name || null;
-
     let formData = new FormData();
-
     // Iterate through all input fields with the class 'dynamic-input'
     $(".dynamic-input").each(function () {
       let inputId = $(this).attr("id");
       let inputValue = $(this).val();
       formData.append(inputId, inputValue);
     });
-
     // Append common form data
     formData.append("submit", "personal_info");
     formData.append("id", user_id);
     formData.append("oldImg", oldImg);
-
     if (newImg) {
       formData.append("newImg", newImg);
     }
-
     let success_message = $(".success-message");
-
     $.ajax({
       method: "POST",
       url: "update.php",
@@ -243,7 +236,7 @@ $(function () {
   $(".checkOwner").on("click", function () {
     $.ajax({
       method: "POST",
-      url: "owner/index.php",
+      url: "../owner/index.php",
       processData: false,
       contentType: false,
       success: function (data) {
@@ -285,7 +278,7 @@ $(function () {
     formData.append("owner-request", 1);
     $.ajax({
       method: "POST",
-      url: "owner/index.php",
+      url: "../owner/index.php",
       data: formData,
       processData: false,
       contentType: false,

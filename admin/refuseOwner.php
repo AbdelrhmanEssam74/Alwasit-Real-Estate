@@ -4,6 +4,10 @@ $pageTitel = 'delete';
 include 'init.php';
 include $libs . "emails/index.php";
 $user_id =  (isset($_POST['id'])) ? $_POST['id'] : 0;
+$stmt_data = $conn->prepare("SELECT *  FROM  users WHERE user_id = ?");
+$stmt_data->execute([$user_id]);
+$data = $stmt_data->fetchObject();
+
 $stmt = $conn->prepare("SELECT *  FROM  onwer_requests WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $row = $stmt->fetchObject();
@@ -18,7 +22,7 @@ if ($count > 0) :
   <!DOCTYPE html>
   <html>
   <body style='display: flex;flex-direction: column;align-items: center;gap: 15px;'>
-  <h3 style='margin: 0; text-align: right;'>$row->F_Name  $row->L_Name,</h3>
+  <h3 style='margin: 0; text-align: right;'>$data->F_Name  $data->L_Name,</h3>
   <p style='text-align: right; padding: 20px;  width: 100%; margin: 15px 0;'>
     ناسف لقد تم رفض الطلب الخاص بك ,برجاء مراجعة البيانات الخاصه بك
   </p>

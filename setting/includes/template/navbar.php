@@ -9,7 +9,7 @@
         </button>
         <div class="dropMenuContainer">
           <div id="myDropdown" class="dropdown-content">
-            <a href="<?php echo $dashboard ?>index.php">Dashboard</a>
+            <button class="checkOwner">Dashboard</button>
             <a href="<?php echo $setting_page ?>">Settings</a>
             <a href="<?php echo $auth ?>logout.php">Logout</a>
           </div>
