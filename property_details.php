@@ -8,6 +8,15 @@ $prop_details_page = '';
 <?php include $templates . 'navbar.php' ?>
 <!-- End Header -->
 <!--start gallery-->
+<div class="modal-container overlay">
+  <div class="modal-content">
+    <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
+    <h2></h2>
+    <hr />
+    <p></p>
+    <button class="modal-content-btn send-access-permission " for="modal-toggle"></button>
+  </div>
+</div>
 <div class="image-gallery">
   <div class="container">
     <div class="main-image">
@@ -23,7 +32,7 @@ $prop_details_page = '';
     </div>
   </div>
   <div class="popup-img">
-    <span class="close"> <i class="fa fa-close" aria-hidden="true"></i> </span>
+    <span class="close-popupImg"> <i class="fa fa-close" aria-hidden="true"></i> </span>
     <span class="next"><i class="fa-solid fa-angle-right"></i></span>
     <span class="prev"><i class="fa-solid fa-angle-left"></i></span>
     <img src="images/img3.jpg" alt="Image 1">
