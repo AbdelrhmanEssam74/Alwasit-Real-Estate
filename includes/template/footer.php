@@ -37,6 +37,10 @@
     ?>
       <script src="<?php echo $js ?>property_details.js"></script>
     <?php
+    elseif (isset($profile_page)) :
+    ?>
+      <script src="<?php echo $js ?>profile.js"></script>
+    <?php
     elseif (isset($contactus_page)) :
     ?>
       <script src="<?php echo $js ?>contactus.js"></script>

@@ -1,28 +1,49 @@
 <?php include 'init.php';
 $DefultPage = '';
-$pageTitel = 'الوسيط | Alwasit';
-$main_page  = '';
+$pageTitel = 'query';
+$profile_page = '';
 ?>
 <?php include $templates . 'header.php' ?>
 <!-- Start Header -->
-<?php include $templates . 'navbar.php'
-?>
+<?php include $templates . 'navbar.php' ?>
 <!-- End Header -->
-<!-- Start Landing -->
-<div class="langing">
-  <div class="container">
-    <div class="content">
-      <h1 id="h2">خاص بمحافظة بني سويف</h1>
-      <p id="info">
-        شراء او استئجار العقارات <br> بدون عمولة
-      </p>
-    </div>
-    <!-- start Form -->
-    <?php include $templates . 'searchform.php' ?>
-    <!-- End Form -->
+<div class="modal-container overlay">
+  <div class="modal-content">
+    <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
+    <h2></h2>
+    <hr />
+    <p></p>
+    <button class="modal-content-btn send-access-permission " for="modal-toggle"></button>
   </div>
 </div>
-<!-- End Landing -->
+<div class="wedge-section">
+  <div class="container">
+    <div class="description box">
+      <div class="section__info">
+        <div class="agent-links">
+          <ul class="">
+            <div class="section_info_content">
+              <h1>FLR Real Estate <span><i class="fa-solid fa-check"></i></span></h1>
+              <div>
+                <span>15<span> العقارات المتوفرة</span>
+              </div>
+            </div>
+            <li>
+              <a href="tel:01028492181" class="link-item">01028492181</a>
+              <i class="fa fa-phone" aria-hidden="true"></i>
+            </li>
+            <li><a class="link-item" href="">Mail.agent@gmail.com</a><i class="fa fa-envelope" aria-hidden="true"></i></li>
+            <li> Egypt, Bani-Suef<i class="fa-solid fa-location-dot"></i> </li>
+          </ul>
+          <img src="ar/images/item3.jpg" alt="">
+        </div>
+        <div class="share-btn">
+          <button> مشاركة الملف الشخصي <i class="fa fa-share" aria-hidden="true"></i> </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Start widget -->
 <div class="widget-container">
   <div class="container">
@@ -92,47 +113,5 @@ $main_page  = '';
     </div>
   </div>
 </div>
-<!-- End widget -->
-<!-- Start Design -->
-<div class="design">
-  <div class="container">
-    <div class="design_img">
-      <img src="<?php echo $images ?>item3.jpg" alt="">
-    </div>
-    <div class="design_content">
-      <p>قم بإنشاء حسابك ونشر العقارات الخاصة بك
-        للوصول لأكبر عدد من مستخدمي الوسيط</p>
-      <a class="LoginBtn" href='<?php echo $login ?>'>
-        تسجيل الدخول
-      </a>
-    </div>
-  </div>
-</div>
-<!-- End Design -->
-<!-- start stats -->
-<div class="stats" id="stats-section">
-  <div class="container">
-    <div class="box">
-      <i class="fa-solid fa-building"></i>
-      <div class="number" data-goal="450">0</div>
-      <p>عقار للإيجار</p>
-    </div>
-    <div class="box">
-      <i class="fa-solid fa-building"></i>
-      <div class="number" data-goal="256">0</div>
-      <p>عقار للبيع</p>
-    </div>
-    <div class="box">
-      <i class="fa-solid fa-person"></i>
-      <div class="number" data-goal="210">0</div>
-      <p>عميل</p>
-    </div>
-    <div class="box">
-      <i class="fa-solid fa-eye"></i>
-      <div class="number" data-goal="600">0</div>
-      <p>زائر</p>
-    </div>
-  </div>
-</div>
-<!-- End stats -->
+<!-- End widget -->>
 <?php include $templates . 'footer.php'; ?>

@@ -165,7 +165,7 @@ $prop_details_page = '';
         <div class="owner-details">
           <div class="info">
             <h4>User</h4>
-            <a href="">25 عقار</a>
+            <a href="profile.php?ID=">25 عقار</a>
           </div>
           <img src="<?php echo $images ?>person1.jpg" alt="">
         </div>

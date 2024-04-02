@@ -1,6 +1,6 @@
 :root {
   --head-line: #00214d;
-  --head-line-hover: #003170;
+  --head-line-hover: #003b88;
   --sub-head-line: #1b2d45;
   --paragraph: #1b2d45;
   --card-paragraph: #1b2d45;
@@ -194,7 +194,7 @@ header nav ul {
   display: flex;
 }
 
-ul a {
+header nav ul a {
   display: block;
   color: var(--paragraph);
   text-decoration: none;
@@ -766,7 +766,7 @@ input[type="number"]::-webkit-outer-spin-button {
 /* end form */
 /* Start widget  */
 .widget-container {
-  margin-top: 100px;
+  margin-top: 30px;
   padding-top: var(--sectina-padding);
   padding-bottom: var(--sectina-padding);
 }

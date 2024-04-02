@@ -49,23 +49,26 @@ $buy_page = '';
 <!-- Start widget -->
 <div class="widget-container">
   <div class="container">
+    <div class="main-heading animate__bounceInLeft">
+      <h2 class="heading2">عقارات مميزة</h2>
+    </div>
     <div class="widgets">
       <div class="property-body">
         <div class="images-details">
           <a href="<?php echo $prop_details ?>" class="property-link">
-            <img src="<?php echo $images ?>item1.jpg" alt="">
+            <img class="prop-img" src="<?php echo $images ?>item1.jpg" alt="">
           </a>
           <div class="details-top">
             <div class="details-type">
               <div class="type1">سكني</div>
-              <div class="buy">للبيع</div>
+              <div class="rent">للإيجار</div>
             </div>
             <div class="favorite-box">
-              <a href='#' title="اضف للمفضلة" class='property-favorite'>
+              <button title="اضف للمفضلة" class='property-favorite'>
                 <span class='icon-heart-o'>
                   <i class="fa-regular fa-heart"></i>
                 </span>
-              </a>
+              </button>
             </div>
           </div>
           <div class="details-bottom">
@@ -98,7 +101,7 @@ $buy_page = '';
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, quae.</p>
           </div>
           <div class="price">
-            <p>1,550,00 <span>جنيه</span></p>
+            <p>3,000 <span>جنيه</span></p>
           </div>
           <hr>
           <div class="owner">
@@ -108,11 +111,9 @@ $buy_page = '';
             </a>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </div>
-
 <!-- End widget -->
 <?php include $templates . 'footer.php'; ?>

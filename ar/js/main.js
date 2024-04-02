@@ -136,7 +136,7 @@ function updateMenuAndSearchInputs() {
   } else {
     newSearchInputs.innerHTML = `
     <div class="input_control_search">
-        <input type="text" name="q" required oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
+        <input type="text" name="q" oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
         <p class="no-suggestion-message" id="noSuggestionMessage"></p>
         <ul class="suggestion-list" id="suggestionList"></ul>
         <i class='bx bx-search'></i>
