@@ -48,7 +48,7 @@ $profile_page = '';
 <div class="widget-container">
   <div class="container">
     <div class="main-heading animate__bounceInLeft">
-      <h2 class="heading2">عقارات مميزة</h2>
+      <h2 class="heading2">عقارات الوكيل</h2>
     </div>
     <div class="widgets">
       <div class="property-body">
