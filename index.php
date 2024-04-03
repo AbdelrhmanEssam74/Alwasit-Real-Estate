@@ -5,10 +5,19 @@ $main_page  = '';
 ?>
 <?php include $templates . 'header.php' ?>
 <!-- Start Header -->
-<?php include $templates . 'navbar.php'
+<?php include $templates . 'navbar.php';
 ?>
 <!-- End Header -->
 <!-- Start Landing -->
+<div class="modal-container overlay">
+  <div class="modal-content">
+    <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
+    <h2></h2>
+    <hr />
+    <p></p>
+    <button class="modal-content-btn send-access-permission " for="modal-toggle"></button>
+  </div>
+</div>
 <div class="langing">
   <div class="container">
     <div class="content">
@@ -32,7 +41,7 @@ $main_page  = '';
     <div class="widgets">
       <div class="property-body">
         <div class="images-details">
-          <a href="<?php echo $prop_details ?>" class="property-link">
+          <a href="<?php echo $prop_details ?>?PId=" class="property-link">
             <img class="prop-img" src="<?php echo $images ?>item1.jpg" alt="">
           </a>
           <div class="details-top">

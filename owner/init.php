@@ -9,3 +9,4 @@ $css = 'ar/css/';
 $js = 'ar/js/';
 $images = 'ar/images/';
 $libs = '../libs/';
+$prop_details_page = "../property_details.php";

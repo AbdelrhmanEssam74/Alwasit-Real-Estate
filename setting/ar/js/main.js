@@ -1,7 +1,5 @@
 // Get all navigation items
-
 const navItems = document.querySelectorAll(".sidebar__list-item");
-
 // Add a click event listener to each item
 navItems.forEach((item) => {
   item.addEventListener("click", function () {

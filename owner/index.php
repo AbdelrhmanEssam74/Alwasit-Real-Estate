@@ -10,7 +10,10 @@ $user_id = isset($_SESSION['uID']) ? $_SESSION['uID'] : 0;
 $stmt = $conn->prepare("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
 $stmt->execute();
 $data = $stmt->fetch(PDO::FETCH_OBJ);
-if (isset($data)) :
+if (empty($data)) :
+  header("Location:" . APPURL);
+  exit;
+else :
   $is_onwer = $data->is_owner;
   //NOTE -  check if user is already onwer 
   if ($is_onwer) :
