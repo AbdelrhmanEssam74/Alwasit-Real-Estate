@@ -1178,7 +1178,9 @@ ul {
   flex-direction: column;
   gap: 15px;
   position: relative;
+  margin-bottom: 20px;
 }
+
 .form-group label {
   text-align: right;
   font-family: "Cairo";
@@ -1200,7 +1202,7 @@ ul {
 .latitude-longitude {
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 15px;
 }
 .price-area-rooms {
@@ -1208,6 +1210,16 @@ ul {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 15px;
+}
+.help-text {
+  position: absolute;
+  bottom: -40%;
+  right: 0;
+  color: #696969;
+  user-select: none;
+}
+.help-text.location{
+  bottom: -45%;
 }
 .form-group.btn {
   display: flex;
@@ -1226,10 +1238,27 @@ ul {
   transition: 0.5s all linear;
   margin-top: 15px;
 }
-.publish-btn:hover {
+.publish-btn.disabled {
+  background-color: #9c9c9c;
+  cursor: not-allowed;
+}
+.publish-btn.enabled:hover {
   background-color: #005ac7;
 }
-@media (max-width: 767px) {
+/* Hide the default increment and decrement arrows */
+input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Remove the inner and outer spin buttons (arrows) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+@media (max-width: 1050px) {
   .latitude-longitude,
   .city-neighborhood,
   .type-conditions {
@@ -1363,3 +1392,9 @@ ul {
   left: 3%;
 }
 /* end from */
+.invalid-input {
+  position: absolute;
+  bottom: -26%;
+  right: 0;
+  color: red;
+}
