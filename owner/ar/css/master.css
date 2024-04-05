@@ -8,9 +8,10 @@
 }
 * {
   box-sizing: border-box;
+  font-family: "Cairo";
 }
 body {
-  font-family: "Open Sans", sans-serif;
+
   margin: 0;
 }
 *:focus {
@@ -1410,14 +1411,14 @@ input[type="number"]::-webkit-outer-spin-button {
   position: fixed;
   color: rgb(0, 0, 0);
   bottom: 5%;
-  right:  -27%;
+  right: -27%;
   padding: 15px 10px;
   border-radius: 0px 5px 5px 0px;
   font-weight: 500;
   transition: 0.7s all;
   z-index: 999;
   text-align: right;
-  font-family: 'Cairo';
+  font-family: "Cairo";
   cursor: pointer;
   user-select: none;
 }
@@ -1425,4 +1426,278 @@ input[type="number"]::-webkit-outer-spin-button {
 .success-message.show-success {
   right: 3%;
   background-color: rgb(82, 255, 76);
+}
+.head {
+  display: flex;
+  justify-content: end;
+  gap: 15px;
+}
+.icon_wrap {
+  cursor: pointer;
+}
+.icon_wrap::before {
+  position: absolute;
+  content: attr(data-notify);
+  background-color: red;
+  height: 16px;
+  width: 16px;
+  color: #fff;
+  font-size: 13px;
+  padding: 3px;
+  display: grid;
+  place-content: center;
+  border-radius: 50%;
+  top: 0;
+  left: -37%;
+}
+.notifications {
+  margin-right: 25px;
+}
+
+.notifications .icon_wrap {
+  font-size: 28px;
+}
+
+.profile,
+.notifications {
+  position: relative;
+}
+
+.profile .profile_dd,
+.notification_dd {
+  position: absolute;
+  top: 48px;
+  right: -15px;
+  user-select: none;
+  background: #fff;
+  border: 1px solid #c7d8e2;
+  width: 350px;
+  height: auto;
+  display: none;
+  z-index: 999;
+  border-radius: 3px;
+  box-shadow: 10px 10px 35px rgba(0, 0, 0, 0.125),
+    -10px -10px 35px rgba(0, 0, 0, 0.125);
+}
+
+.profile .profile_dd:before,
+.notification_dd:before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 15px;
+  border: 10px solid;
+  border-color: transparent transparent #fff transparent;
+}
+
+.notification_dd li {
+  border-bottom: 1px solid #f1f2f4;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.notification_dd li .notify_icon {
+  display: flex;
+}
+
+.notification_dd li .notify_icon .icon {
+  display: inline-block;
+  background: url("https://i.imgur.com/MVJNkqW.png") no-repeat 0 0;
+  width: 40px;
+  height: 42px;
+}
+
+.notification_dd li.baskin_robbins .notify_icon .icon {
+  background-position: 0 -43px;
+}
+
+.notification_dd li.mcd .notify_icon .icon {
+  background-position: 0 -86px;
+}
+
+.notification_dd li.pizzahut .notify_icon .icon {
+  background-position: 0 -129px;
+}
+
+.notification_dd li.kfc .notify_icon .icon {
+  background-position: 0 -178px;
+}
+
+.notification_dd li .notify_data {
+  margin: 0 15px;
+  width: 185px;
+}
+
+.notification_dd li .notify_data .title {
+  color: #000;
+  font-weight: 600;
+}
+
+.notification_dd li .notify_data .sub_title {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+}
+
+.notification_dd li .notify_status p {
+  font-size: 12px;
+}
+
+.notification_dd li.success .notify_status p {
+  color: #47da89;
+}
+
+.notification_dd li.failed .notify_status p {
+  color: #fb0001;
+}
+
+.notification_dd li.show_all {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.notification_dd li.show_all p {
+  font-weight: 700;
+  color: #3b80f9;
+  cursor: pointer;
+}
+
+.notification_dd li.show_all p:hover {
+  text-decoration: underline;
+}
+
+.profile .icon_wrap {
+  display: flex;
+  align-items: center;
+}
+
+.profile .name {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.icon_wrap:hover,
+.profile.active .icon_wrap,
+.notifications.active .icon_wrap {
+  color: #3b80f9;
+}
+
+.profile .profile_dd {
+  width: 225px;
+}
+.profile .profile_dd:before {
+  right: 10px;
+}
+
+.profile .profile_dd ul li {
+  border-bottom: 1px solid #f1f2f4;
+}
+
+.profile .profile_dd ul li a {
+  display: block;
+  padding: 15px 35px;
+  position: relative;
+}
+
+.profile .profile_dd ul li a .picon {
+  display: inline-block;
+  width: 30px;
+}
+
+.profile .profile_dd ul li a:hover {
+  color: #3b80f9;
+  background: #f0f5ff;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.profile .profile_dd ul li.profile_li a:hover {
+  background: transparent;
+  cursor: default;
+  color: #7f8db0;
+}
+
+.profile .profile_dd ul li .btn {
+  height: 32px;
+  padding: 7px 10px;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+  background: #3b80f9;
+  width: 125px;
+  margin: 5px auto 15px;
+}
+
+.profile .profile_dd ul li .btn:hover {
+  background: #6593e4;
+}
+
+.profile.active .profile_dd,
+.notifications.active .notification_dd {
+  display: block;
+}
+
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  transition: all 0.2s ease;
+  display: none;
+}
+
+.shadow {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.6;
+  z-index: 999;
+  border: 1px solid red;
+}
+
+.popup .inner_popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+}
+
+.popup .notification_dd {
+  display: block;
+  position: static;
+  margin: 0 auto;
+  height: 357px;
+  overflow: auto;
+}
+
+.popup .notification_dd:before {
+  display: none;
+}
+
+.popup .notification_dd li.title {
+  font-weight: 700;
+  color: #3b80f9;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.popup .notification_dd li.title .close {
+  position: absolute;
+  top: 2px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.popup .notification_dd li.title .close:hover {
+  opacity: 0.5;
 }
