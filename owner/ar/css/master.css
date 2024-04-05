@@ -1218,7 +1218,7 @@ ul {
   color: #696969;
   user-select: none;
 }
-.help-text.location{
+.help-text.location {
   bottom: -45%;
 }
 .form-group.btn {
@@ -1237,6 +1237,14 @@ ul {
   color: #fff;
   transition: 0.5s all linear;
   margin-top: 15px;
+  position: relative;
+}
+.invalid-img {
+  display: block;
+  position: absolute;
+  bottom: -25%;
+  right: 0;
+  color: red;
 }
 .publish-btn.disabled {
   background-color: #9c9c9c;
@@ -1397,4 +1405,24 @@ input[type="number"]::-webkit-outer-spin-button {
   bottom: -26%;
   right: 0;
   color: red;
+}
+.success-message {
+  position: fixed;
+  color: rgb(0, 0, 0);
+  bottom: 5%;
+  right:  -27%;
+  padding: 15px 10px;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: 500;
+  transition: 0.7s all;
+  z-index: 999;
+  text-align: right;
+  font-family: 'Cairo';
+  cursor: pointer;
+  user-select: none;
+}
+
+.success-message.show-success {
+  right: 3%;
+  background-color: rgb(82, 255, 76);
 }

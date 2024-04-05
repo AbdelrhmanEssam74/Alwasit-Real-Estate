@@ -67,82 +67,73 @@ $(document).ready(function () {
   });
 
   // Get the values from the input fields
-  var propertyTitle = $("#propertyTitle");
-  var propertyDescription = $("#propertyDescription");
-  var propertyType = $(".type-conditions .Type_input select").eq(0);
-  var propertyStatus = $(".type-conditions .Type_input select").eq(1);
-  var propertyPrice = $("#formGroupExamplePrice");
-  var propertyArea = $("#formGroupExampleArea");
-  var propertyRooms = $(".price-area-rooms .Rooms select");
-  var propertyBaths = $(".price-area-rooms .baths select");
-  var propertyAddress = $("#propertyAddress");
-  var propertyNeighborhood = $("#neighborhood");
-  var propertyCity = $("#City");
-  var locationURL = $("#locationURL");
-  var buildingYear = $("#longitude");
+  var inputFields = [
+    $("#propertyTitle"),
+    $("#propertyDescription"),
+    $(".type-conditions .Type_input select").eq(0),
+    $(".type-conditions .Type_input select").eq(1),
+    $("#formGroupExamplePrice"),
+    $("#formGroupExampleArea"),
+    $(".price-area-rooms .Rooms select"),
+    $(".price-area-rooms .baths select"),
+    $("#propertyAddress"),
+    $("#neighborhood"),
+    $("#City"),
+    $("#locationURL"),
+    $("#build-year"),
+  ];
   // Get the selected images count
-  $("#imgs")[0].files.length;
 
-  //NOTE - Validate the inputs
-  // Check if any input field is empty
-  var isAnyFieldEmpty = propertyTitle.val() === "";
-  // propertyDescription.val() === "" ||
-  // propertyType.val() === "" ||
-  // propertyStatus.val() === "" ||
-  // propertyPrice.val() === "" ||
-  // propertyArea.val() === "" ||
-  // propertyRooms.val() === "" ||
-  // propertyBaths.val() === "" ||
-  // propertyAddress.val() === "" ||
-  // propertyNeighborhood.val() === "" ||
-  // propertyCity.val() === "" ||
-  // locationURL.val() === "" ||
-  // buildingYear.val() === "";
+  // Validate the inputs and disable the button initially
+  $(".publish-btn").prop("disabled", true).addClass("disabled");
 
-  // Extract latitude and longitude from the URL
-  var coordinates = extractLatLngFromUrl(locationURL.val());
-  var latitude = coordinates ? coordinates.latitude : null;
-  var longitude = coordinates ? coordinates.longitude : null;
-  // Disable the button if any field is empty
-  console.log(isAnyFieldEmpty);
-  if (isAnyFieldEmpty) {
-    $(".publish-btn").prop("disabled", true).addClass("disabled");
-  } else {
-    $(".publish-btn")
-      .prop("disabled", false)
-      .removeClass("disabled")
-      .addClass("enabled");
-  }
-  $(".publish-btn").on("click", function () {
-    //  AJAX request
-    $.ajax({
-      url: "backend.php",
-      method: "POST",
-      data: {
-        propertyTitle: propertyTitle.val(),
-        propertyDescription: propertyDescription.val(),
-        propertyType: propertyType.val(),
-        propertyStatus: propertyStatus.val(),
-        propertyPrice: propertyPrice.val(),
-        propertyArea: propertyArea.val(),
-        propertyRooms: propertyRooms.val(),
-        propertyBaths: propertyBaths.val(),
-        propertyAddress: propertyAddress.val(),
-        propertyNeighborhood: propertyNeighborhood.val(),
-        propertyCity: propertyCity.val(),
-        latitude: latitude,
-        longitude: longitude,
-        buildingYear: buildingYear.val(),
-        // imgs: $("#imgs")[0].files,
-      },
-      success: function (response) {
-        // Handle the server response
-        console.log(response);
-      },
-      error: function (xhr, status, error) {
-        // Handle the error
-        console.error(error);
-      },
+  // Attach input event listener to each input field
+  inputFields.forEach(function (field) {
+    field.on("input", () => {
+      var allFieldsFilled = inputFields.every(function (field) {
+        return field.val().trim() !== "";
+      });
+
+      if (allFieldsFilled) {
+        $(".publish-btn")
+          .prop("disabled", false)
+          .removeClass("disabled")
+          .addClass("enabled");
+      } else {
+        $(".publish-btn")
+          .prop("disabled", true)
+          .removeClass("enabled")
+          .addClass("disabled");
+      }
     });
   });
+
+  // Attach input event listener to img input field
+  $("#imgs").on("input", () => {
+    if (
+      $("#imgs")[0].files.length == 0 ||
+      $("#imgs")[0].files.length < 5 ||
+      $("#imgs")[0].files.length > 5
+    ) {
+      $(".publish-btn")
+        .prop("disabled", true)
+        .removeClass("enabled")
+        .addClass("disabled");
+      $("#imgs").after('<span class="invalid-img">أرفق 5 صور فقط</span>');
+    } else if ($("#imgs")[0].files.length == 5) {
+      $(".publish-btn")
+        .prop("disabled", false)
+        .removeClass("disabled")
+        .addClass("enabled");
+      $(".invalid-img").css("display", "none");
+    }
+  });
+
+  if ($(".success-message")) {
+    $(".success-message").addClass("show-success");
+    $(".success-message").on("click", function () {
+      $(".success-message").removeClass("show-success");
+      location.reload();
+    });
+  }
 });

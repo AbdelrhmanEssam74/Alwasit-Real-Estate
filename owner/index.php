@@ -23,6 +23,9 @@ else :
       $is_onwer,
       $dashboard_url
     ]));
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+      header("Location:" . $dashboard_url);
+    }
     exit;
   else :
     // check if user is already send a request before sending another one
