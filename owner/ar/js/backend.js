@@ -137,15 +137,13 @@ $(document).ready(function () {
     });
   }
 
-
-
   $(".notifications .icon_wrap").click(function () {
     $(this).parent().toggleClass("active");
-    $(".notifications #overloay").css("display" , "block");
+    $(".notifications #overloay").css("display", "block");
   });
   $(".notifications #overloay").click(function () {
-    $(".notifications").removeClass("active")
-    $(".notifications #overloay").css("display" , "none");
+    $(".notifications").removeClass("active");
+    $(".notifications #overloay").css("display", "none");
   });
 
   $(".notifications .icon_wrap").click(function () {
@@ -158,7 +156,7 @@ $(document).ready(function () {
         method: "POST",
         data: { owner_id: owner_id },
         success: function (response) {
-          $(".icon_wrap").attr("data-notify", '');
+          $(".icon_wrap").attr("data-notify", "");
         },
         error: function (error) {
           console.log(error);
@@ -166,4 +164,23 @@ $(document).ready(function () {
       });
     }
   });
+  // Function to check for new notifications
+  function checkNotifications() {
+    let owner_id = $(".icon_wrap").attr("data-owerID");
+    $.ajax({
+      url: "check_notifications.php",
+      method: "POST",
+      data: { owner_id: owner_id },
+      success: function (response) {
+        $(".icon_wrap").attr("data-notify", response);
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  }
+  // Call the checkNotifications function initially
+  checkNotifications();
+  // Set interval to call checkNotifications every 1 minute (3000 milliseconds)
+  setInterval(checkNotifications, 3000);
 });
