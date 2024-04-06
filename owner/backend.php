@@ -1,5 +1,7 @@
 <?php
 include 'init.php';
+include $function . 'function.php';
+include $libs . 'emails/index.php';
 
 $owner_id = $_SESSION['owner_id'];
 $property_id = uniqid();
@@ -131,8 +133,36 @@ $property_num++;
 // update the property_num in owners table in database
 $update_stmt = $conn->prepare("UPDATE owners SET property_num = :property_num WHERE owner_id = :owner_id");
 $update_stmt->execute(['property_num' => $property_num, 'owner_id' => $owner_id]);
-if ($r) {
-  $_SESSION['uploaded_success'] = true;
-  header('Location:' . $_SERVER['HTTP_REFERER']);
-  exit;
-}
+// set notifications
+setNotifications($owner_id, array_keys($notification_type, $notification_type['New Property Listing'])[0], $notification_type['New Property Listing']);
+// send email to user to notify him the property uploded successfully 
+$full_name = $_SESSION['fullname'];
+$current_date = date('Y-m-d h:i');
+$propertyTitle = $_POST['propertyTitle'];
+$mailBody = "
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body style='text-align:right;'>
+مرحبًا  <h3>$full_name,</h3>
+<p>
+$propertyTitle   :   لقد قمت بارسال عقار بعنوان     
+  <br>
+  $current_date     بتاريخ  
+  <br> 
+  سيتم مراجعته  والموافقه عليه في اقرب وقت
+</p>
+<p>فريق الوسيط</p>
+<a href='http://localhost/Alwasit' target='_blank'>Alwasit</a>
+</body>
+</html>
+";
+$email_subject  = 'Alwasit | الوسيط';
+$send_email_obj = new EmailSender($_SESSION['email'], $email_subject, $mailBody);
+$send_email_obj->sendEmail();
+// if ($r) {
+//   $_SESSION['uploaded_success'] = true;
+//   header('Location:' . $_SERVER['HTTP_REFERER']);
+//   exit;
+// }

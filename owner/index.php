@@ -19,6 +19,8 @@ else :
   if ($is_onwer) :
     $_SESSION['owner'] = true;
     $_SESSION['owner_id'] = $data->owner_id;
+    $_SESSION['username']  = $data->username;
+    $_SESSION['fullname']  = $data->F_Name . ' ' . $data->L_Name;
     print_r(json_encode([
       $is_onwer,
       $dashboard_url

@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Africa/Cairo");
 include "connect.php";
 session_start();
 # Routes
@@ -14,4 +15,7 @@ $logout = "../auth/logout.php";
 $upload_dir = "upload/";
 $owner_dir = "owner/";
 
-
+$notification_type = [
+  "New Property Listing" => "تم إرسال العقار بنجاح , سيتم مراحعته و الموافقه عليه في اقرب وقت",
+  "Change" => "تم التعديل العقار بنجاح , سيتم مراحعته و الموافقه عليه في اقرب وقت",
+];

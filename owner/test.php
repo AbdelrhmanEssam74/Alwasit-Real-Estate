@@ -2,4 +2,5 @@
 include 'init.php';
 include $function . 'function.php';
 $owner_id = $_SESSION['owner_id'];
-echo setNotifications($owner_id, "Accept New Property Listing", "تم قبول العقار بنجاح");
+print_r(array_keys($notification_type, $notification_type['New Property Listing'])[0]);
+print_r($_SESSION);
