@@ -20,7 +20,7 @@ if (isset($_SESSION['uploaded_success'])) {
     </div>
     <div class="propertyDescription form-group">
       <label for="propertyDescription">وصف العقار</label>
-      <textarea name="propertyDescription" placeholder="وصف مفصل للعقار" class="form-control" id="propertyDescription" rows="7"></textarea>
+      <textarea name="propertyDescription" required="required" placeholder="وصف مفصل للعقار" class="form-control" id="propertyDescription" rows="7"></textarea>
     </div>
     <div class="type-conditions">
       <div class="Type_input form-group">

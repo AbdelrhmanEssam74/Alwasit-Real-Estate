@@ -137,21 +137,33 @@ $(document).ready(function () {
     });
   }
 
-  $(".profile .icon_wrap").click(function () {
-    $(this).parent().toggleClass("active");
-    $(".notifications").removeClass("active");
-  });
+
 
   $(".notifications .icon_wrap").click(function () {
     $(this).parent().toggleClass("active");
-    $(".profile").removeClass("active");
+    $(".notifications #overloay").css("display" , "block");
+  });
+  $(".notifications #overloay").click(function () {
+    $(".notifications").removeClass("active")
+    $(".notifications #overloay").css("display" , "none");
   });
 
-  $(".show_all .link").click(function () {
-    $(".notifications").removeClass("active");
-    $(".popup").show();
-  });
-  $(".close, .shadow ").click(function () {
-    $(".popup").hide();
+  $(".notifications .icon_wrap").click(function () {
+    let notifications_num = $(".icon_wrap").attr("data-notify");
+    let owner_id = $(".icon_wrap").attr("data-owerID");
+    if (notifications_num > 0) {
+      // send ajax request to update read status of notification
+      $.ajax({
+        url: "update_notification_status.php",
+        method: "POST",
+        data: { owner_id: owner_id },
+        success: function (response) {
+          $(".icon_wrap").attr("data-notify", '');
+        },
+        error: function (error) {
+          console.log(error);
+        },
+      });
+    }
   });
 });

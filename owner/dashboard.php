@@ -2,11 +2,12 @@
 <?php
 // get user data
 $user_id = isset($_SESSION['uID']) ? $_SESSION['uID'] : 0;
+$owner_id = isset($_SESSION['owner_id']) ? $_SESSION['owner_id'] : 0;
 $stmt = $conn->prepare("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
 $stmt->execute();
-$data = $stmt->fetch(PDO::FETCH_OBJ);
+$owner_data = $stmt->fetch(PDO::FETCH_OBJ);
 ?>
-<?php $pageTitel = "Dashboard | $data->F_Name "; ?>
+<?php $pageTitel = "Dashboard | $owner_data->F_Name "; ?>
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
 <h1 class="p-relative">Dashboard</h1>
@@ -16,14 +17,14 @@ $data = $stmt->fetch(PDO::FETCH_OBJ);
     <div class="intro p-20 d-flex space-between bg-eee">
       <div>
         <h2 class="m-0">Welcome</h2>
-        <p class="c-grey mt-5"><?php echo $data->username ?></p>
+        <p class="c-grey mt-5"><?php echo $owner_data->username ?></p>
       </div>
       <img class="hide-mobile" src="ar/images/welcome.png" alt="" />
     </div>
     <img src="ar/images/avatar.png" alt="" class="avatar" />
     <div class="body txt-c d-flex p-20 mt-20 mb-20 block-mobile">
-      <div><?php echo $data->F_Name . ' ' . $data->L_Name ?> <span class="d-block c-grey fs-14 mt-10">Owner</span></div>
-      <div>17 <span class="d-block c-grey fs-14 mt-10">Proparty</span></div>
+      <div><?php echo $owner_data->F_Name . ' ' . $owner_data->L_Name ?> <span class="d-block c-grey fs-14 mt-10">Owner</span></div>
+      <div><?php echo getValue('property_num', 'owners', $owner_id); ?><span class="d-block c-grey fs-14 mt-10">Proparty</span></div>
       <div>5 <span class="d-block c-grey fs-14 mt-10">Clients</span></div>
     </div>
     <a href="profile.html" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a>
@@ -35,17 +36,17 @@ $data = $stmt->fetch(PDO::FETCH_OBJ);
     <div class="d-flex txt-c gap-20 f-wrap">
       <div class="box p-20 rad-10 fs-13 c-grey">
         <i class="fa fa-home fa-2x mb-10 c-orange" aria-hidden="true"></i>
-        <span class="d-block c-black fw-bold fs-25 mb-5">17</span>
+        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo getValue('property_num', 'owners', $owner_id); ?></span>
         All Properties
       </div>
       <div class="box p-20 rad-10 fs-13 c-grey">
         <i class="fa fa-commenting fa-2x mb-10 c-blue" aria-hidden="true"></i>
-        <span class="d-block c-black fw-bold fs-25 mb-5">14</span>
+        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo getValue('comments_num', 'owners', $owner_id); ?></span>
         Total Visitor Reviews
       </div>
       <div class="box p-20 rad-10 fs-13 c-grey">
         <i class="fa fa-heart fa-2x mb-10 c-green" aria-hidden="true"></i>
-        <span class="d-block c-black fw-bold fs-25 mb-5">18</span>
+        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo countItems('owner_id', 'favorites' , $owner_id) ?></span>
         Total Favorites
       </div>
     </div>

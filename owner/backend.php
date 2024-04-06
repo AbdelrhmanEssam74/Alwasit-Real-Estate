@@ -123,6 +123,14 @@ $insert_stmt = $conn->prepare(
     )"
 );
 $r = $insert_stmt->execute($data);
+// get the value of property_num from owners table in database and increate it by 1
+$get_stmt = $conn->prepare("SELECT property_num FROM owners WHERE owner_id = :owner_id");
+$get_stmt->execute(['owner_id' => $owner_id]);
+$property_num = $get_stmt->fetchColumn();
+$property_num++;
+// update the property_num in owners table in database
+$update_stmt = $conn->prepare("UPDATE owners SET property_num = :property_num WHERE owner_id = :owner_id");
+$update_stmt->execute(['property_num' => $property_num, 'owner_id' => $owner_id]);
 if ($r) {
   $_SESSION['uploaded_success'] = true;
   header('Location:' . $_SERVER['HTTP_REFERER']);
