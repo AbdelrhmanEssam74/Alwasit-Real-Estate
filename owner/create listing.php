@@ -1,15 +1,14 @@
 <?php include 'init.php';
 ?>
-<?php include $templates . 'header.php'; ?>
-<?php include $templates . 'navbar.php'; ?>
 <?php
 $pageTitel = "Alwasit | إنشاء عقار جديد";
 if (isset($_SESSION['uploaded_success'])) {
   echo '<p class="success-message ">تم إرسال العقار بنجاح <br> سيتم الموافقه عليه في اقرب وقت</p>';
   unset($_SESSION['uploaded_success']);
 }
-
 ?>
+<?php include $templates . 'header.php'; ?>
+<?php include $templates . 'navbar.php'; ?>
 <h1 class="p-relative txt-r">إضافة عقار جديد</h1>
 <!-- Start Property form -->
 <div class="projects  p-20 bg-white rad-10 m-20">

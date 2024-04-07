@@ -75,7 +75,7 @@ $data = array(
   'propertyDescription'   => $_POST['propertyDescription'],
   'propertyType'          => $arr[$_POST['propertyType']],
   'propertyStatus'        => $arr[$_POST['propertyStatus']],
-  'propertyPrice'         => $_POST['propertyPrice'],
+  'propertyPrice'         => number_format($_POST['propertyPrice']),
   'propertyArea'          => $_POST['propertyArea'],
   'propertyRooms'         => $_POST['propertyRooms'],
   'propertyBaths'         => $_POST['propertyBaths'],
@@ -167,8 +167,8 @@ $propertyTitle   :   لقد قمت بارسال عقار بعنوان
 $email_subject  = 'Alwasit | الوسيط';
 $send_email_obj = new EmailSender($_SESSION['email'], $email_subject, $mailBody);
 $send_email_obj->sendEmail();
-// if ($r) {
-//   $_SESSION['uploaded_success'] = true;
-//   header('Location:' . $_SERVER['HTTP_REFERER']);
-//   exit;
-// }
+if ($r) {
+  $_SESSION['uploaded_success'] = true;
+  header('Location:' . $_SERVER['HTTP_REFERER']);
+  exit;
+}

@@ -1,13 +1,14 @@
 <?php include 'init.php'; ?>
-<?php include $templates . 'header.php'; ?>
-<?php include $templates . 'navbar.php'; ?>
 <?php
-// get user data
+// get user owner_data
 $user_id = isset($_SESSION['uID']) ? $_SESSION['uID'] : 0;
 $stmt = $conn->prepare("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
 $stmt->execute();
-$data = $stmt->fetch(PDO::FETCH_OBJ);
+$owner_data = $stmt->fetch(PDO::FETCH_OBJ);
 ?>
+<?php $pageTitel = "Settings | $owner_data->F_Name "; ?>
+<?php include $templates . 'header.php'; ?>
+<?php include $templates . 'navbar.php'; ?>
 <h1 class="p-relative">Settings</h1>
 <div class="settings-page m-20 d-grid gap-20">
   <!-- Start Settings Box -->
@@ -16,15 +17,15 @@ $data = $stmt->fetch(PDO::FETCH_OBJ);
     <p class="mt-0 mb-20 c-grey fs-15">General Information About Your Account</p>
     <div class="mb-15">
       <label class="fs-14 c-grey d-block mb-10" for="first">First Name</label>
-      <input class="b-none border-ccc p-10 rad-6 d-block w-full" type="text" value="<?php echo $data->F_Name ?>" id="first" placeholder="First Name" />
+      <input class="b-none border-ccc p-10 rad-6 d-block w-full" type="text" value="<?php echo $owner_data->F_Name ?>" id="first" placeholder="First Name" />
     </div>
     <div class="mb-15">
       <label class="fs-14 c-grey d-block mb-5" for="last">Last Name</label>
-      <input class="b-none border-ccc p-10 rad-6 d-block w-full" id="last" value="<?php echo $data->L_Name ?>" type="text" placeholder="Last Name" />
+      <input class="b-none border-ccc p-10 rad-6 d-block w-full" id="last" value="<?php echo $owner_data->L_Name ?>" type="text" placeholder="Last Name" />
     </div>
     <div>
       <label class="fs-14 c-grey d-block mb-5" for="email">Email</label>
-      <input class="email b-none border-ccc p-10 rad-6 w-full mr-10" id="email" value="<?php echo $data->email ?>" type="email" value="o@nn.sa" disabled />
+      <input class="email b-none border-ccc p-10 rad-6 w-full mr-10" id="email" value="<?php echo $owner_data->email ?>" type="email" value="o@nn.sa" disabled />
       <!-- <a class="c-blue" href="#">Change</a> -->
       <button style="cursor: po;" class=" bg-blue p-10 rad-6  b-none c-white ">Save</button>
     </div>

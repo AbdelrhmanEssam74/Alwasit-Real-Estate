@@ -21,6 +21,7 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
           <td>Comments</td>
           <td>Status</td>
           <td>Price</td>
+          <td>Area</td>
           <td>Action</td>
         </tr>
       </thead>
@@ -42,6 +43,7 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
               }
               ?>
               <td><?php echo $property->price ?></td>
+              <td><?php echo $property->area ?></td>
               <td><button class=" fs-14 bg-red c-white w-fit b-none btn-shape">حذف</button></td>
             </tr>
         <?php
