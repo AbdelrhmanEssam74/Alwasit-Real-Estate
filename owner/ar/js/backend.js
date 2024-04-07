@@ -85,20 +85,20 @@ $(document).ready(function () {
   // Get the selected images count
 
   // Validate the inputs and disable the button initially
-  $(".publish-btn").prop("disabled", true).addClass("disabled");
-
+  let input_valid = false;
+  let img_valid = false;
   // Attach input event listener to each input field
   inputFields.forEach(function (field) {
     field.on("input", () => {
       var allFieldsFilled = inputFields.every(function (field) {
         return field.val().trim() !== "";
       });
-
       if (allFieldsFilled) {
         $(".publish-btn")
           .prop("disabled", false)
           .removeClass("disabled")
           .addClass("enabled");
+        input_valid = true;
       } else {
         $(".publish-btn")
           .prop("disabled", true)
@@ -106,9 +106,8 @@ $(document).ready(function () {
           .addClass("disabled");
       }
     });
+    // Attach input event listener to img input field
   });
-
-  // Attach input event listener to img input field
   $("#imgs").on("input", () => {
     if (
       $("#imgs")[0].files.length == 0 ||
@@ -126,8 +125,17 @@ $(document).ready(function () {
         .removeClass("disabled")
         .addClass("enabled");
       $(".invalid-img").css("display", "none");
+      img_valid = true;
     }
   });
+  if (input_valid && img_valid) {
+    $(".publish-btn")
+      .prop("disabled", false)
+      .removeClass("disabled")
+      .addClass("enabled");
+  } else {
+    $(".publish-btn").prop("disabled", true).addClass("disabled");
+  }
 
   if ($(".success-message")) {
     $(".success-message").addClass("show-success");

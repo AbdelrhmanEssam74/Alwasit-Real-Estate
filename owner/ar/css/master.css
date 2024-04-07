@@ -1251,7 +1251,12 @@ input[type="number"]::-webkit-outer-spin-button {
   z-index: 999;
   border-radius: 3px;
   box-shadow: 10px 10px 35px rgba(0, 0, 0, 0.125),
-    -10px -10px 35px rgba(0, 0, 0, 0.125);
+  -10px -10px 35px rgba(0, 0, 0, 0.125);
+}
+@media (max-width: 767px) {
+  .notification_dd{
+    width: 250px;
+  }
 }
 #overloay {
   display: none;
@@ -1263,7 +1268,6 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: #00000017;
   z-index: 100;
 }
-.profile .profile_dd:before,
 .notification_dd:before {
   content: "";
   position: absolute;
@@ -1319,8 +1323,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .notification_dd li .notify_data .sub_title {
   font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
+  white-space: wrap;
   text-overflow: ellipsis;
   margin-top: 5px;
 }
@@ -1353,16 +1356,6 @@ input[type="number"]::-webkit-outer-spin-button {
   text-decoration: underline;
 }
 
-.profile .icon_wrap {
-  display: flex;
-  align-items: center;
-}
-
-.profile .name {
-  display: inline-block;
-  margin: 0 10px;
-}
-
 .icon_wrap:hover,
 .notifications.active .icon_wrap {
   color: #3b80f9;
@@ -1372,7 +1365,6 @@ input[type="number"]::-webkit-outer-spin-button {
   background: #6593e4;
 }
 
-.profile.active .profile_dd,
 .notifications.active .notification_dd {
   display: block;
 }

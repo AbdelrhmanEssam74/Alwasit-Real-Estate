@@ -3,6 +3,7 @@
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
 <?php
+$pageTitel = "Alwasit | إنشاء عقار جديد";
 if (isset($_SESSION['uploaded_success'])) {
   echo '<p class="success-message ">تم إرسال العقار بنجاح <br> سيتم الموافقه عليه في اقرب وقت</p>';
   unset($_SESSION['uploaded_success']);

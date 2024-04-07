@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Africa/Cairo");
 // function to set the title for each page contain pageTitle variable
 function PageTitle()
 {
@@ -53,8 +54,9 @@ function getValue($item, $table, $id)
   */
 function setNotifications($receive_id, $notification_type, $notification_content)
 {
+  $current_date = date("Y-m-d h:i:s");
   global $conn;
-  $insert_stmt = $conn->prepare("INSERT INTO notifications (receive_id ,notification_type,notification_content ) VALUES (?,?,?)");
-  $r = $insert_stmt->execute(array($receive_id, $notification_type, $notification_content));
+  $insert_stmt = $conn->prepare("INSERT INTO notifications (`receive_id` ,`notification_type`,`notification_content` ,`Timestamp` ) VALUES (?,?,?,?)");
+  $r = $insert_stmt->execute(array($receive_id, $notification_type, $notification_content, $current_date));
   return $r;
 }

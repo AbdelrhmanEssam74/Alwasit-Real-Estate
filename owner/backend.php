@@ -66,6 +66,7 @@ if ($result !== null) {
 $arr = array(
   "type1" => "شقة",
   "type2" => "فيلا",
+  "status1" => "لللإيجار",
   "status2" => "للبيع",
 );
 $data = array(
