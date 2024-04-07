@@ -482,3 +482,86 @@ p.error_message::before {
 }
 
 /* End Form  */
+/* The alert message box */
+.alert {
+  position: fixed;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.alert .btns {
+  z-index: 100;
+  display: flex;
+  gap: 10px;
+  justify-content: end;
+}
+.alert .btns button {
+  outline: none !important;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: white;
+}
+.alert .btns button.logout {
+  border: none;
+  background-color: var(--button-text);
+  transition: 0.5s all;
+}
+.alert .btns button.logout:hover {
+  background-color: var(--head-line-hover);
+}
+.alert .btns button.cancel {
+  background-color: transparent;
+  border: 1px solid;
+  transition: 0.5s all;
+  color: #f44336;
+}
+.alert .btns button.cancel:hover {
+  background-color: #ff00000e;
+}
+.alert .content p {
+  line-height: 1.5;
+  text-align: right;
+}
+.alert .content {
+  position: absolute;
+  color: #f44336;
+  background-color: #fff;
+  border-top: 25px solid #f44336;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 15px;
+  top: 28%;
+  border-radius: 5px;
+  z-index: 100;
+  width: 300px;
+}
+.overlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  background-color: #00000017;
+  z-index: 100;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}

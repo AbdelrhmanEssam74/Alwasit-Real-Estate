@@ -76,4 +76,12 @@ class loginTable extends DatabaseConnection
     $rows = $prepare->fetch();
     return $rows;
   }
+  public function checklogin($e)
+  {
+    $qry = "SELECT * FROM `login` WHERE email='" . $e . "'";
+    $prepare = $this->conn->prepare($qry);
+    $prepare->execute();
+    $prepare->fetch();
+    return $prepare->rowCount();
+  }
 }

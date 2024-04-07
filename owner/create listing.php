@@ -6,7 +6,7 @@
 if (isset($_SESSION['uploaded_success'])) {
   echo '<p class="success-message ">تم إرسال العقار بنجاح <br> سيتم الموافقه عليه في اقرب وقت</p>';
   unset($_SESSION['uploaded_success']);
-} 
+}
 
 ?>
 <h1 class="p-relative txt-r">إضافة عقار جديد</h1>
@@ -33,8 +33,8 @@ if (isset($_SESSION['uploaded_success'])) {
       <div class="Type_input form-group">
         <label>حالة العقار</label>
         <select required="required" name="propertyStatus" class="selectpicker form-select" data-live-search="true" data-width="100%">
-          <option value="type1">لللإيجار</option>
-          <option value="Type2">للبيع</option>
+          <option value="status1">لللإيجار</option>
+          <option value="status2">للبيع</option>
         </select>
       </div>
     </div>

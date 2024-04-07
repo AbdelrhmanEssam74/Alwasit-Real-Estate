@@ -15,6 +15,12 @@ $userObj = new loginTable();
 $row_count = $userObj->checkIfUserExist($email);
 $user_id = $userObj->GetUserID();
 
+if ($userObj->checklogin($email)) {
+  header("location:../" . $login);
+  $_SESSION['duplicate_login'] = true;
+  exit();
+}
+
 // Check if user already logged in with "Remember Me" cookie
 if (isset($_COOKIE['rem'])) {
   if ($userObj->GetUserToken($user_id)['token'] === $_COOKIE['rem']) {

@@ -20,6 +20,12 @@ $wrongPassword = '';
 if (isset($_SESSION['wrongPass'])) {
   $wrongPassword = $_SESSION['wrongPass'];
 }
+$duplicate_login = '';
+if (isset($_SESSION['duplicate_login']) && $_SESSION['duplicate_login'] == 1) {
+  $duplicate_login = $_SESSION['duplicate_login'];
+}
+
+
 session_unset();
 ?>
 
@@ -28,6 +34,26 @@ session_unset();
 <?php include $templates . 'navbar.php' ?>
 <!-- End Header -->
 <!-- Start Login Form -->
+<?php
+if (!empty($duplicate_login)) {
+  echo <<< _END
+            <div class="alert">
+              <div class="overlay"></div>
+              <div class="content">
+                <p>هذا الحساب مسجل بالفعل
+                  <br>
+                  تسجيل الخروج من جميع الاجهزة ام الغاء العملية ؟
+                </p>
+                <div class="btns">
+                <button class="cancel" onclick="this.parentElement.parentElement.parentElement.style.display='none';">إلغاء</button>
+                <button class="logout">تسجيل الخروج </button>
+                </div>
+                </div>
+                </div>
+        _END;
+}
+?>
+
 <div class="form_box">
   <div class="back_img">
     <div class="form_content">
