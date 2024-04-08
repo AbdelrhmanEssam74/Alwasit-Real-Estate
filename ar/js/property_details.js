@@ -81,6 +81,23 @@ $(document).ready(function () {
       },
     });
   });
+  $(".show-more").on("click", function () {
+    const fullDescription = $(this).attr("data-full-desc");
+    const descriptionDiv = $(this).parent().find("p").text(fullDescription);
+    console.log(fullDescription);
+    if (descriptionDiv.hasClass("full")) {
+      // Already showing full description, toggle to truncated
+      const truncatedDescription = "..." + fullDescription.substr(0, 50);
+      descriptionDiv.text(truncatedDescription);
+      descriptionDiv.removeClass("full");
+      $(this).text("عرض المزيد");
+    } else {
+      // Show full description
+      descriptionDiv.text(fullDescription);
+      descriptionDiv.addClass("full");
+      $(this).text("عرض أقل");
+    }
+  });
   // if user clicked on this button send request to server to set user as owner
   $(".send-access-permission").on("click", function () {
     let formData = new FormData();
@@ -169,6 +186,9 @@ images.forEach(function (image, index) {
 });
 
 document.querySelector(".popup-img .close-popupImg").onclick = () => {
+  document.querySelector(".popup-img").style.display = "none";
+};
+document.querySelector(".popup-img .overlay-close").onclick = () => {
   document.querySelector(".popup-img").style.display = "none";
 };
 
@@ -330,34 +350,26 @@ $(document).ready(function () {
   });
 });
 
-// $.ajax({
-//     url: 'test.php',
-//     type: 'POST',
-//     success: function (coordinates) {
-//         var values = coordinates.split("|");
-//         var lat_value = values[0]
-//         var lang_value = values[1]
-//         console.log(lat_value.type());
-//         console.log(lang_value);
-//     },
-//     error: function () {
-//         console.log('error');
-//     }
-// });
-
 //SECTION - google map api
 function initMap() {
+  var location = document.querySelector(".property-location");
   // map options
   var options = {
     zoom: 18,
-    center: { lat: 29.07136598167721, lng: 31.095339506442322 },
+    center: {
+      lat: Number(location.dataset.lat),
+      lng: Number(location.dataset.lang),
+    },
   };
   // new map
   var map = new google.maps.Map(document.getElementById("map"), options);
 
   // add marker
   var marker = new google.maps.Marker({
-    position: { lat: lat_value, lng: lang_value },
+    position: {
+      lat: Number(location.dataset.lat),
+      lng: Number(location.dataset.lang),
+    },
     map: map,
   });
 
@@ -374,7 +386,11 @@ function initMap() {
       infoWindow.open(map, marker);
     });
   }
+
   addMarker({
-    coords: { lat: 29.07136598167721, lng: 31.095339506442322 },
+    coords: {
+      lat: Number(location.dataset.lat),
+      lng: Number(location.dataset.lang),
+    },
   });
 }

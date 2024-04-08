@@ -82,7 +82,9 @@
 }
 
 .image-gallery .container .main-image img {
-  width: 100%;
+  width: 93%;
+  aspect-ratio: 4 / 4;
+  object-fit: cover;
 }
 
 .image-gallery .container .other-images {
@@ -100,8 +102,9 @@
 }
 
 .image-gallery .container .other-images img {
-  width: 100%;
-  z-index: 9999;
+  width: 83%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .image-gallery .popup-img {
@@ -139,6 +142,7 @@
   z-index: 100;
   opacity: 0.7;
   transition: 0.5s all;
+  user-select: none;
 }
 
 .image-gallery .popup-img .prev {
@@ -152,6 +156,7 @@
   opacity: 0.7;
   z-index: 100;
   transition: 0.5s all;
+  user-select: none;
 }
 
 .image-gallery .popup-img .next:hover,
@@ -166,8 +171,11 @@
   transform: translate(-50%, -50%);
   border: 2px solid #fff;
   border-radius: 5px;
-  width: 60%;
+  z-index: 999;
+  width: 50%;
   object-fit: cover;
+  aspect-ratio: 5 / 4;
+  user-select: none;
 }
 
 @media (max-width: 1000px) {
@@ -180,7 +188,12 @@
     flex-wrap: wrap;
   }
 }
-
+.overlay-close {
+  position: fixed;
+  z-index: 100;
+  height: 100vh;
+  width: 100vw;
+}
 @media (max-width: 768px) {
   .image-gallery .popup-img img {
     widows: 95%;
@@ -254,7 +267,7 @@
 }
 
 .wedge-section .container .left-section .description .top .type p:hover {
-  background-color: var(--color9);
+  background-color: var(--head-line);
   color: #fff;
 }
 
@@ -293,20 +306,24 @@
   .top
   .share_btns
   .share:hover {
-  background-color: var(--color3hover);
+  background-color: var(--tertiary);
   color: #fff;
 }
 
 .wedge-section .container .left-section .box h2 {
-  color: var(--color9);
+  color: var(--head-line);
   margin-bottom: 15px;
   font-size: 30px;
   font-weight: 600;
 }
 
+.wedge-section .container .left-section .description .content p.full {
+}
 .wedge-section .container .left-section .description .content p {
   text-wrap: wrap;
-  color: var(--third-color);
+  line-height: 1.5;
+  color: var(--card-paragraph);
+  font-size: 20px;
 }
 
 div.divTable {
@@ -379,7 +396,7 @@ div.divTable {
   .divTable
   .divTableCell
   i {
-  color: var(--color9);
+  color: var(--head-line);
   font-size: 25px;
   margin-left: 15px;
 }
@@ -461,7 +478,7 @@ div.divTable {
 .wedge-section .container .left-section .comments .comment .details .rate {
   margin-bottom: 5px;
   font-size: 20px;
-  color: var(--color9);
+  color: var(--head-line);
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -540,7 +557,7 @@ div.divTable {
 }
 
 .comment-form .form button {
-  background: var(--color9);
+  background: var(--head-line);
   color: white;
   padding: 10px;
   border: none;
@@ -576,7 +593,7 @@ div.divTable {
 }
 
 .wedge-section .container .right-section .owner .owner-details .info h4 {
-  color: var(--color9);
+  color: var(--head-line);
   font-size: 20px;
 }
 
@@ -798,7 +815,7 @@ div.divTable {
 
 .report-links p {
   text-align: center;
-  color: var(--color9);
+  color: var(--head-line);
   transition: 0.5s all;
   cursor: pointer;
   position: relative;
@@ -912,7 +929,7 @@ select {
   width: 100%;
   font-weight: bold;
   text-align: right;
-  color: var(--color9);
+  color: var(--head-line);
 }
 
 .right-section .connectio-with-owner .form .main-input {
@@ -939,7 +956,7 @@ select {
 }
 
 .right-section .connectio-with-owner .form button {
-  background: var(--color9);
+  background: var(--head-line);
   color: white;
   padding: 10px;
   border: none;
@@ -980,7 +997,7 @@ select {
 
 .right-section .other-proparty a .info .type,
 .right-section .other-proparty a .info .price {
-  color: var(--color9);
+  color: var(--head-line);
   font-weight: 500;
   display: flex;
   flex-direction: row-reverse;
@@ -1230,3 +1247,12 @@ select {
 }
 
 /* End Footer  */
+.show-more {
+  background-color: #e4e4e4;
+  border-radius: 3px;
+  border: none;
+  color: rgb(0, 0, 0);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 12px;
+}

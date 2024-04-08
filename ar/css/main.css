@@ -1220,3 +1220,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .modal-content-btn:hover {
   background-color: #365690;
 }
+.alert-danger {
+  background-color: rgb(255, 44, 44);
+  padding: 30px;
+  color: #fff;
+}

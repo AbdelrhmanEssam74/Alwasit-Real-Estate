@@ -4,7 +4,7 @@ define("APPURL", "http://localhost/Alwasit/");
 $function = 'includes/functions/';
 # Routes
 $templates = 'includes/template/';
-$owner = 'owner';
+$owner = 'owner/';
 $css = 'ar/css/';
 $js = 'ar/js/';
 $images = 'ar/images/';

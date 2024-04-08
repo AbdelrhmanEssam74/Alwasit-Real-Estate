@@ -1,4 +1,6 @@
 <?php include 'init.php';
+include  $config . 'config.php';
+include  $config . 'propertyTable.php';
 $DefultPage = '';
 $pageTitel = 'query';
 $prop_details_page = '';
@@ -7,6 +9,19 @@ $prop_details_page = '';
 <!-- Start Header -->
 <?php include $templates . 'navbar.php' ?>
 <!-- End Header -->
+<?php
+// get property details from database
+$property_id = (isset($_GET['PId']) ? $_GET['PId'] : 0);
+if ($property_id != 0) :
+  // Get Property Details From Database
+  $property_obj = new PropertyTable();
+  $property_data = $property_obj->getPropertyById($property_id);
+  $fullDescription = $property_data->description;
+  $desc = substr($fullDescription, 0, 89);
+  // explode the imgs
+  $imgs = explode(',', $property_data->img);
+endif;
+?>
 <!--start gallery-->
 <div class="modal-container overlay">
   <div class="modal-content">
@@ -21,21 +36,22 @@ $prop_details_page = '';
   <div class="container">
     <div class="main-image">
       <div>
-        <img data-index="1" src="<?php echo $images ?>img1.jpg" alt="Image 1">
+        <img data-index="1" src="<?php echo $owner ?>upload/<?php echo $property_data->owner_id ?>/<?php echo $property_data->property_id ?>/<?php echo $imgs[0] ?>" alt="Image 1">
       </div>
     </div>
     <div class="other-images">
-      <div> <img data-index="2" src="<?php echo $images ?>img2.jpg" alt="Image 1"></div>
-      <div><img data-index="3" src="<?php echo $images ?>img3.jpg" alt="Image 1"></div>
-      <div> <img data-index="4" src="<?php echo $images ?>img4.jpg" alt="Image 1"></div>
-      <div> <img data-index="5" src="<?php echo $images ?>img5.jpg" alt="Image 1"></div>
+      <div> <img data-index="2" src="<?php echo $owner ?>upload/<?php echo $property_data->owner_id ?>/<?php echo $property_data->property_id ?>/<?php echo $imgs[1] ?>" alt="Image 1"></div>
+      <div> <img data-index="3" src="<?php echo $owner ?>upload/<?php echo $property_data->owner_id ?>/<?php echo $property_data->property_id ?>/<?php echo $imgs[2] ?>" alt="Image 1"></div>
+      <div> <img data-index="4" src="<?php echo $owner ?>upload/<?php echo $property_data->owner_id ?>/<?php echo $property_data->property_id ?>/<?php echo $imgs[3] ?>" alt="Image 1"></div>
+      <div> <img data-index="3" src="<?php echo $owner ?>upload/<?php echo $property_data->owner_id ?>/<?php echo $property_data->property_id ?>/<?php echo $imgs[4] ?>" alt="Image 1"></div>
     </div>
   </div>
   <div class="popup-img">
+    <div class="overlay-close"></div>
     <span class="close-popupImg"> <i class="fa fa-close" aria-hidden="true"></i> </span>
     <span class="next"><i class="fa-solid fa-angle-right"></i></span>
     <span class="prev"><i class="fa-solid fa-angle-left"></i></span>
-    <img src="images/img3.jpg" alt="Image 1">
+
   </div>
 </div>
 <!--end gallery-->
@@ -49,13 +65,14 @@ $prop_details_page = '';
             <button class="add_to_fav" title="أضف للمفضلة"><i class="fa-regular fa-heart"></i></button>
           </div>
           <div class="type">
-            <p>للبيع</p>
-            <p>فيلا</p>
+            <p><?php echo $property_data->status ?></p>
+            <p><?php echo $property_data->type ?></p>
           </div>
         </div>
         <div class="content">
           <h2>الوصف</h2>
-          <p>فيلا للبيع المدينة الحي الاول ناصية اولي موقع متميز اول ساكن</p>
+          <p> ...<?php echo $desc ?> </p>
+          <button class="show-more" data-full-desc="<?php echo $fullDescription ?>">عرض المزيد</button>
         </div>
       </div>
       <div class="property-details box">
@@ -65,35 +82,35 @@ $prop_details_page = '';
             <div class="divTableRow">
               <div class="divTableCell">
                 <i class='bx bxs-purchase-tag'></i>
-                <p>السعر<span> : 3,000,000</span></p>
+                <p>السعر<span> : <?php echo $property_data->price ?> جنيه</span></p>
               </div>
               <div class="divTableCell">
                 <i class='bx bxs-building'></i>
-                <p>حالة العقار <span> : للبيع</span></p>
+                <p>حالة العقار <span> : <?php echo $property_data->status ?></span></p>
               </div>
               <div class="divTableCell">
                 <i class='bx bxs-building'></i>
-                <p>نوع العقار<span> : فيلا</span></p>
+                <p>نوع العقار<span> : <?php echo $property_data->type ?></span></p>
               </div>
             </div>
             <div class="divTableRow">
               <div class="divTableCell">
                 <i class='bx bx-area'></i>
-                <p>المساحة<span> : 300 متر مربع</span></p>
+                <p>المساحة<span> : <?php echo $property_data->area ?> متر مربع</span></p>
               </div>
               <div class="divTableCell">
                 <i class='bx bx-bath'></i>
-                <p>حمامات<span> : 3</span></p>
+                <p>حمامات<span> : <?php echo $property_data->bath ?></span></p>
               </div>
               <div class="divTableCell">
                 <i class='bx bx-bed'></i>
-                <p> عدد الغرف<span> : 4</span></p>
+                <p> عدد الغرف<span> : <?php echo $property_data->rooms ?></span></p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="property-location box">
+      <div class="property-location box" data-lat="<?php echo $property_data->latitude ?>" data-lang="<?php echo $property_data->longitude ?>">
         <h2>موقع العقار</h2>
         <div id="map"></div>
       </div>
@@ -165,14 +182,14 @@ $prop_details_page = '';
         <div class="owner-details">
           <div class="info">
             <h4>User</h4>
-            <a href="profile.php?ID=">25 عقار</a>
+            <a href="profile.php?ID="><?php echo $property_data->property_num ?> عقار</a>
           </div>
           <img src="<?php echo $images ?>person1.jpg" alt="">
         </div>
         <div class="connection-links">
-          <a class="connection-btn phone-link" data-phone="+201028492181" href="tel:+201007816670">إتصل</a>
-          <a class="connection-btn email-link" href="mailto:abdelrhmanroshdy8@gmail.com">بريد إلكتروني</a>
-          <button onclick="send_handle()" class="connection-btn button-whatsapp" data-phone="+201028492181" data-propertyLink="">
+          <a class="connection-btn phone-link" data-phone="<?php echo $property_data->phone_num ?>" href="tel:<?php echo $property_data->phone_num ?>">إتصل</a>
+          <a class="connection-btn email-link" href="mailto:<?php echo $property_data->email ?>">بريد إلكتروني</a>
+          <button onclick="send_handle()" class="connection-btn button-whatsapp" data-phone="<?php echo $property_data->phone_num ?>" data-propertyLink="<?php echo APPURL . $prop_details . "?PId=" .  $property_data->property_id ?>">
             واتس أب
           </button>
         </div>
