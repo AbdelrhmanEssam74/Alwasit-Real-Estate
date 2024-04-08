@@ -1,4 +1,6 @@
-<?php include 'init.php'; ?>
+<?php include 'init.php'; 
+$pageTitel = " | My Properties"
+?>
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
 <?php
@@ -17,11 +19,12 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
       <thead>
         <tr>
           <td>Title</td>
+          <td>Address</td>
           <td>Date published</td>
-          <td>Comments</td>
-          <td>Status</td>
           <td>Price</td>
           <td>Area</td>
+          <td>Comments</td>
+          <td>Status</td>
           <td>Action</td>
         </tr>
       </thead>
@@ -32,19 +35,22 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
           foreach ($prop_data as $property) :
         ?>
             <tr>
-              <td><?php echo $property->title ?></td>
+              <td><a href="<?php echo $prop_details_page?>?PId=<?php echo $property->property_id ?>"><?php echo $property->title ?></a></td>
+              <td><?php echo $property->address ?></td>
               <td><?php echo $property->uploaded_at ?></td>
+              <td><?php echo $property->price ?></td>
+              <td><?php echo $property->area ?> m²</td>
               <td><?php echo $property->comments_num ?></td>
               <?php
               if ($property->active == 0) {
-                echo " <td>  <p class='fs-15 bg-red c-white pt-10 pb-10 rad-6'> قيد الانتظار </p></td>";
+                echo " <td>  <p class='fs-15 bg-red c-white pt-5 pb-5 rad-6'> قيد الانتظار </p></td>";
               } else {
-                echo " <td>  <p class='fs-15 bg-blue c-white pt-10 pb-10 rad-6'>تم الموافقه</p></td>";
+                echo " <td>  <p class='fs-15 bg-blue c-white pt-5 pb-5 rad-6'>تم الموافقه</p></td>";
               }
               ?>
-              <td><?php echo $property->price ?></td>
-              <td><?php echo $property->area ?></td>
-              <td><button class=" fs-14 bg-red c-white w-fit b-none btn-shape">حذف</button></td>
+              <td><button class=" fs-14 bg-red c-white w-fit b-none btn-shape">حذف</button>
+                <button class=" fs-14 bg-blue c-white w-fit b-none btn-shape">تعديل</button>
+              </td>
             </tr>
         <?php
           endforeach;
