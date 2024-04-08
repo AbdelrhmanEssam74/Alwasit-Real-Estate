@@ -139,7 +139,7 @@ $property_num++;
 // update the property_num in owners table in database
 $update_stmt = $conn->prepare("UPDATE owners SET property_num = :property_num WHERE owner_id = :owner_id");
 $update_stmt->execute(['property_num' => $property_num, 'owner_id' => $owner_id]);
-// set notifications
+// send notifications
 setNotifications($owner_id, array_keys($notification_type, $notification_type['New Property Listing'])[0], $notification_type['New Property Listing']);
 // send email to user to notify him the property uploded successfully 
 $full_name = $_SESSION['fullname'];

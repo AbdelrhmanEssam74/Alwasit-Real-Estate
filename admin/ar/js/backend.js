@@ -156,4 +156,56 @@ $(function () {
       },
     });
   });
+  $(".show-more").on("click", function () {
+    const row = $(this).closest("tr");
+    const descriptionDiv = row.find(".description");
+    const fullDescription = $(this).attr("data-full-desc");
+    if (descriptionDiv.hasClass("full")) {
+      // Already showing full description, toggle to truncated
+      const truncatedDescription = fullDescription.substr(0, 20) + "...";
+      descriptionDiv.text(truncatedDescription);
+      descriptionDiv.removeClass("full");
+      $(this).text("Show More");
+    } else {
+      // Show full description
+      descriptionDiv.text(fullDescription);
+      descriptionDiv.addClass("full");
+      $(this).text("Show Less");
+    }
+  });
+
+  // accept user request to acivte his property
+  $(".active-prop").on("click", function () {
+    let element = $(this);
+    let property_id = element.attr("data-propID");
+    let owner_id = element.attr("data-ownerID");
+    let success_message = $(".success-message");
+    $.ajax({
+      method: "POST",
+      url: "activeproperty.php",
+      data: { property_id: property_id, owner_id: owner_id },
+      success: function (data) {
+        console.log(data);
+        if (data == 1) {
+          success_message
+            .addClass("show-success")
+            .text("Property Active Successfully");
+          $("#row_" + property_id).remove();
+          setTimeout(function () {
+            success_message.removeClass("show-success");
+          }, 1500);
+        } else {
+          success_message
+            .addClass("show-failed")
+            .text("Property Active Failed");
+          setTimeout(function () {
+            success_message.removeClass("show-failed");
+          }, 1500);
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
+  });
 });

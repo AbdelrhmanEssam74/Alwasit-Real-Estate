@@ -65,3 +65,13 @@ function getLatest($select, $table, $order,  $limit = 5)
   return $rows;
 }
 
+
+
+function setNotifications($receive_id, $notification_type, $notification_content)
+{
+  $current_date = date("Y-m-d h:i:s");
+  global $conn;
+  $insert_stmt = $conn->prepare("INSERT INTO notifications (`receive_id` ,`notification_type`,`notification_content` ,`Timestamp` ) VALUES (?,?,?,?)");
+  $r = $insert_stmt->execute(array($receive_id, $notification_type, $notification_content, $current_date));
+  return $r;
+}

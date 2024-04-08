@@ -17,3 +17,9 @@ if ($pageTitel != 'delete') {
     include $templates . 'navbar.php';
   }
 }
+
+$notification_type = [
+  "New Property Listing" => "تم إرسال العقار بنجاح , سيتم مراحعته و الموافقه عليه في اقرب وقت",
+  "Accept Property Listing" => "تم الموافقه علي العقار بنجاح",
+  "Change" => "تم التعديل العقار بنجاح , سيتم مراحعته و الموافقه عليه في اقرب وقت",
+];

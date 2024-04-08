@@ -64,7 +64,7 @@ $notifications_num = ($stmt2->rowCount() > 0) ? $stmt2->rowCount() : " ";
         <div class="notification_dd">
           <ul class="notification_ul">
             <?php
-            $notifications = $conn->prepare("SELECT * FROM `notifications` WHERE `receive_id` = '$owner_id'");
+            $notifications = $conn->prepare("SELECT * FROM `notifications` WHERE `receive_id` = '$owner_id' ORDER BY `id` DESC");
             $notifications->execute();
             $data = $notifications->fetchAll(PDO::FETCH_OBJ);
             if ($notifications->rowCount() > 0) {

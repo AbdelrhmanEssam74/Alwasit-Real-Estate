@@ -20,7 +20,7 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'])) {
     <div class="container">
       <h1 class="text-primary-emphasis">Dashboard</h1>
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 mb-2">
           <div class="stat st-members">
             <!-- <i class="fa fa-users"></i> -->
             <div class="info">
@@ -31,7 +31,7 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'])) {
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mb-2">
           <div class="stat st-pending">
             <!-- <i class="fa fa-user-plus"></i> -->
             <div class="info">
@@ -42,18 +42,29 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'])) {
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mb-2">
           <div class="stat st-items">
             <!-- <i class="fa fa-tag"></i> -->
             <div class="info">
-              Total Items
+              Total Properties
               <span>
-
+                <a href="users.php?action=Properties"><?php echo checkItem('active', 'onwer_requests', 0) ?></a>
               </span>
             </div>
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mb-2">
+          <div class="stat st-items">
+            <!-- <i class="fa fa-tag"></i> -->
+            <div class="info">
+              Pending Properties
+              <span>
+                <a href="users.php?action=Properties&page=Pending"><?php echo checkItem('active', 'properties', 0) ?></a>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-2">
           <div class="stat st-comments">
             <!-- <i class="fa fa-comments"></i> -->
             <div class="info">
