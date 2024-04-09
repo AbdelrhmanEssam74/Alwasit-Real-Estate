@@ -1,4 +1,4 @@
-<?php include 'init.php'; 
+<?php include 'init.php';
 $pageTitel = " | My Properties"
 ?>
 <?php include $templates . 'header.php'; ?>
@@ -35,7 +35,7 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
           foreach ($prop_data as $property) :
         ?>
             <tr>
-              <td><a href="<?php echo $prop_details_page?>?PId=<?php echo $property->property_id ?>"><?php echo $property->title ?></a></td>
+              <td><a href="<?php echo $prop_details_page ?>?PId=<?php echo $property->property_id ?>"><?php echo $property->title ?></a></td>
               <td><?php echo $property->address ?></td>
               <td><?php echo $property->uploaded_at ?></td>
               <td><?php echo $property->price ?></td>
@@ -48,8 +48,9 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
                 echo " <td>  <p class='fs-15 bg-blue c-white pt-5 pb-5 rad-6'>تم الموافقه</p></td>";
               }
               ?>
-              <td><button class=" fs-14 bg-red c-white w-fit b-none btn-shape">حذف</button>
-                <button class=" fs-14 bg-blue c-white w-fit b-none btn-shape">تعديل</button>
+              <td>
+                <button class=" fs-14 bg-red c-white w-fit b-none btn-shape">حذف</button>
+                <a href="create listing.php?action=Edit&PropID=<?php echo $property->property_id ?>" class=" fs-14 bg-blue c-white w-fit b-none btn-shape">تعديل</a>
               </td>
             </tr>
         <?php

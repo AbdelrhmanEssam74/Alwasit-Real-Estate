@@ -39,7 +39,7 @@ $notifications_num = ($stmt2->rowCount() > 0) ? $stmt2->rowCount() : " ";
         </a>
       </li>
       <li>
-        <a class="d-flex sidebar__list-item align-center fs-14 c-black rad-6 p-10" href="create listing.php">
+        <a class="d-flex sidebar__list-item align-center fs-14 c-black rad-6 p-10" href="create listing.php?action=create">
           <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
           <span>Create Listing</span>
         </a>

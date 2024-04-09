@@ -82,6 +82,7 @@ $data = array(
   'propertyAddress'       => $_POST['propertyAddress'],
   'propertyNeighborhood'  => $_POST['propertyNeighborhood'],
   'propertyCity'          => $_POST['propertyCity'],
+  'locationURL'          => $_POST['locationURL'],
   'latitude'              => $latitude,
   'longitude'              => $longitude,
   'buildingYear'          => $_POST['buildingYear'],
@@ -107,6 +108,7 @@ $insert_stmt = $conn->prepare(
     `building_in`, 
     `description`,
     `img`,
+    `location_url`, 
     `latitude`, 
     `longitude`
     )
@@ -126,6 +128,7 @@ $insert_stmt = $conn->prepare(
     :buildingYear,
     :propertyDescription,
     :imgs,
+    :locationURL,
     :latitude,
     :longitude
     )"
