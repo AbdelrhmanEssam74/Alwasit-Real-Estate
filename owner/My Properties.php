@@ -6,12 +6,22 @@ $pageTitel = " | My Properties"
 <?php
 // get all proparty which belong to owner
 $owner_id = $_SESSION['owner_id'];
-$prop_data = $conn->prepare("SELECT * FROM properties WHERE owner_id = ?");
+$prop_data = $conn->prepare("SELECT * FROM properties WHERE owner_id = ? AND `deleted` = 0");
 $prop_data->execute([$owner_id]);
 $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
 ?>
 <h1 class="p-relative">My Properties</h1>
 <!-- Start Projects Table -->
+<div id="delete-modal" class="modal-overlay">
+  <div class="close-overlay"></div>
+  <div class="modal">
+    <h2> ! سبب حذف العقار</h2>
+    <textarea name="delete-reason" placeholder="اكتب سبب حذف العقار" id="delete-reason" cols="30" rows="10"></textarea>
+    <p class="invalid"></p>
+    <button id="delete-confirm-button">حذف</button>
+  </div>
+</div>
+<p class="success-message2"></p>
 <div class="projects p-20 bg-white rad-10 m-20">
   <h2 class="mt-0 mb-20">My Properties</h2>
   <div class="responsive-table">
@@ -33,8 +43,9 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
         //NOTE - display properties details 
         if (isset($prop_data)) :
           foreach ($prop_data as $property) :
+            $_SESSION['property_title'] = $property->title . " " . $property->neighborhood;
         ?>
-            <tr>
+            <tr id="row_<?php echo $property->property_id ?>">
               <td><a href="<?php echo $prop_details_page ?>?PId=<?php echo $property->property_id ?>"><?php echo $property->title ?></a></td>
               <td><?php echo $property->address ?></td>
               <td><?php echo $property->uploaded_at ?></td>
@@ -49,7 +60,7 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
               }
               ?>
               <td>
-                <button class=" fs-14 bg-red c-white w-fit b-none btn-shape">حذف</button>
+                <button data-owner="<?php echo $owner_id ?>" data-PropID="<?php echo $property->property_id ?>" class="delete-btn fs-14 bg-red c-white w-fit b-none btn-shape">حذف</button>
                 <a href="create listing.php?action=Edit&PropID=<?php echo $property->property_id ?>" class=" fs-14 bg-blue c-white w-fit b-none btn-shape">تعديل</a>
               </td>
             </tr>

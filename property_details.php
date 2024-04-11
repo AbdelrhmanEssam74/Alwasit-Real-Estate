@@ -2,7 +2,11 @@
 include  $config . 'config.php';
 include  $config . 'propertyTable.php';
 $DefultPage = '';
-$pageTitel = 'query';
+if (isset($_SESSION['property_title'])) {
+  $pageTitel = $_SESSION['property_title'];
+} else {
+  $pageTitel = "Query";
+}
 $prop_details_page = '';
 ?>
 <?php include $templates . 'header.php' ?>
@@ -16,10 +20,15 @@ if ($property_id != 0) :
   // Get Property Details From Database
   $property_obj = new PropertyTable();
   $property_data = $property_obj->getPropertyById($property_id);
-  $fullDescription = $property_data->description;
-  $desc = substr($fullDescription, 0, 89);
-  // explode the imgs
-  $imgs = explode(',', $property_data->img);
+  if (empty($property_data)) :
+    echo " <div class='invalid-id'>Property Not Found!</div>";
+    exit;
+  else :
+    $fullDescription = $property_data->description;
+    $desc = substr($fullDescription, 0, 89);
+    // explode the imgs
+    $imgs = explode(',', $property_data->img);
+  endif;
 endif;
 ?>
 <!--start gallery-->
@@ -50,6 +59,7 @@ endif;
     <div class="overlay-close"></div>
     <span class="close-popupImg"> <i class="fa fa-close" aria-hidden="true"></i> </span>
     <span class="next"><i class="fa-solid fa-angle-right"></i></span>
+    <img data-index="1" src="<?php echo $owner ?>upload/<?php echo $property_data->owner_id ?>/<?php echo $property_data->property_id ?>/<?php echo $imgs[0] ?>" alt="Image 1">
     <span class="prev"><i class="fa-solid fa-angle-left"></i></span>
 
   </div>

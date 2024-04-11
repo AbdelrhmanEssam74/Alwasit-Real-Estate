@@ -187,6 +187,46 @@ $(document).ready(function () {
       },
     });
   }
+  $(".delete-btn").on("click", function () {
+    let element = $(this);
+    let owner_id = element.attr("data-owner");
+    let property_id = element.attr("data-PropID");
+    // show delete reson modal
+    $(".modal-overlay").css("display", "flex");
+    $(".close-overlay").on("click", function () {
+      $(".modal-overlay").css("display", "none");
+    });
+    $("#delete-confirm-button").on("click", function () {
+      let delete_reason = $("#delete-reason").val().length;
+      if (delete_reason < 1) {
+        $(".invalid").css("display", "block").text("من فضلك ادخل سبب الحذف");
+      } else {
+        $(".modal-overlay").css("display", "none");
+        var delete_reason_val = $("#delete-reason").val();
+        $.ajax({
+          url: "delete.php",
+          method: "POST",
+          data: {
+            owner_id: owner_id,
+            property_id: property_id,
+            delete_reason_val: delete_reason_val,
+          },
+          success: function (response) {
+            $("#row_" + property_id).remove();
+            $(".success-message2")
+              .addClass("show-success")
+              .text("تم حذف العقار بنجاح")
+              .on("click", function () {
+                $(".success-message2").removeClass("show-success");
+              });
+          },
+          error: function (error) {
+            console.log(error);
+          },
+        });
+      }
+    });
+  });
   // Call the checkNotifications function initially
   checkNotifications();
   // Set interval to call checkNotifications every 1 minute (3000 milliseconds)
