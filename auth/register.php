@@ -65,21 +65,34 @@ $activation_code_hashed  = password_hash($activation_code, PASSWORD_DEFAULT);
 $email_subject  = 'قم بتأكيد عنوان بريدك الإلكتروني';
 $mailBody = "
 <!DOCTYPE html>
-<html>
+<html dir='rtl'>
 <head>
-<style>
-
-</style>
+  <meta charset='UTF-8'>
+  <title> Alwasit تنبيه تسجيل الدخول - نشاط على حسابك في </title>
+  <style>
+  p{
+    color : #333;
+    line-height : 1.8;
+    padding:15px;
+  }
+  h3{
+    color : #ff9a33;
+  }
+  </style>
 </head>
 <body>
-مرحبًا <h3>{$firstName} {$lastName}</h3>
-<p>شكرًا لك على تسجيل حساب معنا! قبل أن تتمكن من استخدام حسابك، يُرجى التحقق من عنوان بريدك الإلكتروني عن طريق النقر علي هذا الرابط:
+  <div style='font-family: Arial, sans-serif; text-align: right; padding:15px'>
+  <h3>مرحبًا  {$firstName} {$lastName}</h3>
+  <p>شكرًا لك على تسجيل حساب معنا! قبل أن تتمكن من استخدام حسابك، يُرجى التحقق من عنوان بريدك الإلكتروني عن طريق النقر علي هذا الرابط:
 </p>
 <a href='http://localhost/Alwasit/verification.php?vc={$activation_code_hashed}&uID={$id}'>
 Active
 </a>
-<p>فريق الوسيط</p>
-<a href='http://localhost/Alwasit' target='_blank'>Alwasit</a>
+    <p>شكرًا لاستخدامك لخدماتنا وثقتك فينا.</p>
+    <p>مع أطيب التحيات،<br>
+    فريق</p>
+    <h3><a href='http://localhost/Alwasit'>Alwasit</a></h3>
+  </div>
 </body>
 </html>
         ";
