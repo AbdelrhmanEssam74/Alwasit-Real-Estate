@@ -10,7 +10,7 @@ setNotifications($owner_id, array_keys($notification_type, $notification_type['D
 $get_stmt = $conn->prepare("SELECT property_num FROM owners WHERE owner_id = :owner_id");
 $get_stmt->execute(['owner_id' => $owner_id]);
 $property_num = $get_stmt->fetchColumn();
-$property_num--;
+$property_num = ($property_num > 0) ? $property_num-- : 0; // if there is no property, set property_num to 0
 // update the property_num in owners table in database
 $update_stmt = $conn->prepare("UPDATE owners SET property_num = :property_num WHERE owner_id = :owner_id");
 $update_stmt->execute(['property_num' => $property_num, 'owner_id' => $owner_id]);

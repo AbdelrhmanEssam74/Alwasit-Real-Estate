@@ -37,12 +37,12 @@ function countItems($item, $table, $value = null)
 	** $table = The Table To Choose From
 	** $id    = The ID of owner
 */
-function getValue($item, $table, $id)
+function getValue($item, $table, $column, $value)
 {
   global $conn;
-  $stmt2 = $conn->prepare("SELECT $item FROM $table WHERE owner_id = '$id'");
+  $stmt2 = $conn->prepare("SELECT $item FROM $table WHERE $column = '$value'");
   $stmt2->execute();
-  return $stmt2->fetchColumn();
+  return $stmt2->fetch();
 }
 
 /*
@@ -59,4 +59,29 @@ function setNotifications($receive_id, $notification_type, $notification_content
   $insert_stmt = $conn->prepare("INSERT INTO notifications (`receive_id` ,`notification_type`,`notification_content` ,`Timestamp` ) VALUES (?,?,?,?)");
   $r = $insert_stmt->execute(array($receive_id, $notification_type, $notification_content, $current_date));
   return $r;
+}
+
+/*
+	** Get Latest Records Function v1.0
+	** Function To Get Latest Items From Database [ Users, Items, Comments ]
+	** $select = Field To Select
+	** $table = The Table To Choose From
+	** $order = The Desc Ordering
+	** $limit = Number Of Records To Get
+	*/
+
+function getLatest($select, $table, $order,  $limit = 3, $condition = null)
+{
+  global $conn;
+  $rows = array();
+  if ($condition == null) {
+    $getStmt = $conn->prepare("SELECT $select FROM $table ORDER BY $order  DESC LIMIT $limit");
+    $getStmt->execute();
+    $rows = $getStmt->fetchAll(PDO::FETCH_OBJ);
+  } else {
+    $getStmt = $conn->prepare("SELECT $select FROM $table WHERE $condition ORDER BY $order  DESC LIMIT $limit ");
+    $getStmt->execute();
+    $rows = $getStmt->fetchAll(PDO::FETCH_OBJ);
+  }
+  return $rows;
 }

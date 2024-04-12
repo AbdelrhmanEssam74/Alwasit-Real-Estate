@@ -24,7 +24,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
     <img src="ar/images/avatar.png" alt="" class="avatar" />
     <div class="body txt-c d-flex p-20 mt-20 mb-20 block-mobile">
       <div><?php echo $owner_data->F_Name . ' ' . $owner_data->L_Name ?> <span class="d-block c-grey fs-14 mt-10">Owner</span></div>
-      <div><?php echo getValue('property_num', 'owners', $owner_id); ?><span class="d-block c-grey fs-14 mt-10">Proparty</span></div>
+      <div><?php echo getValue('property_num', 'owners', "owner_id", $owner_id)['property_num']; ?><span class="d-block c-grey fs-14 mt-10">Proparty</span></div>
       <div>5 <span class="d-block c-grey fs-14 mt-10">Clients</span></div>
     </div>
     <a href="profile.html" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a>
@@ -36,17 +36,17 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
     <div class="d-flex txt-c gap-20 f-wrap">
       <div class="box p-20 rad-10 fs-13 c-grey">
         <i class="fa fa-home fa-2x mb-10 c-orange" aria-hidden="true"></i>
-        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo getValue('property_num', 'owners', $owner_id); ?></span>
+        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo getValue('property_num', 'owners',  "owner_id", $owner_id)['property_num']; ?></span>
         All Properties
       </div>
       <div class="box p-20 rad-10 fs-13 c-grey">
         <i class="fa fa-commenting fa-2x mb-10 c-blue" aria-hidden="true"></i>
-        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo getValue('comments_num', 'owners', $owner_id); ?></span>
+        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo getValue('comments_num', 'owners',  "owner_id", $owner_id)['comments_num']; ?></span>
         Total Visitor Reviews
       </div>
       <div class="box p-20 rad-10 fs-13 c-grey">
         <i class="fa fa-heart fa-2x mb-10 c-green" aria-hidden="true"></i>
-        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo countItems('owner_id', 'favorites' , $owner_id) ?></span>
+        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo countItems('owner_id', 'favorites', $owner_id) ?></span>
         Total Favorites
       </div>
     </div>
@@ -55,32 +55,63 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
   <!-- Start Latest News Widget -->
   <div class="latest-news p-20 bg-white rad-10 txt-c-mobile">
     <h2 class="mt-0 mb-20">Latest properties loaded</h2>
-    <a href="<?php echo $prop_details_page ?>?PId=" class="news-row d-flex align-center">
-      <img src="<?php echo $images ?>news-01.png" alt="" />
-      <div class="info">
-        <h3>شقة للبيع حي الرمد</h3>
-        <p class="m-0 fs-14 c-grey">3 غرف</p>
-      </div>
-      <div class="btn-shape bg-eee fs-13 label">3 Days Ago</div>
-    </a>
+    <?php
+    $properties = getLatest("*", "properties", "id", 3, "owner_id = " . "'$owner_id' AND deleted = 0");
+    foreach ($properties as $property) {
+      $imgs = explode(",", $property->img);
+      $property_id = $property->property_id;
+      $main_img = $imgs[0];
+      $title = $property->title . " " . $property->neighborhood;
+      $rooms = $property->rooms;
+      $uploaded_at = $property->uploaded_at;
+      $current_date = new DateTime(); // Current date and time
+      $uploaded_date = new DateTime($uploaded_at); // Uploaded date and time
+      $diff = $current_date->diff($uploaded_date); // Calculate the difference
+      $days_ago = $diff->days; // Get the number of days
+    ?>
+      <a href="<?php echo $prop_details_page ?>?PId=<?php echo $property_id ?>" class="news-row d-flex align-center">
+        <img src="<?php echo $upload_dir . $owner_id . '/' . $property_id . '/' . $main_img ?>" alt="" />
+        <div class="info">
+          <h3><?php echo $title ?></h3>
+          <p class="m-0 fs-14 c-grey"><?php echo $rooms ?> غرف</p>
+        </div>
+        <div class="btn-shape bg-eee fs-13 label"><?php echo $days_ago ?> Days Ago</div>
+      </a>
   </div>
-  <!-- End Latest News Widget -->
-  <!-- Start Latest Post Widget -->
-  <div class="latest-post p-20 bg-white rad-10 p-relative">
-    <h2 class="mt-0 mb-25">Latest Comment</h2>
+<?php
+    }
+?>
+<!-- End Latest News Widget -->
+<!-- Start Latest Post Widget -->
+<div class="latest-post p-20 bg-white rad-10 p-relative">
+  <h2 class="mt-0 mb-25">Latest Comment</h2>
+  <?php
+  $comments = getLatest("*", "comments", "id", 3, "owner_id = " . "'$owner_id'");
+  foreach ($comments as $comment) {
+    $uploaded_at = $comment->timestamp;
+    $current_date = new DateTime(); // Current date and time
+    $uploaded_date = new DateTime($uploaded_at); // Uploaded date and time
+    $diff = $current_date->diff($uploaded_date); // Calculate the difference
+    $time_ago = $diff->h; // Get the number of days
+    $content = $comment->content;
+    // get the user who write the comment
+    $user = getValue("*", "users", "user_id", $comment->user_id);
+  ?>
     <div class="top d-flex align-center">
       <img class="avatar mr-15" src="<?php echo $images ?>avatar.png" alt="" />
       <div class="info">
-        <span class="d-block mb-5 fw-bold">User</span>
-        <span class="c-grey">About 3 Hours Ago</span>
+        <span class="d-block mb-5 fw-bold"><?php echo $user['F_Name'] . " " . $user['L_Name'] ?></span>
+        <span class="c-grey">About <?php echo $time_ago ?> Hours Ago</span>
       </div>
     </div>
     <div class="post-content txt-c-mobile pt-20 pb-20 mt-20 mb-20">
-      You can fool all of the people some of the time, and some of the people all of the time, but you can't
-      fool all of the people all of the time.
+      <?php echo $content ?>
     </div>
-  </div>
-  <!-- End Latest Post Widget -->
+  <?php
+  }
+  ?>
+</div>
+<!-- End Latest Post Widget -->
 </div>
 </div>
 </div>
