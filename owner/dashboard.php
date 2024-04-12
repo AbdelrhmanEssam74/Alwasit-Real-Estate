@@ -77,41 +77,41 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
         </div>
         <div class="btn-shape bg-eee fs-13 label"><?php echo $days_ago ?> Days Ago</div>
       </a>
-  </div>
-<?php
+    <?php
     }
-?>
-<!-- End Latest News Widget -->
-<!-- Start Latest Post Widget -->
-<div class="latest-post p-20 bg-white rad-10 p-relative">
-  <h2 class="mt-0 mb-25">Latest Comment</h2>
-  <?php
-  $comments = getLatest("*", "comments", "id", 3, "owner_id = " . "'$owner_id'");
-  foreach ($comments as $comment) {
-    $uploaded_at = $comment->timestamp;
-    $current_date = new DateTime(); // Current date and time
-    $uploaded_date = new DateTime($uploaded_at); // Uploaded date and time
-    $diff = $current_date->diff($uploaded_date); // Calculate the difference
-    $time_ago = $diff->h; // Get the number of days
-    $content = $comment->content;
-    // get the user who write the comment
-    $user = getValue("*", "users", "user_id", $comment->user_id);
-  ?>
-    <div class="top d-flex align-center">
-      <img class="avatar mr-15" src="<?php echo $images ?>avatar.png" alt="" />
-      <div class="info">
-        <span class="d-block mb-5 fw-bold"><?php echo $user['F_Name'] . " " . $user['L_Name'] ?></span>
-        <span class="c-grey">About <?php echo $time_ago ?> Hours Ago</span>
+    ?>
+  </div>
+  <!-- End Latest News Widget -->
+  <!-- Start Latest Post Widget -->
+  <div class="latest-post p-20 bg-white rad-10 p-relative">
+    <h2 class="mt-0 mb-25">Latest Comment</h2>
+    <?php
+    $comments = getLatest("*", "comments", "id", 3, "owner_id = " . "'$owner_id'");
+    foreach ($comments as $comment) {
+      $uploaded_at = $comment->timestamp;
+      $current_date = new DateTime(); // Current date and time
+      $uploaded_date = new DateTime($uploaded_at); // Uploaded date and time
+      $diff = $current_date->diff($uploaded_date); // Calculate the difference
+      $time_ago = $diff->h; // Get the number of days
+      $content = $comment->content;
+      // get the user who write the comment
+      $user = getValue("*", "users", "user_id", $comment->user_id);
+    ?>
+      <div class="top d-flex align-center">
+        <img class="avatar mr-15" src="<?php echo $images ?>avatar.png" alt="" />
+        <div class="info">
+          <span class="d-block mb-5 fw-bold"><?php echo $user['F_Name'] . " " . $user['L_Name'] ?></span>
+          <span class="c-grey">About <?php echo $time_ago ?> Hours Ago</span>
+        </div>
       </div>
-    </div>
-    <div class="post-content txt-c-mobile pt-20 pb-20 mt-20 mb-20">
-      <?php echo $content ?>
-    </div>
-  <?php
-  }
-  ?>
-</div>
-<!-- End Latest Post Widget -->
+      <div class="post-content txt-c-mobile pt-20 pb-20 mt-20 mb-20">
+        <?php echo $content ?>
+      </div>
+    <?php
+    }
+    ?>
+  </div>
+  <!-- End Latest Post Widget -->
 </div>
 </div>
 </div>

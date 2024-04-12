@@ -118,7 +118,8 @@ $update_stmt = $conn->prepare(
     `img` = :imgs,
     `location_url` = :locationURL,
     `latitude` = :latitude,
-    `longitude` = :longitude
+    `longitude` = :longitude,
+    `updated_at` = NOW()
   WHERE `property_id` = :property_id"
 );
 $r = $update_stmt->execute($data);

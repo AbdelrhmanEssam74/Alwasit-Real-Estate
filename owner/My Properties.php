@@ -47,9 +47,9 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
         ?>
             <tr id="row_<?php echo $property->property_id ?>">
               <td><a href="<?php echo $prop_details_page ?>?PId=<?php echo $property->property_id ?>"><?php echo $property->title ?></a></td>
-              <td><?php echo $property->address ?></td>
+              <td><?php echo substr($property->address, 0, 50) ?></td>
               <td><?php echo $property->uploaded_at ?></td>
-              <td><?php echo $property->price ?></td>
+              <td><?php echo number_format($property->price) ?></td>
               <td><?php echo $property->area ?> m²</td>
               <td><?php echo $property->comments_num ?></td>
               <?php

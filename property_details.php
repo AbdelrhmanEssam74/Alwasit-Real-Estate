@@ -92,7 +92,7 @@ endif;
             <div class="divTableRow">
               <div class="divTableCell">
                 <i class='bx bxs-purchase-tag'></i>
-                <p>السعر<span> : <?php echo $property_data->price ?> جنيه</span></p>
+                <p>السعر<span> : <?php echo number_format($property_data->price) ?> جنيه</span></p>
               </div>
               <div class="divTableCell">
                 <i class='bx bxs-building'></i>
