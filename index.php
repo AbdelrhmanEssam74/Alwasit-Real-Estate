@@ -1,4 +1,6 @@
 <?php include 'init.php';
+include  $config . 'config.php';
+include $config . 'propertyTable.php';
 $DefultPage = '';
 $pageTitel = 'الوسيط | Alwasit';
 $main_page  = '';
@@ -39,65 +41,77 @@ $main_page  = '';
       <h2 class="heading2">عقارات مميزة</h2>
     </div>
     <div class="widgets">
-      <div class="property-body">
-        <div class="images-details">
-          <a href="<?php echo $prop_details ?>?PId=" class="property-link">
-            <img class="prop-img" src="<?php echo $images ?>item1.jpg" alt="">
-          </a>
-          <div class="details-top">
-            <div class="details-type">
-              <div class="type1">سكني</div>
-              <div class="rent">للإيجار</div>
-            </div>
-            <div class="favorite-box">
-              <button title="اضف للمفضلة" class='property-favorite'>
-                <span class='icon-heart-o'>
-                  <i class="fa-regular fa-heart"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="details-bottom">
-            <div class="property-details">
-              <div class="bath">
-                <p>2</p>
-                <i class='bx bx-bath'></i>
-              </div>
-              <div class="rooms">
-                <p>4</p>
-                <i class='bx bx-bed'></i>
-              </div>
-              <div class="area">
-                <p>200 m<sup>2</sup> </p>
-                <i class='bx bx-layout'></i>
-              </div>
-            </div>
-            <div class="photos">
-              <p>5</p>
-              <i class="fa-solid fa-camera"></i>
-            </div>
-          </div>
-        </div>
-        <div class="proparty-info">
-          <div class="location">
-            <i class="fa-solid fa-location-dot"></i>
-            <p>location</p>
-          </div>
-          <div class="description">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, quae.</p>
-          </div>
-          <div class="price">
-            <p>3,000 <span>جنيه</span></p>
-          </div>
-          <hr>
-          <div class="owner">
-            <a href="">
-              <p> : المالك </p>
-              <span> ابراهيم عبد الرحمن</span>
+      <?php
+      // get top 3 properties from database
+      $property_obj = new PropertyTable();
+      foreach ($property_obj->getTopProperties() as $prop) :
+        $imgs = explode(",", $prop->img);
+        $main_img = $imgs[0];
+      ?>
+        <div class="property-body">
+          <div class="images-details">
+            <a href="<?php echo $prop_details ?>?PId=<?php echo  $prop->property_id ?>" class="property-link">
+              <img class="prop-img" src="<?php echo $owner ?>/upload/<?php echo $prop->owner_id . "/" . $prop->property_id . "/" . $main_img ?>" alt="">
             </a>
+            <div class="details-top">
+              <div class="details-type">
+                <!-- <div class="type1">سكني</div> -->
+                <?php
+                echo ($prop->status == 'لللإيجار') ? '<div class="rent">للإيجار</div>' : '<div class="buy">للبيع</div>';
+                ?>
+              </div>
+              <div class="favorite-box">
+                <button title="اضف للمفضلة" class='property-favorite'>
+                  <span class='icon-heart-o'>
+                    <i class="fa-regular fa-heart"></i>
+                  </span>
+                </button>
+              </div>
+            </div>
+            <div class="details-bottom">
+              <div class="property-details">
+                <div class="bath">
+                  <p><?php echo $prop->bath ?></p>
+                  <i class='bx bx-bath'></i>
+                </div>
+                <div class="rooms">
+                  <p><?php echo $prop->rooms ?></p>
+                  <i class='bx bx-bed'></i>
+                </div>
+                <div class="area">
+                  <p><?php echo $prop->area ?> m<sup>2</sup> </p>
+                  <i class='bx bx-layout'></i>
+                </div>
+              </div>
+              <div class="photos">
+                <p>5</p>
+                <i class="fa-solid fa-camera"></i>
+              </div>
+            </div>
+          </div>
+          <div class="proparty-info">
+            <div class="location">
+              <i class="fa-solid fa-location-dot"></i>
+              <p><?php echo $prop->address ?></p>
+            </div>
+            <div class="description">
+              <p>......<?php echo substr($prop->description, 0, 55) ?></p>
+            </div>
+            <div class="price">
+              <p><?php echo number_format($prop->price) ?> <span>جنيه</span></p>
+            </div>
+            <hr>
+            <div class="owner">
+              <a href="">
+                <p> : المالك </p>
+                <span><?php echo  $prop->full_name ?></span>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      <?php
+      endforeach;
+      ?>
     </div>
   </div>
 </div>

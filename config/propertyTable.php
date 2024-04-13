@@ -11,4 +11,12 @@ class PropertyTable extends DatabaseConnection
     $property = $stmt->fetch(PDO::FETCH_OBJ);
     return $property;
   }
+  public function getTopProperties()
+  {
+    $sql = "SELECT * FROM properties  INNER JOIN owners ON properties.owner_id = owners.owner_id Where properties.active = 1 AND properties.deleted = 0 LIMIT 3";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $properties;
+  }
 }
