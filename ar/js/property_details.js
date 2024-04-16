@@ -1,6 +1,13 @@
 $(document).ready(function () {
   "use strict";
-
+  $("[placeholder]")
+    .focus(function () {
+      $($(this).attr("data-text", $(this).attr("placeholder")));
+      $(this).attr("placeholder", " ");
+    })
+    .blur(function () {
+      $(this).attr("placeholder", $(this).attr("data-text"));
+    });
   $(".toggle_menu").click(function () {
     $("#menu").toggleClass("show_menu");
     $(this).toggleClass("active");
@@ -132,6 +139,215 @@ $(document).ready(function () {
     $(".alert_modal").css("display", "none");
     $(".overlay").css("display", "none");
   });
+  // before send any comment message to the owner check if the user already login or not
+  // check if any input if empty and disabled the button
+  let inputs = [
+    {
+      element: $("#comment-form #fullname"),
+      minLength: 1,
+    },
+    {
+      element: $("#comment-form #email"),
+      minLength: 1,
+    },
+    {
+      element: $("#comment-form #comment-content"),
+      minLength: 1,
+    },
+  ];
+  let submitButton = $(".send-comment");
+  submitButton.prop("disabled", true).addClass("disabled");
+  function checkInputs() {
+    let allInputsFilled = true;
+    for (let input of inputs) {
+      if (input.element.val().length < input.minLength) {
+        allInputsFilled = false;
+        input.element.parent().attr("data-warning", "الرجاء ملء هذا الحقل");
+        input.element.css("border", "1px solid red");
+      } else {
+        input.element.parent().removeAttr("data-warning");
+        input.element.css("border", "");
+      }
+    }
+    submitButton.prop("disabled", !allInputsFilled);
+    submitButton.toggleClass("disabled", !allInputsFilled);
+    submitButton.toggleClass("enable", allInputsFilled);
+  }
+  for (let input of inputs) {
+    input.element.on("input", checkInputs);
+  }
+  $(".send-comment").on("click", function () {
+    // send request to DB to check if the user is login or not
+    $.ajax({
+      method: "POST",
+      url: "checklogin.php",
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        if (data == 0) {
+          $(".modal-container-2").css("display", "flex");
+          $(".modal-container-2  h2").text("للمتابعة يجب تسجيل الدخول اولاً");
+          $(".modal-container-2 .login").text("تسجيل الدخول");
+          $(".modal-container-2 .login").on("click", function () {
+            location.href = "login.php";
+          });
+        } else if (data == 1) {
+          // if user is logged in
+          let fullName = $("#comment-form #fullname").val();
+          let email = $("#comment-form #email").val();
+          let comment = $("#comment-form #comment-content").val();
+          let submitButton = $(".send-comment");
+          let formData = new FormData();
+          formData.append("full_name", fullName);
+          formData.append("user_mail", email);
+          formData.append("comment", comment);
+          formData.append("user_id", submitButton.attr("data-userID"));
+          formData.append("owner_id", submitButton.attr("data-ownerID"));
+          formData.append("property_id", submitButton.attr("data-propertyID"));
+          // send the data to the server
+          $.ajax({
+            method: "POST",
+            url: "send_comment.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+              console.log(data);
+              if (data == 1) {
+                $(".success-message")
+                  .addClass("show-success")
+                  .text("تم ارسال التعليق بنجاح")
+                  .on("click", function () {
+                    $(this).removeClass("show-success");
+                  });
+                setTimeout(function () {
+                  $(".success-message").removeClass("show-success");
+                  location.reload();
+                }, 2000);
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error(xhr);
+            },
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
+  });
+  let formData = new FormData();
+  formData.append("property_id", submitButton.attr("data-propertyID"));
+  $.ajax({
+    method: "POST",
+    url: "get_comments.php",
+    data: formData,
+    processData: false,
+    contentType: false,
+    success: function (data) {
+      var parsedData = $.parseJSON(data);
+      if ($.isArray(parsedData)) {
+        if (Object.keys(parsedData).length === 0) {
+          $(".comments .content").append(
+            $("<h5>").text("لا يوجد تعليقات").css("color", "#868686")
+          );
+        } else {
+          $.each(parsedData, function (index, obj) {
+            var comment = createCommentElement(obj);
+            $(".comments .content").append(comment);
+          });
+        }
+      }
+    },
+  });
+
+  function createCommentElement(commentData) {
+    var comment = $("<div>")
+      .addClass("comment")
+      .attr("commentID", commentData.comment_id)
+      .attr("uID", commentData[1])
+      .attr("pID", commentData.property_id);
+    var deleteButton = $("<button>")
+      .attr("title", "حذف التعليق")
+      .addClass("delete-comment")
+      .html("<i class='fa-solid fa-trash-can'></i>");
+    // check if the user is login or not and display the delete burron
+    if ($(".comments .content").attr("data-loID") == commentData[1]) {
+      deleteButton.appendTo(comment);
+    }
+    var image = $("<div>").addClass("image");
+    var imgSrc = $(".comments  .content").attr("data-img-src");
+    $("<img>")
+      .attr("src", imgSrc + commentData.profile_img)
+      .appendTo(image);
+    var details = $("<div>").addClass("details");
+    $("<h4>").text(commentData.FullName).appendTo(details);
+    $("<p>").text(commentData.content).appendTo(details);
+    var timestamp = getTimestampString(commentData.timestamp);
+    $("<span>").text(timestamp).appendTo(details);
+    image.appendTo(comment);
+    details.appendTo(comment);
+    // Add event listener to delete button
+    deleteButton.on("click", function () {
+      var commentID = comment.attr("commentID");
+      var uID = comment.attr("uID");
+      deleteComment(commentID, uID);
+    });
+    return comment;
+  }
+
+  function getTimestampString(timestamp) {
+    var currentTime = new Date();
+    var previousTime = new Date(timestamp);
+    var timeDifference = currentTime - previousTime;
+    var minutes = Math.floor(timeDifference / 60000);
+    var hours = Math.floor(minutes / 60);
+    var days = Math.floor(hours / 24);
+    var months = Math.floor(days / 30);
+
+    if (months > 0) {
+      return months + " month(s) ago";
+    } else if (days > 0) {
+      return days + " day(s) ago";
+    } else if (hours > 0) {
+      return hours + " hour(s) ago";
+    } else if (minutes > 0) {
+      return minutes + " minute(s) ago";
+    } else {
+      return "Just now";
+    }
+  }
+  setInterval(function () {
+    $(".comments .comment").each(function () {
+      var timestamp = $(this).find("span").data("timestamp");
+      var timestampSpan = $(this).find("span");
+      updateTimestamp(timestamp, timestampSpan);
+    });
+  }, 60000); // Update the timestamp every minute
+  function scrollToTopAndReload() {
+    $(window).scrollTop(0); // Scroll to the top of the page
+    location.reload(); // Reload the page
+  }
+  setTimeout(scrollToTopAndReload, 600000); // Scroll to top and reload after 10 minutes (600,000 milliseconds)
+  // delete the comment
+  function deleteComment(commentID, uID) {
+    $.ajax({
+      method: "POST",
+      url: "delete_comment.php",
+      data: {
+        commentID: commentID,
+        uID: uID,
+      },
+      success: function (response) {
+        // Optionally, you can remove the comment element from the DOM
+        $(".comments .comment[commentID='" + commentID + "']").remove();
+      },
+      error: function (error) {
+        console.error("Failed to delete comment:", error);
+      },
+    });
+  }
 });
 
 // Get Slider items

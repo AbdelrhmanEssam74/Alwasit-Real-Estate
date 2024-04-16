@@ -20,7 +20,7 @@ else :
     $_SESSION['owner'] = true;
     $_SESSION['owner_id'] = $data->owner_id;
     $_SESSION['username']  = $data->username;
-    $_SESSION['fullname']  = $data->F_Name . ' ' . $data->L_Name;
+    $_SESSION['fullname']  = $data->FullName;
     print_r(json_encode([
       $is_onwer,
       $dashboard_url
@@ -63,7 +63,7 @@ else :
                   <head>
                   </head>
                   <body style='display: flex;flex-direction: column;align-items: center;gap: 15px text-align:right;'>
-                  مرحبًا<h3>$data->F_Name  $data->L_Name,</h3>
+                  مرحبًا<h3>$data->FullName,</h3>
                   <p>
                     تم إرسال الطلب الخاص بك 
                       سيتم التواصل معك في اقرب وقت لمراجعة بعض البيانات 

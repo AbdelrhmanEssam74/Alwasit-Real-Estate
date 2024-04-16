@@ -7,7 +7,7 @@ $stmt = $conn->prepare("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
 $stmt->execute();
 $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
 ?>
-<?php $pageTitel = "Dashboard | $owner_data->F_Name "; ?>
+<?php $pageTitel = "Dashboard | $owner_data->FullName "; ?>
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
 <h1 class="p-relative">Dashboard</h1>
@@ -23,7 +23,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
     </div>
     <img src="ar/images/avatar.png" alt="" class="avatar" />
     <div class="body txt-c d-flex p-20 mt-20 mb-20 block-mobile">
-      <div><?php echo $owner_data->F_Name . ' ' . $owner_data->L_Name ?> <span class="d-block c-grey fs-14 mt-10">Owner</span></div>
+      <div><?php echo ucwords($owner_data->FullName) ?> <span class="d-block c-grey fs-14 mt-10">Owner</span></div>
       <div><?php echo getValue('property_num', 'owners', "owner_id", $owner_id)['property_num']; ?><span class="d-block c-grey fs-14 mt-10">Proparty</span></div>
       <div>5 <span class="d-block c-grey fs-14 mt-10">Clients</span></div>
     </div>
@@ -100,7 +100,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
       <div class="top d-flex align-center">
         <img class="avatar mr-15" src="<?php echo $images ?>avatar.png" alt="" />
         <div class="info">
-          <span class="d-block mb-5 fw-bold"><?php echo $user['F_Name'] . " " . $user['L_Name'] ?></span>
+          <span class="d-block mb-5 fw-bold"><?php echo ucwords($user['FullName']) ?></span>
           <span class="c-grey">About <?php echo $time_ago ?> Hours Ago</span>
         </div>
       </div>

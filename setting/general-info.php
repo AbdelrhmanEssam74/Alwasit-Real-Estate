@@ -14,7 +14,7 @@ include_once $config . 'usersTable.php';
 $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : 0;
 $users_obj = new RegisterTable;
 $user_data = $users_obj->getAll($user_id)[0];
-$_SESSION['full_name'] = $user_data->F_Name . ' ' . $user_data->L_Name;
+$_SESSION['full_name'] = $user_data->FullName;
 ?>
 <!-- End Header -->
 <div class="modal-container overlay">
@@ -52,17 +52,10 @@ $_SESSION['full_name'] = $user_data->F_Name . ' ' . $user_data->L_Name;
               <input type="text" id="username" class="dynamic-input" name="username" value="<?php echo $user_data->username ?>" placeholder="Enter your username" required="required">
               <p class="invalid-username-value">Can't Be Empty</p>
             </div>
-            <div class="full_name">
-              <div class="form-control">
-                <label for="first_name">First Name:</label>
-                <input type="text" id="first_name" class="dynamic-input" name="first_name" value="<?php echo $user_data->F_Name ?>" placeholder="Enter your first name" required="required">
-                <p class="invalid-fName-value">Can't Be Empty</p>
-              </div>
-              <div class="form-control">
-                <label for="last_name">Last Name:</label>
-                <input type="text" id="last_name" class="dynamic-input" name="last_name" value="<?php echo $user_data->L_Name ?>" placeholder="Enter your last name" required="required">
-                <p class="invalid-lName-value">Can't Be Empty</p>
-              </div>
+            <div class="form-control">
+              <label for="first_name">Full Name:</label>
+              <input type="text" id="fullname" class="dynamic-input" name="full_name" value="<?php echo $user_data->FullName ?>" placeholder="Enter your first name" required="required">
+              <p class="invalid-fName-value">Can't Be Empty</p>
             </div>
             <button class="personal_info_save_btn" data-UID="<?php echo $user_data->user_id; ?>" type="submit">Save</button>
           </div>

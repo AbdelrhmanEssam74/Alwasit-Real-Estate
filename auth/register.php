@@ -47,15 +47,14 @@ $_SESSION['user_id'] = $id;
 $data = [
   "id" => $id,
   "username" => trim(strstr($email, '@', true)),
-  "FN" => $firstName,
-  "LN" => $lastName,
+  "N" => $firstName . " " . $lastName,
   "em" => $email,
   "pass" => $password,
   "phone" => $phone,
 ];
 
-$insertQuery = "INSERT INTO `alwasit`.`users` (user_id, username, F_Name, L_Name, email, user_phone, Password , reg_status) 
-                VALUES (:id, :username, :FN, :LN, :em, :phone, :pass , 1)";
+$insertQuery = "INSERT INTO `alwasit`.`users` (user_id, username, FullName, email, user_phone, Password , reg_status) 
+                VALUES (:id, :username, :N, :em, :phone, :pass , 1)";
 $userObj->insert($insertQuery, $data);
 
 // send verification  code to user's email

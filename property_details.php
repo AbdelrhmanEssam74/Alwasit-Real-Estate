@@ -31,6 +31,7 @@ if ($property_id != 0) :
   endif;
 endif;
 ?>
+<p class="success-message"></p>
 <!--start gallery-->
 <div class="modal-container overlay">
   <div class="modal-content">
@@ -39,6 +40,15 @@ endif;
     <hr />
     <p></p>
     <button class="modal-content-btn send-access-permission " for="modal-toggle"></button>
+  </div>
+</div>
+<div class="modal-container-2 overlay">
+  <div class="modal-content">
+    <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
+    <h2></h2>
+    <hr />
+    <p></p>
+    <button class="modal-content-btn login" id="login-comment" for="modal-toggle"></button>
   </div>
 </div>
 <div class="image-gallery">
@@ -122,68 +132,29 @@ endif;
       </div>
       <div class="property-location box" data-lat="<?php echo $property_data->latitude ?>" data-lang="<?php echo $property_data->longitude ?>">
         <h2>موقع العقار</h2>
+        <div class="loc">
+          <?php echo $property_data->address ?> <i class="fa-solid fa-location-dot"></i>
+        </div>
         <div id="map"></div>
       </div>
       <div class="comments box">
         <h2>التعليقات</h2>
-        <div class="content">
-          <div class="comment">
-            <div class="image">
-              <img src="<?php echo $images ?>person1.jpg" alt="">
-            </div>
-            <div class="details">
-              <div class="rate">
-                <h5>user</h5>
-                <div class="starts">
-                  <i class="fa-regular fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-              <p>منزل جميل ورائع جدًا وقريب من كل شيء ! دافئ قليلاً لعطلة نهاية أسبوع حارة
-                ، ولكن أحب أن أعود خلال المواسم الباردة!</p>
-            </div>
-          </div>
-          <div class="comment">
-            <div class="image">
-              <img src="<?php echo $images ?>person1.jpg" alt="">
-            </div>
-            <div class="details">
-              <div class="rate">
-                <h5>user</h5>
-                <div class="starts">
-                  <i class="fa-regular fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-              <p>منزل جميل ورائع جدًا وقريب من كل شيء ! دافئ قليلاً لعطلة نهاية أسبوع حارة
-                ، ولكن أحب أن أعود خلال المواسم الباردة!</p>
-            </div>
-          </div>
+        <div class="content" data-img-src="<?php echo $images ?>" data-loID="<?php echo (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "" ?>">
         </div>
       </div>
       <div class="comment-form box">
         <h2>اكتب تعليق</h2>
-        <div class="rate">
-          <div class="starts">
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
+        <div role="form" class="form" id="comment-form">
+          <div>
+            <input type="text" name="name" id="fullname" class="main-input" placeholder="الأسم" required="required">
           </div>
-          <p>تقييمك ؟</p>
-        </div>
-        <div role="form" class="form">
-          <input type="text" name="name" class="main-input" placeholder="الأسم">
-          <input type="email" name="email" class="main-input" placeholder="البريد الإلكتروني">
-          <textarea name="message" class="main-input" placeholder="تعليقك"></textarea>
-          <button>إرسال</button>
+          <div>
+            <input type="email" value="<?php echo (isset($_SESSION['email'])) ? $_SESSION['email'] : " "  ?>" name="email" id="email" class="main-input" placeholder="البريد الإلكتروني" required="required">
+          </div>
+          <div>
+            <textarea name="message" id="comment-content" class="main-input" placeholder="تعليقك" required="required"></textarea>
+          </div>
+          <button class="send-comment" type="submit" data-propertyID="<?php echo $property_data->property_id ?>" data-userID="<?php echo (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "" ?>" data-ownerID="<?php echo $property_data->owner_id ?>">إرسال</button>
         </div>
       </div>
     </div>
@@ -233,7 +204,7 @@ endif;
               <p class="price">3000 <span> جنية</span> </p>
               <div class="details">
                 <div>
-                  <span>متر مربع</span> <span> 90 </span>
+                  <span>متر مربع</span> <span> 150 </span>
                   <i class='bx bx-area'></i>
                 </div>
                 <div>

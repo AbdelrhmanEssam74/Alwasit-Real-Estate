@@ -6,7 +6,7 @@ $stmt = $conn->prepare("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
 $stmt->execute();
 $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
 ?>
-<?php $pageTitel = "Settings | $owner_data->F_Name "; ?>
+<?php $pageTitel = "Settings | $owner_data->username "; ?>
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
 <h1 class="p-relative">Settings</h1>
@@ -17,7 +17,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
     <p class="mt-0 mb-20 c-grey fs-15">General Information About Your Account</p>
     <div class="mb-15">
       <label class="fs-14 c-grey d-block mb-10" for="first">First Name</label>
-      <input class="b-none border-ccc p-10 rad-6 d-block w-full" type="text" value="<?php echo $owner_data->F_Name ?>" id="first" placeholder="First Name" />
+      <input class="b-none border-ccc p-10 rad-6 d-block w-full" type="text" value="<?php echo trim(strstr($owner_data->FullName, ' ', true)) ?>" id="first" placeholder="First Name" />
     </div>
     <div class="mb-15">
       <label class="fs-14 c-grey d-block mb-5" for="last">Last Name</label>

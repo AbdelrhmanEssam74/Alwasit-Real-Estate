@@ -1168,6 +1168,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border-bottom: 1px solid var(--head-line);
 }
 
+.modal-container-2,
 .modal-container {
   display: none;
   align-items: center;

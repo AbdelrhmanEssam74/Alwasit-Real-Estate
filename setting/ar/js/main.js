@@ -74,25 +74,18 @@ $(function () {
           setTimeout(function () {
             success_message.removeClass("show-success");
           }, 5000);
-        } else {
-          success_message.addClass("show-failed").text("Save Failed");
-          setTimeout(function () {
-            success_message.removeClass("show-failed");
-          }, 5000);
         }
 
-        $(
-          ".invalid-username-value, .invalid-fName-value, .invalid-lName-value"
-        ).css("display", "none");
+        $(".invalid-username-value, .invalid-fName-value").css(
+          "display",
+          "none"
+        );
 
         if (data === "nameEmpty") {
           $(".invalid-username-value").css("display", "block");
         }
         if (data === "fNameEmpty") {
           $(".invalid-fName-value").css("display", "block");
-        }
-        if (data === "lNameEmpty") {
-          $(".invalid-lName-value").css("display", "block");
         }
 
         success_message.click(function () {

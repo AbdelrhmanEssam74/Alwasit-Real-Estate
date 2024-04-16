@@ -458,83 +458,76 @@ div.divTable {
 #map {
   height: 400px;
 }
+.loc {
+  margin: 15px 0px;
+}
 
-.wedge-section .container .left-section .comments .comment .image {
-  width: 20%;
-  height: 20%;
+.comments .comment {
+  position: relative;
+}
+.comments .comment::before {
+  position: absolute;
+  content: " ";
+  width: 100%;
+  bottom: 0;
+  height: 1px;
+  background-color: #79797996;
+}
+.delete-comment {
+  position: absolute;
+  left: 0;
+  border: none;
+  color: var(--card-highlitght);
+  top: 37%;
+  cursor: pointer;
+}
+.comments .comment .image {
+  width: 70px;
+  height: 70px;
   overflow: hidden;
   display: grid;
   place-items: center;
   border: 2px solid var(--color4);
   border-radius: 50%;
 }
-
-.wedge-section .container .left-section .comments .comment img {
+.comments .comment img {
   width: 100%;
+  aspect-ratio: 2 / 2;
+  object-fit: cover;
 }
 
-.wedge-section .container .left-section .comments .comment .details {
+.comments .comment .details {
   padding: 15px;
 }
-
-.wedge-section .container .left-section .comments .comment .details .rate {
-  margin-bottom: 5px;
-  font-size: 20px;
-  color: var(--head-line);
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
+.comments .comment .details span {
+  font-size: 13px;
+  color: #919191;
 }
-
-.wedge-section
-  .container
-  .left-section
-  .comments
-  .comment
-  .details
-  .rate
-  .starts {
-  font-size: 15px;
-  margin-right: 15px;
-  color: var(--color3hover);
-}
-
-.wedge-section .container .left-section .comments .comment .details p {
+.comments .comment .details p {
   line-height: 2;
   color: var(--third-color);
 }
 
 @media (max-width: 1085px) {
-  .wedge-section .container .left-section .comments .comment {
+  .comments .comment {
     flex-direction: column;
     gap: 5px;
   }
 
-  .wedge-section .container .left-section .comments .comment .details {
+  .comments .comment .details {
     text-align: center;
   }
 
-  .wedge-section .container .left-section .comments .comment .details .rate {
+  .comments .comment .details .rate {
     justify-content: center;
   }
 }
 
 .comment-form .form {
-  flex-basis: 100%;
-}
-
-.comment-form .rate {
   display: flex;
-  justify-content: end;
-  margin-bottom: 20px;
-  gap: 15px;
+  flex-direction: column;
+  gap: 5px;
 }
-
-.comment-form .rate i:hover {
-  cursor: pointer;
-  color: var(--color3hover);
-}
-
 .comment-form .form .main-input {
   padding: 20px;
   display: block;
@@ -545,12 +538,22 @@ div.divTable {
   width: 100%;
   background-color: #fbf3fc;
   text-align: right;
+  position: relative;
 }
-
+.comment-form .form div {
+  position: relative;
+}
 .comment-form .form .main-input:focus {
   outline: none;
 }
-
+.comment-form .form div::after {
+  position: absolute;
+  content: attr(data-warning);
+  bottom: 0;
+  right: 0;
+  color: red;
+  text-align: right;
+}
 .comment-form .form textarea.main-input {
   height: 200px;
   resize: none;
@@ -559,20 +562,25 @@ div.divTable {
 }
 
 .comment-form .form button {
-  background: var(--head-line);
   color: white;
   padding: 10px;
   border: none;
   outline: none;
   width: 100%;
-  cursor: pointer;
   border-radius: 5px;
   transition: all 0.3s;
   font-size: 25px;
 }
-
-.comment-form .form button:hover {
-  background-color: var(--color8);
+.comment-form .form button.disabled {
+  background: #5f5f5f;
+  cursor: not-allowed;
+}
+.comment-form .form button.enable {
+  background: var(--head-line);
+  cursor: pointer;
+}
+.comment-form .form button.enable:hover {
+  background-color: var(--head-line-hover);
 }
 
 .wedge-section .container .right-section .owner .owner-details {
@@ -1259,10 +1267,76 @@ select {
   font-size: 12px;
 }
 
-.invalid-id{
+.invalid-id {
   background-color: #ff4e4e;
   padding: 25px;
   color: #fff;
   text-align: center;
   font-size: 20px;
+}
+
+.success-message {
+  position: fixed;
+  color: rgb(0, 0, 0);
+  right: -27%;
+  padding: 15px 10px;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: 500;
+  transition: 0.7s all;
+  z-index: 999;
+  width: 250px;
+  bottom: 15%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.success-message.show-success {
+  right: 5%;
+  background-color: rgb(250, 250, 250);
+  border-top: 5px solid var(--success);
+  border-bottom: 5px solid var(--success);
+}
+
+.success-message.show-failed {
+  right: 4%;
+  background-color: rgb(250, 250, 250);
+  border-top: 5px solid var(--danger);
+  border-bottom: 5px solid var(--danger);
+}
+
+.success-message.show-success::after,
+.success-message.show-failed::after {
+  position: absolute;
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: "\f00d";
+  color: #000;
+  top: 36%;
+  right: 8%;
+}
+
+.success-message.show-failed::before {
+  position: absolute;
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: "\f06a";
+  color: var(--danger);
+  top: 38%;
+  left: 8%;
+}
+
+.success-message.show-success::before {
+  position: absolute;
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: "\f058";
+  top: 38%;
+  left: 8%;
+  color: var(--success);
+}
+
+@media only screen and (max-width: 767px) {
+  .success-message {
+    right: -55%;
+  }
 }
