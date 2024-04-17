@@ -143,16 +143,8 @@ $(document).ready(function () {
   // check if any input if empty and disabled the button
   let inputs = [
     {
-      element: $("#comment-form #fullname"),
-      minLength: 1,
-    },
-    {
-      element: $("#comment-form #email"),
-      minLength: 1,
-    },
-    {
       element: $("#comment-form #comment-content"),
-      minLength: 1,
+      minLength: 20,
     },
   ];
   let submitButton = $(".send-comment");
@@ -176,6 +168,7 @@ $(document).ready(function () {
   for (let input of inputs) {
     input.element.on("input", checkInputs);
   }
+  //NOTE - Send comment to server
   $(".send-comment").on("click", function () {
     // send request to DB to check if the user is login or not
     $.ajax({
@@ -193,8 +186,6 @@ $(document).ready(function () {
           });
         } else if (data == 1) {
           // if user is logged in
-          let fullName = $("#comment-form #fullname").val();
-          let email = $("#comment-form #email").val();
           let comment = $("#comment-form #comment-content").val();
           let submitButton = $(".send-comment");
           let formData = new FormData();
@@ -239,6 +230,7 @@ $(document).ready(function () {
   });
   let formData = new FormData();
   formData.append("property_id", submitButton.attr("data-propertyID"));
+  //NOTE - Get the comments from the server and display them in the DOM
   $.ajax({
     method: "POST",
     url: "get_comments.php",
@@ -262,6 +254,7 @@ $(document).ready(function () {
     },
   });
 
+  // Function to create comment element based on JSON object input
   function createCommentElement(commentData) {
     var comment = $("<div>")
       .addClass("comment")
@@ -296,7 +289,7 @@ $(document).ready(function () {
     });
     return comment;
   }
-
+  // Function to get timestamp of comment in string format from UNIX time stamp
   function getTimestampString(timestamp) {
     var currentTime = new Date();
     var previousTime = new Date(timestamp);
@@ -318,19 +311,21 @@ $(document).ready(function () {
       return "Just now";
     }
   }
+  // Update the timestamp every minute
   setInterval(function () {
     $(".comments .comment").each(function () {
       var timestamp = $(this).find("span").data("timestamp");
       var timestampSpan = $(this).find("span");
       updateTimestamp(timestamp, timestampSpan);
     });
-  }, 60000); // Update the timestamp every minute
+  }, 60000);
+  // Scroll to the top of the page and Reload the page
   function scrollToTopAndReload() {
-    $(window).scrollTop(0); // Scroll to the top of the page
-    location.reload(); // Reload the page
+    $(window).scrollTop(0);
+    location.reload();
   }
   setTimeout(scrollToTopAndReload, 600000); // Scroll to top and reload after 10 minutes (600,000 milliseconds)
-  // delete the comment
+  // Function to to delete the comment from the comment list
   function deleteComment(commentID, uID) {
     $.ajax({
       method: "POST",
@@ -348,6 +343,112 @@ $(document).ready(function () {
       },
     });
   }
+
+  // Create the main container div
+  const reportModelDiv = $("<div>").addClass("report-model");
+
+  // Create the title paragraph
+  const titleParagraph = $("<p>")
+    .addClass("title")
+    .text("الإبلاغ عن هذا العقار");
+  reportModelDiv.append(titleParagraph);
+
+  // Create the form container div
+  const formDiv = $("<div>").addClass("form");
+  reportModelDiv.append(formDiv);
+
+  // Create the form element
+  const formElement = $("<form>").attr("action", "");
+  formDiv.append(formElement);
+
+  // Create the select dropdown item div
+  const selectDropdownItemDiv = $("<div>").addClass("select-dropdown__item");
+  formElement.append(selectDropdownItemDiv);
+
+  // Create the reason select element
+  const reasonSelect = $("<select>")
+    .attr("name", "reason")
+    .addClass("select-resson");
+  selectDropdownItemDiv.append(reasonSelect);
+
+  // Create the default option for the reason select
+  const defaultOption = $("<option>").val("").text("إختر السبب");
+  reasonSelect.append(defaultOption);
+
+  // Create the other options for the reason select
+  const reasons = [
+    "العقار غير متوافر",
+    "السعر غير دقيق",
+    "لم أتسلم رد من الوسيط العقاري",
+    "لا توجد تفاصيل للعقار",
+    "نوعية الصور رديئة",
+    "نص الوصف ضعيف جداً",
+    "الموقع غير صحيح",
+    "العقار المدرج غير موجود فعلياً",
+    "خطأ في نوع العقار المدرج",
+  ];
+
+  reasons.forEach((reason, index) => {
+    const option = $("<option>")
+      .val(index + 1)
+      .text(reason);
+    reasonSelect.append(option);
+  });
+
+  // Create the input message div
+  const inputMessageDiv = $("<div>")
+    .addClass("input__message")
+    .text("يرجى تحديد السبب");
+  selectDropdownItemDiv.append(inputMessageDiv);
+
+  // Create the textarea for the message
+  const messageTextarea = $("<textarea>")
+    .attr("name", "message")
+    .addClass("main-input")
+    .attr("placeholder", "تعليق إضافي");
+  formElement.append(messageTextarea);
+
+  // Create the submit button
+  const subButton = $("<button>").addClass("submit-report").text("إرسال");
+  formElement.append(subButton);
+
+  // Create the image container div
+  const imgDiv = $("<div>").addClass("img");
+  reportModelDiv.append(imgDiv);
+
+  // Create the image element
+  const imageElement = $("<img>")
+    .attr("src", "images/report-property.png")
+    .attr("alt", "");
+  imgDiv.append(imageElement);
+
+  // Create the description paragraph
+  const descriptionParagraph = $("<p>").text(
+    "هل هناك مشكلة في هذا العقار؟ يرجى تزويدنا بمزيد من المعلومات حتى نتمكن من حل المشكلة"
+  );
+  imgDiv.append(descriptionParagraph);
+
+  // Append the model box to the desired container in your HTML
+  $(".report-property").append(reportModelDiv);
+
+  // Get the property paragraph element
+  const propertyRepor = $("#property");
+
+  // Get the report model element
+  const reportModel = $(".report");
+
+  // Add a click event listener to the property paragraph
+  propertyRepor.on("click", (event) => {
+    // event.stopPropagation(); // Stop the click event from propagating to the document
+    // Show the report model
+    reportModel.fadeToggle();
+    reportModel.css("display", "flex");
+  });
+  let close_model = $(".close-report-model");
+  close_model.on("click", () => {
+    reportModel.fadeOut();
+    reportModel.css("display", "none");
+  });
 });
 
 // Get Slider items
@@ -451,117 +552,6 @@ phone_btn.addEventListener("click", () => {
 
 $(document).ready(function () {
   "use strict";
-  // Create the main container div
-  const reportModelDiv = $("<div>").addClass("report-model");
-
-  // Create the title paragraph
-  const titleParagraph = $("<p>")
-    .addClass("title")
-    .text("الإبلاغ عن هذا العقار");
-  reportModelDiv.append(titleParagraph);
-
-  // Create the form container div
-  const formDiv = $("<div>").addClass("form");
-  reportModelDiv.append(formDiv);
-
-  // Create the form element
-  const formElement = $("<form>").attr("action", "");
-  formDiv.append(formElement);
-
-  // Create the select dropdown item div
-  const selectDropdownItemDiv = $("<div>").addClass("select-dropdown__item");
-  formElement.append(selectDropdownItemDiv);
-
-  // Create the reason select element
-  const reasonSelect = $("<select>")
-    .attr("name", "reason")
-    .addClass("select-resson");
-  selectDropdownItemDiv.append(reasonSelect);
-
-  // Create the default option for the reason select
-  const defaultOption = $("<option>").val("").text("إختر السبب");
-  reasonSelect.append(defaultOption);
-
-  // Create the other options for the reason select
-  const reasons = [
-    "العقار غير متوافر",
-    "السعر غير دقيق",
-    "لم أتسلم رد من الوسيط العقاري",
-    "لا توجد تفاصيل للعقار",
-    "نوعية الصور رديئة",
-    "نص الوصف ضعيف جداً",
-    "الموقع غير صحيح",
-    "العقار المدرج غير موجود فعلياً",
-    "خطأ في نوع العقار المدرج",
-  ];
-
-  reasons.forEach((reason, index) => {
-    const option = $("<option>")
-      .val(index + 1)
-      .text(reason);
-    reasonSelect.append(option);
-  });
-
-  // Create the input message div
-  const inputMessageDiv = $("<div>")
-    .addClass("input__message")
-    .text("يرجى تحديد السبب");
-  selectDropdownItemDiv.append(inputMessageDiv);
-
-  // Create the textarea for the message
-  const messageTextarea = $("<textarea>")
-    .attr("name", "message")
-    .addClass("main-input")
-    .attr("placeholder", "تعليق إضافي");
-  formElement.append(messageTextarea);
-
-  // Create the submit button
-  const submitButton = $("<button>").addClass("submit-report").text("إرسال");
-  formElement.append(submitButton);
-
-  // Create the image container div
-  const imgDiv = $("<div>").addClass("img");
-  reportModelDiv.append(imgDiv);
-
-  // Create the image element
-  const imageElement = $("<img>")
-    .attr("src", "images/report-property.png")
-    .attr("alt", "");
-  imgDiv.append(imageElement);
-
-  // Create the description paragraph
-  const descriptionParagraph = $("<p>").text(
-    "هل هناك مشكلة في هذا العقار؟ يرجى تزويدنا بمزيد من المعلومات حتى نتمكن من حل المشكلة"
-  );
-  imgDiv.append(descriptionParagraph);
-
-  // Append the model box to the desired container in your HTML
-  $(".report-property").append(reportModelDiv);
-
-  // Get the property paragraph element
-  const propertyRepor = $("#property");
-
-  // Get the report model element
-  const reportModel = $(".report");
-
-  // Add a click event listener to the property paragraph
-  propertyRepor.on("click", (event) => {
-    // event.stopPropagation(); // Stop the click event from propagating to the document
-    // Show the report model
-    reportModel.fadeToggle();
-    reportModel.css("display", "flex");
-  });
-  let close_model = $(".close-report-model");
-  close_model.on("click", () => {
-    reportModel.fadeOut();
-    reportModel.css("display", "none");
-  });
-  // toggle menu for user
-  let droptn = $(".dropbtn img");
-  let dropDown_list = $(".dropdown-content");
-  droptn.click(function () {
-    dropDown_list.toggleClass("show");
-  });
 });
 
 //SECTION - google map api

@@ -144,6 +144,10 @@ if (isset($_POST["remember"])) {
 $_SESSION['loggedIn'] = true;
 $_SESSION['uID'] = $user_id;
 $_SESSION['email'] = $email;
+$_SESSION['fullName'] =  $userObj->GetUserFullName();
 // Redirect to the home page
-header("Location:../" . $home);
+if (isset($_SESSION['HTTP_REFERER']))
+  header("Location:" . $_SESSION['HTTP_REFERER']);
+else
+  header("Location:../" . $home);
 exit();

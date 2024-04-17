@@ -92,7 +92,7 @@ $main_page  = '';
           <div class="proparty-info">
             <div class="location">
               <i class="fa-solid fa-location-dot"></i>
-              <p><?php echo $prop->address ?></p>
+              <p><?php echo $prop->neighborhood ?></p>
             </div>
             <div class="description">
               <p>......<?php echo substr($prop->description, 0, 55) ?></p>

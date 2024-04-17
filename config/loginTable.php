@@ -4,6 +4,8 @@ class loginTable extends DatabaseConnection
   private $user_id = "";
   private $email;
   private $owner;
+  private $username;
+  private $fullname;
   public function insert($query, $arr)
   {
     $insert = $this->conn->prepare($query);
@@ -32,6 +34,7 @@ class loginTable extends DatabaseConnection
       $this->user_id = $rows['user_id'];
       $this->email = $rows['email'];
       $this->owner = $rows['is_owner'];
+      $this->fullname = $rows['FullName'];
     }
     return $prepare->rowCount();
   }
@@ -52,6 +55,10 @@ class loginTable extends DatabaseConnection
   public function GetUserEmail()
   {
     return $this->email;
+  }
+  public function GetUserFullName()
+  {
+    return $this->fullname;
   }
   public function isOwner()
   {

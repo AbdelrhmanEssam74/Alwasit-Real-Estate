@@ -145,14 +145,14 @@ endif;
       <div class="comment-form box">
         <h2>اكتب تعليق</h2>
         <div role="form" class="form" id="comment-form">
-          <div>
+          <!-- <div>
             <input type="text" name="name" id="fullname" class="main-input" placeholder="الأسم" required="required">
-          </div>
-          <div>
+          </div> -->
+          <!-- <div>
             <input type="email" value="<?php echo (isset($_SESSION['email'])) ? $_SESSION['email'] : " "  ?>" name="email" id="email" class="main-input" placeholder="البريد الإلكتروني" required="required">
-          </div>
+          </div> -->
           <div>
-            <textarea name="message" id="comment-content" class="main-input" placeholder="تعليقك" required="required"></textarea>
+            <textarea name="message" id="comment-content" class="main-input" placeholder="<?php echo (isset($_SESSION['fullName'])) ? $_SESSION['fullName'] . " تعليق باسم" : "تعليقك" ?>" required="required"></textarea>
           </div>
           <button class="send-comment" type="submit" data-propertyID="<?php echo $property_data->property_id ?>" data-userID="<?php echo (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "" ?>" data-ownerID="<?php echo $property_data->owner_id ?>">إرسال</button>
         </div>

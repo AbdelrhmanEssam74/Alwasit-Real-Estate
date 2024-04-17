@@ -41,6 +41,7 @@ if ($userObj->checkPhoneExists($phone) > 0) {
 
 $firstName = trim($_POST['FName']);
 $lastName = trim($_POST['LName']);
+$_SESSION['fullname'] = $firstName . " " . $lastName;
 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $id = uniqid();
 $_SESSION['user_id'] = $id;

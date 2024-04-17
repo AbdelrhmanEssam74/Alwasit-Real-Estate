@@ -24,9 +24,8 @@ $duplicate_login = '';
 if (isset($_SESSION['duplicate_login']) && $_SESSION['duplicate_login'] == 1) {
   $duplicate_login = $_SESSION['duplicate_login'];
 }
-
-
 session_unset();
+$_SESSION['HTTP_REFERER'] = $_SERVER['HTTP_REFERER'];
 ?>
 
 <?php include $templates . 'header.php' ?>
