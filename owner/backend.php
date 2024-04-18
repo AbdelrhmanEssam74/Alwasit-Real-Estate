@@ -75,12 +75,12 @@ $data = array(
   'propertyDescription'   => $_POST['propertyDescription'],
   'propertyType'          => $arr[$_POST['propertyType']],
   'propertyStatus'        => $arr[$_POST['propertyStatus']],
-  'propertyPrice'         => number_format($_POST['propertyPrice']),
+  'propertyPrice'         => $_POST['propertyPrice'],
   'propertyArea'          => $_POST['propertyArea'],
   'propertyRooms'         => $_POST['propertyRooms'],
   'propertyBaths'         => $_POST['propertyBaths'],
   'propertyAddress'       => $_POST['propertyAddress'],
-  'propertyNeighborhood'  => $_POST['propertyNeighborhood'],
+  'propertyNeighborhood'  => trim($_POST['propertyNeighborhood']),
   'propertyCity'          => $_POST['propertyCity'],
   'locationURL'          => $_POST['locationURL'],
   'latitude'              => $latitude,
@@ -134,6 +134,26 @@ $insert_stmt = $conn->prepare(
     )"
 );
 $r = $insert_stmt->execute($data);
+//NOTE - Insert neighborhood in neighborhood table in database
+// get number of properteis in neighborhood table in database
+$n = trim($_POST['propertyNeighborhood']);
+$neighborhoods = $conn->prepare("SELECT * FROM `neighborhoods` WHERE neighborhood_name = :n");
+$neighborhoods->execute(['n' => $n]);
+$neighborhoods = $neighborhoods->fetch(PDO::FETCH_OBJ);
+echo "<pre>";
+print_r($neighborhoods);
+echo "</pre>";
+if (($neighborhoods)) {
+  $num = $neighborhoods->nums_of_properties;
+  $num++;
+  $update_nums_of_properties = "UPDATE neighborhoods set nums_of_properties = ?";
+  $stmt = $conn->prepare($update_nums_of_properties);
+  $stmt->execute(array($num));
+} else {
+  $insert_neighborhoods = "INSERT INTO `neighborhoods` (`neighborhood_name` , `city`) VALUES(?,?)";
+  $stmt = $conn->prepare($insert_neighborhoods);
+  $r = $stmt->execute(array($data['propertyNeighborhood'], $data['propertyCity']));
+}
 // get the value of property_num from owners table in database and increate it by 1
 $get_stmt = $conn->prepare("SELECT property_num FROM owners WHERE owner_id = :owner_id");
 $get_stmt->execute(['owner_id' => $owner_id]);

@@ -231,4 +231,14 @@ $(document).ready(function () {
   checkNotifications();
   // Set interval to call checkNotifications every 1 minute (3000 milliseconds)
   setInterval(checkNotifications, 3000);
+  // get all neighborhoods when user try to enter a neighborhood input
+  $("#neighborhood").on("click", function () {
+    let parent = $(this).parent();
+    let list = $("<div>").addClass("neighborhood_list").appendTo(parent);
+    let ul = $("<ul>").appendTo(list);
+    for (let index = 0; index < 3; index++) {
+      let li = $("<li>").addClass("neighborhood_item").text("p1").appendTo(ul);
+    }
+    console.log(parent);
+  });
 });

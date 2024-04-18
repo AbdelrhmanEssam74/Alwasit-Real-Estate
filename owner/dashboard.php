@@ -86,7 +86,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
   <div class="latest-post p-20 bg-white rad-10 p-relative">
     <h2 class="mt-0 mb-25">Latest Comment</h2>
     <?php
-    $comments = getLatest("*", "comments", "id", 3, "owner_id = " . "'$owner_id'");
+    $comments = getLatest("*", "comments", "comment_id", 3, "owner_id = " . "'$owner_id'");
     foreach ($comments as $comment) {
       $uploaded_at = $comment->timestamp;
       $current_date = new DateTime(); // Current date and time
