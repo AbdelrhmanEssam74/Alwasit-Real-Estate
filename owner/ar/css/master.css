@@ -1524,7 +1524,12 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .neighborhood_list {
   position: absolute;
-  border: 1px solid;
+  width: 100%;
+  bottom: -157%;
+  z-index: 999;
+  background: #7f7f7f;
+  color: #fff;
+  border-radius: 5px 5px 10px 10px;
 }
 .neighborhood_list ul {
   display: flex;

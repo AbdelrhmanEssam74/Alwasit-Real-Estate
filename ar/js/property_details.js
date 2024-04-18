@@ -559,7 +559,7 @@ function initMap() {
   var location = document.querySelector(".property-location");
   // map options
   var options = {
-    zoom: 30,
+    zoom: 19,
     center: {
       lat: Number(location.dataset.lat),
       lng: Number(location.dataset.lang),

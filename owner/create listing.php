@@ -219,7 +219,7 @@ switch ($action) {
             <div class="city-neighborhood">
               <div class="form-group">
                 <label for="neighborhood">الحي/البلدة</label>
-                <input required="required" value="<?php echo $propertyNeighborhood ?> " placeholder="مثال : الحميات / الرمد / الواسطي" type="text" name="propertyNeighborhood" class="form-control" id="neighborhood">
+                <input required="required" autocomplete="false" value="<?php echo $propertyNeighborhood ?> " placeholder="مثال : الحميات / الرمد / الواسطي" type="text" name="propertyNeighborhood" class="form-control" id="neighborhood">
               </div>
               <div class="form-group">
                 <label for="City">المحافظة</label>

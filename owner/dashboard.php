@@ -87,28 +87,32 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
     <h2 class="mt-0 mb-25">Latest Comment</h2>
     <?php
     $comments = getLatest("*", "comments", "comment_id", 3, "owner_id = " . "'$owner_id'");
-    foreach ($comments as $comment) {
-      $uploaded_at = $comment->timestamp;
-      $current_date = new DateTime(); // Current date and time
-      $uploaded_date = new DateTime($uploaded_at); // Uploaded date and time
-      $diff = $current_date->diff($uploaded_date); // Calculate the difference
-      $time_ago = $diff->h; // Get the number of days
-      $content = $comment->content;
-      // get the user who write the comment
-      $user = getValue("*", "users", "user_id", $comment->user_id);
+    if (sizeof($comments)) :
+      foreach ($comments as $comment) {
+        $uploaded_at = $comment->timestamp;
+        $current_date = new DateTime(); // Current date and time
+        $uploaded_date = new DateTime($uploaded_at); // Uploaded date and time
+        $diff = $current_date->diff($uploaded_date); // Calculate the difference
+        $time_ago = $diff->h; // Get the number of days
+        $content = $comment->content;
+        // get the user who write the comment
+        $user = getValue("*", "users", "user_id", $comment->user_id);
     ?>
-      <div class="top d-flex align-center">
-        <img class="avatar mr-15" src="<?php echo $images ?>avatar.png" alt="" />
-        <div class="info">
-          <span class="d-block mb-5 fw-bold"><?php echo ucwords($user['FullName']) ?></span>
-          <span class="c-grey">About <?php echo $time_ago ?> Hours Ago</span>
+        <div class="top d-flex align-center">
+          <img class="avatar mr-15" src="<?php echo $images ?>avatar.png" alt="" />
+          <div class="info">
+            <span class="d-block mb-5 fw-bold"><?php echo ucwords($user['FullName']) ?></span>
+            <span class="c-grey">About <?php echo $time_ago ?> Hours Ago</span>
+          </div>
         </div>
-      </div>
-      <div class="post-content txt-c-mobile pt-20 pb-20 mt-20 mb-20">
-        <?php echo $content ?>
-      </div>
+        <div class="post-content txt-c-mobile pt-20 pb-20 mt-20 mb-20">
+          <?php echo $content ?>
+        </div>
     <?php
-    }
+      }
+    else :
+      echo "<div class='txt-c-mobile c-grey'>No Comments</div>";
+    endif;
     ?>
   </div>
   <!-- End Latest Post Widget -->
