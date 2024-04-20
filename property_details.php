@@ -162,8 +162,8 @@ endif;
       <div class="owner box">
         <div class="owner-details">
           <div class="info">
-            <h4>User</h4>
-            <a href="profile.php?ID="><?php echo $property_data->property_num ?> عقار</a>
+            <h4><?php echo $property_data->full_name ?></h4>
+            <a href="profile.php?ID=<?php echo $property_data->owner_id ?>"><?php echo $property_data->property_num ?> عقار</a>
           </div>
           <img src="<?php echo $images ?>person1.jpg" alt="">
         </div>

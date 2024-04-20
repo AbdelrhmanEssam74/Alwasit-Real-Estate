@@ -1521,22 +1521,39 @@ input[type="number"]::-webkit-outer-spin-button {
     max-width: 300px;
   }
 }
-
+.city-neighborhood .overlay {
+  position: fixed !important;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  z-index: 10;
+}
 .neighborhood_list {
   position: absolute;
   width: 100%;
   bottom: -157%;
   z-index: 999;
-  background: #7f7f7f;
-  color: #fff;
+  background: #cacaca;
+  color: #000000;
   border-radius: 5px 5px 10px 10px;
+  height: fit-content;
+  overflow: scroll;
+  top: 100%;
 }
 .neighborhood_list ul {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  list-style: square;
 }
 .neighborhood_list ul li {
   padding: 5px;
   text-align: right;
+  cursor: pointer;
+  transition: 0.5s all;
+  padding-right: 20px;
+}
+.neighborhood_list ul li:hover {
+  background-color: #8d8d8d;
+  color: #ffffff;
 }

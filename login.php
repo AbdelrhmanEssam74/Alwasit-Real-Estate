@@ -75,12 +75,12 @@ if (!empty($duplicate_login)) {
           <i class='bx bx-hide ' id="eyeHidePassword"></i>
           <p class="error_message"></p>
         </div>
-        <a id="restPass" href="<?php echo $auth ?>rest-password.php?_action=verification">نسيت كلمة السر؟</a>
         <?php
         if (!empty($wrongPassword)) {
           echo "<p class='message'>{$wrongPassword}</p>";
         }
         ?>
+          <a id="restPass" href="<?php echo $auth ?>rest-password.php?_action=verification">نسيت كلمة السر؟</a>
         <div class="check-box">
           <label dir="rtl" for="LoginForMonth">تسجيل الدخول لمده شهر</label>
           <input class="checkbox" name="remember" id="LoginForMonth" type="checkbox">

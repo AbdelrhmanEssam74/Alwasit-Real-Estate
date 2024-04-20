@@ -189,8 +189,6 @@ $(document).ready(function () {
           let comment = $("#comment-form #comment-content").val();
           let submitButton = $(".send-comment");
           let formData = new FormData();
-          formData.append("full_name", fullName);
-          formData.append("user_mail", email);
           formData.append("comment", comment);
           formData.append("user_id", submitButton.attr("data-userID"));
           formData.append("owner_id", submitButton.attr("data-ownerID"));

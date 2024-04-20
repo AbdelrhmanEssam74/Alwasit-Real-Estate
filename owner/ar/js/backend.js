@@ -235,10 +235,32 @@ $(document).ready(function () {
   $("#neighborhood").on("click", function () {
     let parent = $(this).parent();
     let list = $("<div>").addClass("neighborhood_list").appendTo(parent);
+    let overlay = $("<div>").addClass("overlay").appendTo(parent);
+    overlay.on("click", function () {
+      list.hide();
+      overlay.remove();
+    });
     let ul = $("<ul>").appendTo(list);
-    for (let index = 0; index < 3; index++) {
-      let li = $("<li>").addClass("neighborhood_item").text("p1").appendTo(ul);
-    }
-    console.log(parent);
+    // send ajax request to get neighborhoods
+    $.ajax({
+      url: "get_neighborhoods.php",
+      method: "GET",
+      success: function (response) {
+        let neighborhoods = JSON.parse(response);
+        for (let index = 0; index < neighborhoods.length; index++) {
+          const element = neighborhoods[index];
+          let li = $("<li>")
+            .addClass("neighborhood_item")
+            .text(element.neighborhood_name)
+            .appendTo(ul);
+          li.on("click", function () {
+            let input = $("#neighborhood");
+            input.val($(this).text());
+            list.hide();
+            overlay.remove();
+          });
+        }
+      },
+    });
   });
 });

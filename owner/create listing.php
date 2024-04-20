@@ -223,7 +223,7 @@ switch ($action) {
               </div>
               <div class="form-group">
                 <label for="City">المحافظة</label>
-                <input required="required" value="<?php echo $propertyCity ?> " placeholder="مثال : بني سويف" type="text" class="form-control" name="propertyCity" id="City">
+                <input autocomplete="false" required="required" value="<?php echo $propertyCity ?> " placeholder="مثال : بني سويف" type="text" class="form-control" name="propertyCity" id="City">
               </div>
             </div>
             <div class="latitude-longitude">
