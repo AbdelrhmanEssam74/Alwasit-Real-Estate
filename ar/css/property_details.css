@@ -37,6 +37,8 @@
 .image-gallery .container .main-image img {
   width: 100%;
   height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .image-gallery .container .main-image .next_img {
@@ -81,12 +83,6 @@
 
 .image-gallery .container .main-image .prev_img:hover {
   transform: translate(40%, 0);
-}
-
-.image-gallery .container .main-image img {
-  width: 93%;
-  aspect-ratio: 4 / 4;
-  object-fit: cover;
 }
 
 .image-gallery .container .other-images {
@@ -176,7 +172,7 @@
   z-index: 999;
   width: 50%;
   object-fit: cover;
-  aspect-ratio: 5 / 4;
+  aspect-ratio: 1 / 1;
   user-select: none;
 }
 
@@ -195,6 +191,7 @@
   z-index: 100;
   height: 100vh;
   width: 100vw;
+  cursor: zoom-out;
 }
 @media (max-width: 768px) {
   .image-gallery .popup-img img {
@@ -559,6 +556,8 @@ div.divTable {
   resize: none;
   overflow: hidden;
   text-align: right;
+  direction: rtl; /* Set text direction to right-to-left */
+  text-align: right; /* Align text to the right */
 }
 
 .comment-form .form button {
@@ -571,48 +570,51 @@ div.divTable {
   transition: all 0.3s;
   font-size: 25px;
 }
-.comment-form .form button.disabled {
+.comment-form .form .send-comment.disabled {
   background: #5f5f5f;
   cursor: not-allowed;
 }
-.comment-form .form button.enable {
+.comment-form .form .send-comment.enable {
   background: var(--head-line);
   cursor: pointer;
 }
-.comment-form .form button.enable:hover {
+.comment-form .form .send-comment.enable:hover {
   background-color: var(--head-line-hover);
 }
-
-.wedge-section .container .right-section .owner .owner-details {
+textarea::placeholder {
+  direction: rtl; /* Set text direction to right-to-left */
+  text-align: right; /* Align text to the right */
+}
+.owner .owner-details {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: end;
 }
 
-.wedge-section .container .right-section .owner .owner-details img {
+.owner .owner-details img {
   width: 20%;
   border-radius: 50%;
 }
 
-.wedge-section .container .right-section .owner .owner-details .info {
+.owner .owner-details .info {
   display: flex;
   flex-direction: column;
   gap: 10px;
   margin-right: 30px;
 }
 
-.wedge-section .container .right-section .owner .owner-details .info h4 {
+.owner .owner-details .info h4 {
   color: var(--head-line);
   font-size: 20px;
 }
 
-.wedge-section .container .right-section .owner .owner-details .info a {
+.owner .owner-details .info a {
   text-decoration: underline;
   color: var(--color4);
 }
 
-.wedge-section .container .right-section .owner .connection-links {
+.owner .connection-links {
   margin-top: 50px;
   display: flex;
   justify-content: space-between;
@@ -622,7 +624,7 @@ div.divTable {
   position: relative;
 }
 
-.wedge-section .container .right-section .owner .connection-links::after {
+.owner .connection-links::after {
   position: absolute;
   content: "";
   width: 100%;
@@ -642,14 +644,9 @@ div.divTable {
   outline: none;
 }
 
-.wedge-section
-  .container
-  .right-section
-  .owner
-  .connection-links
-  .button-whatsapp,
-.wedge-section .container .right-section .owner .connection-links .email-link,
-.wedge-section .container .right-section .owner .connection-links .phone-link {
+.right-section .owner .connection-links .button-whatsapp,
+.right-section .owner .connection-links .email-link,
+.right-section .owner .connection-links .phone-link {
   width: 100%;
   padding: 10px 30px 10px 10px;
   border-radius: 5px;
@@ -659,21 +656,11 @@ div.divTable {
   text-align: center;
 }
 
-.wedge-section
-  .container
-  .right-section
-  .owner
-  .connection-links
-  .button-whatsapp {
+.owner .connection-links .button-whatsapp {
   background-color: #25d366;
 }
 
-.wedge-section
-  .container
-  .right-section
-  .owner
-  .connection-links
-  .button-whatsapp::before {
+.owner .connection-links .button-whatsapp::before {
   position: absolute;
   font-family: "Font Awesome 5 Brands";
   content: "\f232";
@@ -681,12 +668,7 @@ div.divTable {
   right: 5%;
 }
 
-.wedge-section
-  .container
-  .right-section
-  .owner
-  .connection-links
-  .email-link::before {
+.owner .connection-links .email-link::before {
   position: absolute;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
@@ -695,12 +677,7 @@ div.divTable {
   top: 30%;
 }
 
-.wedge-section
-  .container
-  .right-section
-  .owner
-  .connection-links
-  .phone-link::before {
+.owner .connection-links .phone-link::before {
   position: absolute;
   font-family: "Font Awesome 5 Free";
   font-weight: 600;
@@ -709,70 +686,72 @@ div.divTable {
   top: 25%;
 }
 
-.wedge-section
-  .container
-  .right-section
-  .owner
-  .connection-links
-  .button-whatsapp:hover {
+.owner .connection-links .button-whatsapp:hover {
   background-color: #1dad52;
 }
 
-.wedge-section .container .right-section .owner .connection-links .phone-link,
-.wedge-section .container .right-section .owner .connection-links .email-link {
+.owner .connection-links .phone-link,
+.owner .connection-links .email-link {
   background-color: #ff5a13;
 }
 
-.wedge-section
-  .container
-  .right-section
-  .owner
-  .connection-links
-  .phone-link:hover,
-.wedge-section
-  .container
-  .right-section
-  .owner
-  .connection-links
-  .email-link:hover {
+.owner .connection-links .phone-link:hover,
+.owner .connection-links .email-link:hover {
   background-color: #b83e0a;
 }
 
-.report {
+.report-property {
   position: fixed;
   top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  height: 100%;
+  z-index: 999;
   width: 100%;
-  z-index: 6;
   height: 100%;
-  width: 100%;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+  transform: scale(0);
 }
-
-.report-property {
+.report-property.active {
+  opacity: 1;
+  transform: scale(1);
+}
+.report-property .btns {
   display: flex;
   width: 100%;
-  justify-content: center;
-  align-items: center;
-  z-index: 666;
+  gap: 15px;
 }
-
-.report svg {
-  position: absolute;
-  font-size: 2em;
+.cancel-report,
+.report-property .btns button {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 0;
   color: #fff;
-  top: 4%;
-  right: 22%;
-  transform: translate(0%, 115%);
+  width: 100%;
+  transition: 0.5s all;
+  text-align: center;
   cursor: pointer;
 }
-
-.report .report-property .report-model {
+.report-property .btns .submit-report {
+  background-color: #ff5a13;
+}
+.report-property .btns .cancel-report {
+  color: #ff5a13;
+  background-color: #fff;
+  border: 1px solid #ff5a13;
+}
+.report-property .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background-color: #00000036;
+}
+.report-property .report-model {
   display: flex;
   background-color: #fff;
   justify-content: space-between;
@@ -784,7 +763,7 @@ div.divTable {
   z-index: 666;
 }
 
-.report .report-property .report-model .title {
+.report-property .report-model .title {
   position: absolute;
   top: -10%;
   left: 0;
@@ -797,21 +776,21 @@ div.divTable {
   border-radius: 5px 5px 0px 0px;
 }
 
-.report .report-property .report-model .img {
+.report-property .report-model .img {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 25px;
 }
 
-.report .report-property .report-model .img p {
+.report-property .report-model .img p {
   width: 250px;
   text-align: right;
   margin-top: 25px;
   line-height: 1.5;
 }
 
-.report .report-property .report-model img {
+.report-property .report-model img {
   width: 60%;
 }
 
@@ -845,16 +824,16 @@ div.divTable {
   text-decoration: underline;
 }
 
-.report-model form {
+.report-model .report-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.report-model form textarea {
+.report-model .report-form textarea {
   height: 100px;
   resize: none;
-  overflow: hidden;
+  overflow: scroll;
   text-align: right;
   border: none;
   padding: 10px;
@@ -865,22 +844,11 @@ div.divTable {
   text-align: right;
 }
 
-.report-model form button {
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 0;
-  color: #fff;
-  background-color: #ff5a13;
-  transition: 0.5s all;
-  cursor: pointer;
-}
-
-.report-model form .input__message {
+.report-model .report-form .input__message {
   display: none;
 }
 
-.report-model form .input__message--invalid {
+.report-model .report-form .input__message--invalid {
   margin-top: 5px;
   width: 100%;
   text-align: right;
@@ -888,15 +856,15 @@ div.divTable {
   display: block;
 }
 
-.report-model form button:hover {
+.report-model .report-form button:hover {
   background-color: #b83e0a;
 }
 
-select::-ms-expand {
+.report-form select::-ms-expand {
   display: none;
 }
 
-select {
+.report-form select {
   font-weight: 400;
   appearance: none;
   outline: none;
@@ -932,8 +900,8 @@ select {
   pointer-events: none;
 }
 
-.right-section .connectio-with-owner .title,
-.right-section .other-proparty .title {
+.connectio-with-owner .title,
+.other-proparty .title {
   font-size: 15px;
   margin: 20px 0px;
   width: 100%;
@@ -942,7 +910,7 @@ select {
   color: var(--head-line);
 }
 
-.right-section .connectio-with-owner .form .main-input {
+.connectio-with-owner .form .main-input {
   padding: 20px;
   display: block;
   border-radius: 5px;
@@ -954,18 +922,19 @@ select {
   text-align: right;
 }
 
-.right-section .connectio-with-owner .form .main-input:focus {
+.connectio-with-owner .form .main-input:focus {
   outline: none;
 }
 
-.right-section .connectio-with-owner .form textarea.main-input {
+.connectio-with-owner .form textarea.main-input {
   height: 200px;
   resize: none;
   overflow: hidden;
   text-align: right;
+  direction: rtl; /* Set text direction to right-to-left */
+  text-align: right; /* Align text to the right */
 }
-
-.right-section .connectio-with-owner .form button {
+.connectio-with-owner .form button {
   background: var(--head-line);
   color: white;
   padding: 10px;
@@ -977,19 +946,31 @@ select {
   transition: all 0.3s;
   font-size: 25px;
 }
-
-.right-section .other-proparty a {
+.connectio-with-owner .form button.disabled {
+  background: #5f5f5f;
+  cursor: not-allowed;
+}
+.connectio-with-owner .form button.enable {
+  background: var(--head-line);
+  cursor: pointer;
+}
+.connectio-with-owner .form button.enable:hover {
+  background-color: var(--head-line-hover);
+}
+.other-proparty a {
   display: flex;
   flex-direction: row-reverse;
   margin-top: 30px;
 }
 
 .right-section .other-proparty a .img {
-  width: 65%;
+  width: 50%;
 }
 
 .right-section .other-proparty a img {
   width: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
 }
 
 .right-section .other-proparty a .info {
@@ -1061,32 +1042,17 @@ select {
 }
 
 @media (max-width: 767px) {
-  .wedge-section .container .right-section .owner .connection-links {
+  .owner .connection-links {
     gap: 30px;
   }
 
-  .wedge-section
-    .container
-    .right-section
-    .owner
-    .connection-links
-    .button-whatsapp,
-  .wedge-section .container .right-section .owner .connection-links .email-link,
-  .wedge-section
-    .container
-    .right-section
-    .owner
-    .connection-links
-    .phone-link {
+  .owner .connection-links .button-whatsapp,
+  .owner .connection-links .email-link,
+  .owner .connection-links .phone-link {
     width: 100%;
   }
 
-  .wedge-section
-    .container
-    .right-section
-    .owner
-    .connection-links
-    .button-whatsapp::before {
+  .connection-links .button-whatsapp::before {
     position: absolute;
     font-family: "Font Awesome 5 Brands";
     content: "\f232";
@@ -1107,8 +1073,7 @@ select {
     top: 0%;
     right: 12%;
   }
-
-  .report .report-property .report-model .img {
+  .report-property .report-model .img {
     display: none;
   }
 
@@ -1137,6 +1102,9 @@ select {
 
   .right-section .other-proparty div a .info .details {
     gap: 20px;
+  }
+  select:optional {
+    font-size: 15px;
   }
 }
 

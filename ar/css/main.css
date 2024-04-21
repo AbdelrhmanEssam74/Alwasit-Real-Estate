@@ -817,7 +817,6 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .widgets .property-body {
-  transition: 0.5s all;
   background-color: var(--card-background);
 }
 
@@ -839,7 +838,7 @@ input[type="number"]::-webkit-outer-spin-button {
   aspect-ratio: 1/1;
 }
 
-.widgets .property-body .images-details .details-top {
+.images-details .details-top {
   position: absolute;
   top: 0;
   display: flex;
@@ -850,12 +849,12 @@ input[type="number"]::-webkit-outer-spin-button {
   align-items: center;
 }
 
-.widgets .property-body .images-details .details-top .details-type {
+.images-details .details-top .details-type {
   display: flex;
   gap: 20px;
 }
 
-.widgets .property-body .images-details .details-top .details-type .type1 {
+.images-details .details-top .details-type .type1 {
   width: 90px;
   color: #000000;
   text-align: center;
@@ -864,7 +863,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 7px;
 }
 
-.widgets .property-body .images-details .details-top .details-type .rent {
+.images-details .details-top .details-type .rent {
   width: 90px;
   color: var(--sub-head-line);
   text-align: center;
@@ -873,7 +872,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 7px;
 }
 
-.widgets .property-body .images-details .details-top .details-type .buy {
+.images-details .details-top .details-type .buy {
   width: 90px;
   color: #ffffff;
   text-align: center;
@@ -882,7 +881,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 7px;
 }
 
-.widgets .property-body .images-details .details-top .favorite-box {
+.images-details .details-top .favorite-box {
   border-radius: 50%;
   padding: 10px;
   width: 35px;
@@ -895,7 +894,7 @@ input[type="number"]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
-.widgets .property-body .images-details .details-top .favorite-box button {
+.images-details .details-top .favorite-box button {
   border: none;
   outline: none;
   background-color: transparent;
@@ -903,7 +902,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 15px;
 }
 
-.widgets .property-body .images-details .details-top .favorite-box:hover {
+.images-details .details-top .favorite-box:hover {
   background-color: var(--secondary);
 }
 
@@ -911,7 +910,7 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #fff;
 }
 
-.widgets .property-body .images-details .details-bottom {
+.images-details .details-bottom {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
@@ -922,7 +921,7 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 5px;
 }
 
-.widgets .property-body .images-details .details-bottom .property-details {
+.details-bottom .property-details {
   display: flex;
   flex-direction: row-reverse;
   padding: 5px 5px;
@@ -932,19 +931,9 @@ input[type="number"]::-webkit-outer-spin-button {
   align-items: center;
 }
 
-.widgets .property-body .images-details .details-bottom .property-details .area,
-.widgets
-  .property-body
-  .images-details
-  .details-bottom
-  .property-details
-  .rooms,
-.widgets
-  .property-body
-  .images-details
-  .details-bottom
-  .property-details
-  .bath {
+.details-bottom .property-details .area,
+.details-bottom .property-details .rooms,
+.details-bottom .property-details .bath {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -954,33 +943,18 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: var(--card-tag-background);
 }
 
-.widgets
-  .property-body
-  .images-details
-  .details-bottom
-  .property-details
-  .rooms,
-.widgets
-  .property-body
-  .images-details
-  .details-bottom
-  .property-details
-  .bath {
+.details-bottom .property-details .rooms,
+.details-bottom .property-details .bath {
   padding: 5px 8px;
   gap: 5px;
 }
 
-.widgets
-  .property-body
-  .images-details
-  .details-bottom
-  .property-details
-  .area {
+.details-bottom .property-details .area {
   padding: 5px 10px;
   width: 100%;
 }
 
-.widgets .property-body .images-details .details-bottom .photos {
+.images-details .details-bottom .photos {
   display: flex;
   width: 50px;
   justify-content: center;
@@ -1071,15 +1045,18 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /* animate property body */
+.property-body {
+  transition: 0.5s ease-out;
+}
 .property-body.hide {
   opacity: 0;
-  transform: translateX(150px);
-  transition: opacity 1s, transform 1s;
+  transform: scale(0);
+  /* transition: opacity 1.5s, transform 1.5s; */
 }
 
 .property-body.show {
   opacity: 1;
-  transform: translateX(0);
+  transform: scale(1);
 }
 
 /* ُEnd widget  */

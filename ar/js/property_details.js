@@ -135,39 +135,49 @@ $(document).ready(function () {
     });
   });
   // close alert modal
-  $(".alert_close, .overlay , .close").click(function () {
+  $(".alert_close, .modal-overlay , .close").click(function () {
     $(".alert_modal").css("display", "none");
-    $(".overlay").css("display", "none");
+    $(".modal-overlay").css("display", "none");
   });
   // before send any comment message to the owner check if the user already login or not
   // check if any input if empty and disabled the button
+  function initializeCommentForm(inputs, sendBtn) {
+    let btn = $(sendBtn);
+    btn.prop("disabled", true).addClass("disabled");
+    function checkInputs() {
+      let allInputsFilled = true;
+      for (let input of inputs) {
+        if (input.element.val().length < input.minLength) {
+          allInputsFilled = false;
+          input.element.parent().attr("data-warning", "الرجاء ملء هذا الحقل");
+          input.element.css("border", "1px solid red");
+        } else {
+          input.element.parent().removeAttr("data-warning");
+          input.element.css("border", "");
+        }
+      }
+      btn.prop("disabled", !allInputsFilled);
+      btn.toggleClass("disabled", !allInputsFilled);
+      btn.toggleClass("enable", allInputsFilled);
+    }
+
+    for (let input of inputs) {
+      input.element.on("input", checkInputs);
+    }
+  }
+
+  // Example usage:
   let inputs = [
     {
       element: $("#comment-form #comment-content"),
       minLength: 20,
     },
   ];
-  let submitButton = $(".send-comment");
-  submitButton.prop("disabled", true).addClass("disabled");
-  function checkInputs() {
-    let allInputsFilled = true;
-    for (let input of inputs) {
-      if (input.element.val().length < input.minLength) {
-        allInputsFilled = false;
-        input.element.parent().attr("data-warning", "الرجاء ملء هذا الحقل");
-        input.element.css("border", "1px solid red");
-      } else {
-        input.element.parent().removeAttr("data-warning");
-        input.element.css("border", "");
-      }
-    }
-    submitButton.prop("disabled", !allInputsFilled);
-    submitButton.toggleClass("disabled", !allInputsFilled);
-    submitButton.toggleClass("enable", allInputsFilled);
-  }
-  for (let input of inputs) {
-    input.element.on("input", checkInputs);
-  }
+
+  let send_comment_btn = $(".send-comment");
+
+  // Call the function to initialize the comment form
+  initializeCommentForm(inputs, send_comment_btn);
   //NOTE - Send comment to server
   $(".send-comment").on("click", function () {
     // send request to DB to check if the user is login or not
@@ -187,12 +197,15 @@ $(document).ready(function () {
         } else if (data == 1) {
           // if user is logged in
           let comment = $("#comment-form #comment-content").val();
-          let submitButton = $(".send-comment");
+          let send_comment_btn = $(".send-comment");
           let formData = new FormData();
           formData.append("comment", comment);
-          formData.append("user_id", submitButton.attr("data-userID"));
-          formData.append("owner_id", submitButton.attr("data-ownerID"));
-          formData.append("property_id", submitButton.attr("data-propertyID"));
+          formData.append("user_id", send_comment_btn.attr("data-userID"));
+          formData.append("owner_id", send_comment_btn.attr("data-ownerID"));
+          formData.append(
+            "property_id",
+            send_comment_btn.attr("data-propertyID")
+          );
           // send the data to the server
           $.ajax({
             method: "POST",
@@ -226,8 +239,81 @@ $(document).ready(function () {
       },
     });
   });
+  //NOTE - Send offer about spacific property to the owner
+  let send_offer_btn = $(".send-offer");
+  send_offer_btn.prop("disabled", true).addClass("disabled");
+  // Example usage:
+  let inputs2 = [
+    {
+      element: $(".connectio-with-owner #offer-content"),
+      minLength: 20,
+    },
+  ];
+
+  initializeCommentForm(inputs2, send_offer_btn);
+  $(".send-offer").on("click", function () {
+    // send request to DB to check if the user is login or not
+    $.ajax({
+      method: "POST",
+      url: "checklogin.php",
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        if (data == 0) {
+          $(".modal-container-2").css("display", "flex");
+          $(".modal-container-2  h2").text("للمتابعة يجب تسجيل الدخول اولاً");
+          $(".modal-container-2 .login").text("تسجيل الدخول");
+          $(".modal-container-2 .login").on("click", function () {
+            location.href = "login.php";
+          });
+        } else if (data == 1) {
+          // if user is logged in
+          let offer = $(".connectio-with-owner #offer-content").val();
+          let send_offer_btn = $(".send-offer");
+          let formData = new FormData();
+          formData.append("offer", offer);
+          formData.append("user_id", send_offer_btn.attr("data-userID"));
+          formData.append("owner_id", send_offer_btn.attr("data-ownerID"));
+          formData.append(
+            "property_id",
+            send_offer_btn.attr("data-propertyID")
+          );
+          // send the data to the server
+          $.ajax({
+            method: "POST",
+            url: "send_offer.php",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+              console.log(data);
+              if (data == 1) {
+                $(".success-message")
+                  .addClass("show-success")
+                  .text("تم ارسال  العرض  بنجاح")
+                  .on("click", function () {
+                    $(this).removeClass("show-success");
+                  });
+                setTimeout(function () {
+                  $(".success-message").removeClass("show-success");
+                  location.reload();
+                }, 2000);
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error(xhr);
+            },
+          });
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
+  });
+  //////////////////////////////////////
   let formData = new FormData();
-  formData.append("property_id", submitButton.attr("data-propertyID"));
+  formData.append("property_id", send_comment_btn.attr("data-propertyID"));
   //NOTE - Get the comments from the server and display them in the DOM
   $.ajax({
     method: "POST",
@@ -341,111 +427,84 @@ $(document).ready(function () {
       },
     });
   }
-
-  // Create the main container div
-  const reportModelDiv = $("<div>").addClass("report-model");
-
-  // Create the title paragraph
-  const titleParagraph = $("<p>")
-    .addClass("title")
-    .text("الإبلاغ عن هذا العقار");
-  reportModelDiv.append(titleParagraph);
-
-  // Create the form container div
-  const formDiv = $("<div>").addClass("form");
-  reportModelDiv.append(formDiv);
-
-  // Create the form element
-  const formElement = $("<form>").attr("action", "");
-  formDiv.append(formElement);
-
-  // Create the select dropdown item div
-  const selectDropdownItemDiv = $("<div>").addClass("select-dropdown__item");
-  formElement.append(selectDropdownItemDiv);
-
-  // Create the reason select element
-  const reasonSelect = $("<select>")
-    .attr("name", "reason")
-    .addClass("select-resson");
-  selectDropdownItemDiv.append(reasonSelect);
-
-  // Create the default option for the reason select
-  const defaultOption = $("<option>").val("").text("إختر السبب");
-  reasonSelect.append(defaultOption);
-
-  // Create the other options for the reason select
-  const reasons = [
-    "العقار غير متوافر",
-    "السعر غير دقيق",
-    "لم أتسلم رد من الوسيط العقاري",
-    "لا توجد تفاصيل للعقار",
-    "نوعية الصور رديئة",
-    "نص الوصف ضعيف جداً",
-    "الموقع غير صحيح",
-    "العقار المدرج غير موجود فعلياً",
-    "خطأ في نوع العقار المدرج",
-  ];
-
-  reasons.forEach((reason, index) => {
-    const option = $("<option>")
-      .val(index + 1)
-      .text(reason);
-    reasonSelect.append(option);
-  });
-
-  // Create the input message div
-  const inputMessageDiv = $("<div>")
-    .addClass("input__message")
-    .text("يرجى تحديد السبب");
-  selectDropdownItemDiv.append(inputMessageDiv);
-
-  // Create the textarea for the message
-  const messageTextarea = $("<textarea>")
-    .attr("name", "message")
-    .addClass("main-input")
-    .attr("placeholder", "تعليق إضافي");
-  formElement.append(messageTextarea);
-
-  // Create the submit button
-  const subButton = $("<button>").addClass("submit-report").text("إرسال");
-  formElement.append(subButton);
-
-  // Create the image container div
-  const imgDiv = $("<div>").addClass("img");
-  reportModelDiv.append(imgDiv);
-
-  // Create the image element
-  const imageElement = $("<img>")
-    .attr("src", "images/report-property.png")
-    .attr("alt", "");
-  imgDiv.append(imageElement);
-
-  // Create the description paragraph
-  const descriptionParagraph = $("<p>").text(
-    "هل هناك مشكلة في هذا العقار؟ يرجى تزويدنا بمزيد من المعلومات حتى نتمكن من حل المشكلة"
-  );
-  imgDiv.append(descriptionParagraph);
-
-  // Append the model box to the desired container in your HTML
-  $(".report-property").append(reportModelDiv);
-
-  // Get the property paragraph element
-  const propertyRepor = $("#property");
-
-  // Get the report model element
-  const reportModel = $(".report");
-
-  // Add a click event listener to the property paragraph
-  propertyRepor.on("click", (event) => {
-    // event.stopPropagation(); // Stop the click event from propagating to the document
-    // Show the report model
-    reportModel.fadeToggle();
-    reportModel.css("display", "flex");
-  });
-  let close_model = $(".close-report-model");
-  close_model.on("click", () => {
-    reportModel.fadeOut();
-    reportModel.css("display", "none");
+  // report property
+  $(".report-links").on("click", function () {
+    $(".report-property").addClass("active");
+    $(".report-property .overlay ").on("click", function () {
+      $(".report-property").removeClass("active");
+    });
+    $(".report-property .cancel-report").on("click", function () {
+      $(".report-property").removeClass("active");
+    });
+    // send report to server
+    let send_report_btn = $(".report-property .submit-report");
+    send_report_btn.on("click", function () {
+      // send request to DB to check if the user is login or not
+      $.ajax({
+        method: "POST",
+        url: "checklogin.php",
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          if (data == 0) {
+            $(".modal-container-2").css("display", "flex");
+            $(".modal-container-2  h2").text("للمتابعة يجب تسجيل الدخول اولاً");
+            $(".modal-container-2 .login").text("تسجيل الدخول");
+            $(".report-property").removeClass("active");
+            $(".modal-container-2 .login").on("click", function () {
+              location.href = "login.php";
+            });
+          } else if (data == 1) {
+            // if user is logged in
+            let report_reson = $(".select-dropdown__item select").val();
+            if (report_reson == "") { // check if the reason is empty or not
+              $(".input__message").addClass("input__message--invalid");
+            } else {
+              // if reason not empty get the value and send it to the server
+              let report_reson = $(".select-dropdown__item select").val();
+              let additional_reason = $("#additional_reason").val();
+              let formData = new FormData();
+              formData.append("report_reason", report_reson);
+              formData.append("additional_reason", additional_reason);
+              formData.append("user_id", send_report_btn.attr("data-userID"));
+              formData.append("owner_id", send_report_btn.attr("data-ownerID"));
+              formData.append(
+                "property_id",
+                send_report_btn.attr("data-propertyID")
+              );
+              // // send the data to the server
+              $.ajax({
+                method: "POST",
+                url: "send_report.php",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                  if (data == 1) {
+                    $(".report-property").removeClass("active");
+                    $(".success-message")
+                      .addClass("show-success")
+                      .text("تم إرسال التقرير  بنجاح")
+                      .on("click", function () {
+                        $(this).removeClass("show-success");
+                      });
+                    setTimeout(function () {
+                      $(".success-message").removeClass("show-success");
+                    }, 3000);
+                  }
+                },
+                error: function (xhr, status, error) {
+                  console.error(xhr);
+                },
+              });
+            }
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr);
+        },
+      });
+    });
   });
 });
 

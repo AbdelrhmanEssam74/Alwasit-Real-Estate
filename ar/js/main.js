@@ -444,7 +444,7 @@ window.addEventListener("scroll", function () {
   const windowHeight = window.innerHeight;
   const windowWidth = window.innerWidth;
 
-  if (windowWidth > 768) {
+  if (windowWidth > 730) {
     propertyBodies.forEach(function (body) {
       const bodyTop = body.getBoundingClientRect().top;
 

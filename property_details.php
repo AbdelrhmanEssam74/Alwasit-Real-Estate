@@ -1,6 +1,24 @@
 <?php include 'init.php';
 include  $config . 'config.php';
 include  $config . 'propertyTable.php';
+$neighborhood = "";
+$property_id = (isset($_GET['PId']) ? $_GET['PId'] : 0);
+if ($property_id != 0) :
+  // Get Property Details From Database
+  $property_obj = new PropertyTable();
+  $property_data = $property_obj->getPropertyById($property_id);
+  if (empty($property_data)) :
+    echo " <div class='invalid-id'>Property Not Found!</div>";
+    exit;
+  else :
+    $_SESSION['property_title'] = $property_data->title . " | " . $property_data->neighborhood;
+    $fullDescription = $property_data->description;
+    $desc = substr($fullDescription, 0, 89);
+    // explode the imgs
+    $imgs = explode(',', $property_data->img);
+    $neighborhood = $property_data->neighborhood;
+  endif;
+endif;
 $DefultPage = '';
 if (isset($_SESSION['property_title'])) {
   $pageTitel = $_SESSION['property_title'];
@@ -15,25 +33,15 @@ $prop_details_page = '';
 <!-- End Header -->
 <?php
 // get property details from database
-$property_id = (isset($_GET['PId']) ? $_GET['PId'] : 0);
-if ($property_id != 0) :
-  // Get Property Details From Database
-  $property_obj = new PropertyTable();
-  $property_data = $property_obj->getPropertyById($property_id);
-  if (empty($property_data)) :
-    echo " <div class='invalid-id'>Property Not Found!</div>";
-    exit;
-  else :
-    $fullDescription = $property_data->description;
-    $desc = substr($fullDescription, 0, 89);
-    // explode the imgs
-    $imgs = explode(',', $property_data->img);
-  endif;
-endif;
+if (!isset($_GET['PId'])) {
+  echo " <div class='invalid-id'>Property Not Found!</div>";
+  exit;
+}
+
 ?>
 <p class="success-message"></p>
 <!--start gallery-->
-<div class="modal-container overlay">
+<div class="modal-container modal-overlay">
   <div class="modal-content">
     <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
     <h2></h2>
@@ -42,7 +50,7 @@ endif;
     <button class="modal-content-btn send-access-permission " for="modal-toggle"></button>
   </div>
 </div>
-<div class="modal-container-2 overlay">
+<div class="modal-container-2 modal-overlay">
   <div class="modal-content">
     <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
     <h2></h2>
@@ -177,96 +185,95 @@ endif;
         <div class="report-links">
           <p id="property">الإبلاغ عن هذا العقار</p>
         </div>
-        <div class="report">
-          <i class="fa-solid fa-xmark close-report-model"></i>
-          <div class="report-property">
-          </div>
-        </div>
       </div>
       <div class="connectio-with-owner box">
-        <p class="title">إرسال عرض خاص بهذا العقار للوسيط</p>
+        <p class="title">إرسال عرض خاص بهذا العقار للمالك</p>
         <div role="form" class="form">
-          <input type="text" name="name" class="main-input" placeholder="الأسم">
-          <input type="email" name="email" class="main-input" placeholder="البريد الإلكتروني">
-          <textarea name="message" class="main-input" placeholder="عرضك"></textarea>
-          <button>إرسال</button>
+          <!-- <input type="text" name="name" class="main-input" placeholder="الأسم">
+          <input type="email" name="email" class="main-input" placeholder="البريد الإلكتروني"> -->
+          <div>
+            <textarea id="offer-content" name="message" class="main-input" placeholder="<?php echo (isset($_SESSION['fullName'])) ?  " عرض باسم " . $_SESSION['fullName']  : "أرسل عرض...." ?>"></textarea>
+          </div>
+          <button class="send-offer" type="submit" data-propertyID="<?php echo $property_data->property_id ?>" data-userID="<?php echo (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "" ?>" data-ownerID="<?php echo $property_data->owner_id ?>">إرسال</button>
         </div>
       </div>
       <div class="other-proparty box">
         <p class="title">عقارات اخري في نفس المنطقة</p>
         <div>
-          <a href="" role="rowgroup">
-            <div class="img">
-              <img src="<?php echo $images ?>img1.jpg" alt="">
-            </div>
-            <div class="info">
-              <p class="type">شقة | للإيجار</p>
-              <p class="price">3000 <span> جنية</span> </p>
-              <div class="details">
-                <div>
-                  <span>متر مربع</span> <span> 150 </span>
-                  <i class='bx bx-area'></i>
+          <?php
+          //NOTE - Get the top 3 properties in the same neighborhood
+          $properties = $property_obj->getALLProperties();
+          foreach ($properties as $prop) :
+            if ($prop->neighborhood == $neighborhood && $prop->property_id != $property_id) :
+              $main_img = explode(',', $prop->img)[0];
+
+          ?>
+              <a href="?PId=<?php echo $prop->property_id ?> " role="rowgroup">
+                <div class="img">
+                  <img src="<?php echo $owner ?>upload/<?php echo $prop->owner_id ?>/<?php echo $prop->property_id ?>/<?php echo $main_img ?>" alt="">
                 </div>
-                <div>
-                  <span>1</span>
-                  <i class='bx bx-bath'></i>
+                <div class="info">
+                  <p class="type"><?php echo $prop->type  ?> | <?php echo $prop->status  ?></p>
+                  <p class="price"><?php echo number_format($prop->price)  ?> <span> جنية</span> </p>
+                  <div class="details">
+                    <div>
+                      <span>متر مربع</span> <span> <?php echo $prop->area  ?> </span>
+                      <i class='bx bx-area'></i>
+                    </div>
+                    <div>
+                      <span><?php echo $prop->bath  ?></span>
+                      <i class='bx bx-bath'></i>
+                    </div>
+                    <div>
+                      <span><?php echo $prop->rooms  ?></span>
+                      <i class='bx bx-bed'></i>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <span>3</span>
-                  <i class='bx bx-bed'></i>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="" role="rowgroup">
-            <div class="img">
-              <img src="<?php echo $images ?>img1.jpg" alt="">
-            </div>
-            <div class="info">
-              <p class="type">شقة | للإيجار</p>
-              <p class="price">3000 <span> جنية</span> </p>
-              <div class="details">
-                <div>
-                  <span>متر مربع</span> <span> 90 </span>
-                  <i class='bx bx-area'></i>
-                </div>
-                <div>
-                  <span>1</span>
-                  <i class='bx bx-bath'></i>
-                </div>
-                <div>
-                  <span>3</span>
-                  <i class='bx bx-bed'></i>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="" role="rowgroup">
-            <div class="img">
-              <img src="<?php echo $images ?>img1.jpg" alt="">
-            </div>
-            <div class="info">
-              <p class="type">شقة | للإيجار</p>
-              <p class="price">3000 <span> جنية</span> </p>
-              <div class="details">
-                <div>
-                  <span>متر مربع</span> <span> 90 </span>
-                  <i class='bx bx-area'></i>
-                </div>
-                <div>
-                  <span>1</span>
-                  <i class='bx bx-bath'></i>
-                </div>
-                <div>
-                  <span>3</span>
-                  <i class='bx bx-bed'></i>
-                </div>
-              </div>
-            </div>
-          </a>
+              </a>
+          <?php
+            else :
+            // echo " <div class='invalid-id'>لا يوجد عقارات اخري في نفس المنطقه</div>";
+            // continue;
+            endif;
+
+          endforeach;
+
+          ?>
         </div>
 
       </div>
+    </div>
+  </div>
+</div>
+<div class="report-property">
+  <div class="overlay"></div>
+  <div class="report-model">
+    <p class="title">الإبلاغ عن هذا العقار</p>
+    <div class="report-form" role="form">
+      <div class="select-dropdown__item">
+        <select name="reason" class="select-resson">
+          <option value="">إختر السبب</option>
+          <option value="1">العقار غير متوافر</option>
+          <option value="2">السعر غير دقيق</option>
+          <option value="3">لم أتسلم رد من الوسيط العقاري</option>
+          <option value="4">لا توجد تفاصيل للعقار</option>
+          <option value="5">نوعية الصور رديئة</option>
+          <option value="6">نص الوصف ضعيف جداً</option>
+          <option value="7">الموقع غير صحيح</option>
+          <option value="8">العقار المدرج غير موجود فعلياً</option>
+          <option value="9">خطأ في نوع العقار المدرج</option>
+        </select>
+        <div class="input__message">يرجى تحديد السبب</div>
+      </div>
+      <textarea name="additional_reason" class="main-input" id="additional_reason" placeholder="تعليق إضافي"></textarea>
+      <div class="btns">
+        <p class="cancel-report">إلغاء</p>
+        <button class="submit-report" data-propertyID="<?php echo $property_data->property_id ?>" data-userID="<?php echo (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "" ?>" data-ownerID="<?php echo $property_data->owner_id ?>">إرسال</button>
+      </div>
+    </div>
+    <div class="img"><img src="ar/images/report-property.png" alt="">
+      <p>هل هناك مشكلة في هذا العقار؟ يرجى تزويدنا بمزيد من المعلومات حتى نتمكن من حل المشكلة</p>
     </div>
   </div>
 </div>

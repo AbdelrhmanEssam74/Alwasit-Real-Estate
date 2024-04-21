@@ -19,4 +19,12 @@ class PropertyTable extends DatabaseConnection
     $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $properties;
   }
+  public function getALLProperties()
+  {
+    $sql = "SELECT * FROM properties  INNER JOIN owners ON properties.owner_id = owners.owner_id Where properties.active = 1 AND properties.deleted = 0 ";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $properties;
+  }
 }

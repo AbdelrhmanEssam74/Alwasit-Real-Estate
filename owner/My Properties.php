@@ -43,7 +43,7 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
         //NOTE - display properties details 
         if (isset($prop_data)) :
           foreach ($prop_data as $property) :
-            $_SESSION['property_title'] = $property->title . " " . $property->neighborhood;
+            $_SESSION['property_title'] = $property->title . " | " . $property->neighborhood;
         ?>
             <tr id="row_<?php echo $property->property_id ?>">
               <td><a href="<?php echo $prop_details_page ?>?PId=<?php echo $property->property_id ?>"><?php echo $property->title ?></a></td>
