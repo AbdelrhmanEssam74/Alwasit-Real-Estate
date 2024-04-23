@@ -818,6 +818,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .widgets .property-body {
   background-color: var(--card-background);
+  transition: 0.5s;
 }
 
 .widgets .property-body:hover {
@@ -901,7 +902,11 @@ input[type="number"]::-webkit-outer-spin-button {
   cursor: pointer;
   font-size: 15px;
 }
-
+.images-details .details-top .favorite-box.favorated,
+.images-details .details-top .favorite-box.favorated svg {
+  background-color: var(--secondary);
+  color: #fff;
+}
 .images-details .details-top .favorite-box:hover {
   background-color: var(--secondary);
 }
@@ -1204,4 +1209,70 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: rgb(255, 44, 44);
   padding: 30px;
   color: #fff;
+}
+
+.success-message {
+  position: fixed;
+  color: rgb(0, 0, 0);
+  right: -27%;
+  padding: 15px 10px;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: 500;
+  transition: 0.7s all;
+  z-index: 999;
+  width: 250px;
+  bottom: 15%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.success-message.show-success {
+  right: 5%;
+  background-color: rgb(250, 250, 250);
+  border-top: 5px solid var(--success);
+  border-bottom: 5px solid var(--success);
+}
+
+.success-message.show-failed {
+  right: 4%;
+  background-color: rgb(250, 250, 250);
+  border-top: 5px solid var(--danger);
+  border-bottom: 5px solid var(--danger);
+}
+
+.success-message.show-success::after,
+.success-message.show-failed::after {
+  position: absolute;
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: "\f00d";
+  color: #000;
+  top: 36%;
+  right: 8%;
+}
+
+.success-message.show-failed::before {
+  position: absolute;
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: "\f06a";
+  color: var(--danger);
+  top: 38%;
+  left: 8%;
+}
+
+.success-message.show-success::before {
+  position: absolute;
+  font-weight: 900;
+  font-family: "Font Awesome 5 Free";
+  content: "\f058";
+  top: 38%;
+  left: 8%;
+  color: var(--success);
+}
+
+@media only screen and (max-width: 767px) {
+  .success-message {
+    right: -55%;
+  }
 }

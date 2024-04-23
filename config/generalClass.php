@@ -2,6 +2,13 @@
 
 class GeneralClass extends DatabaseConnection
 {
+  public function select($query)
+  {
+    $select = $this->conn->prepare($query);
+    $select->execute();
+    $data = $select->fetchAll();
+    return $data;
+  }
   public function insert($query)
   {
     $insert = $this->conn->prepare($query);

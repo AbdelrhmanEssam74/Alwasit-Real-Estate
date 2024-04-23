@@ -4,7 +4,7 @@ class PropertyTable extends DatabaseConnection
   // method to get spacefic property by id
   public function getPropertyById($id)
   {
-    $sql = "SELECT * FROM properties INNER JOIN owners ON properties.owner_id=owners.owner_id WHERE properties.property_id = :id";
+    $sql = "SELECT * FROM properties INNER JOIN owners ON properties.owner_id=owners.owner_id  WHERE properties.property_id = :id";
     $stmt = $this->conn->prepare($sql);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
@@ -13,7 +13,7 @@ class PropertyTable extends DatabaseConnection
   }
   public function getTopProperties()
   {
-    $sql = "SELECT * FROM properties  INNER JOIN owners ON properties.owner_id = owners.owner_id Where properties.active = 1 AND properties.deleted = 0 LIMIT 3";
+    $sql = "SELECT * FROM properties  INNER JOIN owners ON properties.owner_id = owners.owner_id LEFT JOIN favorites ON favorites.fav_property_id = properties.property_id Where properties.active = 1 AND properties.deleted = 0 LIMIT 3";
     $stmt = $this->conn->prepare($sql);
     $stmt->execute();
     $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -21,7 +21,15 @@ class PropertyTable extends DatabaseConnection
   }
   public function getALLProperties()
   {
-    $sql = "SELECT * FROM properties  INNER JOIN owners ON properties.owner_id = owners.owner_id Where properties.active = 1 AND properties.deleted = 0 ";
+    $sql = "SELECT * FROM properties  INNER JOIN owners ON properties.owner_id = owners.owner_id  Where properties.active = 1 AND properties.deleted = 0 ";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $properties;
+  }
+  public function getFavorateProperties()
+  {
+    $sql = "SELECT * FROM favorites Where favorites.fav = 1 ";
     $stmt = $this->conn->prepare($sql);
     $stmt->execute();
     $properties = $stmt->fetchAll(PDO::FETCH_OBJ);

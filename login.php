@@ -25,7 +25,7 @@ if (isset($_SESSION['duplicate_login']) && $_SESSION['duplicate_login'] == 1) {
   $duplicate_login = $_SESSION['duplicate_login'];
 }
 session_unset();
-$_SESSION['HTTP_REFERER'] = $_SERVER['HTTP_REFERER'];
+$_SESSION['HTTP_REFERER'] = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER']  : "";
 ?>
 
 <?php include $templates . 'header.php' ?>
@@ -80,7 +80,7 @@ if (!empty($duplicate_login)) {
           echo "<p class='message'>{$wrongPassword}</p>";
         }
         ?>
-          <a id="restPass" href="<?php echo $auth ?>rest-password.php?_action=verification">نسيت كلمة السر؟</a>
+        <a id="restPass" href="<?php echo $auth ?>rest-password.php?_action=verification">نسيت كلمة السر؟</a>
         <div class="check-box">
           <label dir="rtl" for="LoginForMonth">تسجيل الدخول لمده شهر</label>
           <input class="checkbox" name="remember" id="LoginForMonth" type="checkbox">

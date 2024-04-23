@@ -8,10 +8,11 @@ $main_page  = '';
 <?php include $templates . 'header.php' ?>
 <!-- Start Header -->
 <?php include $templates . 'navbar.php';
+$user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
 ?>
 <!-- End Header -->
 <!-- Start Landing -->
-<div class="modal-container overlay">
+<div class="modal-container modal-overlay">
   <div class="modal-content">
     <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
     <h2></h2>
@@ -20,6 +21,16 @@ $main_page  = '';
     <button class="modal-content-btn send-access-permission " for="modal-toggle"></button>
   </div>
 </div>
+<div class="modal-container-2 modal-overlay">
+  <div class="modal-content">
+    <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
+    <h2></h2>
+    <hr />
+    <p></p>
+    <button class="modal-content-btn login" id="login-comment" for="modal-toggle"></button>
+  </div>
+</div>
+<p class="success-message"></p>
 <div class="langing">
   <div class="container">
     <div class="content">
@@ -45,6 +56,9 @@ $main_page  = '';
       // get top 3 properties from database
       $property_obj = new PropertyTable();
       foreach ($property_obj->getTopProperties() as $prop) :
+        // echo "<pre>";
+        // print_r($prop);
+        // echo "</pre>";
         $imgs = explode(",", $prop->img);
         $main_img = $imgs[0];
       ?>
@@ -60,8 +74,8 @@ $main_page  = '';
                 echo ($prop->status == 'لللإيجار') ? '<div class="rent">للإيجار</div>' : '<div class="buy">للبيع</div>';
                 ?>
               </div>
-              <div class="favorite-box">
-                <button title="اضف للمفضلة" class='property-favorite'>
+              <div class="favorite-box" data-fav="<?php echo ($prop->property_id == $prop->fav_property_id and $prop->checked == 1 and $prop->fav_user_id == $user_id) ? $prop->checked : 0 ?>" data-PID="<?php echo  $prop->property_id ?>" data-OID="<?php echo  $prop->owner_id ?>" data-UID="<?php echo $user_id ?>">
+                <button title="اضف للمفضلة" class=' property-favorite'>
                   <span class='icon-heart-o'>
                     <i class="fa-regular fa-heart"></i>
                   </span>

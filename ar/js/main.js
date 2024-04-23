@@ -39,7 +39,11 @@ $(document).ready(function () {
       dropDown_list.removeClass("show");
     }
   });
-
+  // close alert modal
+  $(".alert_close, .modal-overlay , .close").click(function () {
+    $(".alert_modal").css("display", "none");
+    $(".modal-overlay").css("display", "none");
+  });
   // send ajax request to owner index file to check if the user has permission or not
   $(".checkOwner").on("click", function () {
     $.ajax({
@@ -112,6 +116,101 @@ $(document).ready(function () {
   $(".alert_close, .overlay , .close").click(function () {
     $(".alert_modal").css("display", "none");
     $(".overlay").css("display", "none");
+  });
+  // add proparty to favorate
+  $(".favorite-box").on("click", function () {
+    // send request to DB to check if the user is login or not
+    let element = $(this);
+    $.ajax({
+      method: "POST",
+      url: "checklogin.php",
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        if (data == 0) {
+          $(".modal-container-2").css("display", "flex");
+          $(".modal-container-2  h2").text("للمتابعة يجب تسجيل الدخول اولاً");
+          $(".modal-container-2 .login").text("تسجيل الدخول");
+          $(".report-property").removeClass("active");
+          $(".modal-container-2 .login").on("click", function () {
+            location.href = "login.php";
+          });
+        } else if (data == 1) {
+          // if user is logged in
+          let property_id = element.attr("data-PID");
+          let user_id = element.attr("data-UID");
+          let is_fav = element.attr("data-fav");
+          let formData = new FormData();
+          formData.append("is_fav", is_fav);
+          formData.append("property_id", property_id);
+          formData.append("user_id", user_id);
+          if (is_fav == 0) {
+            // send the data to the server
+            $.ajax({
+              method: "POST",
+              url: "add_favorite.php",
+              data: formData,
+              processData: false,
+              contentType: false,
+              success: function (data) {
+                console.log(data);
+                if (data == 1) {
+                  element.attr("data-fav", 1);
+                  element.addClass("favorated");
+                  $(".success-message")
+                    .addClass("show-success")
+                    .text("تم حفظ العقار بنجاح")
+                    .on("click", function () {
+                      $(this).removeClass("show-success");
+                    });
+                  setTimeout(function () {
+                    $(".success-message").removeClass("show-success");
+                  }, 3000);
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error(xhr);
+              },
+            });
+          } else {
+            $.ajax({
+              method: "POST",
+              url: "add_favorite.php",
+              data: formData,
+              processData: false,
+              contentType: false,
+              success: function (data) {
+                if (data == 1) {
+                  element.attr("data-fav", 0);
+                  element.removeClass("favorated");
+                  $(".success-message")
+                    .addClass("show-success")
+                    .text("العقار غير محفوظ")
+                    .on("click", function () {
+                      $(this).removeClass("show-success");
+                    });
+                  setTimeout(function () {
+                    $(".success-message").removeClass("show-success");
+                  }, 3000);
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error(xhr);
+              },
+            });
+          }
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
+  });
+  // display red heart for each favorite item
+  $(".favorite-box").each(function () {
+    if ($(this).attr("data-fav") == "1") {
+      $(this).addClass("favorated");
+    }
   });
 });
 const newSearchInputs = document.querySelector(".search_inputs");
