@@ -27,12 +27,19 @@ class PropertyTable extends DatabaseConnection
     $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $properties;
   }
-  public function getFavorateProperties()
+  public function getFavorateProperties($id)
   {
-    $sql = "SELECT * FROM favorites INNER JOIN owners ON properties.owner_id = owners.owner_id Where favorites.checked = 1 ";
+    $sql = "SELECT * FROM favorites INNER JOIN properties ON properties.property_id = favorites.fav_property_id Where favorites.checked = 1 AND favorites.fav_user_id = '$id'";
     $stmt = $this->conn->prepare($sql);
     $stmt->execute();
     $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $properties;
+  }
+  public function remove_fav($uid, $pid)
+  {
+    $sql = "DELETE FROM `favorites` WHERE `fav_user_id` = '$uid' AND `fav_property_id` = '$pid'";
+    $stmt = $this->conn->prepare($sql);
+    $r = $stmt->execute();
+    return $r;
   }
 }

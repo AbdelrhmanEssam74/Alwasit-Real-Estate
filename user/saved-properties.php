@@ -8,12 +8,14 @@ $setting_page = '';
 <?php include $templates . 'navbar.php' ?>
 <?php
 include_once $config . 'config.php';
-include_once $config . 'loginTable.php';
-include_once $config . 'usersTable.php';
+include_once $config . 'propertyTable.php';
 // get all user information
 $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : 0;
-$users_obj = new RegisterTable;
-$user_data = $users_obj->getAll($user_id)[0];
+$properties = new PropertyTable;
+$properties_saved = $properties->getFavorateProperties($user_id);
+// echo "<pre>";
+// print_r($properties_saved);
+// echo "</pre>";
 ?>
 <div class="modal-container overlay">
   <div class="modal-content">
@@ -30,19 +32,31 @@ $user_data = $users_obj->getAll($user_id)[0];
   <div class="container">
     <div class="parent">
       <div class="cards">
-        <div class="blog-card">
-          <div class="description">
-            <h1>Learning to Code</h1>
-            <h2>Opening a door to the future</h2>
-            <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-          </div>
-          <div class="meta">
-            <a href="">
-              <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)">
+        <?php
+        if (count($properties_saved)) {
+
+          foreach ($properties_saved as $property) :
+            $main_img = explode(",", $property->img)[0];
+        ?>
+            <div class="card">
+              <div class="description">
+                <h1><?php echo $property->title ?></h1>
+                <h2><?php echo $property->city . " | " . $property->neighborhood ?></h2>
+                <p> <?php echo $property->description ?></p>
               </div>
-            </a>
-          </div>
-        </div>
+              <div class="meta">
+                <a class="photo" href="#">
+                  <img src="ar/images/item1" alt="">
+                </a>
+              </div>
+              <i data-uid="<?= $property->fav_user_id  ?>" data-pid="<?= $property->property_id ?>" class='fa-solid fa-trash-can remove-saved'></i>
+            </div>
+        <?php
+          endforeach;
+        } else {
+          echo "<h2>لا يوجد عقارات محفوظة</h2>";
+        }
+        ?>
       </div>
       <nva class="sidebar">
         <a href="general-info.php" class="sidebar__list-item">

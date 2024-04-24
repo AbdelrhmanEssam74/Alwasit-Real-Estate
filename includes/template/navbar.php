@@ -1,10 +1,7 @@
 <?php
-// user profile image
-
 $user_id = '';
 if (isset($_SESSION['uID'])) {
   $user_id = $_SESSION['uID'];
-  # code...
 }
 ?>
 <header>
@@ -25,7 +22,7 @@ if (isset($_SESSION['uID'])) {
         </div>
       </div>
       <div class="favorite_page">
-        <a data-saved="5" data-uid="<?php echo $user_id ?>" href="<?php echo $user . "saved-properties.php" ?>">
+        <a data-saved="" data-uid="<?php echo $user_id ?>" href="<?php echo $user . "saved-properties.php" ?>">
           <i class="fa-regular fa-heart"></i>
         </a>
       </div>

@@ -70,7 +70,9 @@ $(function () {
       contentType: false,
       success: function (data) {
         if (data === "1") {
-          success_message.addClass("show-success").text("تم تحديث البيانات بنجاح");
+          success_message
+            .addClass("show-success")
+            .text("تم تحديث البيانات بنجاح");
           setTimeout(function () {
             success_message.removeClass("show-success");
           }, 5000);
@@ -312,5 +314,42 @@ $(function () {
   $(".alert_close, .overlay , .close").click(function () {
     $(".alert_modal").css("display", "none");
     $(".overlay").css("display", "none");
+  });
+  // display the number of favorite items
+  let user_id = $(".favorite_page a").attr("data-uid");
+  $.ajax({
+    url: "get_saved_num.php",
+    method: "POST",
+    data: { user_id: user_id },
+    success: function (data) {
+      if (data == 0) {
+        $(".favorite_page a").attr("data-saved", "");
+        $(".favorite_page a").removeClass("saved");
+      } else {
+        $(".favorite_page a").addClass("saved");
+        $(".favorite_page a").attr("data-saved", data);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error(xhr);
+    },
+  });
+  // remove item from favorite list
+  $(".remove-saved").on("click", function () {
+    let user_id = $(this).attr("data-uid");
+    let property_id = $(this).attr("data-pid");
+    $.ajax({
+      url: "remove_saved.php",
+      method: "POST",
+      data: { user_id: user_id, property_id: property_id },
+      success: function (data) {
+        if (data == 1) {
+          location.reload();
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
   });
 });

@@ -1,3 +1,9 @@
+<?php
+$user_id = '';
+if (isset($_SESSION['uID'])) {
+  $user_id = $_SESSION['uID'];
+}
+?>
 <header>
   <div class="container">
     <?php
@@ -16,7 +22,7 @@
         </div>
       </div>
       <div class="favorite_page">
-        <a href="#">
+        <a href="#" data-saved="" class="saved" data-uid="<?php echo $user_id ?>">
           <i class=" fa-regular fa-heart"></i>
         </a>
       </div>
