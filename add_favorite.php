@@ -7,7 +7,7 @@ $favorite_obj = new GeneralClass;
 $user_id = $_POST['user_id'];
 $property_id = $_POST['property_id'];
 $is_fav = $_POST['is_fav'];
-
+$owner_id = $_POST['owner_id'];
 date_default_timezone_set('Africa/Cairo');
 $current_date = date('Y-m-d H:i:s');
 
@@ -25,6 +25,6 @@ if (isset($stmt_select[0])) {
   }
 } else {
   // Insert a new favorite
-  $insert_query = "INSERT INTO `favorites` (`fav_property_id`, `fav_user_id`, `checked`, `timestamp`) VALUES ('$property_id', '$user_id', 1, '$current_date')";
+  $insert_query = "INSERT INTO `favorites` (`fav_owner_id` ,`fav_property_id`, `fav_user_id`, `checked`, `timestamp`) VALUES ('$owner_id','$property_id', '$user_id', 1, '$current_date')";
   echo $favorite_obj->insert($insert_query);
 }

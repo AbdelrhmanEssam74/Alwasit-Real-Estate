@@ -1,8 +1,6 @@
 <?php
 // user profile image
 
-$img = $images . 'person1.jpg';
-$setting_page = $setting . 'general-info.php';
 $user_id = '';
 if (isset($_SESSION['uID'])) {
   $user_id = $_SESSION['uID'];
@@ -13,20 +11,25 @@ if (isset($_SESSION['uID'])) {
   <div class="container">
     <?php
     if ((isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true) || isset($_COOKIE['rem'])) {
-      echo <<< _END
-                <div class="dropdown"> 
-                    <button  class="dropbtn">
-                        <img src='$img' alt='Profile Picture'>
-                    </button>
-                    <div class="dropMenuContainer">
-                      <div id="myDropdown" class="dropdown-content">
-                        <button class="checkOwner" >Dashboard</button>
-                        <a href="$setting_page">Settings</a> 
-                        <a href="$logout">Logout</a>
-                      </div>
-                    </div>  
-                </div>
-            _END;
+    ?>
+      <div class="dropdown">
+        <button class="dropbtn">
+          <img src='<?php echo  $images . 'person1.jpg' ?>' alt='Profile Picture'>
+        </button>
+        <div class="dropMenuContainer">
+          <div id="myDropdown" class="dropdown-content">
+            <button class="checkOwner">لوحة التحكم </button>
+            <a href="<?php echo $user . 'general-info.php' ?>">البيانات الشخصية</a>
+            <a href="<?php echo $logout ?>">تسجيل الخروج</a>
+          </div>
+        </div>
+      </div>
+      <div class="favorite_page">
+        <a data-saved="5" data-uid="<?php echo $user_id ?>" href="<?php echo $user . "saved-properties.php" ?>">
+          <i class="fa-regular fa-heart"></i>
+        </a>
+      </div>
+    <?php
     } else {
       if (isset($DefultPage))
         echo <<< _END

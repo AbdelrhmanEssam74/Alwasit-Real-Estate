@@ -1131,13 +1131,29 @@ input[type="number"]::-webkit-outer-spin-button {
   cursor: pointer;
   border: 0;
   outline: 0;
+  text-align: right;
+  position: relative;
+  font-size: 15px;
+  font-weight: 400;
 }
 .dropdown-content a {
+  position: relative;
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  text-align: center;
+  text-align: right;
+  font-size: 15px;
+  font-weight: 400;
+}
+.dropdown-content button::after,
+.dropdown-content a::after {
+  position: absolute;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  content: "\f104";
+  color: #000;
+  left: 5%;
 }
 .show {
   display: block;
@@ -1149,7 +1165,6 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: #ddd;
   border-bottom: 1px solid var(--head-line);
 }
-
 .modal-container-2,
 .modal-container {
   display: none;
@@ -1275,4 +1290,25 @@ input[type="number"]::-webkit-outer-spin-button {
   .success-message {
     right: -55%;
   }
+}
+.favorite_page {
+  margin-left: 15px;
+  font-size: 20px;
+}
+.favorite_page a {
+  color: var(--card-paragraph);
+  position: relative;
+}
+.favorite_page a::after {
+  position: absolute;
+  content: attr(data-saved);
+  background-color: red;
+  font-size: 0.6em;
+  border-radius: 50%;
+  width: 13px;
+  height: 163x;
+  color: #fff;
+  bottom: 0;
+  text-align: center;
+  left: 0;
 }

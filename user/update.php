@@ -9,22 +9,24 @@ $user_obj = new RegisterTable;
 
 // Validate input data
 if (isset($_POST['submit']) && $_POST['submit'] == 'personal_info') {
-  $newImg = isset($_POST['newImg']) ? $_POST['newImg'] : 0;
-  $oldImg = $_POST['oldImg'];
-  $username = (isset($_POST['username'])) ? $_POST['username'] : '';
+  // $newImg = isset($_POST['newImg']) ? $_POST['newImg'] : 0;
+  // $oldImg = $_POST['oldImg'];
+  // $username = (isset($_POST['username'])) ? $_POST['username'] : '';
   $full_name = (isset($_POST['fullname'])) ? $_POST['fullname'] : '';
-  $profile_img = ($newImg == 0) ? $oldImg : $newImg;
+  // $profile_img = ($newImg == 0) ? $oldImg : $newImg;
   $user_id = $_POST['id'];
-  $update_query = "UPDATE users SET username = :uname , FullName =:Name , profile_img = :img WHERE user_id = :id";
+  // $update_query = "UPDATE users SET username = :uname , FullName =:Name , profile_img = :img WHERE user_id = :id";
+  $update_query = "UPDATE users SET  FullName =:Name  WHERE user_id = :id";
   $data = [
-    "uname" => $username,
+    // "uname" => $username,
     "Name" => $full_name,
-    "img" => $profile_img,
+    // "img" => $profile_img,
     "id" => $user_id,
   ];
-  if (empty($username)) {
-    echo 'nameEmpty';
-  } else if (empty($full_name)) {
+  // if (empty($username)) {
+  //   echo 'nameEmpty';
+  // } else 
+  if (empty($full_name)) {
     echo "fNameEmpty";
   } else {
     echo $user_obj->update($update_query, $data);

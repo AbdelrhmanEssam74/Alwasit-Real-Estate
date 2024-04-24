@@ -45,8 +45,8 @@ $(function () {
   // update the user personal info in the DB
   $(".personal_info_save_btn").on("click", function () {
     let user_id = $(".personal_info_save_btn").attr("data-UID");
-    let oldImg = $(".oldimg").attr("value").split("/").pop();
-    let newImg = $("#newProfileImage").prop("files")[0]?.name || null;
+    // let oldImg = $(".oldimg").attr("value").split("/").pop();
+    // let newImg = $("#newProfileImage").prop("files")[0]?.name || null;
     let formData = new FormData();
     // Iterate through all input fields with the class 'dynamic-input'
     $(".dynamic-input").each(function () {
@@ -57,10 +57,10 @@ $(function () {
     // Append common form data
     formData.append("submit", "personal_info");
     formData.append("id", user_id);
-    formData.append("oldImg", oldImg);
-    if (newImg) {
-      formData.append("newImg", newImg);
-    }
+    // formData.append("oldImg", oldImg);
+    // if (newImg) {
+    //   formData.append("newImg", newImg);
+    // }
     let success_message = $(".success-message");
     $.ajax({
       method: "POST",
@@ -70,7 +70,7 @@ $(function () {
       contentType: false,
       success: function (data) {
         if (data === "1") {
-          success_message.addClass("show-success").text("Saved Successfully");
+          success_message.addClass("show-success").text("تم تحديث البيانات بنجاح");
           setTimeout(function () {
             success_message.removeClass("show-success");
           }, 5000);
@@ -121,10 +121,10 @@ $(function () {
             success_message.removeClass("show-success");
           }, 5000);
         } else {
-          success_message.addClass("show-failed").text("Save Failed");
-          setTimeout(function () {
-            success_message.removeClass("show-failed");
-          }, 5000);
+          // success_message.addClass("show-failed").text("Save Failed");
+          // setTimeout(function () {
+          //   success_message.removeClass("show-failed");
+          // }, 5000);
         }
         $(".invalid-num-value").css("display", "none");
 

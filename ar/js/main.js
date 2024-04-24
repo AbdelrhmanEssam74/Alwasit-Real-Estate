@@ -138,11 +138,13 @@ $(document).ready(function () {
         } else if (data == 1) {
           // if user is logged in
           let property_id = element.attr("data-PID");
+          let owner_id = element.attr("data-OID");
           let user_id = element.attr("data-UID");
           let is_fav = element.attr("data-fav");
           let formData = new FormData();
           formData.append("is_fav", is_fav);
           formData.append("property_id", property_id);
+          formData.append("owner_id", owner_id);
           formData.append("user_id", user_id);
           if (is_fav == 0) {
             // send the data to the server
@@ -153,9 +155,11 @@ $(document).ready(function () {
               processData: false,
               contentType: false,
               success: function (data) {
-                console.log(data);
                 if (data == 1) {
                   element.attr("data-fav", 1);
+                  // increase the number of favorites when user remove the favorite item
+                  let saved_num = $(".favorite_page a").attr("data-saved");
+                  $(".favorite_page a").attr("data-saved", ++saved_num);
                   element.addClass("favorated");
                   $(".success-message")
                     .addClass("show-success")
@@ -182,6 +186,13 @@ $(document).ready(function () {
               success: function (data) {
                 if (data == 1) {
                   element.attr("data-fav", 0);
+                  // decrese the number of favorites when user remove the favorite item
+                  let saved_num = $(".favorite_page a").attr("data-saved");
+                  if (saved_num == 1) {
+                    $(".favorite_page a").attr("data-saved", "");
+                  } else {
+                    $(".favorite_page a").attr("data-saved", --saved_num);
+                  }
                   element.removeClass("favorated");
                   $(".success-message")
                     .addClass("show-success")
@@ -211,6 +222,23 @@ $(document).ready(function () {
     if ($(this).attr("data-fav") == "1") {
       $(this).addClass("favorated");
     }
+  });
+  // display the number of favorite items
+  let user_id = $(".favorite_page a").attr("data-uid");
+  $.ajax({
+    url: "get_saved_num.php",
+    method: "POST",
+    data: { user_id: user_id },
+    success: function (data) {
+      if (data == 0) {
+        $(".favorite_page a").attr("data-saved", "");
+      } else {
+        $(".favorite_page a").attr("data-saved", data);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error(xhr);
+    },
   });
 });
 const newSearchInputs = document.querySelector(".search_inputs");

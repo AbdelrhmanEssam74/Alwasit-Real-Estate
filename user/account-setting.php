@@ -29,26 +29,20 @@ $user_data = $users_obj->getAll($user_id)[0];
   <p class="success-message"></p>
   <div class="container">
     <div class="parent">
-      <nva class="sidebar">
-        <a href="general-info.php" class="sidebar__list-item "> <i class="fa fa-user" aria-hidden="true"></i>
-          General Info</a>
-        <a href="account-setting.php" class="sidebar__list-item is_active"> <i class="fa fa-gear" aria-hidden="true"></i> Account Settings </a>
-      </nva>
       <div class="">
         <div class="Password-info">
-          <h2>Change Password</h2>
-          <p>To change your account password, enter your current password, then enter your new password and
-            confirm it.</p>
+          <h2>تغيير كلمة المرور</h2>
+          <p>.لتغيير كلمة مرور حسابك، أدخل كلمة المرور الحالية، ثم أدخل كلمة المرور الجديدة </p>
           <div class="form">
-            <label for="profileImage">Current Password:</label>
+            <label for="profileImage">:كلمة المرور الحالية</label>
             <div class="form-control">
               <input type="password" id="currentpass" name="currentpass" required="required">
               <input type="hidden" id="oldpassword" value="<?php echo $user_data->Password; ?>" name="oldpassword">
-              <a class="restPass" href="<?php echo $auth ?>rest-password.php?_action=verification">Forget Passoword?</a>
+              <a class="restPass" href="<?php echo $auth ?>rest-password.php?_action=verification">:نسيت كلمة السر</a>
               <p class="invalid-pass-value"></p>
             </div>
 
-            <label for="username">New Password:</label>
+            <label for="username">:كلمة المرور الجديدة</label>
             <div class="form-control">
               <input type="password" id="newpassword" name="newpassword" required="required">
               <p class="invalid-newpass-value"></p>
@@ -57,6 +51,24 @@ $user_data = $users_obj->getAll($user_id)[0];
           </div>
         </div>
       </div>
+      <nva class="sidebar">
+        <a href="general-info.php" class="sidebar__list-item ">
+          <p> البيانات الشخصية</p>
+          <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+        <a href="account-setting.php" class="sidebar__list-item is_active">
+          <p>إعدادت الحساب</p>
+          <i class="fa fa-gear" aria-hidden="true"></i>
+        </a>
+        <a href="saved-properties.php" class="sidebar__list-item">
+          <p>العقارات المحفوظة</p>
+          <i class="fa-solid fa-heart"></i>
+        </a>
+        <a href="contacted-properties.php" class="sidebar__list-item ">
+          <p>العقارات المتواصل بخصوصها</p>
+          <i class="fa-solid fa-paperclip"></i>
+        </a>
+      </nva>
     </div>
   </div>
 </div>

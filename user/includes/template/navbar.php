@@ -9,11 +9,16 @@
         </button>
         <div class="dropMenuContainer">
           <div id="myDropdown" class="dropdown-content">
-            <button class="checkOwner">Dashboard</button>
-            <a href="<?php echo $setting_page ?>">Settings</a>
-            <a href="<?php echo $auth ?>logout.php">Logout</a>
+            <button class="checkOwner">لوحة التحكم </button>
+            <a href="<?php echo $setting_page ?>">البيانات الشخصية</a>
+            <a href="<?php echo $auth ?>logout.php">تسجيل الخروج</a>
           </div>
         </div>
+      </div>
+      <div class="favorite_page">
+        <a href="#">
+          <i class=" fa-regular fa-heart"></i>
+        </a>
       </div>
     <?php
     else :

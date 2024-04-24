@@ -17,7 +17,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
     <div class="intro p-20 d-flex space-between bg-eee">
       <div>
         <h2 class="m-0">Welcome</h2>
-        <p class="c-grey mt-5"><?php echo $owner_data->username ?></p>
+        <p class="c-grey mt-5"><?php echo $owner_data->FullName ?></p>
       </div>
       <img class="hide-mobile" src="ar/images/welcome.png" alt="" />
     </div>
@@ -27,7 +27,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
       <div><?php echo getValue('property_num', 'owners', "owner_id", $owner_id)['property_num']; ?><span class="d-block c-grey fs-14 mt-10">Proparty</span></div>
       <div>5 <span class="d-block c-grey fs-14 mt-10">Clients</span></div>
     </div>
-    <a href="profile.html" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a>
+    <a href="profile.php" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a>
   </div>
   <!-- End Welcome Widget -->
   <!-- Start Ticket Widget -->
@@ -46,7 +46,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
       </div>
       <div class="box p-20 rad-10 fs-13 c-grey">
         <i class="fa fa-heart fa-2x mb-10 c-green" aria-hidden="true"></i>
-        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo countItems('owner_id', 'favorites', $owner_id) ?></span>
+        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo countItems('fav_owner_id', 'favorites', $owner_id) ?></span>
         Total Favorites
       </div>
     </div>

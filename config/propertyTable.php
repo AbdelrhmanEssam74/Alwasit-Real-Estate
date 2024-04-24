@@ -29,7 +29,7 @@ class PropertyTable extends DatabaseConnection
   }
   public function getFavorateProperties()
   {
-    $sql = "SELECT * FROM favorites Where favorites.fav = 1 ";
+    $sql = "SELECT * FROM favorites INNER JOIN owners ON properties.owner_id = owners.owner_id Where favorites.checked = 1 ";
     $stmt = $this->conn->prepare($sql);
     $stmt->execute();
     $properties = $stmt->fetchAll(PDO::FETCH_OBJ);

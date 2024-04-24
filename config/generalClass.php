@@ -34,4 +34,11 @@ class GeneralClass extends DatabaseConnection
       echo "Error: " . $e->getMessage();
     }
   }
+  public function get_saved_num($id)
+  {
+    $stmt = $this->conn->prepare("SELECT COUNT(*) FROM `favorites` WHERE `fav_user_id` = '$id' AND `checked` = 1");
+    $stmt->execute();
+    $result = $stmt->fetchColumn();
+    return $result;
+  }
 }
