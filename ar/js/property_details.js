@@ -457,7 +457,8 @@ $(document).ready(function () {
           } else if (data == 1) {
             // if user is logged in
             let report_reson = $(".select-dropdown__item select").val();
-            if (report_reson == "") { // check if the reason is empty or not
+            if (report_reson == "") {
+              // check if the reason is empty or not
               $(".input__message").addClass("input__message--invalid");
             } else {
               // if reason not empty get the value and send it to the server
@@ -505,6 +506,47 @@ $(document).ready(function () {
         },
       });
     });
+  });
+  // display red heart for each favorite item
+  if ($(".add_to_fav").attr("data-fav") === "1") {
+    $(".add_to_fav").addClass("favorated");
+  }
+  // display the number of favorite items
+  let user_id = $(".add_to_fav").attr("data-uid");
+  $.ajax({
+    url: "get_saved_num.php",
+    method: "POST",
+    data: { user_id: user_id },
+    success: function (data) {
+      if (data == 0) {
+        $(".favorite_page a").attr("data-saved", "");
+      } else {
+        $(".favorite_page a").attr("data-saved", data);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error(xhr);
+    },
+  });
+  // Copy the URL of the property to the clipboard
+  $(".share").on("click", function () {
+    let url = window.location.href;
+    navigator.clipboard
+      .writeText(url) // Write the text to the clipboard
+      .then(function () {
+        $(".success-message")
+          .addClass("show-success")
+          .text("تم نسخ العنوان إلى الحافظة")
+          .on("click", function () {
+            $(this).removeClass("show-success");
+          });
+        setTimeout(function () {
+          $(".success-message").removeClass("show-success");
+        }, 2000);
+      })
+      .catch(function (err) {
+        console.error("Failed to copy text: ", err); // Show an error message (you can customize this)
+      });
   });
 });
 

@@ -1263,7 +1263,8 @@ input[type="number"]::-webkit-outer-spin-button {
   content: "\f00d";
   color: #000;
   top: 36%;
-  right: 8%;
+  right: 5%;
+  font-size: 15px;
 }
 
 .success-message.show-failed::before {
@@ -1273,7 +1274,7 @@ input[type="number"]::-webkit-outer-spin-button {
   content: "\f06a";
   color: var(--danger);
   top: 38%;
-  left: 8%;
+  left: 3%;
 }
 
 .success-message.show-success::before {
@@ -1282,7 +1283,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-family: "Font Awesome 5 Free";
   content: "\f058";
   top: 38%;
-  left: 8%;
+  left: 3%;
   color: var(--success);
 }
 

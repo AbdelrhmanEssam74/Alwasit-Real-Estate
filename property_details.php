@@ -1,6 +1,7 @@
 <?php include 'init.php';
 include  $config . 'config.php';
 include  $config . 'propertyTable.php';
+$user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
 $neighborhood = "";
 $property_id = (isset($_GET['PId']) ? $_GET['PId'] : 0);
 if ($property_id != 0) :
@@ -19,6 +20,15 @@ if ($property_id != 0) :
     $neighborhood = $property_data->neighborhood;
   endif;
 endif;
+$is_favorite = 0;
+$favorites = $property_obj->getFavorateProperties($user_id);
+foreach ($favorites as $favorite) {
+  $favorate_property_id = $favorite->property_id;
+  if ($favorate_property_id == $property_id) {
+    $is_favorite = true;
+    break;
+  }
+}
 $DefultPage = '';
 if (isset($_SESSION['property_title'])) {
   $pageTitel = $_SESSION['property_title'];
@@ -89,8 +99,8 @@ if (!isset($_GET['PId'])) {
       <div class="description box">
         <div class="top">
           <div class="share_btns">
-            <button class="share" title="مشاركة"><i class='bx bxs-share-alt'></i></button>
-            <button class="add_to_fav" title="أضف للمفضلة"><i class="fa-regular fa-heart"></i></button>
+            <button class="share" data-pLink="<?php echo $_SERVER['REQUEST_URI'] ?>" title="مشاركة"><i class='bx bxs-share-alt'></i></button>
+            <button class="add_to_fav" data-fav="<?php echo $is_favorite ?>" data-uid="<?php echo $user_id ?>" title="عقار مفضل"><i class="fa-regular fa-heart"></i></button>
           </div>
           <div class="type">
             <p><?php echo $property_data->status ?></p>
@@ -194,7 +204,7 @@ if (!isset($_GET['PId'])) {
           <div>
             <textarea id="offer-content" name="message" class="main-input" placeholder="<?php echo (isset($_SESSION['fullName'])) ?  " عرض باسم " . $_SESSION['fullName']  : "أرسل عرض...." ?>"></textarea>
           </div>
-          <button class="send-offer" type="submit" data-propertyID="<?php echo $property_data->property_id ?>" data-userID="<?php echo (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "" ?>" data-ownerID="<?php echo $property_data->owner_id ?>">إرسال</button>
+          <button class="send-offer" type="submit" data-propertyID="<?php echo $property_data->property_id ?>" data-userID="<?php echo $user_id ?>" data-ownerID="<?php echo $property_data->owner_id ?>">إرسال</button>
         </div>
       </div>
       <div class="other-proparty box">

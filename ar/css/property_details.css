@@ -255,7 +255,7 @@
   gap: 10px;
 }
 
-.wedge-section .container .left-section .description .top .type p {
+.left-section .description .top .type p {
   text-align: center;
   width: 80px;
   padding: 10px 15px;
@@ -265,17 +265,17 @@
   user-select: none;
 }
 
-.wedge-section .container .left-section .description .top .type p:hover {
+.left-section .description .top .type p:hover {
   background-color: var(--head-line);
   color: #fff;
 }
 
-.wedge-section .container .left-section .description .top .share_btns {
+r .left-section .description .top .share_btns {
   display: flex;
   gap: 10px;
 }
 
-.wedge-section .container .left-section .description .top .share_btns button {
+.left-section .description .top .share_btns button {
   width: 35px;
   height: 35px;
   border-radius: 5px;
@@ -287,24 +287,18 @@
   transition: 0.5s all;
 }
 
-.wedge-section
-  .container
-  .left-section
-  .description
-  .top
-  .share_btns
-  .add_to_fav:hover {
+.share_btns .add_to_fav.favorated {
   background-color: #ff3860;
   color: #fff;
 }
+.share_btns .add_to_fav.favorated svg {
+  color: #fff;
+}
 
-.wedge-section
-  .container
-  .left-section
-  .description
-  .top
-  .share_btns
-  .share:hover {
+.share_btns .share:hover i {
+  color: #fff;
+}
+.share_btns .share:hover {
   background-color: var(--tertiary);
   color: #fff;
 }
@@ -1243,7 +1237,7 @@ textarea::placeholder {
   font-size: 20px;
 }
 
-.success-message {
+/* .success-message {
   position: fixed;
   color: rgb(0, 0, 0);
   right: -27%;
@@ -1307,4 +1301,4 @@ textarea::placeholder {
   .success-message {
     right: -55%;
   }
-}
+} */

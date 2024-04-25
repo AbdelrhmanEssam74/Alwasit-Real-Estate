@@ -45,8 +45,8 @@ $properties_saved = $properties->getFavorateProperties($user_id);
                 <p> <?php echo $property->description ?></p>
               </div>
               <div class="meta">
-                <a class="photo" href="#">
-                  <img src="ar/images/item1" alt="">
+                <a class="photo" href="<?php echo $main_link . "/property_details.php?PId=" . $property->property_id ?>">
+                  <img src="<?php echo "../owner/upload/" . $property->owner_id . "/" . $property->property_id . "/" .  $main_img ?>" alt="">
                 </a>
               </div>
               <i data-uid="<?= $property->fav_user_id  ?>" data-pid="<?= $property->property_id ?>" class='fa-solid fa-trash-can remove-saved'></i>
