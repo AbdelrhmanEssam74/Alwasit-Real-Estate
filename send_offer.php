@@ -12,5 +12,5 @@ $offer = $_POST['offer'];
 date_default_timezone_set('Africa/Cairo');
 // inset the offer in the database
 $current_date = date('Y-m-d h:i:s');
-$inset_query = "INSERT INTO `offers` ( `user_id`, `owner_id`, `property_id`, `offer_content`, `timestamp`) VALUES ('$user_id', '$owner_id', '$property_id', '$offer', '$current_date')";
+$inset_query = "INSERT INTO `offers` ( `offer_user_id`, `offer_owner_id`, `offer_property_id`, `offer_content`, `offer_timestamp`) VALUES ('$user_id', '$owner_id', '$property_id', '$offer', '$current_date')";
 echo $offer_obj->insert($inset_query);

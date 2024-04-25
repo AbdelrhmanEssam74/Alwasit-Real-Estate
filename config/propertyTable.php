@@ -42,4 +42,12 @@ class PropertyTable extends DatabaseConnection
     $r = $stmt->execute();
     return $r;
   }
+  public function GetContactedProperties($id)
+  {
+    $sql = "SELECT * FROM properties LEFT JOIN offers ON properties.property_id = offers.offer_property_id Where  offers.offer_user_id = '$id'";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $properties;
+  }
 }

@@ -8,13 +8,14 @@ $setting_page = '';
 <?php include_once $templates . 'navbar.php' ?>
 <?php
 include_once $config . 'config.php';
-include_once $config . 'loginTable.php';
-include_once $config . 'usersTable.php';
+include_once $config . 'propertyTable.php';
 // get all user information
 $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : 0;
-$users_obj = new RegisterTable;
-$user_data = $users_obj->getAll($user_id)[0];
-$_SESSION['full_name'] = $user_data->FullName;
+$properties_obj = new PropertyTable;
+// echo "<pre>";
+// print_r($properties_obj->getContactedProperties($user_id));
+// echo "</pre>";
+$properties_data = $properties_obj->getContactedProperties($user_id);
 ?>
 <!-- End Header -->
 <div class="modal-container overlay">
@@ -30,47 +31,49 @@ $_SESSION['full_name'] = $user_data->FullName;
   <p class="success-message"></p>
   <div class="container">
     <div class="parent">
-      <div class="">
-        <div class="personal-info">
-          <h2>Your Personal Information</h2>
-          <div class="form">
-            <div class="img-box">
-              <img id="imagePreview" src="<?php echo $images ?>person1.jpg" alt="Image preview">
-            </div class="form-control">
-            <label for="profileImage">Profile Image:</label>
-            <div>
-              <input type="file" id="newProfileImage" class="custom-file-input" name="newProfileImage" accept="image/*">
-              <input type="hidden" class="oldimg" value="<?php echo $images ?>person1.jpg" name="oldProfileImage">
-            </div>
-            <label for="username">Username:</label>
-            <div class="form-control">
-              <input type="text" id="username" class="dynamic-input" name="username" value="<?php echo $user_data->username ?>" placeholder="Enter your username" required="required">
-              <p class="invalid-username-value">Can't Be Empty</p>
-            </div>
-            <div class="form-control">
-              <label for="first_name">Full Name:</label>
-              <input type="text" id="fullname" class="dynamic-input" name="full_name" value="<?php echo $user_data->FullName ?>" placeholder="Enter your first name" required="required">
-              <p class="invalid-fName-value">Can't Be Empty</p>
-            </div>
-            <button class="personal_info_save_btn" data-UID="<?php echo $user_data->user_id; ?>" type="submit">Save</button>
-          </div>
+      <?php
+      if (count($properties_data) > 0) :
+      ?>
+        <div class="table-wrapper">
+          <table class="fl-table">
+            <thead>
+              <tr>
+                <th>الرقم المرجعي للعقار</th>
+                <th>العرض</th>
+                <th>الحالة</th>
+                <th>التاريخ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($properties_data as $property) :
+                $timestamp = strtotime($property->offer_timestamp); // Convert string timestamp to integer
+                $formattedDate = date("Y-m-d", $timestamp);
+              ?>
+                <tr>
+                  <td><a href="<?php echo $main_link . "/property_details.php?PId=" . $property->property_id ?>"><?php echo $property->offer_property_id ?></a></td>
+                  <td><?php echo $property->offer_content ?></td>
+                  <td>
+                  <?php
+                  if ($property->offer_status == 0) :
+                    echo "<p class='status wating'>قيد الانتظار</p>";
+                  elseif ($property->offer_status == 1) :
+                    echo "<p class='status accepted'>تم القبول</p>";
+                  elseif ($property->offer_status == -1) :
+                    echo "<p class='status refused'>مرفوض</p>";
+                  endif;
+                  ?>
+                  </td>
+                  <td><?php echo $formattedDate ?></td>
+                </tr>
+              <?php
+              endforeach;
+              ?>
+            <tbody>
+          </table>
         </div>
-        <div class="contact_info">
-          <h2>Your Contact Information</h2>
-          <div class="form">
-            <label for="email">Mobile Number:</label>
-            <div class="form-control">
-              <input type="tel" id="phone_num" class="dynamic-input-phone" name="phone" value="<?php echo $user_data->user_phone ?>" placeholder="Enter your Mobile Number" required="required">
-              <p class="invalid-num-value"></p>
-            </div>
-            <label for="email">Email:</label>
-            <div class="form-control">
-              <input type="email" id="email" name="email" disabled value="<?php echo $user_data->email ?>" placeholder="Enter your email">
-            </div>
-            <button class="contact_info_save_btn" data-UID="<?php echo $user_data->user_id; ?>" type="submit">Save</button>
-          </div>
-        </div>
-      </div>
+      <?php
+      endif;
+      ?>
       <nva class="sidebar">
         <a href="general-info.php" class="sidebar__list-item">
           <p> البيانات الشخصية</p>
