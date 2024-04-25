@@ -22,7 +22,7 @@ if (isset($_SESSION['uID'])) {
         </div>
       </div>
       <div class="favorite_page">
-        <a href="#" data-saved="" class="saved" data-uid="<?php echo $user_id ?>">
+        <a href="saved-properties.php" data-saved="" class="saved" data-uid="<?php echo $user_id ?>">
           <i class=" fa-regular fa-heart"></i>
         </a>
       </div>
