@@ -352,4 +352,22 @@ $(function () {
       },
     });
   });
+  //delete offer
+  $(".delete-offer").on("click", function () {
+    let user_id = $(this).attr("data-uid");
+    let property_id = $(this).attr("data-pid");
+    $.ajax({
+      url: "delete-offer.php",
+      method: "POST",
+      data: { user_id: user_id, property_id: property_id },
+      success: function (data) {
+        if (data == 1) {
+          location.reload();
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
+  });
 });

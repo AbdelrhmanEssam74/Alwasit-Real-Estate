@@ -993,7 +993,18 @@ button.disabled {
   text-align: right;
   padding: 8px;
 }
-
+#td-delete {
+  text-align: center;
+  color: red;
+  font-size: 15px;
+}
+#td-delete svg {
+  cursor: pointer;
+  transition: 0.5s all;
+}
+#td-delete svg:hover {
+  transform: scale(1.3);
+}
 .fl-table td {
   border-right: 1px solid #f8f8f8;
   font-size: 12px;
@@ -1013,5 +1024,21 @@ button.disabled {
 .fl-table tr:nth-child(even) {
   background: #f8f8f8;
 }
-
+.no-query {
+  color: var(--button-text);
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.no-query::after {
+  position: absolute;
+  content: "ستجد العقارات التي استفسرت عنها هنا.";
+  font-size: 15px;
+  font-weight: 500;
+  color: #a0a0a0;
+  bottom: 25%;
+}
 /* Responsive */

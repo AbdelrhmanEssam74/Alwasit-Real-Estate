@@ -31,10 +31,10 @@ $properties_data = $properties_obj->getContactedProperties($user_id);
   <p class="success-message"></p>
   <div class="container">
     <div class="parent">
-      <?php
-      if (count($properties_data) > 0) :
-      ?>
-        <div class="table-wrapper">
+      <div class="table-wrapper">
+        <?php
+        if (count($properties_data) > 0) :
+        ?>
           <table class="fl-table">
             <thead>
               <tr>
@@ -42,6 +42,7 @@ $properties_data = $properties_obj->getContactedProperties($user_id);
                 <th>العرض</th>
                 <th>الحالة</th>
                 <th>التاريخ</th>
+                <th>حذف</th>
               </tr>
             </thead>
             <tbody>
@@ -53,27 +54,30 @@ $properties_data = $properties_obj->getContactedProperties($user_id);
                   <td><a href="<?php echo $main_link . "/property_details.php?PId=" . $property->property_id ?>"><?php echo $property->offer_property_id ?></a></td>
                   <td><?php echo $property->offer_content ?></td>
                   <td>
-                  <?php
-                  if ($property->offer_status == 0) :
-                    echo "<p class='status wating'>قيد الانتظار</p>";
-                  elseif ($property->offer_status == 1) :
-                    echo "<p class='status accepted'>تم القبول</p>";
-                  elseif ($property->offer_status == -1) :
-                    echo "<p class='status refused'>مرفوض</p>";
-                  endif;
-                  ?>
+                    <?php
+                    if ($property->offer_status == 0) :
+                      echo "<p class='status wating'>قيد الانتظار</p>";
+                    elseif ($property->offer_status == 1) :
+                      echo "<p class='status accepted'>تم القبول</p>";
+                    elseif ($property->offer_status == -1) :
+                      echo "<p class='status refused'>مرفوض</p>";
+                    endif;
+                    ?>
                   </td>
                   <td><?php echo $formattedDate ?></td>
+                  <td id="td-delete"><i data-uid="<?= $property->offer_user_id  ?>" data-pid="<?= $property->offer_property_id ?>" class=" delete-offer fa-solid fa-trash-can"></i></td>
                 </tr>
               <?php
               endforeach;
               ?>
             <tbody>
           </table>
-        </div>
-      <?php
-      endif;
-      ?>
+        <?php
+        else :
+          echo "<h2 class='no-query'>لم يتم الاستعلام عن اي عقار</h2>";
+        endif;
+        ?>
+      </div>
       <nva class="sidebar">
         <a href="general-info.php" class="sidebar__list-item">
           <p> البيانات الشخصية</p>
