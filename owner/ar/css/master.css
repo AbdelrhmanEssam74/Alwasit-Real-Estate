@@ -1557,3 +1557,29 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: #8d8d8d;
   color: #ffffff;
 }
+.no-query2,
+.no-query {
+  color: var(--button-text);
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.no-query2::after {
+  position: absolute;
+  content: "ستجد العقارات المحفوظة عنها هنا.";
+  font-size: 15px;
+  font-weight: 500;
+  color: #a0a0a0;
+  bottom: 25%;
+}
+.no-query::after {
+  position: absolute;
+  content: "ستجد العروض هنا.";
+  font-size: 15px;
+  font-weight: 500;
+  color: #a0a0a0;
+  bottom: 25%;
+}

@@ -263,4 +263,54 @@ $(document).ready(function () {
       },
     });
   });
+  // accept client offer
+  $(".acceptOffer").on("click", function () {
+    let submit = "accept";
+    let user_id = $(this).attr("data-userID");
+    let property_id = $(this).attr("data-PropID");
+    // Display the loading icon
+    $("#loadingIcon").show();
+    $.ajax({
+      url: "manage_offer.php",
+      method: "POST",
+      data: { submit: submit, user_id: user_id, property_id: property_id },
+      success: function (response) {
+        // Remove the loading icon
+        $("#loadingIcon").hide();
+        // Remove the corresponding row
+        $("#row_" + user_id).remove();
+        setTimeout(() => {
+          location.reload();
+        }, 1);
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  });
+  // refuse client offer
+  $(".refuseOffer").on("click", function () {
+    let submit = "refuse";
+    let user_id = $(this).attr("data-userID");
+    let property_id = $(this).attr("data-PropID");
+    // Display the loading icon
+    $("#loadingIcon").show();
+    $.ajax({
+      url: "manage_offer.php",
+      method: "POST",
+      data: { submit: submit, user_id: user_id, property_id: property_id },
+      success: function (response) {
+        // Remove the loading icon
+        $("#loadingIcon").hide();
+        // Remove the corresponding row
+        $("#row_" + user_id).remove();
+        setTimeout(() => {
+          location.reload();
+        }, 1);
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  });
 });
