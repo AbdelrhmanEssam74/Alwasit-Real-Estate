@@ -54,7 +54,7 @@ $properties_saved = $properties->getFavorateProperties($user_id);
         <?php
           endforeach;
         } else {
-          echo "<h2>لا يوجد عقارات محفوظة</h2>";
+          echo "<h2 class='no-query2'>لا يوجد عقارات محفوظة</h2>";
         }
         ?>
       </div>

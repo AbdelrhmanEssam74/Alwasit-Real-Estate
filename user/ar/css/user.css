@@ -725,6 +725,7 @@ button.disabled {
   content: "\f104";
   color: #000;
   left: 5%;
+  top: 40%;
 }
 .show {
   display: block;
@@ -1024,6 +1025,7 @@ button.disabled {
 .fl-table tr:nth-child(even) {
   background: #f8f8f8;
 }
+.no-query2,
 .no-query {
   color: var(--button-text);
   width: 100%;
@@ -1032,6 +1034,14 @@ button.disabled {
   justify-content: center;
   align-items: center;
   position: relative;
+}
+.no-query2::after {
+  position: absolute;
+  content: "ستجد العقارات المحفوظة عنها هنا.";
+  font-size: 15px;
+  font-weight: 500;
+  color: #a0a0a0;
+  bottom: 25%;
 }
 .no-query::after {
   position: absolute;
