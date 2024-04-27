@@ -41,7 +41,7 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'])) {
                     echo <<< _END
                                         <tr id="row_$row->user_id" >
                                         <td scope="row">$row->user_id</td>
-                                        <td>$row->F_Name  $row->L_Name</td>
+                                        <td>$row->FullName</td>
                                         <td>$row->email</td>
                                         <td>$row->username</td>
                                         <td>$row->user_phone</td>
@@ -64,7 +64,7 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'])) {
                     echo <<< _END
                                         <tr id="row_$row->owner_id" >
                                         <td scope="row">$row->owner_id</td>
-                                        <td>$row->F_Name  $row->L_Name</td>
+                                        <td>$row->FullName</td>
                                         <td>$row->email</td>
                                         <td>$row->username</td>
                                         <td>$row->user_phone</td>
@@ -111,7 +111,7 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'])) {
                 echo <<< _END
                                     <tr id="row_$row->user_id" >
                                     <td scope="row">$row->user_id</td>
-                                    <td>$row->F_Name  $row->L_Name</td>
+                                    <td>$row->FullName</td>
                                     <td>$row->email</td>
                                     <td>$row->username</td>
                                     <td>$row->user_phone</td>
