@@ -210,11 +210,11 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'])) {
                 } else
                   echo <<< _END
                         <td><button class="btn btn-danger confirm delete-prop">Delete</button></td>
-                        <a href="users.php?action=Properties&page=Pending" class="btn btn-primary">Pending Properties</a>
-                    </tr>
-                _END;
-              }
-              ?>
+                        </tr>
+                        _END;
+                      }
+                      ?>
+                      <a href="users.php?action=Properties&page=Pending" class="btn btn-primary">Pending Properties</a>
             </tbody>
           </table>
         </div>

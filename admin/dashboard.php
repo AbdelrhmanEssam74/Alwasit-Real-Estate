@@ -48,7 +48,7 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'])) {
             <div class="info">
               Total Properties
               <span>
-                <a href="users.php?action=Properties"><?php echo checkItem('active', 'onwer_requests', 0) ?></a>
+                <a href="users.php?action=Properties"><?php echo checkItem('active', 'properties', 1) ?></a>
               </span>
             </div>
           </div>
