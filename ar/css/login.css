@@ -1,27 +1,28 @@
 :root {
   --head-line: #00214d;
-  --head-line-hover: #003170;
+  --head-line-hover: #003b88;
   --sub-head-line: #1b2d45;
-  --paragraph: #1b2d45;
+  --paragraph: #16415a;
   --card-paragraph: #1b2d45;
   --background: #f2f4f6;
   --card-background: #fffffe;
-  --button: #00ebc7;
+  --button: #16415a;
   --highlight: #00ebc7;
-  --button-hover: rgb(1, 226, 192);
-  --button-text: #00214d;
+  --button-hover: #1f597a;
+  --button-text: #ffffff;
   --secondary: #ff5470;
   --tertiary: #ff9a33;
   --tertiary-hover: #e68a19;
   --card-highlitght: #ff5470;
   --card-tag-background: #2f6b6e;
   --color7: #e7e7e3;
+  --color2: #a25c32;
   --success: #00b73f;
   --success-hover: #008b31;
-  --danger: #ff3860;
-  --danger-hover: #bb2443;
   --sectina-padding: 100px;
 }
+
+
 
 ::-webkit-scrollbar {
   width: 15px;

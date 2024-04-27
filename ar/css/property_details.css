@@ -170,7 +170,7 @@
   border: 2px solid #fff;
   border-radius: 5px;
   z-index: 999;
-  width: 50%;
+  width: 40%;
   object-fit: cover;
   aspect-ratio: 1 / 1;
   user-select: none;
