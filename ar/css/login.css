@@ -565,3 +565,15 @@ p.error_message::before {
 .closebtn:hover {
   color: black;
 }
+.logout_message {
+  position: fixed;
+  background-color: #575757;
+  padding: 10px 15px;
+  border-radius: 4px;
+  color: #fff;
+  bottom: -10%;
+  left: 40%;
+}
+.logout_message.show{
+  transform: translateY(100%);
+}

@@ -19,6 +19,7 @@ $user_id = $userObj->GetUserID();
 if ($userObj->checklogin($email)) {
   header("location:../" . $login);
   $_SESSION['duplicate_login'] = true;
+  $_SESSION['uID'] = $userObj->GetUserID();
   exit();
 }
 

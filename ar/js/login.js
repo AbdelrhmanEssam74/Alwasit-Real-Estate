@@ -62,9 +62,20 @@ $(document).ready(function () {
     return errors.length === 0;
   }
 
-  // $('.logout').on('click', function() {
-  //   console.log("logout");
-  // })
+  $(".logout").on("click", function () {
+    let user_id = $(".logout").attr("data-uid");
+    $.ajax({
+      url: "http://localhost/Alwasit/auth/logout.php",
+      type: "POST",
+      data: {
+        logout_user_id: user_id,
+      },
+      success: function (response) {
+        $(".logout_message").addClass("show");
+        // window.location.href = "login.php";
+      },
+    });
+  });
 });
 //SECTION -  end form validation
 

@@ -24,6 +24,10 @@ $duplicate_login = '';
 if (isset($_SESSION['duplicate_login']) && $_SESSION['duplicate_login'] == 1) {
   $duplicate_login = $_SESSION['duplicate_login'];
 }
+$user_id  = '';
+if (isset($_SESSION["uID"])) {
+  $user_id = $_SESSION['uID'];
+}
 session_unset();
 $_SESSION['HTTP_REFERER'] = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER']  : "";
 ?>
@@ -45,14 +49,14 @@ if (!empty($duplicate_login)) {
                 </p>
                 <div class="btns">
                 <button class="cancel" onclick="this.parentElement.parentElement.parentElement.style.display='none';">إلغاء</button>
-                <button class="logout">تسجيل الخروج </button>
+                <button class="logout" data-uid = "$user_id">تسجيل الخروج </button>
                 </div>
                 </div>
                 </div>
         _END;
 }
 ?>
-
+<p class='logout_message'>تم تسجيل الخروج بنجاح</p>
 <div class="form_box">
   <div class="back_img">
     <div class="form_content">

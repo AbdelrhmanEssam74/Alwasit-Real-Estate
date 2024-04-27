@@ -88,7 +88,8 @@ class loginTable extends DatabaseConnection
     $qry = "SELECT * FROM `login` WHERE email='" . $e . "'";
     $prepare = $this->conn->prepare($qry);
     $prepare->execute();
-    $prepare->fetch();
+    $data =  $prepare->fetch();
+    $this->user_id = $data['user_id'];
     return $prepare->rowCount();
   }
 }
