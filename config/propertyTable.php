@@ -21,7 +21,23 @@ class PropertyTable extends DatabaseConnection
   }
   public function getALLProperties()
   {
-    $sql = "SELECT * FROM properties  INNER JOIN owners ON properties.owner_id = owners.owner_id  Where properties.active = 1 AND properties.deleted = 0 ";
+    $sql = "SELECT * FROM properties  INNER JOIN owners ON properties.owner_id = owners.owner_id LEFT JOIN favorites ON favorites.fav_property_id = properties.property_id Where properties.active = 1 AND properties.deleted = 0 ";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $properties;
+  }
+  public function getALLPropertiesBuyType($type = null, $order = "ASC", $column = "uploaded_at")
+  {
+    $sql = "SELECT * FROM properties INNER JOIN owners ON properties.owner_id = owners.owner_id LEFT JOIN favorites ON favorites.fav_property_id = properties.property_id WHERE properties.active = 1 AND properties.deleted = 0";
+
+    if ($type != null) {
+      $sql .= " AND properties.status = '$type'";
+    }
+
+    if ($order != null) {
+      $sql .= " ORDER BY `properties`.`$column` $order";
+    }
     $stmt = $this->conn->prepare($sql);
     $stmt->execute();
     $properties = $stmt->fetchAll(PDO::FETCH_OBJ);

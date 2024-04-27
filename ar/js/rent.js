@@ -1,26 +1,27 @@
-//SECTION - show and hidde the sort list
-let sort_by = document.querySelector(".sort_by_btn")
-let sort_list = document.querySelector(".sort_list")
-let sort_links = document.querySelectorAll(".sort_list a")
-if (sort_by) {
-    sort_by.addEventListener("click", function () {
-        sort_list.classList.toggle("show_list");
-    })
-}
+$(document).ready(function () {
+  var sort_by = $(".sort_by_btn");
+  var sort_list = $(".sort_list");
+  var sort_links = $(".sort_list a");
+  var sort_by_overlay = $(".sort-by-overlay");
 
-sort_links.forEach(element => {
-    element.addEventListener('click', function (e) {
-        sort_by.textContent = element.dataset.link
-    })
-});
+  if (sort_by.length) {
+    sort_by.on("click", function () {
+      sort_list.toggleClass("show_list");
+      sort_by_overlay.toggleClass("show");
+    });
+  }
 
 
-setTimeout(() => {
-    if (sort_list) {
-        if (sort_list.classList.contains("show_list")) {
-            sort_list.classList.remove("show_list")
-        }
+  sort_by_overlay.on("click", function () {
+    if (sort_list.length && sort_list.hasClass("show_list")) {
+      sort_list.removeClass("show_list");
+      sort_by_overlay.removeClass("show");
     }
+  });
 
-}, 5000);
-
+  setTimeout(function () {
+    if (sort_list.length && sort_list.hasClass("show_list")) {
+      sort_list.removeClass("show_list");
+    }
+  }, 5000);
+});

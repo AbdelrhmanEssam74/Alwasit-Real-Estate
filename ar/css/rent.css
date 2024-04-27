@@ -1,146 +1,140 @@
 /* Start Landing */
 .langing .container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 60px 0px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0px;
 }
-
 
 @media (max-width: 767px) {
-    .langing .container {
-        padding: 0px 0px;
-    }
+  .langing .container {
+    padding: 0px 0px;
+  }
 }
-
 
 /* End Landing */
 /* start desgin*/
 .design {
-    background-color: var(--card-background);
-    width: 100%;
-    height: 100px;
-    margin-top: 50px;
+  background-color: var(--card-background);
+  width: 100%;
+  height: 100px;
+  margin-top: 50px;
 }
 
 .design .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 .design .container .text {
-    padding: 5px 0;
-    text-align: right;
+  padding: 5px 0;
+  text-align: right;
 }
 
 .design .container .text h2 {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .design .container .text p {
-    color: var(--paragraph);
-    padding: 10px;
-    font-size: 20px;
+  color: var(--paragraph);
+  padding: 10px;
+  font-size: 20px;
 }
 
 .design .container .text p span {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .design .sort-by {
-    position: relative;
+  position: relative;
 }
 
 .design .sort-by .sort_by_btn {
-    border: 1px solid;
-    padding: 5px 10px;
-    width: 150px;
-    height: 40px;
-    border: 1px solid var(--highlight);
-    border-radius: 5px;
-    cursor: pointer;
-    user-select: none;
-    text-align: right;
-    font-size: 20px;
-    font-weight: 400;
+  border: 1px solid;
+  padding: 5px 10px;
+  width: 150px;
+  height: 40px;
+  border: 1px solid var(--highlight);
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  text-align: right;
+  font-size: 20px;
+  font-weight: 400;
 }
 
 .design .sort-by .sort_by_btn::after {
-    content: '\25BC';
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translate(100%, 70%);
-    color: #000;
-    font-size: 15px;
-    transition: .25s all ease;
-    pointer-events: none;
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(100%, 70%);
+  color: #000;
+  font-size: 15px;
+  transition: 0.25s all ease;
+  pointer-events: none;
 }
 
 .design .sort-by .sort_by_btn:hover::after {
-    color: var(--tertiary);
+  color: var(--tertiary);
 }
 
-
 .design .sort-by .sort_list {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transform: translate(0, 105%);
-    display: none;
-    flex-direction: column;
-    border: 1px solid var(--highlight);
-    width: 100%;
-    padding: 5px 5px;
-    border-radius: 5px;
-    transition: 0.5s ease-in;
-    background-color: #fff;
-    z-index: 6;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(0, 105%);
+  display: none;
+  flex-direction: column;
+  border: 1px solid var(--highlight);
+  width: 100%;
+  padding: 5px 5px;
+  border-radius: 5px;
+  transition: 0.5s ease-in;
+  background-color: #fff;
+  z-index: 6;
 }
 
 .design .sort-by .show_list {
-    display: flex;
+  display: flex;
 }
 
 .design .sort-by div a {
-    text-decoration: none;
-    margin: 5px 0 5px 0;
-    color: var(--color8);
-    padding: 6px;
+  text-decoration: none;
+  margin: 5px 0 5px 0;
+  color: var(--color8);
+  padding: 6px;
 }
 
 .design .sort-by div a:hover {
-    background-color: var(--color7);
+  background-color: var(--color7);
 }
-
-
 
 @media (max-width: 555px) {
-    .design .container .text h2 {
-        font-size: 20px;
-    }
+  .design .container .text h2 {
+    font-size: 20px;
+  }
 
-    .design .sort-by .sort_by_btn {
-        width: 120px;
-        font-size: 15px;
-        display: flex;
-        align-items: center !important;
-    }
+  .design .sort-by .sort_by_btn {
+    width: 120px;
+    font-size: 15px;
+    display: flex;
+    align-items: center !important;
+  }
 }
 
-@media (max-width:416px) {
-    .design .container .text h2 {
-        font-size: 12.5px;
-    }
+@media (max-width: 416px) {
+  .design .container .text h2 {
+    font-size: 12.5px;
+  }
 
-    .design .container .text p {
-        font-size: 15px;
-    }
-
+  .design .container .text p {
+    font-size: 15px;
+  }
 }
 
 /* end design*/
