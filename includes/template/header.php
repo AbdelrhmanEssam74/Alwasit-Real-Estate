@@ -96,7 +96,6 @@ if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
   ?>
     <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>profile.css">
     <link rel="stylesheet" id="stylesheet" href="<?php echo $css ?>main.css">
-
   <?php
   endif;
   ?>

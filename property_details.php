@@ -183,8 +183,8 @@ if (!isset($_GET['PId'])) {
             <h4><?php echo $property_data->full_name ?></h4>
             <a href="profile.php?ID=<?php echo $property_data->owner_id ?>"><?php echo $property_data->property_num ?> عقار</a>
           </div>
-          <img src="<?php echo $images ?>person1.jpg" alt="">
-        </div>
+          <img src="<?php echo $images ?>person1.jpg" alt=""> 
+        </div>   
         <div class="connection-links">
           <a class="connection-btn phone-link" data-phone="<?php echo $property_data->phone_num ?>" href="tel:<?php echo $property_data->phone_num ?>">إتصل</a>
           <a class="connection-btn email-link" href="mailto:<?php echo $property_data->email ?>">بريد إلكتروني</a>

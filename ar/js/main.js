@@ -240,6 +240,7 @@ $(document).ready(function () {
       console.error(xhr);
     },
   });
+
 });
 const newSearchInputs = document.querySelector(".search_inputs");
 const newInputs = `

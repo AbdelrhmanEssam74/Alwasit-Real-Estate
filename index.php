@@ -116,7 +116,7 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
             </div>
             <hr>
             <div class="owner">
-              <a href="">
+              <a href="profile.php?ID=<?php echo $prop->owner_id ?>">
                 <p> : المالك </p>
                 <span><?php echo  $prop->full_name ?></span>
               </a>

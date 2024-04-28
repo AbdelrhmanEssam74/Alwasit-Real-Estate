@@ -1323,3 +1323,25 @@ input[type="number"]::-webkit-outer-spin-button {
 .sort-by-overlay.show {
   display: block;
 }
+.trusted {
+  position: relative;
+}
+.trusted::after {
+  position: absolute;
+  content: "عميل معتمد" !important;
+  font-size: 10px;
+  color: #fff;
+  top: -148%;
+  text-align: center;
+  background: #2b96ea;
+  padding: 5px;
+  border-radius: 4px;
+}
+.trusted::before {
+  position: absolute;
+  content: "\f0d7" !important;
+  font-family: "FontAwesome";
+  color: #2b96ea;
+  top: -54%;
+}
+

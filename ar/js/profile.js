@@ -115,130 +115,161 @@ $(document).ready(function () {
     $(".alert_modal").css("display", "none");
     $(".overlay").css("display", "none");
   });
-  // Create the main container div
-  const reportModelDiv = $("<div>").addClass("report-model");
-
-  // Create the title paragraph
-  const titleParagraph = $("<p>")
-    .addClass("title")
-    .text("الإبلاغ عن هذا العقار");
-  reportModelDiv.append(titleParagraph);
-
-  // Create the form container div
-  const formDiv = $("<div>").addClass("form");
-  reportModelDiv.append(formDiv);
-
-  // Create the form element
-  const formElement = $("<form>").attr("action", "");
-  formDiv.append(formElement);
-
-  // Create the select dropdown item div
-  const selectDropdownItemDiv = $("<div>").addClass("select-dropdown__item");
-  formElement.append(selectDropdownItemDiv);
-
-  // Create the reason select element
-  const reasonSelect = $("<select>")
-    .attr("name", "reason")
-    .addClass("select-resson");
-  selectDropdownItemDiv.append(reasonSelect);
-
-  // Create the default option for the reason select
-  const defaultOption = $("<option>").val("").text("إختر السبب");
-  reasonSelect.append(defaultOption);
-
-  // Create the other options for the reason select
-  const reasons = [
-    "العقار غير متوافر",
-    "السعر غير دقيق",
-    "لم أتسلم رد من الوسيط العقاري",
-    "لا توجد تفاصيل للعقار",
-    "نوعية الصور رديئة",
-    "نص الوصف ضعيف جداً",
-    "الموقع غير صحيح",
-    "العقار المدرج غير موجود فعلياً",
-    "خطأ في نوع العقار المدرج",
-  ];
-
-  reasons.forEach((reason, index) => {
-    const option = $("<option>")
-      .val(index + 1)
-      .text(reason);
-    reasonSelect.append(option);
+  // copy owner profile page url to clipboard
+  $(".share-btn").on("click", function () {
+    let url = window.location.href;
+    navigator.clipboard.writeText(url); // Write the text to the clipboard
+    alert("تم النسخ الي الحافظة");
   });
-
-  // Create the input message div
-  const inputMessageDiv = $("<div>")
-    .addClass("input__message")
-    .text("يرجى تحديد السبب");
-  selectDropdownItemDiv.append(inputMessageDiv);
-
-  // Create the textarea for the message
-  const messageTextarea = $("<textarea>")
-    .attr("name", "message")
-    .addClass("main-input")
-    .attr("placeholder", "تعليق إضافي");
-  formElement.append(messageTextarea);
-
-  // Create the submit button
-  const submitButton = $("<button>").addClass("submit-report").text("إرسال");
-  formElement.append(submitButton);
-
-  // Create the image container div
-  const imgDiv = $("<div>").addClass("img");
-  reportModelDiv.append(imgDiv);
-
-  // Create the image element
-  const imageElement = $("<img>")
-    .attr("src", "images/report-property.png")
-    .attr("alt", "");
-  imgDiv.append(imageElement);
-
-  // Create the description paragraph
-  const descriptionParagraph = $("<p>").text(
-    "هل هناك مشكلة في هذا العقار؟ يرجى تزويدنا بمزيد من المعلومات حتى نتمكن من حل المشكلة"
-  );
-  imgDiv.append(descriptionParagraph);
-
-  // Append the model box to the desired container in your HTML
-  $(".report-property").append(reportModelDiv);
-
-  // Get the property paragraph element
-  const propertyRepor = $("#property");
-
-  // Get the report model element
-  const reportModel = $(".report");
-
-  // Add a click event listener to the property paragraph
-  propertyRepor.on("click", (event) => {
-    // event.stopPropagation(); // Stop the click event from propagating to the document
-    // Show the report model
-    reportModel.fadeToggle();
-    reportModel.css("display", "flex");
+  // add proparty to favorate
+  $(".favorite-box").on("click", function () {
+    // send request to DB to check if the user is login or not
+    let element = $(this);
+    $.ajax({
+      method: "POST",
+      url: "checklogin.php",
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        if (data == 0) {
+          $(".modal-container-2").css("display", "flex");
+          $(".modal-container-2  h2").text("للمتابعة يجب تسجيل الدخول اولاً");
+          $(".modal-container-2 .login").text("تسجيل الدخول");
+          $(".report-property").removeClass("active");
+          $(".modal-container-2 .login").on("click", function () {
+            location.href = "login.php";
+          });
+        } else if (data == 1) {
+          // if user is logged in
+          let property_id = element.attr("data-PID");
+          let owner_id = element.attr("data-OID");
+          let user_id = element.attr("data-UID");
+          let is_fav = element.attr("data-fav");
+          let formData = new FormData();
+          formData.append("is_fav", is_fav);
+          formData.append("property_id", property_id);
+          formData.append("owner_id", owner_id);
+          formData.append("user_id", user_id);
+          if (is_fav == 0) {
+            // send the data to the server
+            $.ajax({
+              method: "POST",
+              url: "add_favorite.php",
+              data: formData,
+              processData: false,
+              contentType: false,
+              success: function (data) {
+                if (data == 1) {
+                  element.attr("data-fav", 1);
+                  // increase the number of favorites when user remove the favorite item
+                  let saved_num = $(".favorite_page a").attr("data-saved");
+                  $(".favorite_page a").attr("data-saved", ++saved_num);
+                  element.addClass("favorated");
+                  $(".success-message")
+                    .addClass("show-success")
+                    .text("تم حفظ العقار بنجاح")
+                    .on("click", function () {
+                      $(this).removeClass("show-success");
+                    });
+                  setTimeout(function () {
+                    $(".success-message").removeClass("show-success");
+                  }, 3000);
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error(xhr);
+              },
+            });
+          } else {
+            $.ajax({
+              method: "POST",
+              url: "add_favorite.php",
+              data: formData,
+              processData: false,
+              contentType: false,
+              success: function (data) {
+                if (data == 1) {
+                  element.attr("data-fav", 0);
+                  // decrese the number of favorites when user remove the favorite item
+                  let saved_num = $(".favorite_page a").attr("data-saved");
+                  if (saved_num == 1) {
+                    $(".favorite_page a").attr("data-saved", "");
+                  } else {
+                    $(".favorite_page a").attr("data-saved", --saved_num);
+                  }
+                  element.removeClass("favorated");
+                  $(".success-message")
+                    .addClass("show-success")
+                    .text("العقار غير محفوظ")
+                    .on("click", function () {
+                      $(this).removeClass("show-success");
+                    });
+                  setTimeout(function () {
+                    $(".success-message").removeClass("show-success");
+                  }, 3000);
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error(xhr);
+              },
+            });
+          }
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
   });
-  let close_model = $(".close-report-model");
-  close_model.on("click", () => {
-    reportModel.fadeOut();
-    reportModel.css("display", "none");
+  // display red heart for each favorite item
+  $(".favorite-box").each(function () {
+    if ($(this).attr("data-fav") == "1") {
+      $(this).addClass("favorated");
+    }
+  });
+  // close alert modal
+  $(".alert_close, .modal-overlay , .close").click(function () {
+    $(".alert_modal").css("display", "none");
+    $(".modal-overlay").css("display", "none");
+  });
+  // display the number of favorite items
+  let user_id = $(".favorite_page a").attr("data-uid");
+  $.ajax({
+    url: "get_saved_num.php",
+    method: "POST",
+    data: { user_id: user_id },
+    success: function (data) {
+      if (data == 0) {
+        $(".favorite_page a").attr("data-saved", "");
+      } else {
+        $(".favorite_page a").attr("data-saved", data);
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error(xhr);
+    },
   });
 });
+//SECTION -  Animate property body
+window.addEventListener("scroll", function () {
+  const header = document.querySelector("header");
+  header.classList.toggle("sticky", window.scrollY);
 
-// send whatsApp message
-function send_handle() {
-  const whatsAppBtn = document.querySelector(".button-whatsapp");
-  const num = whatsAppBtn.dataset.phone;
-  const link = whatsAppBtn.getAttribute("data-propertyLink");
-  const message_model = `
-    مرحباً
-    أود الحصول على المزيد من المعلومات 
-    حول هذا العقار المنشور على موقع 
-    alwasite.eg
-    نوع العقار: فيلا
-    السعر: 3,721,600 جنيه
-    الموقع: المدينة
-    الرابط: ${link}
-    `;
-  const win = window.open(
-    `https://wa.me/${num}?text=${message_model}`,
-    "_blank"
-  );
-}
+  const propertyBodies = document.querySelectorAll(".property-body");
+  const windowHeight = window.innerHeight;
+  const windowWidth = window.innerWidth;
+
+  if (windowWidth > 730) {
+    propertyBodies.forEach(function (body) {
+      const bodyTop = body.getBoundingClientRect().top;
+
+      if (bodyTop < windowHeight) {
+        body.classList.add("show");
+        body.classList.remove("hide");
+      } else {
+        body.classList.remove("show");
+        body.classList.add("hide");
+      }
+    });
+  }
+});
