@@ -13,7 +13,7 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'])) {
 ?>
       <p class="success-message"></p>
       <div class="container">
-        <h1 class="text-primary-emphasis">Manage Owners Requests</h1>
+        <h1 class="text-primary-emphasis"><?php echo ((isset($_GET['page']) && $_GET['page'] == 'Pending')) ? "Manage Owners Requests" : "Manage Owners" ?></h1>
         <div class="table-responsive">
           <table class="table main-table table-bordered">
             <thead>
@@ -212,9 +212,9 @@ if (!(isset($_SESSION['login']) && $_SESSION['login'])) {
                         <td><button class="btn btn-danger confirm delete-prop">Delete</button></td>
                         </tr>
                         _END;
-                      }
-                      ?>
-                      <a href="users.php?action=Properties&page=Pending" class="btn btn-primary">Pending Properties</a>
+              }
+              ?>
+              <a href="users.php?action=Properties&page=Pending" class="btn btn-primary">Pending Properties</a>
             </tbody>
           </table>
         </div>

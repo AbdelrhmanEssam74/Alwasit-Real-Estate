@@ -1,5 +1,5 @@
         <!-- start Form -->
-        <form class="form_search" action="">
+        <form class="form_search" action="<?php echo $search ?>search.php" method="get">
           <div class="check_btn">
             <?php
             if (isset($rent_page)) {
@@ -40,8 +40,6 @@
             <div class="select_type">
               <select name="t" id="propertyTypeSelect">
                 <option value="all">نوع العقار</option>
-                <option value="1">شقة</option>
-                <option value="2">فيلا</option>
               </select>
             </div>
             <div class="select_price">

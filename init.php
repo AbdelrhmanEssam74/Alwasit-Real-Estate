@@ -29,3 +29,4 @@ $auth = 'auth/';
 $logout = 'auth/logout.php';
 $user = 'user/';
 $libs = 'libs/';
+$search = 'search/';

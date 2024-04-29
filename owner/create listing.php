@@ -31,13 +31,17 @@ switch ($action) {
           <textarea name="propertyDescription" required="required" placeholder="وصف مفصل للعقار" class="form-control" id="propertyDescription" rows="7"></textarea>
         </div>
         <div class="type-conditions">
-          <div class="Type_input form-group">
+          <div class="form-group">
+            <label for="propertyType">نوع العقار</label>
+            <input required="required" autocomplete="work" placeholder="مثال : شقة / فيلا" type="text" name="propertyType" class="form-control" id="propertyType">
+          </div>
+          <!-- <div class="Type_input form-group">
             <label>نوع العقار</label>
             <select required="required" name="propertyType" class="selectpicker form-select" data-live-search="true" data-width="100%">
               <option value="type1">شقة</option>
               <option value="Type2">فيلا</option>
             </select>
-          </div>
+          </div> -->
           <div class="Type_input form-group">
             <label>حالة العقار</label>
             <select required="required" name="propertyStatus" class="selectpicker form-select" data-live-search="true" data-width="100%">
@@ -86,7 +90,7 @@ switch ($action) {
         <div class="city-neighborhood">
           <div class="form-group">
             <label for="neighborhood">الحي/البلدة</label>
-            <input required="required" placeholder="مثال : الحميات / الرمد / الواسطي" type="text" name="propertyNeighborhood" class="form-control" id="neighborhood">
+            <input required="required" autocomplete="work" placeholder="مثال : الحميات / الرمد / الواسطي" type="text" name="propertyNeighborhood" class="form-control" id="neighborhood">
           </div>
           <div class="form-group">
             <label for="City">المحافظة</label>
@@ -153,7 +157,7 @@ switch ($action) {
           <h2 class="mt-0 mb-20 txt-r">تعديل عقار </h2>
           <form enctype="multipart/form-data" method="POST" action="edit_property.php" class="responsive-form d-flex flex-direction-column w-full">
             <div class="propertyTitle form-group">
-              <input type="hidden" name="property_id" value="<?php echo $property_id?>">
+              <input type="hidden" name="property_id" value="<?php echo $property_id ?>">
               <label for="propertyTitle">اسم العقار</label>
               <input required="required" value="<?php echo $propertyTitle ?>" name="propertyTitle" placeholder="مثال : شقة للبيع / للإيحار" type="text" class="form-control" id="propertyTitle">
             </div>
@@ -243,7 +247,7 @@ switch ($action) {
                 <span class="fake-btn">اختر الملفات</span>
                 <span class="file-msg">أو قم بسحب الملفات هنا</span>
                 <input type="hidden" name="old-imgs" value="<?php echo $imgs ?>">
-                <input  class="file-input" id="imgs" type="file" multiple accept="image/*" name="new-imgs[]">
+                <input class="file-input" id="imgs" type="file" multiple accept="image/*" name="new-imgs[]">
                 <div class="item-delete"></div>
               </div>
             </div>

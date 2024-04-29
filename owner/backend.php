@@ -134,15 +134,12 @@ $insert_stmt = $conn->prepare(
     )"
 );
 $r = $insert_stmt->execute($data);
-//NOTE - Insert neighborhood in neighborhood table in database
-// get number of properteis in neighborhood table in database
+//NOTE - Insert type of property in categories table in database
+// get number of properteis in categories table in database
 $n = trim($_POST['propertyNeighborhood']);
 $neighborhoods = $conn->prepare("SELECT * FROM `neighborhoods` WHERE neighborhood_name = :n");
 $neighborhoods->execute(['n' => $n]);
 $neighborhoods = $neighborhoods->fetch(PDO::FETCH_OBJ);
-echo "<pre>";
-print_r($neighborhoods);
-echo "</pre>";
 if (($neighborhoods)) {
   $num = $neighborhoods->nums_of_properties;
   $num++;
@@ -153,6 +150,23 @@ if (($neighborhoods)) {
   $insert_neighborhoods = "INSERT INTO `neighborhoods` (`neighborhood_name` , `city`) VALUES(?,?)";
   $stmt = $conn->prepare($insert_neighborhoods);
   $r = $stmt->execute(array($data['propertyNeighborhood'], $data['propertyCity']));
+}
+//NOTE - Insert neighborhood in neighborhood table in database
+// get number of properteis in neighborhood table in database
+$t = trim($_POST['propertyType']);
+$categories = $conn->prepare("SELECT * FROM `categories` WHERE category_name = :t");
+$categories->execute(['t' => $t]);
+$categories = $categories->fetch(PDO::FETCH_OBJ);
+if (($categories)) {
+  $num = $categories->nums_of_properties;
+  $num++;
+  $update_nums_of_properties = "UPDATE categories set nums_of_properties = ?";
+  $stmt = $conn->prepare($update_nums_of_properties);
+  $stmt->execute(array($num));
+} else {
+  $insert_categories = "INSERT INTO `categories` (`category_name`) VALUES(?)";
+  $stmt = $conn->prepare($insert_categories);
+  $r = $stmt->execute(array($data['propertyType']));
 }
 // get the value of property_num from owners table in database and increate it by 1
 $get_stmt = $conn->prepare("SELECT property_num FROM owners WHERE owner_id = :owner_id");
@@ -170,10 +184,12 @@ $current_date = date('Y-m-d h:i');
 $propertyTitle = $_POST['propertyTitle'];
 $mailBody = "
 <!DOCTYPE html>
-<html>
+<html dir='rtl'>
 <head>
+  <meta charset='UTF-8'>
 </head>
-<body style='text-align:right;'>
+<body>
+  <div style='font-family: Arial, sans-serif; text-align: right; padding:15px'>
 مرحبًا  <h3>$full_name,</h3>
 <p>
 $propertyTitle   :   لقد قمت بارسال عقار بعنوان     
@@ -184,6 +200,7 @@ $propertyTitle   :   لقد قمت بارسال عقار بعنوان
 </p>
 <p>فريق الوسيط</p>
 <a href='http://localhost/Alwasit' target='_blank'>Alwasit</a>
+  </div>
 </body>
 </html>
 ";

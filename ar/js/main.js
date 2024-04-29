@@ -240,7 +240,6 @@ $(document).ready(function () {
       console.error(xhr);
     },
   });
-
 });
 const newSearchInputs = document.querySelector(".search_inputs");
 const newInputs = `
@@ -270,12 +269,10 @@ function updateMenuAndSearchInputs() {
         <i class='bx bx-search'></i>
     </div>
     <div class="select_type">
-        <select name="t" id="propertyTypeSelect">
-            <option value="all">نوع العقار</option>
-            <option value="1">شقة</option>
-            <option value="2">فيلا</option>
-        </select>
-    </div>
+    <select name="t" id="propertyTypeSelect">
+      <option value="all">نوع العقار</option>
+    </select>
+  </div>
     <div class="select_price">
         <p class="price_text">السعر</p>
         <div class="price_input">
@@ -325,15 +322,93 @@ function updateMenuAndSearchInputs() {
 window.addEventListener("resize", updateMenuAndSearchInputs);
 updateMenuAndSearchInputs();
 //SECTION - suggestions list for search input
-const suggestions = [
-  "الرمد",
-  "الحميات",
-  "الكورنيش",
-  "المدينة",
-  "الحي الاول",
-  "الواسطي",
-];
-
+//NOTE -  get suggestions list from database and apend data in suggestion list
+const suggestions = [];
+const suggestions_price_buy = [];
+const suggestions_price_rent = [];
+const suggestions_min_area = [];
+$(document).ready(function () {
+  // send ajax request to server
+  $.ajax({
+    url: "../../owner/get_neighborhoods.php",
+    method: "GET",
+    success: function (response) {
+      let neighborhoods = JSON.parse(response);
+      for (let index = 0; index < neighborhoods.length; index++) {
+        const element = neighborhoods[index];
+        suggestions.push(element.neighborhood_name);
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log(textStatus);
+    },
+  });
+  //SECTION - suggestions list for categories  select input
+  //NOTE -  get categories list from database and apend data in suggestion list
+  $.ajax({
+    url: "../../owner/get_categories.php",
+    method: "GET",
+    success: function (response) {
+      let categories = JSON.parse(response);
+      for (let index = 0, i = 1; index < categories.length; index++, i++) {
+        const element = categories[index];
+        element.category_name;
+        let option = $("<option value=" + i + "></option>").text(
+          element.category_name
+        );
+        option.appendTo($("#propertyTypeSelect"));
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log(textStatus);
+    },
+  });
+  // get  price from database when user clicks on buy radio btn
+  $.ajax({
+    url: "../../owner/includes/functions/get_price_buy.php",
+    method: "GET",
+    success: function (response) {
+      let BuyPrice = JSON.parse(response);
+      for (let index = 0; index < BuyPrice.length; index++) {
+        const element = BuyPrice[index];
+        suggestions_price_buy.push(element.price);
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log(textStatus);
+    },
+  });
+  // get  price from database when user clicks on rent radio btn
+  $.ajax({
+    url: "../../owner/includes/functions/get_price_rent.php",
+    method: "GET",
+    success: function (response) {
+      let RentPrice = JSON.parse(response);
+      for (let index = 0; index < RentPrice.length; index++) {
+        const element = RentPrice[index];
+        suggestions_price_rent.push(element.price);
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log(textStatus);
+    },
+  });
+  // get  area from database
+  $.ajax({
+    url: "../../owner/includes/functions/get_area.php",
+    method: "GET",
+    success: function (response) {
+      let area = JSON.parse(response);
+      for (let index = 0; index < area.length; index++) {
+        const element = area[index];
+        suggestions_min_area.push(element.area);
+      }
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log(textStatus);
+    },
+  });
+});
 function showSuggestions() {
   const userInput = document.getElementById("searchInput").value.toLowerCase();
   const suggestionList = document.getElementById("suggestionList");
@@ -346,13 +421,13 @@ function showSuggestions() {
   }
 
   const matchingSuggestions = suggestions.filter((suggestion) =>
-    suggestion.toLowerCase().startsWith(userInput)
+    suggestion.toLowerCase().includes(userInput)
   );
 
   matchingSuggestions.forEach((suggestion) => {
     const li = document.createElement("li");
     li.textContent = suggestion;
-    li.addEventListener("click", () => {
+    li.addEventListener("click", function () {
       document.getElementById("searchInput").value = suggestion;
       suggestionList.innerHTML = "";
     });
@@ -364,17 +439,8 @@ function showSuggestions() {
       "لا يمكننا العثور على استعلام البحث الخاص بك. جرب موقعًا مختلفًا.";
   }
 }
-document
-  .querySelector("body")
-  .addEventListener("click", function hideSuggestions() {
-    const suggestionList = document.getElementById("suggestionList");
-    suggestionList.innerHTML = "";
-  });
 
 //SECTION - suggestions list for price
-const suggestions_price_buy = [1000, 2000, 3000, 4000, 5000, 6000];
-
-const suggestions_price_rent = [500, 1000, 1500, 2000, 2500, 3500];
 
 let radio_buy = document.querySelector("#buy");
 let radio_rent = document.querySelector("#rent");
@@ -455,10 +521,6 @@ if (minPriceInput) {
   });
 
   //SECTION - suggestions list for area
-
-  const suggestions_min_area = [50, 60, 70, 80, 100];
-
-  const suggestions_max_area = [50, 60, 70, 80, 100];
 
   let minAreaInput = document.querySelector("#minAreaInput");
   let maxAreaInput = document.querySelector("#maxAreaInput");

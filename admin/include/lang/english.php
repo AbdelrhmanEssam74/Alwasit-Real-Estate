@@ -6,7 +6,7 @@ function lang($text)
     // Navbar Links
     'HOME_ADMIN'    => 'Alwasit',
     'CATEGORIES'    => 'Sections',
-    'ITEMS'         => 'Items',
+    'ITEMS'         => 'Properties',
     'MEMBERS'       => 'Members',
     'COMMENTS'      => 'Comments',
     'STATISTICS'    => 'Statistics',

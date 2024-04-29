@@ -44,7 +44,7 @@ if (isset($_SESSION['uID'])) {
         <li><a href="<?php echo $contactus ?>">تواصل معنا</a></li>
         <li> <a href="<?php echo $about ?>">عنا</a></li>
         <li> <a href="<?php echo $commercial ?>">تجاريه</a></li>
-        <li> <a href="<?php echo $students ?>">للطلاب</a></li>
+        <li> <a href="<?php echo $students ?>">مغتربين</a></li>
         <li> <a href="<?php echo $forRent ?>">للإيجار</a></li>
         <li> <a href="<?php echo $forBuy ?>">للبيع</a></li>
       </ul>
