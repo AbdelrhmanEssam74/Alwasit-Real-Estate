@@ -31,7 +31,7 @@
           </div>
           <div class="search_inputs">
             <div class="input_control_search">
-              <input type="text" name="q" oninput="showSuggestions()" id="searchInput" placeholder="الحي او المنطقة">
+              <input type="text" name="q" oninput="showSuggestions()" autocomplete="false" id="searchInput" placeholder="الحي او المنطقة">
               <p class="no-suggestion-message" id="noSuggestionMessage"></p>
               <ul class="suggestion-list" id="suggestionList">
               </ul>

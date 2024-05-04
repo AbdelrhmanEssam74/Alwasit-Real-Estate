@@ -33,7 +33,7 @@ switch ($action) {
         <div class="type-conditions">
           <div class="form-group">
             <label for="propertyType">نوع العقار</label>
-            <input required="required" autocomplete="work" placeholder="مثال : شقة / فيلا" type="text" name="propertyType" class="form-control" id="propertyType">
+            <input required="required" autocomplete="false" placeholder="مثال : شقة / فيلا" type="text" name="propertyType" class="form-control" id="propertyType">
           </div>
           <!-- <div class="Type_input form-group">
             <label>نوع العقار</label>

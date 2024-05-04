@@ -64,16 +64,19 @@ if ($result !== null) {
   $longitude = $result['longitude'];
 }
 $arr = array(
-  "type1" => "شقة",
-  "type2" => "فيلا",
   "status1" => "لللإيجار",
   "status2" => "للبيع",
 );
+$arr2 = array(
+  "type1" => "شقة",
+  "type2" => "فيلا",
+);
+echo $_POST['propertyType'];
 $data = array(
   'owner_id'              => $owner_id,
   'propertyTitle'         => $_POST['propertyTitle'],
   'propertyDescription'   => $_POST['propertyDescription'],
-  'propertyType'          => $arr[$_POST['propertyType']],
+  'propertyType'          => $_POST['propertyType'],
   'propertyStatus'        => $arr[$_POST['propertyStatus']],
   'propertyPrice'         => $_POST['propertyPrice'],
   'propertyArea'          => $_POST['propertyArea'],

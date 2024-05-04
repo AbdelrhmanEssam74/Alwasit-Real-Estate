@@ -48,7 +48,7 @@ $(document).ready(function () {
   $(".checkOwner").on("click", function () {
     $.ajax({
       method: "POST",
-      url: "owner/index.php",
+      url: "../owner/index.php",
       processData: false,
       contentType: false,
       success: function (data) {
@@ -123,7 +123,7 @@ $(document).ready(function () {
     let element = $(this);
     $.ajax({
       method: "POST",
-      url: "checklogin.php",
+      url: "../checklogin.php",
       processData: false,
       contentType: false,
       success: function (data) {
@@ -150,7 +150,7 @@ $(document).ready(function () {
             // send the data to the server
             $.ajax({
               method: "POST",
-              url: "add_favorite.php",
+              url: "../add_favorite.php",
               data: formData,
               processData: false,
               contentType: false,
@@ -179,7 +179,7 @@ $(document).ready(function () {
           } else {
             $.ajax({
               method: "POST",
-              url: "add_favorite.php",
+              url: "../add_favorite.php",
               data: formData,
               processData: false,
               contentType: false,
@@ -206,7 +206,7 @@ $(document).ready(function () {
                 }
               },
               error: function (xhr, status, error) {
-                console.error(xhr);
+                console.error(xhr, status, error);
               },
             });
           }
@@ -226,7 +226,7 @@ $(document).ready(function () {
   // display the number of favorite items
   let user_id = $(".favorite_page a").attr("data-uid");
   $.ajax({
-    url: "get_saved_num.php",
+    url: "../user/get_saved_num.php",
     method: "POST",
     data: { user_id: user_id },
     success: function (data) {
@@ -236,8 +236,9 @@ $(document).ready(function () {
         $(".favorite_page a").attr("data-saved", data);
       }
     },
-    error: function (xhr, status, error) {
-      console.error(xhr);
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log(textStatus);
+      console.log(errorThrown);
     },
   });
 });
@@ -332,7 +333,7 @@ const suggestions_min_area = [];
 $(document).ready(function () {
   // send ajax request to server
   $.ajax({
-    url: "../../owner/get_neighborhoods.php",
+    url: "../owner/get_neighborhoods.php",
     method: "GET",
     success: function (response) {
       let neighborhoods = JSON.parse(response);
@@ -348,7 +349,7 @@ $(document).ready(function () {
   //SECTION - suggestions list for categories  select input
   //NOTE -  get categories list from database and apend data in suggestion list
   $.ajax({
-    url: "../../owner/get_categories.php",
+    url: "../owner/get_categories.php",
     method: "GET",
     success: function (response) {
       let categories = JSON.parse(response);
@@ -367,7 +368,7 @@ $(document).ready(function () {
   });
   // get  price from database when user clicks on buy radio btn
   $.ajax({
-    url: "../../owner/includes/functions/get_price_buy.php",
+    url: "../owner/includes/functions/get_price_buy.php",
     method: "GET",
     success: function (response) {
       let BuyPrice = JSON.parse(response);
@@ -382,7 +383,7 @@ $(document).ready(function () {
   });
   // get  price from database when user clicks on rent radio btn
   $.ajax({
-    url: "../../owner/includes/functions/get_price_rent.php",
+    url: "../owner/includes/functions/get_price_rent.php",
     method: "GET",
     success: function (response) {
       let RentPrice = JSON.parse(response);
@@ -397,7 +398,7 @@ $(document).ready(function () {
   });
   // get  area from database
   $.ajax({
-    url: "../../owner/includes/functions/get_area.php",
+    url: "../owner/includes/functions/get_area.php",
     method: "GET",
     success: function (response) {
       let area = JSON.parse(response);
@@ -410,7 +411,32 @@ $(document).ready(function () {
       console.log(textStatus);
     },
   });
+  var sort_by = $(".sort_by_btn");
+  var sort_list = $(".sort_list");
+  var sort_links = $(".sort_list a");
+  var sort_by_overlay = $(".sort-by-overlay");
+
+  if (sort_by.length) {
+    sort_by.on("click", function () {
+      sort_list.toggleClass("show_list");
+      sort_by_overlay.toggleClass("show");
+    });
+  }
+
+  sort_by_overlay.on("click", function () {
+    if (sort_list.length && sort_list.hasClass("show_list")) {
+      sort_list.removeClass("show_list");
+      sort_by_overlay.removeClass("show");
+    }
+  });
+
+  setTimeout(function () {
+    if (sort_list.length && sort_list.hasClass("show_list")) {
+      sort_list.removeClass("show_list");
+    }
+  }, 5000);
 });
+console.log(123);
 function showSuggestions() {
   const userInput = document.getElementById("searchInput").value.toLowerCase();
   const suggestionList = document.getElementById("suggestionList");

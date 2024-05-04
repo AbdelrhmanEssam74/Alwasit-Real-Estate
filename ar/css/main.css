@@ -1345,3 +1345,49 @@ input[type="number"]::-webkit-outer-spin-button {
   top: -54%;
 }
 
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination a,
+.pagination .current-page {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #f2f2f2;
+  color: #333;
+  text-decoration: none;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+.pagination a:hover {
+  background-color: #ddd;
+}
+
+.pagination .current-page {
+  background-color: #999;
+  color: #fff;
+}
+.no-prop {
+  width: 100%;
+  direction: rtl;
+  margin-top: -176px;
+  padding: 15px;
+  background-color: #ffffff;
+  position: relative;
+}
+.no-prop > *:not(:first-child) {
+  margin-top: 10px;
+}
+.no-prop p {
+  color: #353535;
+}
+.no-prop img {
+  position: absolute;
+  top: 0;
+  right: 30%;
+  opacity: 0.5;
+  width: 130px;
+}

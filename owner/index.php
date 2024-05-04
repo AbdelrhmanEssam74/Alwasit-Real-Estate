@@ -42,10 +42,11 @@ else :
         $_SESSION['owner-request'] = $_POST['owner-request'];
         $owner_rquest = 3;
         // inset a new request in the database
-        $insert_request = $conn->prepare("INSERT INTO `onwer_requests` (`user_id` , `username` ,`email` ,`active`)
-        Value (:user_id, :username, :email, :active)");
+        $insert_request = $conn->prepare("INSERT INTO `onwer_requests` (`user_id` ,`full_name`, `username` ,`email` ,`active`)
+        Value (:user_id, :FN, :username, :email, :active)");
         $inserted_data = [
           'user_id' => $user_id,
+          'FN' =>  $data->FullName,
           'username' => $data->username,
           'email' => $data->email,
           'active' => 0

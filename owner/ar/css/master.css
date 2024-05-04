@@ -955,11 +955,14 @@ ul {
 .form-group label {
   text-align: right;
   font-family: "Cairo";
-  color: rgb(0, 0, 92);
+  color: #0066ff;
 }
 .form-group textarea,
 .form-group input {
   text-align: right;
+}
+.form-group textarea::placeholder {
+  direction: rtl;
 }
 .city-neighborhood,
 .type-conditions {
@@ -1538,7 +1541,8 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 5px 5px 10px 10px;
   height: fit-content;
   overflow: scroll;
-  top: 100%;
+  top: 88%;
+  max-height: 178px;
 }
 .neighborhood_list ul {
   display: flex;

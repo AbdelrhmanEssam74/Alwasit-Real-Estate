@@ -41,10 +41,15 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
 </div>
 <div class="sort-by-overlay"></div>
 <div class="design">
+  <?php
+  // get  properties for buy from database
+  $property_obj = new PropertyTable();
+  $data = $property_obj->getALLPropertiesBuyType("لللإيجار");
+  ?>
   <div class="container" dir="rtl">
     <div class="text">
       <h2>عقارات للبيع في بني سويف</h2>
-      <p><span>1050</span>عقارات اخري </p>
+      <p><span><?php echo count($data) ?></span>عقارات اخري </p>
     </div>
     <div class="sort-by">
       <div class="sort_by_btn">ترتيب حسب</div>
@@ -66,9 +71,11 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
     </div>
     <div class="widgets">
       <?php
-      // get  properties for buy from database
-      $property_obj = new PropertyTable();
-      $data = $property_obj->getALLPropertiesBuyType("لللإيجار");
+      $itemsPerPage = 6;
+      $totalItems = count($data);
+      $totalPages = ceil($totalItems / $itemsPerPage);
+      $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+      $offset = ($currentPage - 1) * $itemsPerPage;
       $query = (isset($_GET['q'])) ? $_GET['q'] : '';
       switch ($query) {
         case 'd':
@@ -104,6 +111,7 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
             </a>
             <div class="details-top">
               <div class="details-type">
+                <div class="type1"><?php echo  $prop->type ?></div>
                 <div class="rent">للإيجار</div>
               </div>
               <div class="favorite-box" data-fav="<?php echo ($prop->property_id == $prop->fav_property_id and $prop->checked == 1 and $prop->fav_user_id == $user_id) ? $prop->checked : 0 ?>" data-PID="<?php echo  $prop->property_id ?>" data-OID="<?php echo  $prop->owner_id ?>" data-UID="<?php echo $user_id ?>">
@@ -162,4 +170,14 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
   </div>
 </div>
 <!-- End widget -->
+<!-- // Display pagination links -->
+<div class="pagination">
+  <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+    <?php if ($page == $currentPage) : ?>
+      <span class="current-page"><?php echo $page; ?></span>
+    <?php else : ?>
+      <a href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+    <?php endif; ?>
+  <?php endfor; ?>
+</div>
 <?php include $templates . 'footer.php'; ?>

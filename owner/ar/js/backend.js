@@ -264,7 +264,7 @@ $(document).ready(function () {
     });
   });
   // get all categories when user try to enter a neighborhood input
-  $("#propertyType").on("click", function () {
+  $("#propertyType").one("click", function () {
     let parent = $(this).parent();
     let list = $("<div>").addClass("neighborhood_list").appendTo(parent);
     let overlay = $("<div>").addClass("overlay").appendTo(parent);
