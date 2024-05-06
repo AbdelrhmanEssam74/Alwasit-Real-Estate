@@ -332,17 +332,19 @@ const suggestions_min_area = [];
 $(document).ready(function () {
   // send ajax request to server
   $.ajax({
-    url: "../../owner/get_neighborhoods.php",
+    url: "../../get_neighborhoods.php",
     method: "GET",
     success: function (response) {
-      let neighborhoods = JSON.parse(response);
-      for (let index = 0; index < neighborhoods.length; index++) {
-        const element = neighborhoods[index];
-        suggestions.push(element.neighborhood_name);
-      }
+      console.log(response);
+      // let neighborhoods = JSON.parse(response);
+      // for (let index = 0; index < neighborhoods.length; index++) {
+      //   const element = neighborhoods[index];
+      //   suggestions.push(element.neighborhood_name);
+      // }
     },
-    error: function (jqXHR, textStatus, errorThrown) {
-      console.log(textStatus);
+    error: function (xhr, textStatus, errorThrown) {
+      // console.log(textStatus);
+      console.log(xhr);
     },
   });
   //SECTION - suggestions list for categories  select input
@@ -362,7 +364,7 @@ $(document).ready(function () {
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.log(textStatus);
+      // console.log(textStatus);
     },
   });
   // get  price from database when user clicks on buy radio btn
@@ -377,7 +379,7 @@ $(document).ready(function () {
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.log(textStatus);
+      // console.log(textStatus);
     },
   });
   // get  price from database when user clicks on rent radio btn
@@ -392,7 +394,7 @@ $(document).ready(function () {
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.log(textStatus);
+      // console.log(textStatus);
     },
   });
   // get  area from database
@@ -407,7 +409,7 @@ $(document).ready(function () {
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.log(textStatus);
+      // console.log(textStatus);
     },
   });
 });

@@ -15,6 +15,12 @@ class GeneralClass extends DatabaseConnection
     $r = $insert->execute();
     return $r;
   }
+  public function update($query)
+  {
+    $insert = $this->conn->prepare($query);
+    $r = $insert->execute();
+    return $insert->rowCount();
+  }
   public function delete($query)
   {
     $insert = $this->conn->prepare($query);
@@ -40,5 +46,12 @@ class GeneralClass extends DatabaseConnection
     $stmt->execute();
     $result = $stmt->fetchColumn();
     return $result;
+  }
+  public function get_neighborhood()
+  {
+    $stmt2 = $this->conn->prepare("SELECT neighborhood_name FROM `neighborhoods`");
+    $stmt2->execute();
+    $data = $stmt2->fetchAll(PDO::FETCH_OBJ);
+    return $data;
   }
 }
