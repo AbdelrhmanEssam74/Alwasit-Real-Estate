@@ -1,7 +1,7 @@
 <?php include 'init.php'; ?>
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
-<h1 class="p-relative">Profile</h1>
+<h1 class="p-relative"></h1>
 <div class="profile-page m-20">
   <!-- Start Overview -->
   <div class="overview bg-white rad-10 d-flex align-center">

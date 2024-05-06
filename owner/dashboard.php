@@ -21,7 +21,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
       </div>
       <img class="hide-mobile" src="ar/images/welcome.png" alt="" />
     </div>
-    <img src="ar/images/avatar.png" alt="" class="avatar" />
+    <img src="ar/images/person1.jpg" alt="" class="avatar" />
     <div class="body txt-c d-flex p-20 mt-20 mb-20 block-mobile">
       <div><?php echo ucwords($owner_data->FullName) ?> <span class="d-block c-grey fs-14 mt-10">Owner</span></div>
       <div><?php echo getValue('property_num', 'owners', "owner_id", $owner_id)['property_num']; ?><span class="d-block c-grey fs-14 mt-10">Proparty</span></div>
@@ -41,7 +41,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
       </div>
       <div class="box p-20 rad-10 fs-13 c-grey">
         <i class="fa fa-commenting fa-2x mb-10 c-blue" aria-hidden="true"></i>
-        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo getValue('comments_num', 'owners',  "owner_id", $owner_id)['comments_num']; ?></span>
+        <span class="d-block c-black fw-bold fs-25 mb-5 comments_nums"></span>
         Total Visitor Reviews
       </div>
       <div class="box p-20 rad-10 fs-13 c-grey">

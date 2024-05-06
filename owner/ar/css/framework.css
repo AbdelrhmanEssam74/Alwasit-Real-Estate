@@ -28,6 +28,9 @@
 .d-block {
   display: block;
 }
+.float-r {
+  float: right;
+}
 @media (max-width: 767px) {
   .block-mobile {
     display: block;
@@ -254,5 +257,11 @@
 .flex-direction-column {
   flex-direction: column;
 }
+.flex-direction-row {
+  flex-direction: column;
+}
+.dir-r {
+  direction: rtl;
+  
+}
 /* End Components */
-

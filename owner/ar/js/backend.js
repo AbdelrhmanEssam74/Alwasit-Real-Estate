@@ -345,4 +345,17 @@ $(document).ready(function () {
       },
     });
   });
+  setInterval(() => {
+    $.ajax({
+      url: "get_comments_nums.php",
+      method: "POST",
+      data: {},
+      success: function (data) {
+        $(".comments_nums").text(data);
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
+  }, 500);
 });

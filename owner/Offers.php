@@ -10,13 +10,13 @@ $offers_data = $conn->prepare("SELECT * FROM offers JOIN users ON offers.offer_u
 $offers_data->execute([$owner_id]);
 $offers_data = $offers_data->fetchAll(PDO::FETCH_OBJ);
 ?>
-<h1 class="p-relative">العروض</h1>
+<h1 class="p-relative txt-r">العروض</h1>
 <!-- Start Projects Table -->
 <div class="projects p-20 bg-white rad-10 m-20">
   <div id="loadingIcon" style="display: none;">
     <i class="fas fa-spinner fa-spin"></i> Loading...
   </div>
-  <h2 class="mt-0 mb-20">العروض</h2>
+  <h2 class="mt-0 mb-20 txt-r">العروض</h2>
   <?php
   if (count($offers_data) > 0) :
   ?>

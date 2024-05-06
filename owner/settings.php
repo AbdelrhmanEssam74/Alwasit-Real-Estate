@@ -9,26 +9,22 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
 <?php $pageTitel = "Settings | $owner_data->username "; ?>
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
-<h1 class="p-relative">Settings</h1>
+<h1 class="p-relative txt-r">الإعدادات</h1>
 <div class="settings-page m-20 d-grid gap-20">
   <!-- Start Settings Box -->
-  <div class="p-20 bg-white rad-10">
+  <div class="p-20 bg-white rad-10 d-flex flex-direction-column dir-r">
     <h2 class="mt-0 mb-10">General Info</h2>
     <p class="mt-0 mb-20 c-grey fs-15">General Information About Your Account</p>
     <div class="mb-15">
-      <label class="fs-14 c-grey d-block mb-10" for="first">First Name</label>
-      <input class="b-none border-ccc p-10 rad-6 d-block w-full" type="text" value="<?php echo trim(strstr($owner_data->FullName, ' ', true)) ?>" id="first" placeholder="First Name" />
-    </div>
-    <div class="mb-15">
-      <label class="fs-14 c-grey d-block mb-5" for="last">Last Name</label>
-      <input class="b-none border-ccc p-10 rad-6 d-block w-full" id="last" value="<?php echo $owner_data->L_Name ?>" type="text" placeholder="Last Name" />
+      <label class="fs-14 c-grey d-block mb-10" for="first">Full Name</label>
+      <input class="b-none border-ccc p-10 rad-6 d-block w-full" type="text" value="<?php echo $owner_data->FullName ?>" id="first" placeholder="First Name" />
     </div>
     <div>
       <label class="fs-14 c-grey d-block mb-5" for="email">Email</label>
       <input class="email b-none border-ccc p-10 rad-6 w-full mr-10" id="email" value="<?php echo $owner_data->email ?>" type="email" value="o@nn.sa" disabled />
       <!-- <a class="c-blue" href="#">Change</a> -->
-      <button style="cursor: po;" class=" bg-blue p-10 rad-6  b-none c-white ">Save</button>
     </div>
+    <button style="cursor:pointer;" class=" bg-blue p-10 rad-6 mt-10 b-none c-white ">Save</button>
   </div>
   <!-- End Settings Box -->
   <!-- Start Settings Box -->
@@ -41,7 +37,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
       </div>
       <div class="mb-15">
         <label class="fs-14 c-grey d-block mb-10" for="first">Current Password</label>
-        <input class="b-none border-ccc p-10 rad-6 d-block w-full" type="password" id="first" placeholder="Current Password" />
+        <input class="b-none border-ccc p-10 rad-6 d-block w-full" type="password" id="P_first" placeholder="Current Password" />
       </div>
       <div class="mb-15">
         <label class="fs-14 c-grey d-block mb-5" for="last">New Password</label>

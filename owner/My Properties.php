@@ -10,7 +10,7 @@ $prop_data = $conn->prepare("SELECT * FROM properties WHERE owner_id = ? AND `de
 $prop_data->execute([$owner_id]);
 $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
 ?>
-<h1 class="p-relative">My Properties</h1>
+<h1 class="p-relative txt-r">العقارات</h1>
 <!-- Start Projects Table -->
 <div id="delete-modal" class="modal-overlay">
   <div class="close-overlay"></div>
@@ -23,19 +23,19 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
 </div>
 <p class="success-message2"></p>
 <div class="projects p-20 bg-white rad-10 m-20">
-  <h2 class="mt-0 mb-20">My Properties</h2>
+  <h2 class="mt-0 mb-20 txt-r ">العقارات</h2>
   <div class="responsive-table">
     <table class="fs-15 w-full txt-c">
       <thead>
         <tr>
-          <td>Title</td>
-          <td>Address</td>
-          <td>Date published</td>
-          <td>Price</td>
-          <td>Area</td>
-          <td>Comments</td>
-          <td>Status</td>
-          <td>Action</td>
+          <td>تعديل | حذف</td>
+          <td>الحاله</td>
+          <td>التعليقات</td>
+          <td>المساحه</td>
+          <td>السعر</td>
+          <td>تاريخ النشر</td>
+          <td>العنوان</td>
+          <td>اسم العقار</td>
         </tr>
       </thead>
       <tbody>
@@ -46,12 +46,10 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
             $_SESSION['property_title'] = $property->title . " | " . $property->neighborhood;
         ?>
             <tr id="row_<?php echo $property->property_id ?>">
-              <td><a href="<?php echo $prop_details_page ?>?PId=<?php echo $property->property_id ?>"><?php echo $property->title ?></a></td>
-              <td><?php echo substr($property->address, 0, 50) ?></td>
-              <td><?php echo $property->uploaded_at ?></td>
-              <td><?php echo number_format($property->price) ?></td>
-              <td><?php echo $property->area ?> m²</td>
-              <td><?php echo $property->comments_num ?></td>
+              <td>
+                <button data-owner="<?php echo $owner_id ?>" data-PropID="<?php echo $property->property_id ?>" class="delete-btn fs-14 bg-red c-white w-fit b-none btn-shape">حذف</button>
+                <a href="create listing.php?action=Edit&PropID=<?php echo $property->property_id ?>" class=" fs-14 bg-blue c-white w-fit b-none btn-shape">تعديل</a>
+              </td>
               <?php
               if ($property->active == 0) {
                 echo " <td>  <p class='fs-15 bg-red c-white pt-5 pb-5 rad-6'> قيد الانتظار </p></td>";
@@ -59,10 +57,12 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
                 echo " <td>  <p class='fs-15 bg-blue c-white pt-5 pb-5 rad-6'>تم الموافقه</p></td>";
               }
               ?>
-              <td>
-                <button data-owner="<?php echo $owner_id ?>" data-PropID="<?php echo $property->property_id ?>" class="delete-btn fs-14 bg-red c-white w-fit b-none btn-shape">حذف</button>
-                <a href="create listing.php?action=Edit&PropID=<?php echo $property->property_id ?>" class=" fs-14 bg-blue c-white w-fit b-none btn-shape">تعديل</a>
-              </td>
+              <td><?php echo $property->comments_num ?></td>
+              <td><?php echo $property->area ?> m²</td>
+              <td><?php echo number_format($property->price) ?></td>
+              <td><?php echo $property->uploaded_at ?></td>
+              <td><?php echo substr($property->address, 0, 50) ?></td>
+              <td><a href="<?php echo $prop_details_page ?>?PId=<?php echo $property->property_id ?>"><?php echo $property->title ?></a></td>
             </tr>
         <?php
           endforeach;
