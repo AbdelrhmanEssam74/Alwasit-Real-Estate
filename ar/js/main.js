@@ -332,25 +332,25 @@ const suggestions_min_area = [];
 $(document).ready(function () {
   // send ajax request to server
   $.ajax({
-    url: "../../get_neighborhoods.php",
+    url: "owner/get_neighborhoods.php",
     method: "GET",
     success: function (response) {
-      console.log(response);
-      // let neighborhoods = JSON.parse(response);
-      // for (let index = 0; index < neighborhoods.length; index++) {
-      //   const element = neighborhoods[index];
-      //   suggestions.push(element.neighborhood_name);
-      // }
+      // console.log(response);
+      let neighborhoods = JSON.parse(response);
+      for (let index = 0; index < neighborhoods.length; index++) {
+        const element = neighborhoods[index];
+        suggestions.push(element.neighborhood_name);
+      }
     },
     error: function (xhr, textStatus, errorThrown) {
-      // console.log(textStatus);
+      console.log(textStatus);
       console.log(xhr);
     },
   });
   //SECTION - suggestions list for categories  select input
   //NOTE -  get categories list from database and apend data in suggestion list
   $.ajax({
-    url: "../../owner/get_categories.php",
+    url: "owner/get_categories.php",
     method: "GET",
     success: function (response) {
       let categories = JSON.parse(response);
@@ -364,12 +364,12 @@ $(document).ready(function () {
       }
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      // console.log(textStatus);
+      console.log(textStatus);
     },
   });
   // get  price from database when user clicks on buy radio btn
   $.ajax({
-    url: "../../owner/includes/functions/get_price_buy.php",
+    url: "owner/includes/functions/get_price_buy.php",
     method: "GET",
     success: function (response) {
       let BuyPrice = JSON.parse(response);
@@ -384,7 +384,7 @@ $(document).ready(function () {
   });
   // get  price from database when user clicks on rent radio btn
   $.ajax({
-    url: "../../owner/includes/functions/get_price_rent.php",
+    url: "owner/includes/functions/get_price_rent.php",
     method: "GET",
     success: function (response) {
       let RentPrice = JSON.parse(response);
@@ -399,7 +399,7 @@ $(document).ready(function () {
   });
   // get  area from database
   $.ajax({
-    url: "../../owner/includes/functions/get_area.php",
+    url: "owner/includes/functions/get_area.php",
     method: "GET",
     success: function (response) {
       let area = JSON.parse(response);

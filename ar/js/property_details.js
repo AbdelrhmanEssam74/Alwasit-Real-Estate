@@ -369,7 +369,8 @@ $(document).ready(function () {
     deleteButton.on("click", function () {
       var commentID = comment.attr("commentID");
       var uID = comment.attr("uID");
-      deleteComment(commentID, uID);
+      var PID = comment.attr("pid");
+      deleteComment(commentID, uID, PID);
     });
     return comment;
   }
@@ -410,16 +411,18 @@ $(document).ready(function () {
   }
   setTimeout(scrollToTopAndReload, 600000); // Scroll to top and reload after 10 minutes (600,000 milliseconds)
   // Function to to delete the comment from the comment list
-  function deleteComment(commentID, uID) {
+  function deleteComment(commentID, uID, PID) {
     $.ajax({
       method: "POST",
       url: "delete_comment.php",
       data: {
         commentID: commentID,
         uID: uID,
+        PID: PID,
       },
       success: function (response) {
         // Optionally, you can remove the comment element from the DOM
+        console.log(response);
         $(".comments .comment[commentID='" + commentID + "']").remove();
       },
       error: function (error) {
