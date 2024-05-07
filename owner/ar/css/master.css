@@ -1587,3 +1587,57 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #a0a0a0;
   bottom: 25%;
 }
+.update-message {
+  position: fixed;
+  bottom: -100px;
+  right: 36%;
+  background-color: var(--green-color);
+  color: #fff;
+  padding: 10px 35px 10px 15px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  cursor: pointer;
+}
+.update-message::after {
+  position: absolute;
+  font-weight: 600;
+  content: "X";
+  top: 20%;
+  text-align: center;
+  right: 5%;
+}
+.update-message.show {
+  opacity: 1;
+  bottom: 20px;
+  transition: opacity 0.5s ease-in;
+}
+
+.invalid-n-pass,
+.invalid-c-pass {
+  position: absolute;
+  color: red;
+  font-size: 12px;
+  margin-top: -5px;
+  display: none;
+}
+svg.show-n-pass,
+svg.show-c-pass {
+  top: 60%;
+  left: 5px;
+  color: #5e5e5e;
+  cursor: pointer;
+}
+.dis{
+  pointer-events: none;
+  opacity: 0.8;
+}
+.dis:hover{
+  cursor: not-allowed;
+}
+.restPass{
+  position: absolute;
+  left: 0;
+  font-size: 12px;
+  color: #1da1f2;
+}

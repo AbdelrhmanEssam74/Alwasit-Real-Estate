@@ -121,22 +121,48 @@ switch ($action) {
       $_SESSION['expiryTime'] = $expiryTime; // Store the expiration time of this token
       $mailBody = "
       <!DOCTYPE html>
-      <html>
+      <html dir='rtl'>
       <head>
-      </head>
-      <body style='display: flex;flex-direction: column;align-items: center;gap: 15px;'>
-      مرحبًا  <h3>$full_name</h3>
-      <p>
-      يمكن إعادة تعيين كلمة المرور الخاصة بك عن طريق النقر على الزر أدناه. إذا لم تكن قد طلبت كلمة مرور جديدة، يرجى تجاهل هذا البريد الإلكتروني
-      </p>
-      <a style='display: inline-block;padding: 10px 20px;background-color: #007BFF;color: #fff;text-decoration: none;border-radius: 5px;transition: background-color 0.3s ease;' href='http://localhost/Alwasit/auth/rest-password.php?token=$token&_action=check-token'>
-      Change Password
-      </a>
-      <p>هذا الايميل صالح لمدة 12 ساعه فقط</p>
-      <p>فريق الوسيط</p>
-      <a href='http://localhost/Alwasit' target='_blank'>Alwasit</a>
-      </body>
-      </html>
+        <meta charset='UTF-8'>
+  <style>
+  p{
+    color : #333;
+    line-height : 1.8;
+    padding:15px;
+  }
+  h3{
+    color : #ff9a33;
+  }
+  .rest{
+      display: block;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor:pointer;
+  }
+
+  </style>
+</head>
+<body>
+  <div style='font-family: Arial, sans-serif; text-align: right; padding:15px'>
+    <h3> مرحباً  $full_name</h3>
+    </hr>
+    <p>
+    يمكن إعادة تعيين كلمة المرور الخاصة بك عن طريق النقر على الزر أدناه. إذا لم تكن قد طلبت كلمة مرور جديدة، يرجى تجاهل هذا البريد الإلكتروني
+    </p>
+  <a class='rest'  href='http://localhost/Alwasit/auth/rest-password.php?token=$token&_action=check-token'>
+  Change Password
+  </a>
+  <p>هذا الميل صالح لمدة 12 ساعه فقط</p>
+    <p>شكرًا لاستخدامك لخدماتنا وثقتك فينا.</p>
+    <p>مع أطيب التحيات،<br>
+    فريق</p>
+    <a href='http://localhost/Alwasit' target='_blank'><h3>Alwasit</h3></a>
+  </div>
+</body>
+</html>
       ";
       $email_subject  = 'هذا طلب إعادة تعيين كلمة المرور لـ الوسيط';
       $send_email_obj = new EmailSender($email_from_post, $email_subject, $mailBody);

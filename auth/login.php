@@ -119,7 +119,8 @@ $Login_mailBody = "
   </div>
 </body>
 </html>
-        ";
+        "
+        ;
 $send_login_obj = new EmailSender($email, $Login_email_subject, $Login_mailBody);
 // $send_login_obj->sendEmail();
 // Check if user wants to login for 1 month (Remember Me)

@@ -358,4 +358,132 @@ $(document).ready(function () {
       },
     });
   }, 500);
+  // send general info to server
+  $(".save-general-info").on("click", function () {
+    let owner_id = $(this).attr("data-OID");
+    let user_id = $(this).attr("data-UID");
+    let formData = new FormData();
+    $(".dynamic-input").each(function () {
+      let inputId = $(this).attr("id");
+      let inputValue = $(this).val();
+      formData.append(inputId, inputValue);
+    });
+    // Append common form data
+    formData.append("owner_id", owner_id);
+    formData.append("user_id", user_id);
+    formData.append("submit", "general_info");
+    $.ajax({
+      method: "POST",
+      url: "update_data.php",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        if (data == 1) {
+          $(".update-message")
+            .text("تم تحديث البيانات بنجاح")
+            .addClass("show")
+            .on("click", function () {
+              $(this).removeClass("show");
+            });
+          setInterval(() => {
+            $(".update-message").removeClass("show");
+          }, 3000);
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
+  });
+  // send security info to server
+  // show and hide password
+
+  $("svg.show-c-pass").hover(
+    function () {
+      $("#current_pass").attr("type", "text");
+    },
+    function () {
+      $("#current_pass").attr("type", "password");
+    }
+  );
+  $("svg.show-n-pass").hover(
+    function () {
+      $("#new_pass").attr("type", "text");
+    },
+    function () {
+      $("#new_pass").attr("type", "password");
+    }
+  );
+
+  // get current and new password and validate it
+  let current_pass = $("#current_pass");
+  let new_pass = $("#new_pass");
+  if (current_pass.val().length == 0 || new_pass.val().length == 0) {
+    // $(".invalid-c-pass").css("display", "block").text("أدخل كلمة المرور");
+    // $("#current_pass").css("border", "1px solid red");
+    $(".save-security-info").attr("disabled", "disabled").addClass("dis");
+  }
+  $("#current_pass").on("input", function () {
+    if (current_pass.val().length == 0) {
+      $(".invalid-c-pass").css("display", "block").text(" أدخل كلمة المرور");
+      $("#current_pass").css("border", "1px solid red");
+    } else {
+      $(".invalid-c-pass").css("display", "none");
+      $("#current_pass").css("border", "1px solid #ccc");
+    }
+  });
+  $("#new_pass").on("input", function () {
+    if (new_pass.val().length < 8) {
+      $(".invalid-n-pass")
+        .css("display", "block")
+        .text("كلمة المرور لا تقل عن 8 حرف او ارقام");
+      $("#new_pass").css("border", "1px solid red");
+    } else {
+      $(".invalid-n-pass").css("display", "none");
+      $("#new_pass").css("border", "1px solid #ccc");
+      $(".save-security-info").removeAttr("disabled").removeClass("dis");
+    }
+  });
+  $(".save-security-info").on("click", function () {
+    let owner_id = $(this).attr("data-OID");
+    let user_id = $(this).attr("data-UID");
+    let c_pass = $("#current_pass").val();
+    let n_pass = $("#new_pass").val();
+    let formData = new FormData();
+    formData.append("owner_id", owner_id);
+    formData.append("user_id", user_id);
+    formData.append("current_pass", c_pass);
+    formData.append("new_pass", n_pass);
+    formData.append("submit", "security_info");
+    $.ajax({
+      method: "POST",
+      url: "update_data.php",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        if (data == 1) {
+          $(".update-message")
+            .text("تم تحديث البيانات بنجاح")
+            .addClass("show")
+            .on("click", function () {
+              $(this).removeClass("show");
+            });
+          setInterval(() => {
+            $(".update-message").removeClass("show");
+          }, 3000);
+        }
+        if (data == -1) {
+          $(".invalid-c-pass")
+            .css("display", "block")
+            .text("كلمة المرور غير صحيحة");
+          $("#current_pass").css("border", "1px solid red");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
+  });
 });

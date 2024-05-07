@@ -147,7 +147,7 @@ $(function () {
     });
   });
   // update the user password info in the DB
-  // if the user enter a dont enter new password disapled the save button and enabled it when he enters something
+  // if the user enter a dont enter new password disabled the save button and enabled it when he enters something
   let newpass = document.getElementById("newpassword");
   if (newpass) {
     if (newpass.value.length < 8) {

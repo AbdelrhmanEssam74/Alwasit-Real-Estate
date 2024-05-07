@@ -249,6 +249,11 @@
   align-items: center;
   justify-content: space-between;
 }
+.d-end {
+  display: flex;
+  flex-direction: column;
+  direction: rtl;
+}
 .btn-shape {
   padding: 10px 15px;
   border-radius: 6px;
@@ -258,10 +263,9 @@
   flex-direction: column;
 }
 .flex-direction-row {
-  flex-direction: column;
-}
-.dir-r {
-  direction: rtl;
-  
+  flex-direction: row;
 }
 /* End Components */
+.btn-hover:hover {
+  background-color: #0d69d5;
+}

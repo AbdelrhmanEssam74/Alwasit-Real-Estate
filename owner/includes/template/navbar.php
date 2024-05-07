@@ -20,12 +20,12 @@ $notifications_num = ($stmt2->rowCount() > 0) ? $stmt2->rowCount() : " ";
           <span>Settings</span>
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a class="d-flex sidebar__list-item align-center fs-14 c-black rad-6 p-10" href="profile.php">
           <i class="fa-regular fa-user fa-fw"></i>
           <span>Profile</span>
         </a>
-      </li>
+      </li> -->
       <li>
         <a class="d-flex sidebar__list-item align-center fs-14 c-black rad-6 p-10" href="My Properties.php">
           <i class="fa fa-building fa-fw" aria-hidden="true"></i>
