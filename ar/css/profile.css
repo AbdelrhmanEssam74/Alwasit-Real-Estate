@@ -3,25 +3,25 @@
   margin-top: 70px;
 }
 
-.wedge-section .container .box {
+.container .box {
   background-color: #fff;
   border-radius: 5px;
   padding: 20px;
   margin-bottom: 25px;
 }
-.wedge-section .container .description .section__info {
+.container .description .section__info {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
 }
-.wedge-section .container .description .section_info_content {
+.container .description .section_info_content {
   display: flex;
   flex-direction: column;
   align-items: end;
   justify-content: center;
   margin-bottom: 15px;
 }
-.wedge-section .container .description .section_info_content h1 {
+.container .description .section_info_content h1 {
   color: var(--head-line);
   margin: 0;
   position: relative;
@@ -40,46 +40,46 @@
   top: 18%;
   left: -15%;
 }
-.wedge-section .container .description .agent-links {
+.container .description .agent-links {
   display: flex;
   justify-content: end;
   gap: 50px;
   width: fit-content;
   align-items: center;
 }
-.wedge-section .container .description .agent-links ul {
+.container .description .agent-links ul {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.wedge-section .container .description ul li {
+.container .description ul li {
   display: flex;
   font-size: 15px;
   justify-content: end;
   align-items: center;
   gap: 10px;
 }
-.wedge-section .container .description ul li svg {
+.description ul li svg {
   color: var(--card-tag-background);
 }
-.wedge-section .container .description ul .link-item {
+.description ul .link-item {
   color: #000;
   font-size: 17px;
 }
-.wedge-section .container .description img {
+.container .description img {
   width: 30%;
   aspect-ratio: 4 / 4;
   object-fit: cover;
   border-radius: 5px;
 }
-.wedge-section .description .share-btn {
+.description .share-btn {
   height: fit-content;
   width: 50%;
 }
-.wedge-section .description .share-btn svg {
+.description .share-btn svg {
   color: var(--card-tag-background);
 }
-.wedge-section .description .share-btn button {
+.description .share-btn button {
   background-color: transparent;
   border: none;
   outline: none;
@@ -88,30 +88,30 @@
   color: var(--head-line);
   transition: all 300ms ease;
 }
-.wedge-section .description .share-btn button:hover {
+.description .share-btn button:hover {
   color: var(--head-line-hover);
 }
 @media (max-width: 767px) {
-  .wedge-section .container .description img {
+  .container .description img {
     width: 70%;
   }
-  .wedge-section .container .description .section__info {
+  .container .description .section__info {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  .wedge-section .container .description .agent-links {
+  .container .description .agent-links {
     flex-direction: column-reverse;
     width: fit-content;
   }
-  .wedge-section .container .description .section_info_content {
+  .container .description .section_info_content {
     align-items: center;
     margin-top: -50px;
   }
-  .wedge-section .container .description .agent-links ul {
+  .container .description .agent-links ul {
     margin-bottom: 15px;
   }
-  .wedge-section .description .share-btn {
+  .description .share-btn {
     height: fit-content;
     width: 100%;
     display: flex;
@@ -224,3 +224,39 @@
 }
 
 /* End Footer  */
+.social div {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 60%;
+  font-size: 20px;
+}
+
+.social div > a {
+  position: relative;
+  z-index: 999;
+}
+.social div a svg {
+  color: var(--card-tag-background);
+}
+.social div > *::before {
+  position: absolute;
+  content: "";
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.5s all;
+  z-index: -1;
+}
+
+.social div > *:hover::before {
+  background-color: var(--card-tag-background);
+}
+.social div > *:hover svg {
+  color: #fff;
+}

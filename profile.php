@@ -54,6 +54,28 @@ $pageTitel = $data['full_name'];
             </li>
             <li><a class="link-item" href="mailto:<?php echo $data['email'] ?>"><?php echo $data['email'] ?></a><i class="fa fa-envelope" aria-hidden="true"></i></li>
             <!-- <li> Egypt, Bani-Suef<i class="fa-solid fa-location-dot"></i> </li> -->
+            <li class="social">
+              <div class="icons">
+                <?php if (!empty($data['facebook_link'])) {
+                ?>
+                  <a target="_blank" href="<?php echo $data['facebook_link'] ?>"><i class="fa-brands fa-facebook-f"></i></a>
+                <?php
+                }
+                ?>
+                <?php if (!empty($data['twitter_link'])) {
+                ?>
+                  <a target="_blank" href="<?php echo $data['twitter_link'] ?>"><i class="fa-brands fa-x-twitter"></i></a>
+                <?php
+                }
+                ?>
+                <?php if (!empty($data['linkedin_link'])) {
+                ?>
+                  <a target="_blank" href="<?php echo $data['linkedin_link'] ?>"><i class="fa-brands fa-linkedin"></i></a>
+                <?php
+                }
+                ?>
+              </div>
+            </li>
           </ul>
           <img src="ar/images/<?php echo $data['owner_img'] ?> " alt="">
         </div>

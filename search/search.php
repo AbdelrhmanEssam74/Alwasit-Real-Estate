@@ -290,7 +290,7 @@ $data = $search_obj->search($queryWithLimit); // Execute query with limit and of
               </div>
               <hr>
               <div class="owner">
-                <a href="profile.php?ID=<?php echo $prop->owner_id ?>">
+                <a href="<?php echo APPURL ?>profile.php?ID=<?php echo $prop->owner_id ?>">
                   <p> : المالك </p>
                   <span><?php echo  $prop->full_name ?></span>
                 </a>
@@ -311,7 +311,7 @@ if (empty($data)) {
     <h2>لاوجود لعقارت مطابقة لبحثك حالياً</h2>
     <p>بإمكانك تجربة التالي</p>
     <p>تغيير الموقع</p>
-    <img src="../ar/images/img1.svg"  alt="">
+    <img src="../ar/images/img1.svg" alt="">
   </div>
 <?php
 }
