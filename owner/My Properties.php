@@ -21,8 +21,11 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
     <button id="delete-confirm-button">حذف</button>
   </div>
 </div>
-<p class="success-message2"></p>
+<p class="update-message"></p>
 <div class="projects p-20 bg-white rad-10 m-20">
+  <div id="loadingIcon">
+    <i class="fas fa-spinner fa-spin"></i> ...جاري الحذف
+  </div>
   <h2 class="mt-0 mb-20 txt-r ">العقارات</h2>
   <div class="responsive-table">
     <table class="fs-15 w-full txt-c">

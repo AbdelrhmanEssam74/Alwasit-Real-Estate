@@ -1,5 +1,5 @@
 <?php
-date_default_timezone_set("Africa/Cairo");
+date_default_timezone_set('Europe/Sofia');
 include "connect.php";
 session_start();
 # Routes

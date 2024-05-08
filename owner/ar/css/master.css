@@ -554,26 +554,35 @@ ul {
 .settings-page .sec-box .button:hover {
   background-color: var(--blue-alt-color);
 }
-.settings-page .social-boxes i {
-  width: 40px;
-  height: 40px;
-  background-color: #f6f6f6;
+.social-boxes {
+  position: relative;
+}
+.social-boxes div::after {
+  position: absolute;
+  content: "";
+  width: 42px;
+  height: 38px;
+  background-color: #ffffff;
   border: 1px solid #ddd;
-  border-right: none;
-  border-radius: 6px 0 0 6px;
+  border-left: none;
+  border-radius: 0px 6px 6px 0;
   transition: 0.3s;
-  display: flex;
+  /* display: flex; */
 }
-.settings-page .social-boxes input {
+.social-boxes div svg {
+  position: absolute;
+  right: 6.5%;
+  z-index: 999;
+}
+.social-boxes input {
   height: 40px;
   background-color: #f6f6f6;
   border: 1px solid #ddd;
-  padding-left: 10px;
-  border-radius: 0 6px 6px 0;
+  padding-right: 10px;
+  border-radius: 6px 0px 0px 6px;
+  margin-right: 41px;
 }
-.settings-page .social-boxes > div:focus-within i {
-  color: black;
-}
+
 .widgets-control .control input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
@@ -1589,7 +1598,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .update-message {
   position: fixed;
-  bottom: -100px;
+  transform: translateY(500px);
   right: 36%;
   background-color: var(--green-color);
   color: #fff;
@@ -1598,6 +1607,7 @@ input[type="number"]::-webkit-outer-spin-button {
   opacity: 0;
   transition: opacity 0.5s ease-out;
   cursor: pointer;
+  z-index: 999;
 }
 .update-message::after {
   position: absolute;
@@ -1609,8 +1619,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .update-message.show {
   opacity: 1;
-  bottom: 20px;
-  transition: opacity 0.5s ease-in;
+  transform: translateY(300px);
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+.update-message.hide {
+  opacity: 0;
+  transform: translateY(500px);
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
 
 .invalid-n-pass,
@@ -1628,16 +1643,33 @@ svg.show-c-pass {
   color: #5e5e5e;
   cursor: pointer;
 }
-.dis{
+.dis {
   pointer-events: none;
   opacity: 0.8;
 }
-.dis:hover{
+.dis:hover {
   cursor: not-allowed;
 }
-.restPass{
+.restPass {
   position: absolute;
   left: 0;
   font-size: 12px;
   color: #1da1f2;
+}
+#loadingIcon {
+  background-color: rgba(53, 53, 53, 0.6);
+  position: fixed;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  top: 30%;
+  right: 40%;
+  gap: 10px;
+  font-weight: 600;
+  color: #fff;
+  display: none;
 }

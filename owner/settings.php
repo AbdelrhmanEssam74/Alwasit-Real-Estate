@@ -2,7 +2,7 @@
 <?php
 // get user owner_data
 $user_id = isset($_SESSION['uID']) ? $_SESSION['uID'] : 0;
-$stmt = $conn->prepare("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
+$stmt = $conn->prepare("SELECT * FROM `users` JOIN owners ON users.owner_id = owners.owner_id WHERE `user_id` = '$user_id'");
 $stmt->execute();
 $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
 ?>
@@ -23,7 +23,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
     <div class="mb-15">
       <label class="fs-14 c-grey d-block mb-5" for="email">البريد الإلكتروني:</label>
       <input class="email b-none border-ccc p-10 rad-6 w-full mr-10" id="email" value="<?php echo $owner_data->email ?>" type="email" disabled />
-      <a class="c-blue" href="#">Change</a>
+      <!-- <a class="c-blue" href="#">Change</a> -->
     </div>
     <p style="cursor:pointer; transition:0.5s all" data-UID="<?php echo $user_id ?>" data-OID="<?php echo $owner_data->owner_id ?>" class=" button bg-blue b-none c-white btn-shape w-fit save-general-info btn-hover">حفظ</p>
   </div>
@@ -54,22 +54,34 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
   </div>
   <!-- End Settings Box -->
   <!-- Start Settings Box -->
-  <div class="social-boxes p-20 bg-white rad-10">
-    <h2 class="mt-0 mb-10">Social Info</h2>
-    <p class="mt-0 mb-20 c-grey fs-15">Social Media Information</p>
-    <div class="d-flex align-center mb-15">
-      <i class="fa-brands fa-facebook-f center-flex c-grey"></i>
-      <input class="w-full" type="text" placeholder="Facebook Link" />
+  <div class="social-boxes p-20 bg-white rad-10 d-end">
+    <h2 class="mt-0 mb-10">معلومات التواصل الاجتماعي</h2>
+    <p class="mt-0 mb-20 c-grey fs-15">معلومات وسائل التواصل الاجتماعي</p>
+    <div class="d-flex align-center mb-15 ">
+      <input class="w-full" type="text" placeholder="Facebook Link" value="<?php
+                                                                            if (!empty($owner_data->facebook_link)) {
+                                                                              echo $owner_data->facebook_link;
+                                                                            }
+                                                                            ?>" id="face-link" />
+      <i class="fa-brands fa-facebook-f c-grey"></i>
     </div>
-    <div class="d-flex align-center mb-15">
-      <i class="fa-brands fa-twitter center-flex c-grey"></i>
-      <input class="w-full" type="text" placeholder="Twitter Link" />
+    <div class="d-flex align-center mb-15 ">
+      <input class="w-full" type="text" placeholder="X-Twitter Link" value="<?php
+                                                                            if (!empty($owner_data->twitter_link)) {
+                                                                              echo $owner_data->twitter_link;
+                                                                            }
+                                                                            ?>" id="x-link" />
+      <i class="fa-brands fa-x-twitter c-grey"></i>
     </div>
-    <div class="d-flex align-center mb-15">
-      <i class="fa-brands fa-linkedin center-flex c-grey"></i>
-      <input class="w-full" type="text" placeholder="Linkedin Link" />
+    <div class="d-flex align-center mb-15 ">
+      <input class="w-full" type="text" placeholder="Linkedin Link" value="<?php
+                                                                            if (!empty($owner_data->linkedin_link)) {
+                                                                              echo $owner_data->linkedin_link;
+                                                                            }
+                                                                            ?>" id="linked-link" />
+      <i class="fa-brands fa-linkedin c-grey"></i>
     </div>
-    <p class="button bg-blue c-white btn-shape w-fit">Save</p>
+    <button type="submit" data-UID="<?php echo $user_id ?>" data-OID="<?php echo $owner_data->owner_id ?>" class="button bg-blue b-none c-white btn-shape w-fit btn-hover save-social-info">حفظ</button>
   </div>
   <!-- End Settings Box -->
 </div>

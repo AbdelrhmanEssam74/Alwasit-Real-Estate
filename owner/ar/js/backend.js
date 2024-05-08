@@ -25,15 +25,15 @@ $(document).ready(function () {
     });
 
   const $fileInput = $(".file-input");
-  const $droparea = $(".file-drop-area");
+  const $drop_area = $(".file-drop-area");
   const $delete = $(".item-delete");
 
   $fileInput.on("dragenter focus click", function () {
-    $droparea.addClass("is-active");
+    $drop_area.addClass("is-active");
   });
 
   $fileInput.on("dragleave blur drop", function () {
-    $droparea.removeClass("is-active");
+    $drop_area.removeClass("is-active");
   });
 
   $fileInput.on("change", function () {
@@ -203,6 +203,7 @@ $(document).ready(function () {
       } else {
         $(".modal-overlay").css("display", "none");
         var delete_reason_val = $("#delete-reason").val();
+        $("#loadingIcon").css("display" , "flex");
         $.ajax({
           url: "delete.php",
           method: "POST",
@@ -213,12 +214,8 @@ $(document).ready(function () {
           },
           success: function (response) {
             $("#row_" + property_id).remove();
-            $(".success-message2")
-              .addClass("show-success")
-              .text("تم حذف العقار بنجاح")
-              .on("click", function () {
-                $(".success-message2").removeClass("show-success");
-              });
+            showUpdateMessage("تم حذف العقار بنجاح");
+            $("#loadingIcon").hide();
           },
           error: function (error) {
             console.log(error);
@@ -380,15 +377,7 @@ $(document).ready(function () {
       contentType: false,
       success: function (data) {
         if (data == 1) {
-          $(".update-message")
-            .text("تم تحديث البيانات بنجاح")
-            .addClass("show")
-            .on("click", function () {
-              $(this).removeClass("show");
-            });
-          setInterval(() => {
-            $(".update-message").removeClass("show");
-          }, 3000);
+          showUpdateMessage("تم تحديث البيانات بنجاح");
         }
       },
       error: function (xhr, status, error) {
@@ -464,15 +453,7 @@ $(document).ready(function () {
       contentType: false,
       success: function (data) {
         if (data == 1) {
-          $(".update-message")
-            .text("تم تحديث البيانات بنجاح")
-            .addClass("show")
-            .on("click", function () {
-              $(this).removeClass("show");
-            });
-          setInterval(() => {
-            $(".update-message").removeClass("show");
-          }, 3000);
+          showUpdateMessage("تم تحديث البيانات بنجاح");
         }
         if (data == -1) {
           $(".invalid-c-pass")
@@ -486,4 +467,51 @@ $(document).ready(function () {
       },
     });
   });
+
+  // update social media information
+  $(".save-social-info").on("click", function () {
+    let owner_id = $(this).attr("data-OID");
+    let user_id = $(this).attr("data-UID");
+    let face = $("#face-link").val();
+    let linked = $("#linked-link").val();
+    let x = $("#x-link").val();
+
+    let formData = {
+      owner_id: owner_id,
+      user_id: user_id,
+      face_link: face,
+      x_link: x,
+      linked_link: linked,
+      submit: "social_info",
+    };
+
+    $.ajax({
+      method: "POST",
+      url: "update_data.php",
+      data: formData,
+      success: function (data) {
+        if (data == 1) {
+          showUpdateMessage("تم تحديث البيانات بنجاح");
+        }
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr);
+      },
+    });
+  });
+  function showUpdateMessage(message) {
+    let updateMessage = $(".update-message");
+    updateMessage.text(message).addClass("show").removeClass("hide");
+
+    updateMessage.on("click", function () {
+      $(this).removeClass("show").addClass("hide");
+    });
+
+    setTimeout(function () {
+      updateMessage.addClass("hide").removeClass("show");
+    }, 3000);
+  }
 });
+window.FontAwesomeConfig = {
+  searchPseudoElements: true,
+};
