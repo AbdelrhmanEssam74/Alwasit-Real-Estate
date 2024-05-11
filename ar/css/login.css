@@ -22,8 +22,6 @@
   --sectina-padding: 100px;
 }
 
-
-
 ::-webkit-scrollbar {
   width: 15px;
 }
@@ -342,7 +340,7 @@ header nav ul {
   padding: 5px 15px;
   border-radius: 5px;
   font-size: 15px;
-  margin: -15px 0px -5px 0px;
+  margin: -21px 0px 8px 0px;
 }
 
 .form_box .back_img form .input-box input {
@@ -453,26 +451,42 @@ header nav ul {
 /* Error message */
 
 p.error_message {
-  display: none;
+  display: block;
   position: absolute;
-  transition: 0.5s all;
   font-size: 13px;
-  width: 100%;
-  text-align: right;
-  padding: 0px 30px;
-  bottom: 0;
-  right: 0;
+  width: fit-content;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  top: -25%;
+  left: 0;
   color: #ffffff;
-  transform: translate(0, 80%);
+  background-color: rgb(255, 83, 83);
+  transition: opacity 0.5s ease-out;
+  z-index: -1;
+  opacity: 0;
 }
-
-p.error_message::before {
-  content: "\2a";
+p.error_message.show {
+  opacity: 1;
+  z-index: 50;
+  transition: opacity 0.5s ease-out;
+}
+p.error_message.hide {
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.5s ease-out;
+}
+p.error_message.show::after {
+  content: "";
   position: absolute;
-  color: var(--danger);
-  font-size: 36px;
-  right: 3%;
-  top: -41%;
+  width: 0;
+  height: 0;
+  bottom: -12px;
+  border-radius: 2px;
+  left: 5px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 14px solid rgb(255, 83, 83);
 }
 
 @media (max-width: 500px) {
@@ -575,6 +589,6 @@ p.error_message::before {
   bottom: -10%;
   left: 40%;
 }
-.logout_message.show{
+.logout_message.show {
   transform: translateY(100%);
 }

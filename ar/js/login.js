@@ -26,9 +26,13 @@ $(document).ready(function () {
     const $inputControl = $input.parent();
     const $errorDisplay = $inputControl.find(".error_message");
     const $inputIcon = $inputControl.find("i");
-    $errorDisplay.text(message).show();
-    $input.css("border", "1px solid var(--danger)");
-    $inputIcon.css("color", "var(--danger)");
+    $errorDisplay.text(message).addClass("show");
+    $errorDisplay.text(message).removeClass("hide");
+    $input.css("border", "1px solid var(--secondary)");
+    $inputIcon.css("color", "var(--secondary)");
+    $input.on("click", function () {
+      $errorDisplay.text(message).addClass("hide");
+    });
   }
 
   function setSuccess($input) {
