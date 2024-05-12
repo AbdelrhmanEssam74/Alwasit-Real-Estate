@@ -91,7 +91,6 @@ $(document).ready(function () {
   $(".show-more").on("click", function () {
     const fullDescription = $(this).attr("data-full-desc");
     const descriptionDiv = $(this).parent().find("p").text(fullDescription);
-    console.log(fullDescription);
     if (descriptionDiv.hasClass("full")) {
       // Already showing full description, toggle to truncated
       const truncatedDescription = "..." + fullDescription.substr(0, 50);
@@ -214,18 +213,11 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (data) {
-              console.log(data);
               if (data == 1) {
-                $(".success-message")
-                  .addClass("show-success")
-                  .text("تم ارسال التعليق بنجاح")
-                  .on("click", function () {
-                    $(this).removeClass("show-success");
-                  });
-                setTimeout(function () {
-                  $(".success-message").removeClass("show-success");
+                showUpdateMessage("تم ارسال التعليق بنجاح");
+                setInterval(() => {
                   location.reload();
-                }, 2000);
+                }, 3000);
               }
             },
             error: function (xhr, status, error) {
@@ -245,7 +237,7 @@ $(document).ready(function () {
   // Example usage:
   let inputs2 = [
     {
-      element: $(".connectio-with-owner #offer-content"),
+      element: $(".connection-with-owner #offer-content"),
       minLength: 20,
     },
   ];
@@ -268,7 +260,7 @@ $(document).ready(function () {
           });
         } else if (data == 1) {
           // if user is logged in
-          let offer = $(".connectio-with-owner #offer-content").val();
+          let offer = $(".connection-with-owner #offer-content").val();
           let send_offer_btn = $(".send-offer");
           let formData = new FormData();
           formData.append("offer", offer);
@@ -286,18 +278,8 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (data) {
-              console.log(data);
               if (data == 1) {
-                $(".success-message")
-                  .addClass("show-success")
-                  .text("تم ارسال  العرض  بنجاح")
-                  .on("click", function () {
-                    $(this).removeClass("show-success");
-                  });
-                setTimeout(function () {
-                  $(".success-message").removeClass("show-success");
-                  location.reload();
-                }, 2000);
+                showUpdateMessage("تم ارسال  العرض  بنجاح");
               }
             },
             error: function (xhr, status, error) {
@@ -338,6 +320,47 @@ $(document).ready(function () {
     },
   });
 
+  function getTimestampString(timestamp) {
+    var currentTime = new Date();
+    var previousTime = new Date(timestamp);
+    var timeDifference = currentTime - previousTime;
+
+    // Convert to Europe/Sofia time zone
+    var desiredTimeZone = "Europe/Sofia";
+    var convertedPreviousTime = new Date(
+      previousTime.toLocaleString("en-US", { timeZone: desiredTimeZone })
+    );
+
+    var minutes = Math.floor(timeDifference / 60000);
+    var hours = Math.floor(minutes / 60);
+    var days = Math.floor(hours / 24);
+    var months = Math.floor(days / 30);
+
+    if (months > 0) {
+      return months + " month(s) ago";
+    } else if (days > 0) {
+      return days + " day(s) ago";
+    } else if (hours > 0) {
+      return hours + " hour(s) ago";
+    } else if (minutes > 0) {
+      return minutes + " minute(s) ago";
+    } else {
+      // Check if the previous time is in the future
+      if (convertedPreviousTime > currentTime) {
+        return "In the future";
+      } else {
+        // Format the current time in 12-hour format
+        var currentHours = currentTime.getHours();
+        var suffix = currentHours >= 12 ? "PM" : "AM";
+        var formattedHours = currentHours % 12 || 12;
+        var minutes = currentTime.getMinutes();
+        var currentTimeFormatted =
+          formattedHours + ":" + ("0" + minutes).slice(-2) + " " + suffix;
+
+        return "Just now at " + currentTimeFormatted;
+      }
+    }
+  }
   // Function to create comment element based on JSON object input
   function createCommentElement(commentData) {
     var comment = $("<div>")
@@ -349,7 +372,7 @@ $(document).ready(function () {
       .attr("title", "حذف التعليق")
       .addClass("delete-comment")
       .html("<i class='fa-solid fa-trash-can'></i>");
-    // check if the user is login or not and display the delete burron
+    // check if the user is login or not and display the delete button
     if ($(".comments .content").attr("data-loID") == commentData[1]) {
       deleteButton.appendTo(comment);
     }
@@ -374,28 +397,7 @@ $(document).ready(function () {
     });
     return comment;
   }
-  // Function to get timestamp of comment in string format from UNIX time stamp
-  function getTimestampString(timestamp) {
-    var currentTime = new Date();
-    var previousTime = new Date(timestamp);
-    var timeDifference = currentTime - previousTime;
-    var minutes = Math.floor(timeDifference / 60000);
-    var hours = Math.floor(minutes / 60);
-    var days = Math.floor(hours / 24);
-    var months = Math.floor(days / 30);
 
-    if (months > 0) {
-      return months + " month(s) ago";
-    } else if (days > 0) {
-      return days + " day(s) ago";
-    } else if (hours > 0) {
-      return hours + " hour(s) ago";
-    } else if (minutes > 0) {
-      return minutes + " minute(s) ago";
-    } else {
-      return "Just now";
-    }
-  }
   // Update the timestamp every minute
   setInterval(function () {
     $(".comments .comment").each(function () {
@@ -422,7 +424,6 @@ $(document).ready(function () {
       },
       success: function (response) {
         // Optionally, you can remove the comment element from the DOM
-        console.log(response);
         $(".comments .comment[commentID='" + commentID + "']").remove();
       },
       error: function (error) {
@@ -486,15 +487,7 @@ $(document).ready(function () {
                 success: function (data) {
                   if (data == 1) {
                     $(".report-property").removeClass("active");
-                    $(".success-message")
-                      .addClass("show-success")
-                      .text("تم إرسال التقرير  بنجاح")
-                      .on("click", function () {
-                        $(this).removeClass("show-success");
-                      });
-                    setTimeout(function () {
-                      $(".success-message").removeClass("show-success");
-                    }, 3000);
+                    showUpdateMessage("تم إرسال التقرير  بنجاح");
                   }
                 },
                 error: function (xhr, status, error) {
@@ -537,20 +530,24 @@ $(document).ready(function () {
     navigator.clipboard
       .writeText(url) // Write the text to the clipboard
       .then(function () {
-        $(".success-message")
-          .addClass("show-success")
-          .text("تم نسخ العنوان إلى الحافظة")
-          .on("click", function () {
-            $(this).removeClass("show-success");
-          });
-        setTimeout(function () {
-          $(".success-message").removeClass("show-success");
-        }, 2000);
+        showUpdateMessage("تم نسخ العنوان إلى الحافظة");
       })
       .catch(function (err) {
         console.error("Failed to copy text: ", err); // Show an error message (you can customize this)
       });
   });
+  function showUpdateMessage(message) {
+    let updateMessage = $(".update-message2");
+    updateMessage.text(message).addClass("show").removeClass("hide");
+
+    updateMessage.on("click", function () {
+      $(this).removeClass("show").addClass("hide");
+    });
+
+    setTimeout(function () {
+      updateMessage.addClass("hide").removeClass("show");
+    }, 3000);
+  }
 });
 
 // Get Slider items

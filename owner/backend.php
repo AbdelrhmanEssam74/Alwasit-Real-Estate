@@ -138,7 +138,7 @@ $insert_stmt = $conn->prepare(
 );
 $r = $insert_stmt->execute($data);
 //NOTE - Insert type of property in categories table in database
-// get number of properteis in categories table in database
+// get number of properties in categories table in database
 $n = trim($_POST['propertyNeighborhood']);
 $neighborhoods = $conn->prepare("SELECT * FROM `neighborhoods` WHERE neighborhood_name = :n");
 $neighborhoods->execute(['n' => $n]);
@@ -163,15 +163,15 @@ $categories = $categories->fetch(PDO::FETCH_OBJ);
 if (($categories)) {
   $num = $categories->nums_of_properties;
   $num++;
-  $update_nums_of_properties = "UPDATE categories set nums_of_properties = ?";
+  $update_nums_of_properties = "UPDATE categories set nums_of_properties = ? WHERE category_name = ?";
   $stmt = $conn->prepare($update_nums_of_properties);
-  $stmt->execute(array($num));
+  $stmt->execute(array($num, $t));
 } else {
   $insert_categories = "INSERT INTO `categories` (`category_name`) VALUES(?)";
   $stmt = $conn->prepare($insert_categories);
   $r = $stmt->execute(array($data['propertyType']));
 }
-// get the value of property_num from owners table in database and increate it by 1
+// get the value of property_num from owners table in database and increase it by 1
 $get_stmt = $conn->prepare("SELECT property_num FROM owners WHERE owner_id = :owner_id");
 $get_stmt->execute(['owner_id' => $owner_id]);
 $property_num = $get_stmt->fetchColumn();
@@ -182,6 +182,7 @@ $update_stmt->execute(['property_num' => $property_num, 'owner_id' => $owner_id]
 // send notifications
 setNotifications($owner_id, array_keys($notification_type, $notification_type['New Property Listing'])[0], $notification_type['New Property Listing']);
 // send email to user to notify him the property uploded successfully 
+date_default_timezone_set('Europe/Sofia');
 $full_name = $_SESSION['fullname'];
 $current_date = date('Y-m-d h:i');
 $propertyTitle = $_POST['propertyTitle'];

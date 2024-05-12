@@ -21,12 +21,16 @@ if (isset($_SESSION['uID'])) {
           </div>
         </div>
       </div>
-      <div class="favorite_page">
-        <a data-saved="" data-uid="<?php echo $user_id ?>" href="<?php echo $user . "saved-properties.php" ?>">
-          <i class="fa-regular fa-heart"></i>
-        </a>
-      </div>
+      <?php
+      if (!isset($contactus_page)) {
+      ?>
+        <div class="favorite_page">
+          <a data-saved="" data-uid="<?php echo $user_id ?>" href="<?php echo $user . "saved-properties.php" ?>">
+            <i class="fa-regular fa-heart"></i>
+          </a>
+        </div>
     <?php
+      }
     } else {
       if (isset($DefultPage))
         echo <<< _END

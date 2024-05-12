@@ -196,7 +196,11 @@ switch ($action) {
               <div class="Rooms form-group">
                 <label>الغرف</label>
                 <select name="propertyRooms" required="required" class="selectpicker form-select" data-live-search="true" data-width="100%">
-                  <option value="<?php echo $propertyRooms ?>"><?php echo $propertyRooms ?></option>
+                  <option value="<?php echo $propertyRooms ?>"><?php 
+                  if($propertyRooms == 0){
+                    echo "اكثر من 5";
+                  }
+                  ?></option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>

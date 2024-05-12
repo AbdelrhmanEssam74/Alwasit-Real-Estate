@@ -30,7 +30,7 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
     <button class="modal-content-btn login" id="login-comment" for="modal-toggle"></button>
   </div>
 </div>
-<p class="success-message"></p>
+<p class="update-message"></p>
 <div class="langing">
   <div class="container">
     <div class="content">
@@ -89,7 +89,13 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
                   <i class='bx bx-bath'></i>
                 </div>
                 <div class="rooms">
-                  <p><?php echo $prop->rooms ?></p>
+                  <p><?php
+                      if ($prop->rooms == 0) {
+                        echo '+5';
+                      } else {
+                        echo $prop->rooms;
+                      }
+                      ?></p>
                   <i class='bx bx-bed'></i>
                 </div>
                 <div class="area">
@@ -151,22 +157,22 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
   <div class="container">
     <div class="box">
       <i class="fa-solid fa-building"></i>
-      <div class="number" data-goal="450">0</div>
+      <div class="number" id="prop-count-rent" data-goal="">0</div>
       <p>عقار للإيجار</p>
     </div>
     <div class="box">
       <i class="fa-solid fa-building"></i>
-      <div class="number" data-goal="256">0</div>
+      <div class="number" id="prop-count-buy" data-goal="">0</div>
       <p>عقار للبيع</p>
     </div>
     <div class="box">
       <i class="fa-solid fa-person"></i>
-      <div class="number" data-goal="210">0</div>
+      <div class="number" id="clients-count" data-goal="">0</div>
       <p>عميل</p>
     </div>
     <div class="box">
       <i class="fa-solid fa-eye"></i>
-      <div class="number" data-goal="600">0</div>
+      <div class="number" id="visitors" data-goal="">0</div>
       <p>زائر</p>
     </div>
   </div>

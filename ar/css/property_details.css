@@ -505,13 +505,6 @@ div.divTable {
     gap: 5px;
   }
 
-  .comments .comment .details {
-    text-align: center;
-  }
-
-  .comments .comment .details .rate {
-    justify-content: center;
-  }
 }
 
 .comment-form .form {
@@ -894,7 +887,7 @@ textarea::placeholder {
   pointer-events: none;
 }
 
-.connectio-with-owner .title,
+.connection-with-owner .title,
 .other-proparty .title {
   font-size: 15px;
   margin: 20px 0px;
@@ -904,7 +897,7 @@ textarea::placeholder {
   color: var(--head-line);
 }
 
-.connectio-with-owner .form .main-input {
+.connection-with-owner .form .main-input {
   padding: 20px;
   display: block;
   border-radius: 5px;
@@ -916,11 +909,11 @@ textarea::placeholder {
   text-align: right;
 }
 
-.connectio-with-owner .form .main-input:focus {
+.connection-with-owner .form .main-input:focus {
   outline: none;
 }
 
-.connectio-with-owner .form textarea.main-input {
+.connection-with-owner .form textarea.main-input {
   height: 200px;
   resize: none;
   overflow: hidden;
@@ -928,7 +921,7 @@ textarea::placeholder {
   direction: rtl; /* Set text direction to right-to-left */
   text-align: right; /* Align text to the right */
 }
-.connectio-with-owner .form button {
+.connection-with-owner .form button {
   background: var(--head-line);
   color: white;
   padding: 10px;
@@ -940,15 +933,15 @@ textarea::placeholder {
   transition: all 0.3s;
   font-size: 25px;
 }
-.connectio-with-owner .form button.disabled {
+.connection-with-owner .form button.disabled {
   background: #5f5f5f;
   cursor: not-allowed;
 }
-.connectio-with-owner .form button.enable {
+.connection-with-owner .form button.enable {
   background: var(--head-line);
   cursor: pointer;
 }
-.connectio-with-owner .form button.enable:hover {
+.connection-with-owner .form button.enable:hover {
   background-color: var(--head-line-hover);
 }
 .other-proparty a {
@@ -1237,68 +1230,34 @@ textarea::placeholder {
   font-size: 20px;
 }
 
-/* .success-message {
+.update-message2 {
   position: fixed;
-  color: rgb(0, 0, 0);
-  right: -27%;
-  padding: 15px 10px;
-  border-radius: 0px 5px 5px 0px;
-  font-weight: 500;
-  transition: 0.7s all;
-  z-index: 999;
-  width: 250px;
-  bottom: 15%;
-  text-align: center;
+  transform: translateY(550px);
+  right: 40%;
+  background-color: var(--green-color);
+  color: #fff;
+  padding: 15px 35px 15px 15px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
   cursor: pointer;
+  z-index: 999;
 }
-
-.success-message.show-success {
+.update-message2::after {
+  position: absolute;
+  font-weight: 600;
+  content: "X";
+  top: 30%;
+  text-align: center;
   right: 5%;
-  background-color: rgb(250, 250, 250);
-  border-top: 5px solid var(--success);
-  border-bottom: 5px solid var(--success);
 }
-
-.success-message.show-failed {
-  right: 4%;
-  background-color: rgb(250, 250, 250);
-  border-top: 5px solid var(--danger);
-  border-bottom: 5px solid var(--danger);
+.update-message2.show {
+  opacity: 1;
+  transform: translateY(425px);
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 }
-
-.success-message.show-success::after,
-.success-message.show-failed::after {
-  position: absolute;
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  content: "\f00d";
-  color: #000;
-  top: 36%;
-  right: 8%;
+.update-message2.hide {
+  opacity: 0;
+  transform: translateY(550px);
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
-
-.success-message.show-failed::before {
-  position: absolute;
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  content: "\f06a";
-  color: var(--danger);
-  top: 38%;
-  left: 8%;
-}
-
-.success-message.show-success::before {
-  position: absolute;
-  font-weight: 900;
-  font-family: "Font Awesome 5 Free";
-  content: "\f058";
-  top: 38%;
-  left: 8%;
-  color: var(--success);
-}
-
-@media only screen and (max-width: 767px) {
-  .success-message {
-    right: -55%;
-  }
-} */

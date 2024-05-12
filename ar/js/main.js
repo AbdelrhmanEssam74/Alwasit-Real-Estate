@@ -161,15 +161,7 @@ $(document).ready(function () {
                   let saved_num = $(".favorite_page a").attr("data-saved");
                   $(".favorite_page a").attr("data-saved", ++saved_num);
                   element.addClass("favorated");
-                  $(".success-message")
-                    .addClass("show-success")
-                    .text("تم حفظ العقار بنجاح")
-                    .on("click", function () {
-                      $(this).removeClass("show-success");
-                    });
-                  setTimeout(function () {
-                    $(".success-message").removeClass("show-success");
-                  }, 3000);
+                  showUpdateMessage("تم حفظ العقار بنجاح");
                 }
               },
               error: function (xhr, status, error) {
@@ -194,15 +186,7 @@ $(document).ready(function () {
                     $(".favorite_page a").attr("data-saved", --saved_num);
                   }
                   element.removeClass("favorated");
-                  $(".success-message")
-                    .addClass("show-success")
-                    .text("العقار غير محفوظ")
-                    .on("click", function () {
-                      $(this).removeClass("show-success");
-                    });
-                  setTimeout(function () {
-                    $(".success-message").removeClass("show-success");
-                  }, 3000);
+                  showUpdateMessage("العقار غير محفوظ");
                 }
               },
               error: function (xhr, status, error) {
@@ -240,6 +224,18 @@ $(document).ready(function () {
       console.error(xhr);
     },
   });
+  function showUpdateMessage(message) {
+    let updateMessage = $(".update-message");
+    updateMessage.text(message).addClass("show").removeClass("hide");
+
+    updateMessage.on("click", function () {
+      $(this).removeClass("show").addClass("hide");
+    });
+
+    setTimeout(function () {
+      updateMessage.addClass("hide").removeClass("show");
+    }, 3000);
+  }
 });
 const newSearchInputs = document.querySelector(".search_inputs");
 const value = document.querySelector("#searchInput").value;
@@ -672,6 +668,30 @@ $(document).ready(function () {
     );
   });
 
+  // Fetch the visitor count
+  $.get("visitor_count.php", function (count) {
+    $("#visitors").attr("data-goal", count);
+  }).fail(function () {
+    console.error("Failed to fetch visitor count.");
+  });
+  // Fetch the properties for buy count
+  $.get("getTotalBuy.php", function (count) {
+    $("#prop-count-buy").attr("data-goal", count);
+  }).fail(function () {
+    console.error("Failed to fetch visitor count.");
+  });
+  // Fetch the Clients  count
+  $.get("getTotalClients.php", function (count) {
+    $("#clients-count").attr("data-goal", count);
+  }).fail(function () {
+    console.error("Failed to fetch visitor count.");
+  });
+  // Fetch the properties for rent count
+  $.get("getTotalRent.php", function (count) {
+    $("#prop-count-rent").attr("data-goal", count);
+  }).fail(function () {
+    console.error("Failed to fetch visitor count.");
+  });
   const startBoxs = $(".stats .box .number");
   const statsSection = $(".stats");
   let started = false;

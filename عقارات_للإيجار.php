@@ -44,7 +44,7 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
   <?php
   // get  properties for buy from database
   $property_obj = new PropertyTable();
-  $data = $property_obj->getALLPropertiesBuyType("لللإيجار");
+  $data = $property_obj->getALLPropertiesBuyType("للإيجار");
   ?>
   <div class="container" dir="rtl">
     <div class="text">
@@ -129,7 +129,13 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
                   <i class='bx bx-bath'></i>
                 </div>
                 <div class="rooms">
-                  <p><?php echo $prop->rooms ?></p>
+                  <p><?php
+                      if ($prop->rooms == 0) {
+                        echo '+5';
+                      } else {
+                        echo $prop->rooms;
+                      }
+                      ?></p>
                   <i class='bx bx-bed'></i>
                 </div>
                 <div class="area">

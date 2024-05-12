@@ -133,7 +133,13 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
                   <i class='bx bx-bath'></i>
                 </div>
                 <div class="rooms">
-                  <p><?php echo $prop->rooms ?></p>
+                  <p><?php
+                      if ($prop->rooms == 0) {
+                        echo '+5';
+                      } else {
+                        echo $prop->rooms;
+                      }
+                      ?></p>
                   <i class='bx bx-bed'></i>
                 </div>
                 <div class="area">

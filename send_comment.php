@@ -11,7 +11,7 @@ $comment = $_POST['comment'];
 // $full_name = $_POST['full_name'];
 date_default_timezone_set('Europe/Sofia');
 // inset the comment in the database
-$current_date = date('Y-m-d h:i:s');
+$current_date = date('Y-m-d H:i:s');
 $inset_query = "INSERT INTO `comments` ( `user_id`, `owner_id`, `property_id`, `content`, `timestamp`) VALUES ('$user_id', '$owner_id', '$property_id', '$comment', '$current_date')";
 echo $comment_obj->insert($inset_query);
 // update number of comments in comments_num for property

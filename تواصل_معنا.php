@@ -1,6 +1,6 @@
 <?php include 'init.php';
 $DefultPage = '';
-$pageTitel = 'الوسيط | نواصل معنا';
+$pageTitel = 'الوسيط | تواصل معنا';
 $contactus_page = '';
 ?>
 <?php include $templates . 'header.php' ?>

@@ -89,7 +89,9 @@ class loginTable extends DatabaseConnection
     $prepare = $this->conn->prepare($qry);
     $prepare->execute();
     $data =  $prepare->fetch();
-    $this->user_id = $data['user_id'];
+    if (!empty($data)) {
+      $this->user_id = $data['user_id'];
+    }
     return $prepare->rowCount();
   }
 }

@@ -49,7 +49,7 @@ if (!isset($_GET['PId'])) {
 }
 
 ?>
-<p class="success-message"></p>
+<p class="update-message2"></p>
 <!--start gallery-->
 <div class="modal-container modal-overlay">
   <div class="modal-content">
@@ -134,7 +134,7 @@ if (!isset($_GET['PId'])) {
             <div class="divTableRow">
               <div class="divTableCell">
                 <i class='bx bx-area'></i>
-                <p>المساحة<span> : <?php echo $property_data->area ?> متر مربع</span></p>
+                <p>المساحه<span> : <?php echo $property_data->area ?> متر مربع</span></p>
               </div>
               <div class="divTableCell">
                 <i class='bx bx-bath'></i>
@@ -142,7 +142,13 @@ if (!isset($_GET['PId'])) {
               </div>
               <div class="divTableCell">
                 <i class='bx bx-bed'></i>
-                <p> عدد الغرف<span> : <?php echo $property_data->rooms ?></span></p>
+                <p> عدد الغرف<span> : <?php
+                                      if ($property_data->rooms == 0) {
+                                        echo '+5';
+                                      } else {
+                                        echo $property_data->rooms;
+                                      }
+                                      ?></span></p>
               </div>
             </div>
           </div>
@@ -183,8 +189,8 @@ if (!isset($_GET['PId'])) {
             <h4><?php echo $property_data->full_name ?></h4>
             <a href="profile.php?ID=<?php echo $property_data->owner_id ?>"><?php echo $property_data->property_num ?> عقار</a>
           </div>
-          <img src="<?php echo $images ?>person1.jpg" alt=""> 
-        </div>   
+          <img src="<?php echo $images ?>person1.jpg" alt="">
+        </div>
         <div class="connection-links">
           <a class="connection-btn phone-link" data-phone="<?php echo $property_data->phone_num ?>" href="tel:<?php echo $property_data->phone_num ?>">إتصل</a>
           <a class="connection-btn email-link" href="mailto:<?php echo $property_data->email ?>">بريد إلكتروني</a>
@@ -196,7 +202,7 @@ if (!isset($_GET['PId'])) {
           <p id="property">الإبلاغ عن هذا العقار</p>
         </div>
       </div>
-      <div class="connectio-with-owner box">
+      <div class="connection-with-owner box">
         <p class="title">إرسال عرض خاص بهذا العقار للمالك</p>
         <div role="form" class="form">
           <!-- <input type="text" name="name" class="main-input" placeholder="الأسم">
