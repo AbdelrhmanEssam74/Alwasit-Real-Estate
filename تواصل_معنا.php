@@ -8,6 +8,7 @@ $contactus_page = '';
 <?php include $templates . 'navbar.php' ?>
 <!-- End Header -->
 <!-- Start Contact -->
+<p class="update-message"></p>
 <div class="modal-container overlay">
   <div class="modal-content">
     <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
@@ -15,6 +16,15 @@ $contactus_page = '';
     <hr />
     <p></p>
     <button class="modal-content-btn send-access-permission " for="modal-toggle"></button>
+  </div>
+</div>
+<div class="modal-container-2 modal-overlay">
+  <div class="modal-content">
+    <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
+    <h2></h2>
+    <hr />
+    <p></p>
+    <button class="modal-content-btn login" id="login-comment" for="modal-toggle"></button>
   </div>
 </div>
 <section class="background"></section>
@@ -46,12 +56,18 @@ $contactus_page = '';
           <p>نحن هنا من اجلك ! كيف يمكن أن نساعدك</p>
         </div>
         <div class="content">
-          <form action="">
-            <input type="text" name="name" class="main-input" placeholder="الأسم">
-            <input type="email" name="email" class="main-input" placeholder="البريد الإلكتروني">
-            <textarea name="message" class="main-input" placeholder="نحن نستمع إليك"></textarea>
-            <input type="submit" value="إرسال">
-          </form>
+          <div role="form" id="form">
+            <div class="input-control">
+              <input type="text" id="fullName" name="name" class="main-input" value="<?php echo (isset($_SESSION['fullName'])) ? $_SESSION['fullName'] : "" ?>" placeholder="الأسم">
+            </div>
+            <div class="input-control">
+              <input type="email" id="email" name="email" class="main-input" value="<?php echo (isset($_SESSION['email'])) ? $_SESSION['email'] : "" ?>" placeholder="البريد الإلكتروني">
+            </div>
+            <div class="input-control">
+              <textarea name="message" id="message" class="main-input" placeholder="نحن نستمع إليك"></textarea>
+            </div>
+            <button class="send-message" type="submit" data-userID="<?php echo (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "" ?>">إرسال</button>
+          </div>
         </div>
       </div>
     </div>

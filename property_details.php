@@ -49,7 +49,7 @@ if (!isset($_GET['PId'])) {
 }
 
 ?>
-<p class="update-message2"></p>
+<p class="update-message"></p>
 <!--start gallery-->
 <div class="modal-container modal-overlay">
   <div class="modal-content">

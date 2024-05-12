@@ -5,7 +5,6 @@
   --color8: #04363e;
   --color9: #2f6b6e;
   --third-color: #777;
-  --sectina-padding: 100px;
   --head-line: #00214d;
   --head-line-hover: #003170;
   --sub-head-line: #1b2d45;
@@ -26,7 +25,7 @@
   --color2: #a25c32;
   --success: #00b73f;
   --success-hover: #008b31;
-  --sectina-padding: 100px;
+  --section-padding: 100px;
 }
 
 body {
@@ -370,11 +369,11 @@ header nav ul {
   width: 100%;
 }
 
-.contact .right .content form {
+.contact .right .content #form {
   flex-basis: 100%;
 }
 
-.contact .content form .main-input {
+.contact .content #form .main-input {
   padding: 20px;
   display: block;
   border-radius: 5px;
@@ -384,19 +383,38 @@ header nav ul {
   width: 100%;
   background-color: #fbf3fc;
   text-align: right;
+  height: 60px;
 }
-
-.contact .content form .main-input:focus {
+.input-control {
+  position: relative;
+}
+.input-control .error-message {
+  position: absolute;
+  bottom: -25%;
+  font-size: 11px;
+  color: red;
+  width: 100%;
+  text-align: right;
+}
+.input-control .error-message.m {
+  position: absolute;
+  bottom: -8%;
+  font-size: 11px;
+  color: red;
+  width: 100%;
+  text-align: right;
+}
+.contact .content #form .main-input:focus {
   outline: none;
 }
 
-.contact .content form textarea.main-input {
+.contact .content #form textarea.main-input {
   height: 200px;
   resize: none;
   overflow: hidden;
 }
 
-.contact .content form input[type="submit"] {
+.contact .content #form button {
   background: var(--color9);
   color: white;
   padding: 10px;
@@ -409,7 +427,7 @@ header nav ul {
   font-size: 25px;
 }
 
-.contact .content form input[type="submit"]:hover {
+.contact .content #form button:hover {
   background-color: var(--color8);
 }
 
@@ -507,7 +525,7 @@ header nav ul {
 }
 
 /* End Contact Us */
-
+.modal-container-2,
 .modal-container {
   display: none;
   align-items: center;
@@ -600,6 +618,44 @@ header nav ul {
 }
 
 /* Dropdown Content (Hidden by Default) */
+/* Dropdown Button */
+.dropbtn {
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover,
+.dropbtn:focus {
+  background-color: var(--color1);
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown::after {
+  position: absolute;
+  content: "\f078";
+  font-family: "FontAwesome";
+  right: 0;
+  bottom: 0%;
+  cursor: pointer;
+}
+
+.dropdown img {
+  border-radius: 50%;
+  width: 50px;
+  border: 1px solid var(--color1);
+}
+
+/* Dropdown Content (Hidden by Default) */
 .dropMenuContainer {
   display: none;
   position: fixed;
@@ -628,13 +684,29 @@ header nav ul {
   cursor: pointer;
   border: 0;
   outline: 0;
+  text-align: right;
+  position: relative;
+  font-size: 15px;
+  font-weight: 400;
 }
 .dropdown-content a {
+  position: relative;
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  text-align: center;
+  text-align: right;
+  font-size: 15px;
+  font-weight: 400;
+}
+.dropdown-content button::after,
+.dropdown-content a::after {
+  position: absolute;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  content: "\f104";
+  color: #000;
+  left: 5%;
 }
 .show {
   display: block;
@@ -645,4 +717,36 @@ header nav ul {
 .dropdown-content a:hover {
   background-color: #ddd;
   border-bottom: 1px solid var(--head-line);
+}
+
+.update-message {
+  position: fixed;
+  transform: translateY(550px);
+  right: 30%;
+  background-color: var(--success);
+  color: #fff;
+  padding: 15px 35px 15px 15px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  cursor: pointer;
+  z-index: 999;
+}
+.update-message::after {
+  position: absolute;
+  font-weight: 600;
+  content: "X";
+  top: 30%;
+  text-align: center;
+  right: 5%;
+}
+.update-message.show {
+  opacity: 1;
+  transform: translateY(400px);
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+.update-message.hide {
+  opacity: 0;
+  transform: translateY(550px);
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
