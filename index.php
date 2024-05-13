@@ -69,7 +69,7 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
             </a>
             <div class="details-top">
               <div class="details-type">
-                <!-- <div class="type1">سكني</div> -->
+                <div class="type1"><?php echo  $prop->property_id ?></div>
                 <?php
                 echo ($prop->status == 'لللإيجار') ? '<div class="rent">للإيجار</div>' : '<div class="buy">للبيع</div>';
                 ?>
