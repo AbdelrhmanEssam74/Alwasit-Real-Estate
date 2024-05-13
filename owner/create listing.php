@@ -45,7 +45,7 @@ switch ($action) {
           <div class="Type_input form-group">
             <label>حالة العقار</label>
             <select required="required" name="propertyStatus" class="selectpicker form-select" data-live-search="true" data-width="100%">
-              <option value="status1">لللإيجار</option>
+              <option value="status1">للإيجار</option>
               <option value="status2">للبيع</option>
             </select>
           </div>

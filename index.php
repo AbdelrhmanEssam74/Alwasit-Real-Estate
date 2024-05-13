@@ -69,9 +69,9 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
             </a>
             <div class="details-top">
               <div class="details-type">
-                <div class="type1"><?php echo  $prop->property_id ?></div>
+                <div class="type1"><?php echo  $prop->type ?></div>
                 <?php
-                echo ($prop->status == 'لللإيجار') ? '<div class="rent">للإيجار</div>' : '<div class="buy">للبيع</div>';
+                echo ($prop->status == 'للإيجار') ? '<div class="rent">للإيجار</div>' : '<div class="buy">للبيع</div>';
                 ?>
               </div>
               <div class="favorite-box" data-fav="<?php echo ($prop->property_id == $prop->fav_property_id and $prop->checked == 1 and $prop->fav_user_id == $user_id) ? $prop->checked : 0 ?>" data-PID="<?php echo  $prop->property_id ?>" data-OID="<?php echo  $prop->owner_id ?>" data-UID="<?php echo $user_id ?>">

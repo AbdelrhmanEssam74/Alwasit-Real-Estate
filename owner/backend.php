@@ -64,7 +64,7 @@ if ($result !== null) {
   $longitude = $result['longitude'];
 }
 $arr = array(
-  "status1" => "لللإيجار",
+  "status1" => "للإيجار",
   "status2" => "للبيع",
 );
 $arr2 = array(
