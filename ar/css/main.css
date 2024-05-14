@@ -212,12 +212,22 @@ header nav a::before {
   background-color: var(--tertiary);
   height: 1px;
   bottom: 20%;
-  right: 0;
+  right: 50%;
   transition: 0.5s all;
 }
-
+header nav a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  background-color: var(--tertiary);
+  height: 1px;
+  bottom: 20%;
+  left: 50%;
+  transition: 0.5s all;
+}
+header nav li:hover a::after,
 header nav li:hover a::before {
-  width: 100%;
+  width: 50%;
 }
 
 header nav li:hover a {
@@ -291,33 +301,53 @@ header nav ul {
 
   header nav .menu {
     margin: 0;
-    transition: 0.5s all;
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-between;
     position: fixed;
-    right: -70%;
+    right: 0;
     top: 0;
-    width: 50%;
+    width: 100%;
     background-color: #ffffff;
-    text-align: right;
+    text-align: center;
     z-index: 1;
     user-select: none;
     padding-right: 10px;
-    height: 430px;
-    border-radius: 10px 0 0 10px;
-    -webkit-box-shadow: -61px 0px 125px -35px rgba(0, 0, 0, 0.62);
+    height: fit-content;
+    border-radius: 0 0 5px 5px;
+    /* -webkit-box-shadow: -61px 0px 125px -35px rgba(0, 0, 0, 0.62);
     -moz-box-shadow: -61px 0px 125px -35px rgba(0, 0, 0, 0.62);
-    box-shadow: -61px 0px 125px -35px rgba(0, 0, 0, 0.62);
-    transform: translate(0, 18%);
+    box-shadow: -61px 0px 125px -35px rgba(0, 0, 0, 0.62); */
+    transform: translate(100%, 34%);
+    transition: transform 0.5s ease-out;
+    /* border: 1px solid red; */
   }
-
+  header nav a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    background-color: var(--tertiary);
+    height: 1px;
+    bottom: 10%;
+    left: 50%;
+    transition: 0.5s all;
+  }
+  header nav a::before {
+    bottom: 10%;
+    right: 50%;
+  }
+  header nav li:hover a::after,
+  header nav li:hover a::before {
+    width: 50%;
+  }
   header nav .show_menu {
-    right: 0;
+    transform: translate(0%, 34%);
+    transition: 0.5s ease-out;
   }
 
   header ul li a {
     color: #000000;
+    padding: 10px;
   }
 
   header nav ul li a:not(:first-child) {

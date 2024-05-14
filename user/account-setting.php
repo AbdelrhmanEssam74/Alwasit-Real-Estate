@@ -38,13 +38,15 @@ $user_data = $users_obj->getAll($user_id)[0];
             <div class="form-control">
               <input type="password" id="currentpass" name="currentpass" required="required">
               <input type="hidden" id="oldpassword" value="<?php echo $user_data->Password; ?>" name="oldpassword">
-              <a class="restPass" href="<?php echo $auth ?>rest-password.php?_action=verification">:نسيت كلمة السر</a>
+              <i class="fa fa-eye show-old-pass" aria-hidden="true"></i>
               <p class="invalid-pass-value"></p>
+              <a class="restPass" href="<?php echo $auth ?>rest-password.php?_action=verification">:نسيت كلمة السر</a>
             </div>
 
             <label for="username">:كلمة المرور الجديدة</label>
             <div class="form-control">
               <input type="password" id="newpassword" name="newpassword" required="required">
+              <i class="fa fa-eye show-new-pass" aria-hidden="true"></i>
               <p class="invalid-newpass-value"></p>
             </div>
             <button type="submit" class="pass_info_save_btn" data-UID="<?php echo $user_data->user_id; ?>">Save</button>

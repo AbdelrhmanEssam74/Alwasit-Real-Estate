@@ -27,6 +27,7 @@ $_SESSION['full_name'] = $user_data->FullName;
   </div>
 </div>
 <div class="setting">
+  <p class="update-message"></p>
   <p class="success-message"></p>
   <div class="container">
     <div class="parent">
@@ -49,8 +50,8 @@ $_SESSION['full_name'] = $user_data->FullName;
             </div> -->
             <label for="first_name"> :الاسم </label>
             <div class="form-control">
-              <input type="text" id="fullname" class="dynamic-input" name="full_name" value="<?php echo $user_data->FullName ?>" placeholder="Enter your first name" required="required">
-              <p class="invalid-fName-value">Can't Be Empty</p>
+              <input type="text" id="fullname" class="dynamic-input" name="full_name" value="<?php echo $user_data->FullName ?>" placeholder="أدخل الأسم" required="required">
+              <p class="invalid-fName-value">أدخل الأسم بالكامل</p>
             </div>
             <button class="personal_info_save_btn" data-UID="<?php echo $user_data->user_id; ?>" type="submit">Save</button>
           </div>
@@ -60,7 +61,7 @@ $_SESSION['full_name'] = $user_data->FullName;
           <div class="form">
             <label for="email">:رقم الهاتف المحمول </label>
             <div class="form-control">
-              <input type="tel" id="phone_num" class="dynamic-input-phone" name="phone" value="<?php echo $user_data->user_phone ?>" placeholder="Enter your Mobile Number" required="required">
+              <input type="tel" id="phone_num" class="dynamic-input-phone" name="phone" value="<?php echo $user_data->user_phone ?>" placeholder=" رقم الهاتف" required="required">
               <p class="invalid-num-value"></p>
             </div>
             <label for="email">:البريد الإلكتروني</label>

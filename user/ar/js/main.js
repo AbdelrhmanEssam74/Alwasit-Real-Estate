@@ -70,29 +70,21 @@ $(function () {
       contentType: false,
       success: function (data) {
         if (data === "1") {
-          success_message
-            .addClass("show-success")
-            .text("تم تحديث البيانات بنجاح");
-          setTimeout(function () {
-            success_message.removeClass("show-success");
-          }, 5000);
+          showUpdateMessage("تم تحديث البيانات بنجاح");
         }
-
         $(".invalid-username-value, .invalid-fName-value").css(
           "display",
           "none"
         );
-
-        if (data === "nameEmpty") {
-          $(".invalid-username-value").css("display", "block");
-        }
+        // if (data === "nameEmpty") {
+        //   $(".invalid-username-value").css("display", "block");
+        // }
         if (data === "fNameEmpty") {
           $(".invalid-fName-value").css("display", "block");
+          $("#fullname").css("border", "1px solid red");
+        } else {
+          $("#fullname").css("border", "1px solid #ccc");
         }
-
-        success_message.click(function () {
-          $(this).removeClass("show-failed show-success");
-        });
       },
       error: function (xhr, status, error) {
         console.error(xhr);
@@ -118,28 +110,24 @@ $(function () {
       contentType: false,
       success: function (data) {
         if (data === "1") {
-          success_message.addClass("show-success").text("Saved Successfully");
-          setTimeout(function () {
-            success_message.removeClass("show-success");
-          }, 5000);
-        } else {
-          // success_message.addClass("show-failed").text("Save Failed");
-          // setTimeout(function () {
-          //   success_message.removeClass("show-failed");
-          // }, 5000);
+          showUpdateMessage("تم تحديث البيانات بنجاح");
         }
         $(".invalid-num-value").css("display", "none");
 
         if (data === "Cant Be Empty") {
-          $(".invalid-num-value").css("display", "block").text(data);
+          $(".invalid-num-value")
+            .css("display", "block")
+            .text("أدخل رقم الهاتف");
+          $("#phone_num").css("border", "1px solid red");
+        } else {
+          $("#phone_num").css("border", "1px solid #ccc");
         }
         if (data === "Invalid Phone Number") {
-          $(".invalid-num-value").css("display", "block").text(data);
+          $(".invalid-num-value").css("display", "block").text("رقم غير صالح");
+          $("#phone_num").css("border", "1px solid red");
+        } else {
+          $("#phone_num").css("border", "1px solid #ccc");
         }
-
-        success_message.click(function () {
-          $(this).removeClass("show-failed show-success");
-        });
       },
       error: function (xhr, status, error) {
         console.error(xhr);
@@ -147,7 +135,7 @@ $(function () {
     });
   });
   // update the user password info in the DB
-  // if the user enter a dont enter new password disabled the save button and enabled it when he enters something
+  // if the user enter a don't enter new password disabled the save button and enabled it when he enters something
   let newpass = document.getElementById("newpassword");
   if (newpass) {
     if (newpass.value.length < 8) {
@@ -173,7 +161,7 @@ $(function () {
     if (newpass.length < 8) {
       $(".invalid-newpass-value")
         .css("display", "block")
-        .text("Password must be at least 8 characters");
+        .text("يجب ان تكون اكثر من 7 حروف");
     }
     let formData = new FormData();
     // Append common form data
@@ -190,29 +178,33 @@ $(function () {
       processData: false,
       contentType: false,
       success: function (data) {
+        console.log(data);
         if (data === "Cant Be Empty") {
-          $(".invalid-pass-value").css("display", "block").text(data);
+          $(".invalid-pass-value")
+            .css("display", "block")
+            .text("أدخل كلمة المرور الحالية");
         }
         if (data === "Wrong Password") {
-          $(".invalid-pass-value").css("display", "block").text(data);
+          $(".invalid-pass-value")
+            .css("display", "block")
+            .text("كلمة المرور غير صحيحة");
+          $("#currentpass").css("border", "1px solid red");
         }
         if (data === "New Password Cant be empty") {
-          $(".invalid-newpass-value").css("display", "block").text(data);
+          $(".invalid-newpass-value")
+            .css("display", "block")
+            .text("أدخل كلمة المرور الجديدة");
         }
         if (data === "You Use This Password Before! Try Another One.") {
-          $(".invalid-newpass-value").css("display", "block").text(data);
+          $(".invalid-newpass-value")
+            .css("display", "block")
+            .text(" كلمة المرور الجديدة مماثلة للحالية , أدخل كلمة مرور غيرها");
         }
-        $(".invalid-pass-value, .invalid-newpass-value").css("display", "none");
         if (data === "1") {
           success_message.addClass("show-success").text("Saved Successfully");
           setTimeout(function () {
             success_message.removeClass("show-success");
             window.location.reload();
-          }, 5000);
-        } else {
-          success_message.addClass("show-failed").text("Save Failed");
-          setTimeout(function () {
-            success_message.removeClass("show-failed");
           }, 5000);
         }
         success_message.click(function () {
@@ -370,4 +362,16 @@ $(function () {
       },
     });
   });
+  function showUpdateMessage(message) {
+    let updateMessage = $(".update-message");
+    updateMessage.text(message).addClass("show").removeClass("hide");
+
+    updateMessage.on("click", function () {
+      $(this).removeClass("show").addClass("hide");
+    });
+
+    setTimeout(function () {
+      updateMessage.addClass("hide").removeClass("show");
+    }, 3000);
+  }
 });
