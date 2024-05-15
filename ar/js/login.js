@@ -9,62 +9,69 @@ $(document).ready(function () {
       $(this).attr("placeholder", $(this).attr("data-text"));
     });
 
-  const form = $("#form");
-  const email = $("#email");
-  const password = $("#password");
-
-  form.on("submit", function (e) {
-    validateInputs();
-    if (isFormValid()) {
-      form.submit();
-    } else {
-      e.preventDefault(); // Prevent form submission by default
-    }
-  });
-
-  function setErrors($input, message) {
-    const $inputControl = $input.parent();
-    const $errorDisplay = $inputControl.find(".error_message");
-    const $inputIcon = $inputControl.find("i");
-    $errorDisplay.text(message).addClass("show");
-    $errorDisplay.text(message).removeClass("hide");
-    $input.css("border", "1px solid var(--secondary)");
-    $inputIcon.css("color", "var(--secondary)");
-    $input.on("click", function () {
-      $errorDisplay.text(message).addClass("hide");
+    const form = $("#form");
+    const email = $("#email");
+    const password = $("#password");
+    
+    // Form submission event listener
+    form.on("submit", function (e) {
+      validateInputs();
+      if (isFormValid()) {
+        form.submit();
+      } else {
+        e.preventDefault(); // Prevent form submission by default
+      }
     });
-  }
-
-  function setSuccess($input) {
-    const $inputControl = $input.parent();
-    const $errorDisplay = $inputControl.find(".error_message");
-    const $inputIcon = $inputControl.find("i");
-    $errorDisplay.hide();
-    $input.css("border", "1px solid var(--success)");
-    $inputIcon.css("color", "var(--success)");
-  }
-
-  function validateInputs() {
-    const emailValue = email.val().trim();
-    const passwordValue = password.val().trim();
-
-    if (emailValue === "") {
-      setErrors(email, "ادخل بريدك الالكتروني");
-    } else {
-      setSuccess(email);
+    
+    // Function to set error messages and styles for inputs
+    function setErrors($input, message) {
+      const $inputControl = $input.parent();
+      const $errorDisplay = $inputControl.find(".error_message");
+      const $inputIcon = $inputControl.find("i");
+      $errorDisplay.text(message).addClass("show");
+      $errorDisplay.text(message).removeClass("hide");
+      $input.css("border", "1px solid var(--secondary)");
+      $inputIcon.css("color", "var(--secondary)");
+      $input.on("click", function () {
+        $errorDisplay.text(message).addClass("hide");
+      });
     }
-
-    if (passwordValue === "") {
-      setErrors(password, "ادخل كلمة السر");
-    } else {
-      setSuccess(password);
+    
+    // Function to set success styles for inputs
+    function setSuccess($input) {
+      const $inputControl = $input.parent();
+      const $errorDisplay = $inputControl.find(".error_message");
+      const $inputIcon = $inputControl.find("i");
+      $errorDisplay.hide();
+      $input.css("border", "1px solid var(--success)");
+      $inputIcon.css("color", "var(--success)");
     }
-  }
-
-  function isFormValid() {
-    const errors = form.find(".error_message:visible");
-    return errors.length === 0;
-  }
+    
+    // Function to validate inputs
+    function validateInputs() {
+      const emailValue = email.val().trim();
+      const passwordValue = password.val().trim();
+    
+      // Validate email input
+      if (emailValue === "") {
+        setErrors(email, "ادخل بريدك الالكتروني");
+      } else {
+        setSuccess(email);
+      }
+    
+      // Validate password input
+      if (passwordValue === "") {
+        setErrors(password, "ادخل كلمة السر");
+      } else {
+        setSuccess(password);
+      }
+    }
+    
+    // Function to check if the form is valid (no visible error messages)
+    function isFormValid() {
+      const errors = form.find(".error_message:visible");
+      return errors.length === 0;
+    }
 
   $(".logout").on("click", function () {
     let user_id = $(".logout").attr("data-uid");

@@ -1,6 +1,6 @@
 <?php
 include $function . 'function.php';
-date_default_timezone_set('Africa/Cairo');
+date_default_timezone_set('Europe/Sofia');
 
 if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
   $hashed_id = $_COOKIE['u'];

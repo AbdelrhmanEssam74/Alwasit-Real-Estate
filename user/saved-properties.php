@@ -12,7 +12,7 @@ include_once $config . 'propertyTable.php';
 // get all user information
 $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : 0;
 $properties = new PropertyTable;
-$properties_saved = $properties->getFavorateProperties($user_id);
+$properties_saved = $properties->getFavoriteProperties($user_id);
 // echo "<pre>";
 // print_r($properties_saved);
 // echo "</pre>";

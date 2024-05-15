@@ -21,7 +21,7 @@ if ($property_id != 0) :
   endif;
 endif;
 $is_favorite = 0;
-$favorites = $property_obj->getFavorateProperties($user_id);
+$favorites = $property_obj->getFavoriteProperties($user_id);
 foreach ($favorites as $favorite) {
   $favorate_property_id = $favorite->property_id;
   if ($favorate_property_id == $property_id) {
