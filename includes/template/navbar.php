@@ -47,8 +47,8 @@ if (isset($_SESSION['uID'])) {
       <ul id="menu" class="menu">
         <li><a href="<?php echo $contactus ?>">تواصل معنا</a></li>
         <li> <a href="<?php echo $about ?>">عنا</a></li>
-        <li> <a href="<?php echo $commercial ?>">تجاريه</a></li>
-        <li> <a href="<?php echo $students ?>">مغتربين</a></li>
+        <li> <a href="<?php echo $commercial ?>">تجارية</a></li>
+        <li> <a href="<?php echo $students ?>">مفروش</a></li>
         <li> <a href="<?php echo $forRent ?>">للإيجار</a></li>
         <li> <a href="<?php echo $forBuy ?>">للبيع</a></li>
       </ul>

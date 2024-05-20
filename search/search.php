@@ -231,6 +231,8 @@ $data = $search_obj->search($queryWithLimit); // Execute query with limit and of
   <div class="container">
     <div class="widgets">
       <?php
+      // Shuffle the data randomly
+      shuffle($data);
       if (!empty($data)) :
         foreach ($data as $prop) :
           $imgs = explode(",", $prop->img);

@@ -146,9 +146,9 @@ $neighborhoods = $neighborhoods->fetch(PDO::FETCH_OBJ);
 if (($neighborhoods)) {
   $num = $neighborhoods->nums_of_properties;
   $num++;
-  $update_nums_of_properties = "UPDATE neighborhoods set nums_of_properties = ?";
+  $update_nums_of_properties = "UPDATE neighborhoods set nums_of_properties = ? WHERE neighborhood_name = ?";
   $stmt = $conn->prepare($update_nums_of_properties);
-  $stmt->execute(array($num));
+  $stmt->execute(array($num, $n));
 } else {
   $insert_neighborhoods = "INSERT INTO `neighborhoods` (`neighborhood_name` , `city`) VALUES(?,?)";
   $stmt = $conn->prepare($insert_neighborhoods);

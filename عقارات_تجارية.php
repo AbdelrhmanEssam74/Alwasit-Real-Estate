@@ -1,7 +1,10 @@
 <?php include 'init.php';
+include  $config . 'config.php';
+include $config . 'propertyTable.php';
 $DefultPage = '';
 $pageTitel = 'الوسيط | عقارات تجارية في بني سويف';
 $commercial_page = '';
+$user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
 ?>
 <?php include $templates . 'header.php' ?>
 <!-- Start Header -->
@@ -13,13 +16,11 @@ $commercial_page = '';
     <h2 class="landing-title">
       عقارات تجارية في بني سويف
     </h2>
-    <!-- start Form -->
-    <?php  // include $templates . 'searchform.php' ?>
-    <!-- End Form -->
   </div>
 </div>
 <!-- End Landing -->
 <!-- start design-->
+<p class="success-message"></p>
 <div class="modal-container overlay">
   <div class="modal-content">
     <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
@@ -29,21 +30,35 @@ $commercial_page = '';
     <button class="modal-content-btn send-access-permission " for="modal-toggle"></button>
   </div>
 </div>
+<div class="modal-container-2 modal-overlay">
+  <div class="modal-content">
+    <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>
+    <h2></h2>
+    <hr />
+    <p></p>
+    <button class="modal-content-btn login" id="login-comment" for="modal-toggle"></button>
+  </div>
+</div>
+<div class="sort-by-overlay"></div>
 <div class="design">
+  <?php
+  // get  properties for buy from database
+  $property_obj = new PropertyTable();
+  $data = $property_obj->getALLPropertiesCommercial();
+  ?>
   <div class="container" dir="rtl">
     <div class="text">
       <h2>عقارات تجارية في بني سويف</h2>
-      <p><span>1,550,00</span>عقارات اخري </p>
+      <p><span><?php echo count($data) ?></span>عقارات اخري </p>
     </div>
     <div class="sort-by">
       <div class="sort_by_btn">ترتيب حسب</div>
       <div class="sort_list">
-        <a href="#" data-link="متميز">متميز</a>
-        <a href="#" data-link="الأحدث">الأحدث</a>
-        <a href="#" data-link="اقل سعر">اقل سعر</a>
-        <a href="#" data-link="اعلي سعر">اعلي سعر</a>
-        <a href="#" data-link="اكبر مساحة">اكبر مساحة</a>
-        <a href="#" data-link="اقل مساحة">اقل مساحة</a>
+        <a href="?q=d" data-link="الأحدث">الأحدث</a>
+        <a href="?q=pa" data-link="اقل سعر">اقل سعر</a>
+        <a href="?q=pd" data-link="اعلي سعر">اعلي سعر</a>
+        <a href="?q=aa" data-link="اقل مساحة">اقل مساحة</a>
+        <a href="?q=ad" data-link="اكبر مساحة">اكبر مساحة</a>
       </div>
     </div>
   </div>
@@ -53,72 +68,145 @@ $commercial_page = '';
 <div class="widget-container">
   <div class="container">
     <div class="main-heading animate__bounceInLeft">
-      <h2 class="heading2">عقارات مميزة</h2>
     </div>
     <div class="widgets">
-      <div class="property-body">
-        <div class="images-details">
-          <a href="<?php echo $prop_details ?>" class="property-link">
-            <img class="prop-img" src="<?php echo $images ?>item1.jpg" alt="">
-          </a>
-          <div class="details-top">
-            <div class="details-type">
-              <div class="type1">سكني</div>
-              <div class="rent">للإيجار</div>
-            </div>
-            <div class="favorite-box">
-              <button title="اضف للمفضلة" class='property-favorite'>
-                <span class='icon-heart-o'>
-                  <i class="fa-regular fa-heart"></i>
-                </span>
-              </button>
-            </div>
-          </div>
-          <div class="details-bottom">
-            <div class="property-details">
-              <div class="bath">
-                <p>2</p>
-                <i class='bx bx-bath'></i>
+      <?php
+      $itemsPerPage = 6;
+      $totalItems = count($data);
+      $totalPages = ceil($totalItems / $itemsPerPage);
+      $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+      $offset = ($currentPage - 1) * $itemsPerPage;
+      $data = array_slice($data, $offset, $itemsPerPage);
+      $query = (isset($_GET['q'])) ? $_GET['q'] : '';
+      switch ($query) {
+        case 'd':
+          $data = $property_obj->getALLPropertiesCommercial("DESC");
+          break;
+        case 'pa':
+          $data = $property_obj->getALLPropertiesCommercial("ASC", "price");
+          break;
+        case 'pd':
+          $data = $property_obj->getALLPropertiesCommercial("DESC", "price");
+          break;
+        case 'aa':
+          $data = $property_obj->getALLPropertiesCommercial("ASC", "area");
+          break;
+        case 'ad':
+          $data = $property_obj->getALLPropertiesCommercial("DESC", "area");
+          break;
+        default:
+          # code...
+          break;
+      }
+      // Shuffle the data randomly
+      shuffle($data);
+      if (!empty($data)) :
+        foreach ($data as $prop) :
+          // echo "<pre>";
+          // print_r($prop);
+          // echo "</pre>";
+          $imgs = explode(",", $prop->img);
+          $main_img = $imgs[0];
+      ?>
+          <div class="property-body">
+            <div class="images-details">
+              <a href="<?php echo $prop_details ?>?PId=<?php echo  $prop->property_id ?>" class="property-link">
+                <img class="prop-img" src="<?php echo $owner ?>/upload/<?php echo $prop->owner_id . "/" . $prop->property_id . "/" . $main_img ?>" alt="">
+              </a>
+              <div class="details-top">
+                <div class="details-type">
+                  <?php
+                  if ($prop->Furnished) :
+                    echo '<div class="Furnished">مفروش</div>';
+                  endif;
+                  ?>
+                  <div class="type1"><?php echo  $prop->type ?></div>
+                  <div class="rent">للإيجار</div>
+                </div>
+                <div class="favorite-box" data-fav="<?php echo ($prop->property_id == $prop->fav_property_id and $prop->checked == 1 and $prop->fav_user_id == $user_id) ? $prop->checked : 0 ?>" data-PID="<?php echo  $prop->property_id ?>" data-OID="<?php echo  $prop->owner_id ?>" data-UID="<?php echo $user_id ?>">
+                  <button title="اضف للمفضلة" class=' property-favorite'>
+                    <span class='icon-heart-o'>
+                      <i class="fa-regular fa-heart"></i>
+                    </span>
+                  </button>
+                </div>
               </div>
-              <div class="rooms">
-                <p>4</p>
-                <i class='bx bx-bed'></i>
-              </div>
-              <div class="area">
-                <p>200 m<sup>2</sup> </p>
-                <i class='bx bx-layout'></i>
+              <div class="details-bottom">
+                <div class="property-details">
+                  <div class="bath">
+                    <p><?php echo $prop->bath ?></p>
+                    <i class='bx bx-bath'></i>
+                  </div>
+                  <div class="rooms">
+                    <p><?php
+                        if ($prop->rooms == 0) {
+                          echo '+5';
+                        } else {
+                          echo $prop->rooms;
+                        }
+                        ?></p>
+                    <i class='bx bx-bed'></i>
+                  </div>
+                  <div class="area">
+                    <p><?php echo $prop->area ?> m<sup>2</sup> </p>
+                    <i class='bx bx-layout'></i>
+                  </div>
+                </div>
+                <div class="photos">
+                  <p>5</p>
+                  <i class="fa-solid fa-camera"></i>
+                </div>
               </div>
             </div>
-            <div class="photos">
-              <p>5</p>
-              <i class="fa-solid fa-camera"></i>
+            <div class="proparty-info">
+              <div class="location">
+                <i class="fa-solid fa-location-dot"></i>
+                <p><?php echo $prop->neighborhood ?></p>
+              </div>
+              <div class="description">
+                <p>......<?php echo substr($prop->description, 0, 55) ?></p>
+              </div>
+              <div class="price">
+                <p><?php echo number_format($prop->price) ?> <span>جنيه</span></p>
+              </div>
+              <hr>
+              <div class="owner">
+                <a href="profile.php?ID=<?php echo $prop->owner_id ?>">
+                  <p> : المالك </p>
+                  <span><?php echo  $prop->full_name ?></span>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="proparty-info">
-          <div class="location">
-            <i class="fa-solid fa-location-dot"></i>
-            <p>location</p>
-          </div>
-          <div class="description">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum, quae.</p>
-          </div>
-          <div class="price">
-            <p>3,000 <span>جنيه</span></p>
-          </div>
-          <hr>
-          <div class="owner">
-            <a href="">
-              <p> : المالك </p>
-              <span> ابراهيم عبد الرحمن</span>
-            </a>
-          </div>
-        </div>
-      </div>
+      <?php
+        endforeach;
+      endif;
+      ?>
     </div>
   </div>
 </div>
+<?php
+if (empty($data)) {
+?>
+  <div class='no-prop'>
+    <h2>لاوجود لعقارت حالياً</h2>
+    <p>بإمكانك تجربة التالي</p>
+    <p> تفعيل الإشعارات الموقع لتلقي اخر الاخبار</p>
+  </div>
+<?php
+}
+?>
 <!-- End widget -->
+<!-- // Display pagination links -->
+<div class="pagination">
+  <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+    <?php if ($page == $currentPage) : ?>
+      <span class="current-page"><?php echo $page; ?></span>
+    <?php else : ?>
+      <a href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
+    <?php endif; ?>
+  <?php endfor; ?>
+</div>
 <!-- Start footer -->
 <?php include $templates . 'footer.php' ?>
 <!-- End footer -->

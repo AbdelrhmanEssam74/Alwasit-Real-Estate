@@ -21,7 +21,7 @@ if (isset($_COOKIE['u']) && !isset($_SESSION['loggedIn'])) {
     $user_data = $login_user_obj->getLoginUser($user_id);
     if (!empty($user_data)) {
         if ($user_data['expire_date'] < date("Y-m-d H:i:s")) {
-            // update cookies and sesssions
+            // update cookies and sessions
             setcookie("rem", $user_data['token'], $user_data['expire_date'], '/');
             $_SESSION['loggedIn'] = true;
             $_SESSION['uID'] = $user_id;

@@ -24,7 +24,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
     <img src="ar/images/person1.jpg" alt="" class="avatar" />
     <div class="body txt-c d-flex p-20 mt-20 mb-20 block-mobile">
       <div><?php echo ucwords($owner_data->FullName) ?> <span class="d-block c-grey fs-14 mt-10">Owner</span></div>
-      <div><?php echo getValue('property_num', 'owners', "owner_id", $owner_id)['property_num']; ?><span class="d-block c-grey fs-14 mt-10">Proparty</span></div>
+      <div><?php echo getValue('property_num', 'owners', "owner_id", $owner_id)['property_num']; ?><span class="d-block c-grey fs-14 mt-10">Property</span></div>
       <div>5 <span class="d-block c-grey fs-14 mt-10">Clients</span></div>
     </div>
     <a href="profile.php" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a>

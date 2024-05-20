@@ -48,7 +48,7 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
   ?>
   <div class="container" dir="rtl">
     <div class="text">
-      <h2>عقارات للبيع في بني سويف</h2>
+      <h2>عقارات للإيجار في بني سويف</h2>
       <p><span><?php echo count($data) ?></span>عقارات اخري </p>
     </div>
     <div class="sort-by">
@@ -76,6 +76,7 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
       $totalPages = ceil($totalItems / $itemsPerPage);
       $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
       $offset = ($currentPage - 1) * $itemsPerPage;
+      $data = array_slice($data, $offset, $itemsPerPage);
       $query = (isset($_GET['q'])) ? $_GET['q'] : '';
       switch ($query) {
         case 'd':
@@ -97,6 +98,8 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
           # code...
           break;
       }
+      // Shuffle the data randomly
+      shuffle($data);
       foreach ($data as $prop) :
         // echo "<pre>";
         // print_r($prop);
@@ -111,6 +114,11 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
             </a>
             <div class="details-top">
               <div class="details-type">
+                <?php
+                if ($prop->Furnished) :
+                  echo '<div class="Furnished">مفروش</div>';
+                endif;
+                ?>
                 <div class="type1"><?php echo  $prop->type ?></div>
                 <div class="rent">للإيجار</div>
               </div>

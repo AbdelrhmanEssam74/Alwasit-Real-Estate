@@ -43,8 +43,8 @@ if (isset($_SESSION['uID'])) {
       <ul id="menu" class="menu">
         <li><a href="<?php echo $main_link ?>تواصل_معنا.php ">تواصل معنا</a></li>
         <li> <a href="<?php echo $main_link ?>عنا.php">عنا</a></li>
-        <li> <a href="<?php echo $main_link ?>عقارات_تجارية.php">تجاريه</a></li>
-        <li> <a href="<?php echo $main_link ?>الطلاب.php">مغتربين</a></li>
+        <li> <a href="<?php echo $main_link ?>عقارات_تجارية.php">تجارية</a></li>
+        <li> <a href="<?php echo $main_link ?>الطلاب.php">مفروش</a></li>
         <li> <a href="<?php echo $main_link ?>عقارات_للإيجار.php">للإيجار</a></li>
         <li> <a href="<?php echo $main_link ?>عقارات_للبيع.php">للبيع</a></li>
       </ul>

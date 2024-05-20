@@ -77,9 +77,7 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
       $totalPages = ceil($totalItems / $itemsPerPage);
       $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
       $offset = ($currentPage - 1) * $itemsPerPage;
-      // Retrieve data for the current page
       $data = array_slice($data, $offset, $itemsPerPage);
-      // Sorting options
       $query = isset($_GET['q']) ? $_GET['q'] : '';
       switch ($query) {
         case 'd':
@@ -101,6 +99,8 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
           // No sorting option selected
           break;
       }
+      // Shuffle the data randomly
+      shuffle($data);
       foreach ($data as $prop) :
         // echo "<pre>";
         // print_r($prop);
@@ -115,6 +115,11 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
             </a>
             <div class="details-top">
               <div class="details-type">
+                <?php
+                if ($prop->Furnished) :
+                  echo '<div class="Furnished">مفروش</div>';
+                endif;
+                ?>
                 <div class="type1"><?php echo  $prop->type ?></div>
                 <div class="buy">للبيع</div>
               </div>

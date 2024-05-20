@@ -25,6 +25,7 @@ class PropertyTable extends DatabaseConnection
     ON favorites.fav_property_id = properties.property_id 
     Where properties.active = 1 
     AND properties.deleted = 0  
+    AND properties.for_student != 1
     ORDER BY `properties`.`uploaded_at` 
     DESC LIMIT 3";
     $stmt = $this->conn->prepare($sql);
@@ -42,7 +43,8 @@ class PropertyTable extends DatabaseConnection
     LEFT JOIN favorites 
     ON favorites.fav_property_id = properties.property_id 
     Where properties.active = 1 
-    AND properties.deleted = 0 ";
+    AND properties.deleted = 0 
+    AND properties.for_student != 1";
 
     if ($owner_id != null) {
       $sql .= " AND properties.owner_id = '$owner_id'";
@@ -55,6 +57,44 @@ class PropertyTable extends DatabaseConnection
   }
 
   // method to get all properties of a specific type (optional: filtered by type and order)
+  public function getALLPropertiesFurnished($order = "ASC", $column = "uploaded_at")
+  {
+    $sql = "SELECT * FROM properties 
+    INNER JOIN owners 
+    ON properties.owner_id = owners.owner_id 
+    LEFT JOIN favorites 
+    ON favorites.fav_property_id = properties.property_id 
+    WHERE properties.active = 1 
+    AND properties.deleted = 0
+    AND properties.for_student = 1";
+
+    if ($order != null) {
+      $sql .= " ORDER BY `properties`.`$column` $order";
+    }
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $properties;
+  }
+  public function getALLPropertiesCommercial($order = "ASC", $column = "uploaded_at")
+  {
+    $sql = "SELECT * FROM properties 
+    INNER JOIN owners 
+    ON properties.owner_id = owners.owner_id 
+    LEFT JOIN favorites 
+    ON favorites.fav_property_id = properties.property_id 
+    WHERE properties.active = 1 
+    AND properties.deleted = 0
+    AND properties.for_commercial = 1";
+
+    if ($order != null) {
+      $sql .= " ORDER BY `properties`.`$column` $order";
+    }
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $properties = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $properties;
+  }
   public function getALLPropertiesBuyType($type = null, $order = "ASC", $column = "uploaded_at")
   {
     $sql = "SELECT * FROM properties 
