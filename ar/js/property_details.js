@@ -90,16 +90,21 @@ $(document).ready(function () {
   });
   $(".show-more").on("click", function () {
     const fullDescription = $(this).attr("data-full-desc");
-    const descriptionDiv = $(this).parent().find("p").text(fullDescription);
+    const descriptionDiv = $(this).parent().find("p");
+
     if (descriptionDiv.hasClass("full")) {
       // Already showing full description, toggle to truncated
-      const truncatedDescription = "..." + fullDescription.substr(0, 50);
-      descriptionDiv.text(truncatedDescription);
+      const truncatedDescription = "..." + fullDescription.substr(0, 30);
+      const strippedDescription = truncatedDescription.replace(
+        /<br\s?\/?>/gi,
+        ""
+      );
+      descriptionDiv.html(strippedDescription);
       descriptionDiv.removeClass("full");
       $(this).text("عرض المزيد");
     } else {
       // Show full description
-      descriptionDiv.text(fullDescription);
+      descriptionDiv.html(fullDescription);
       descriptionDiv.addClass("full");
       $(this).text("عرض أقل");
     }

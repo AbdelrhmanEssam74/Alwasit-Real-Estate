@@ -119,8 +119,7 @@ $Login_mailBody = "
   </div>
 </body>
 </html>
-        "
-        ;
+        ";
 $send_login_obj = new EmailSender($email, $Login_email_subject, $Login_mailBody);
 // $send_login_obj->sendEmail();
 // Check if user wants to login for 1 month (Remember Me)
@@ -148,7 +147,7 @@ $_SESSION['uID'] = $user_id;
 $_SESSION['email'] = $email;
 $_SESSION['fullName'] =  $userObj->GetUserFullName();
 // Redirect to the home page
-if (isset($_SESSION['HTTP_REFERER']))
+if (isset($_SESSION['HTTP_REFERER']) && strlen(strstr($_SESSION['HTTP_REFERER'], "rest-password.php")) == 0)
   header("Location:" . $_SESSION['HTTP_REFERER']);
 else
   header("Location:../" . $home);

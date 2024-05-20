@@ -10,48 +10,49 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
 <?php $pageTitel = "Dashboard | $owner_data->FullName "; ?>
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
-<h1 class="p-relative">Dashboard</h1>
+<h1 class="p-relative txt-r">لوحة التحكم</h1>
 <div class="wrapper d-grid gap-20">
-  <!-- Start Welcome Widget -->
-  <div class="welcome bg-white rad-10 txt-c-mobile block-mobile">
-    <div class="intro p-20 d-flex space-between bg-eee">
-      <div>
-        <h2 class="m-0">Welcome</h2>
-        <p class="c-grey mt-5"><?php echo $owner_data->FullName ?></p>
-      </div>
-      <img class="hide-mobile" src="ar/images/welcome.png" alt="" />
-    </div>
-    <img src="ar/images/person1.jpg" alt="" class="avatar" />
-    <div class="body txt-c d-flex p-20 mt-20 mb-20 block-mobile">
-      <div><?php echo ucwords($owner_data->FullName) ?> <span class="d-block c-grey fs-14 mt-10">Owner</span></div>
-      <div><?php echo getValue('property_num', 'owners', "owner_id", $owner_id)['property_num']; ?><span class="d-block c-grey fs-14 mt-10">Property</span></div>
-      <div>5 <span class="d-block c-grey fs-14 mt-10">Clients</span></div>
-    </div>
-    <a href="profile.php" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a>
-  </div>
-  <!-- End Welcome Widget -->
+
   <!-- Start Ticket Widget -->
   <div class="tickets p-20 bg-white rad-10">
-    <p class="mt-0 mb-20 c-grey fs-15">Everything About Properties</p>
+    <p class="mt-0 mb-20 c-grey fs-15 txt-r">كل شيء عن العقارات</p>
     <div class="d-flex txt-c gap-20 f-wrap">
-      <div class="box p-20 rad-10 fs-13 c-grey">
-        <i class="fa fa-home fa-2x mb-10 c-orange" aria-hidden="true"></i>
-        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo getValue('property_num', 'owners',  "owner_id", $owner_id)['property_num']; ?></span>
-        All Properties
-      </div>
       <div class="box p-20 rad-10 fs-13 c-grey">
         <i class="fa fa-commenting fa-2x mb-10 c-blue" aria-hidden="true"></i>
         <span class="d-block c-black fw-bold fs-25 mb-5 comments_nums"></span>
-        Total Visitor Reviews
+        إجمالي آراء الزوار
+      </div>
+      <div class="box p-20 rad-10 fs-13 c-grey">
+        <i class="fa fa-home fa-2x mb-10 c-orange" aria-hidden="true"></i>
+        <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo getValue('property_num', 'owners',  "owner_id", $owner_id)['property_num']; ?></span>
+        إجمالي العقارات
       </div>
       <div class="box p-20 rad-10 fs-13 c-grey">
         <i class="fa fa-heart fa-2x mb-10 c-green" aria-hidden="true"></i>
         <span class="d-block c-black fw-bold fs-25 mb-5"><?php echo countItems('fav_owner_id', 'favorites', $owner_id) ?></span>
-        Total Favorites
+        إجمالي العقارات المفضلة
       </div>
     </div>
   </div>
   <!-- End Ticket Widget -->
+  <!-- Start Welcome Widget -->
+  <div class="welcome bg-white rad-10 txt-c-mobile block-mobile">
+    <div class="intro p-20 d-flex space-between bg-eee">
+      <img class="hide-mobile" src="ar/images/welcome.png" alt="" />
+      <div>
+        <h2 class="m-0 txt-r">مرحباً</h2>
+        <p class="c-grey mt-5"><?php echo $owner_data->FullName ?></p>
+      </div>
+    </div>
+    <!-- <img src="ar/images/person1.jpg" alt="" class="avatar" /> -->
+    <div class="body txt-c d-flex p-20 mt-20 mb-20 block-mobile">
+      <div><?php echo getValue('property_num', 'owners', "owner_id", $owner_id)['property_num']; ?><span class="d-block c-grey fs-14 mt-10">العقارات</span></div>
+      <div><?php echo ucwords($owner_data->FullName) ?> <span class="d-block c-grey fs-14 mt-10">مالك</span></div>
+      <!-- <div>5 <span class="d-block c-grey fs-14 mt-10">Clients</span></div> -->
+    </div>
+    <!-- <a href="profile.php" class="visit d-block fs-14 bg-blue c-white w-fit btn-shape">Profile</a> -->
+  </div>
+  <!-- End Welcome Widget -->
   <!-- Start Latest News Widget -->
   <div class="latest-news p-20 bg-white rad-10 txt-c-mobile">
     <h2 class="mt-0 mb-20">Latest properties loaded</h2>

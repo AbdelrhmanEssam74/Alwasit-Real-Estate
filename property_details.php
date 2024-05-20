@@ -13,8 +13,8 @@ if ($property_id != 0) :
     exit;
   else :
     $_SESSION['property_title'] = $property_data->title . " | " . $property_data->neighborhood;
-    $fullDescription = $property_data->description;
-    $desc = substr($fullDescription, 0, 89);
+    $fullDescription = nl2br($property_data->description);
+    $desc = substr($fullDescription, 0, 30);
     // explode the imgs
     $imgs = explode(',', $property_data->img);
     $neighborhood = $property_data->neighborhood;

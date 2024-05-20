@@ -39,6 +39,7 @@ ul {
 .page {
   background-color: #f1f5f9;
   min-height: 100vh;
+  flex-direction: row-reverse;
 }
 /* Start Sidebar */
 .sidebar {
@@ -1233,7 +1234,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .head {
   display: flex;
-  justify-content: end;
+  justify-content: start;
   gap: 15px;
 }
 .icon_wrap {
@@ -1270,7 +1271,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .notification_dd {
   position: absolute;
   top: 48px;
-  right: -15px;
   user-select: none;
   background: #fff;
   border: 1px solid #c7d8e2;
