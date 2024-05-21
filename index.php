@@ -69,6 +69,11 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
             </a>
             <div class="details-top">
               <div class="details-type">
+                <?php
+                if ($prop->Furnished) :
+                  echo '<div class="Furnished">مفروش</div>';
+                endif;
+                ?>
                 <div class="type1"><?php echo  $prop->type ?></div>
                 <?php
                 echo ($prop->status == 'للإيجار') ? '<div class="rent">للإيجار</div>' : '<div class="buy">للبيع</div>';

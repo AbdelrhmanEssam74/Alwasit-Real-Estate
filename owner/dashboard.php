@@ -7,7 +7,7 @@ $stmt = $conn->prepare("SELECT * FROM `users` WHERE `user_id` = '$user_id'");
 $stmt->execute();
 $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
 ?>
-<?php $pageTitel = "Dashboard | $owner_data->FullName "; ?>
+<?php $pageTitel = "لوحة التحكم | $owner_data->FullName "; ?>
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
 <h1 class="p-relative txt-r">لوحة التحكم</h1>
@@ -55,7 +55,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
   <!-- End Welcome Widget -->
   <!-- Start Latest News Widget -->
   <div class="latest-news p-20 bg-white rad-10 txt-c-mobile">
-    <h2 class="mt-0 mb-20">Latest properties loaded</h2>
+    <h2 class="mt-0 mb-20 txt-r">احدث العقارات المحملة</h2>
     <?php
     $properties = getLatest("*", "properties", "id", 3, "owner_id = " . "'$owner_id' AND deleted = 0");
     foreach ($properties as $property) {
@@ -71,12 +71,12 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
       $days_ago = $diff->days; // Get the number of days
     ?>
       <a href="<?php echo $prop_details_page ?>?PId=<?php echo $property_id ?>" class="news-row d-flex align-center">
-        <img src="<?php echo $upload_dir . $owner_id . '/' . $property_id . '/' . $main_img ?>" alt="" />
-        <div class="info">
-          <h3><?php echo $title ?></h3>
+        <div class="btn-shape bg-eee fs-13 label"><?php echo $days_ago ?> Days Ago</div>
+        <div class="info txt-r mr-10">
+          <h3 class=""><?php echo $title ?></h3>
           <p class="m-0 fs-14 c-grey"><?php echo $rooms ?> غرف</p>
         </div>
-        <div class="btn-shape bg-eee fs-13 label"><?php echo $days_ago ?> Days Ago</div>
+        <img src="<?php echo $upload_dir . $owner_id . '/' . $property_id . '/' . $main_img ?>" alt="" />
       </a>
     <?php
     }
@@ -85,7 +85,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
   <!-- End Latest News Widget -->
   <!-- Start Latest Post Widget -->
   <div class="latest-post p-20 bg-white rad-10 p-relative">
-    <h2 class="mt-0 mb-25">Latest Comment</h2>
+    <h2 class="mt-0 mb-25 txt-r">احدث التعليقات</h2>
     <?php
     $comments = getLatest("*", "comments", "comment_id", 3, "owner_id = " . "'$owner_id'");
     if (sizeof($comments)) :
@@ -112,7 +112,7 @@ $owner_data = $stmt->fetch(PDO::FETCH_OBJ);
     <?php
       }
     else :
-      echo "<div class='txt-c-mobile c-grey'>No Comments</div>";
+      echo "<div class='txt-c-mobile c-grey txt-r'>لا يوجد تعليقات</div>";
     endif;
     ?>
   </div>

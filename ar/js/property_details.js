@@ -222,7 +222,7 @@ $(document).ready(function () {
                 showUpdateMessage("تم ارسال التعليق بنجاح");
                 setInterval(() => {
                   location.reload();
-                }, 3000);
+                }, 1500);
               }
             },
             error: function (xhr, status, error) {
@@ -465,16 +465,16 @@ $(document).ready(function () {
             });
           } else if (data == 1) {
             // if user is logged in
-            let report_reson = $(".select-dropdown__item select").val();
-            if (report_reson == "") {
+            let report_reason = $(".select-dropdown__item select").val();
+            if (report_reason == "") {
               // check if the reason is empty or not
               $(".input__message").addClass("input__message--invalid");
             } else {
               // if reason not empty get the value and send it to the server
-              let report_reson = $(".select-dropdown__item select").val();
+              let report_reason = $(".select-dropdown__item select").val();
               let additional_reason = $("#additional_reason").val();
               let formData = new FormData();
-              formData.append("report_reason", report_reson);
+              formData.append("report_reason", report_reason);
               formData.append("additional_reason", additional_reason);
               formData.append("user_id", send_report_btn.attr("data-userID"));
               formData.append("owner_id", send_report_btn.attr("data-ownerID"));

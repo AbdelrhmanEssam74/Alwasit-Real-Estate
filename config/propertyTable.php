@@ -18,16 +18,13 @@ class PropertyTable extends DatabaseConnection
   // method to get top 3 properties based on upload date
   public function getTopProperties()
   {
-    $sql = "SELECT * FROM properties  
-    INNER JOIN owners 
-    ON properties.owner_id = owners.owner_id 
-    LEFT JOIN favorites 
-    ON favorites.fav_property_id = properties.property_id 
-    Where properties.active = 1 
-    AND properties.deleted = 0  
-    AND properties.for_student != 1
-    ORDER BY `properties`.`uploaded_at` 
-    DESC LIMIT 3";
+    $sql = "SELECT * FROM properties
+    INNER JOIN owners ON properties.owner_id = owners.owner_id
+    LEFT JOIN favorites ON favorites.fav_property_id = properties.property_id
+    WHERE properties.active = 1
+    AND properties.deleted = 0
+    ORDER BY RAND(), properties.uploaded_at DESC
+    LIMIT 3";
     $stmt = $this->conn->prepare($sql);
     $stmt->execute();
     $properties = $stmt->fetchAll(PDO::FETCH_OBJ);

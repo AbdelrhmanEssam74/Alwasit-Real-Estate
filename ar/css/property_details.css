@@ -504,7 +504,6 @@ div.divTable {
     flex-direction: column;
     gap: 5px;
   }
-
 }
 
 .comment-form .form {
@@ -1260,4 +1259,15 @@ textarea::placeholder {
   opacity: 0;
   transform: translateY(550px);
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+.divTableCell.Furnished p {
+  margin-right: 20px;
+}
+.divTableCell.Furnished svg {
+  color: var(--success);
+  font-size: 22px;
+  margin-right: 4px;
+}
+.divTableCell.not svg {
+  color: var(--card-highlitght);
 }

@@ -6,18 +6,18 @@ $notifications_num = ($stmt2->rowCount() > 0) ? $stmt2->rowCount() : " ";
 ?>
 <div class="page d-flex">
   <div class="sidebar bg-white p-20 p-relative">
-    <h3 class="p-relative txt-c mt-0"><a href="<?php echo APPURL ?>">Alwasit</a></h3>
+    <h3 class="p-relative txt-c mt-0"><a href="<?php echo APPURL ?>">الوسيط</a></h3>
     <ul>
       <li>
         <a class="sidebar__list-item  d-flex align-center fs-14 c-black rad-6 p-10" href="dashboard.php">
+          <span class="mr-15">لوحة التحكم</span>
           <i class="fa-regular fa-chart-bar fa-fw"></i>
-          <span>Dashboard</span>
         </a>
       </li>
       <li>
         <a class="d-flex sidebar__list-item align-center fs-14 c-black rad-6 p-10" href="settings.php">
+          <span class="mr-15">الإعدادات</span>
           <i class="fa-solid fa-gear fa-fw"></i>
-          <span>Settings</span>
         </a>
       </li>
       <!-- <li>
@@ -28,26 +28,26 @@ $notifications_num = ($stmt2->rowCount() > 0) ? $stmt2->rowCount() : " ";
       </li> -->
       <li>
         <a class="d-flex sidebar__list-item align-center fs-14 c-black rad-6 p-10" href="My Properties.php">
+          <span class="mr-15">العقارات</span>
           <i class="fa fa-building fa-fw" aria-hidden="true"></i>
-          <span>My Properties</span>
         </a>
       </li>
       <li>
         <a class="d-flex sidebar__list-item align-center fs-14 c-black rad-6 p-10" href="Offers.php">
+          <span class="mr-15">العروض</span>
           <i class="fa-solid fa-message fa-fw"></i>
-          <span>Offers</span>
         </a>
       </li>
       <li>
         <a class="d-flex sidebar__list-item align-center fs-14 c-black rad-6 p-10" href="create listing.php?action=create">
+          <span class="mr-15">نشر عقار</span>
           <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
-          <span>Create Listing</span>
         </a>
       </li>
       <li>
         <a class="d-flex sidebar__list-item align-center fs-14 c-black rad-6 p-10" href="<?php echo $logout ?>">
+          <span class="mr-15">تسجيل الخروج</span>
           <i class="fa fa-sign-out" aria-hidden="true"></i>
-          <span>Logout</span>
         </a>
       </li>
     </ul>

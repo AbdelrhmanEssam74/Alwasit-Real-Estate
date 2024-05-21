@@ -4,6 +4,7 @@ include  $config . 'propertyTable.php';
 $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
 $neighborhood = "";
 $property_id = (isset($_GET['PId']) ? $_GET['PId'] : 0);
+
 if ($property_id != 0) :
   // Get Property Details From Database
   $property_obj = new PropertyTable();
@@ -18,17 +19,17 @@ if ($property_id != 0) :
     // explode the imgs
     $imgs = explode(',', $property_data->img);
     $neighborhood = $property_data->neighborhood;
+    $is_favorite = 0;
+    $favorites = $property_obj->getFavoriteProperties($user_id);
+    foreach ($favorites as $favorite) {
+      $favorate_property_id = $favorite->property_id;
+      if ($favorate_property_id == $property_id) {
+        $is_favorite = true;
+        break;
+      }
+    }
   endif;
 endif;
-$is_favorite = 0;
-$favorites = $property_obj->getFavoriteProperties($user_id);
-foreach ($favorites as $favorite) {
-  $favorate_property_id = $favorite->property_id;
-  if ($favorate_property_id == $property_id) {
-    $is_favorite = true;
-    break;
-  }
-}
 $DefultPage = '';
 if (isset($_SESSION['property_title'])) {
   $pageTitel = $_SESSION['property_title'];
@@ -49,7 +50,7 @@ if (!isset($_GET['PId'])) {
 }
 
 ?>
-<p class="update-message"></p>
+<p class="update-message2"></p>
 <!--start gallery-->
 <div class="modal-container modal-overlay">
   <div class="modal-content">
@@ -150,6 +151,54 @@ if (!isset($_GET['PId'])) {
                                       }
                                       ?></span></p>
               </div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell Furnished">
+                <i class="fa-solid fa-square-check"></i>
+                <p>كهرباء</p>
+              </div>
+              <div class="divTableCell Furnished">
+                <i class="fa-solid fa-square-check"></i>
+                <p>مياه</p>
+              </div>
+              <?php
+              if ($property_data->Furnished) :
+                echo '
+                <div class="divTableCell Furnished">
+                  <i class="fa-solid fa-square-check"></i>
+                  <p>مفروش</p>
+                </div>
+              ';
+              else :
+                echo '
+                <div class="divTableCell Furnished not">
+                <i class="fa-solid fa-square-xmark"></i>
+                  <p>مفروش</p>
+                </div>
+              ';
+              endif;
+              ?>
+
+            </div>
+            <div class="divTableRow">
+              <?php
+              if ($property_data->for_student) :
+                echo '
+                <div class="divTableCell Furnished">
+                  <i class="fa-solid fa-square-check"></i>
+                  <p>للطلاب</p>
+                </div>
+              ';
+              else :
+                echo '
+                <div class="divTableCell Furnished not">
+                <i class="fa-solid fa-square-xmark"></i>
+                  <p>للطلاب</p>
+                </div>
+              ';
+              endif;
+              ?>
+
             </div>
           </div>
         </div>
