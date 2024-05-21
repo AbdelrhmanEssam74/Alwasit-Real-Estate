@@ -155,11 +155,11 @@ if (!isset($_GET['PId'])) {
             <div class="divTableRow">
               <div class="divTableCell Furnished">
                 <i class="fa-solid fa-square-check"></i>
-                <p>كهرباء</p>
+                <p> عداد كهرباء </p>
               </div>
               <div class="divTableCell Furnished">
                 <i class="fa-solid fa-square-check"></i>
-                <p>مياه</p>
+                <p> عداد مياه</p>
               </div>
               <?php
               if ($property_data->Furnished) :

@@ -4,7 +4,7 @@ $pageTitel = " | My Properties"
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
 <?php
-// get all proparty which belong to owner
+// get all property which belong to owner
 $owner_id = $_SESSION['owner_id'];
 $prop_data = $conn->prepare("SELECT * FROM properties WHERE owner_id = ? AND `deleted` = 0");
 $prop_data->execute([$owner_id]);
@@ -55,9 +55,9 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
               </td>
               <?php
               if ($property->active == 0) {
-                echo " <td>  <p class='fs-15 bg-red c-white pt-5 pb-5 rad-6'> قيد الانتظار </p></td>";
+                echo " <td>  <p class='fs-15 bg-red c-white p-10 rad-6'> قيد الانتظار </p></td>";
               } else {
-                echo " <td>  <p class='fs-15 bg-blue c-white pt-5 pb-5 rad-6'>تم الموافقه</p></td>";
+                echo " <td>  <p class='fs-15 bg-blue c-white p-10 rad-6'>مقبول</p></td>";
               }
               ?>
               <td><?php echo $property->comments_num ?></td>
