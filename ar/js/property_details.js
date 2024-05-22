@@ -94,7 +94,7 @@ $(document).ready(function () {
 
     if (descriptionDiv.hasClass("full")) {
       // Already showing full description, toggle to truncated
-      const truncatedDescription = "..." + fullDescription.substr(0, 30);
+      const truncatedDescription = "..." + fullDescription.substr(0, 18);
       const strippedDescription = truncatedDescription.replace(
         /<br\s?\/?>/gi,
         ""

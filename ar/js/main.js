@@ -178,7 +178,7 @@ $(document).ready(function () {
               success: function (data) {
                 if (data == 1) {
                   element.attr("data-fav", 0);
-                  // decrese the number of favorites when user remove the favorite item
+                  // decrees the number of favorites when user remove the favorite item
                   let saved_num = $(".favorite_page a").attr("data-saved");
                   if (saved_num == 1) {
                     $(".favorite_page a").attr("data-saved", "");
@@ -226,20 +226,23 @@ $(document).ready(function () {
   });
   function showUpdateMessage(message) {
     let updateMessage = $(".update-message");
+    console.log(updateMessage);
     updateMessage.text(message).addClass("show").removeClass("hide");
-
+    console.log("sdf");
     updateMessage.on("click", function () {
       $(this).removeClass("show").addClass("hide");
     });
-
     setTimeout(function () {
       updateMessage.addClass("hide").removeClass("show");
     }, 3000);
   }
 });
-const newSearchInputs = document.querySelector(".search_inputs");
-const value = document.querySelector("#searchInput").value;
-const newInputs = `
+let newSearchInputs = document.querySelector(".search_inputs");
+let value = "";
+if (document.querySelector("#searchInput")) {
+  value = document.querySelector("#searchInput").value;
+}
+let newInputs = `
     <div class="input_control_search">
         <input type="text" name="q" required oninput="showSuggestions()"  autocomplete="false" value="${value}" id="searchInput" placeholder="الحي او المنطقة">
         <p class="no-suggestion-message" id="noSuggestionMessage"></p>
@@ -252,67 +255,71 @@ const newInputs = `
 `;
 
 function updateMenuAndSearchInputs() {
-  const websiteWidth =
-    window.innerWidth || document.documentElement.clientWidth;
+  let websiteWidth = window.innerWidth || document.documentElement.clientWidth;
 
   if (websiteWidth <= 767) {
     newSearchInputs.innerHTML = newInputs;
   } else {
-    const value = document.querySelector("#searchInput").value;
-    newSearchInputs.innerHTML = `
-    <div class="input_control_search">
-        <input type="text" name="q" oninput="showSuggestions()" id="searchInput" value="${value}" placeholder="الحي او المنطقة">
-        <p class="no-suggestion-message" id="noSuggestionMessage"></p>
-        <ul class="suggestion-list" id="suggestionList"></ul>
-        <i class='bx bx-search'></i>
+    let value = "";
+    if (document.querySelector("#searchInput")) {
+      value = document.querySelector("#searchInput").value;
+    }
+    if (newSearchInputs) {
+      newSearchInputs.innerHTML = `
+      <div class="input_control_search">
+          <input type="text" name="q" oninput="showSuggestions()" id="searchInput" value="${value}" placeholder="الحي او المنطقة">
+          <p class="no-suggestion-message" id="noSuggestionMessage"></p>
+          <ul class="suggestion-list" id="suggestionList"></ul>
+          <i class='bx bx-search'></i>
+      </div>
+      <div class="select_type">
+      <select name="t" id="propertyTypeSelect">
+        <option value="all">نوع العقار</option>
+      </select>
     </div>
-    <div class="select_type">
-    <select name="t" id="propertyTypeSelect">
-      <option value="all">نوع العقار</option>
-    </select>
+      <div class="select_price">
+          <p class="price_text">السعر</p>
+          <div class="price_input">
+              <div class="input_field">
+                  <div class="input_field_min">
+                      <input type="number" name="pmi" placeholder="الحد الادني للسعر" id="minPriceInput">
+                      <ul class="suggestion_min_price">
+                  </ul>
+                  </div>
+                  <span>-</span>
+                  <div class="input_field_max">
+                      <input type="number" name="pmx" placeholder="الحد الاقصي للسعر" id="maxPriceInput">
+                      <ul class="suggestion_max_price">
+                      </ul>
+                  </div>
+              </div>
+              <div class="rest_price_input">إعادة ضبط</div>
+          </div>
+      </div>
+      <div class="select_area">
+      <p class="area_text">المساحه <span>(متر مربع)</span></p>
+      <div class="area_input">
+          <div class="input_field">
+              <div class="input_field_min">
+                  <input type="number" name="ami" placeholder="اقل مساحه" id="minAreaInput">
+                  <ul class="suggestion_min_area">
+                  </ul>
+              </div>
+              <span>-</span>
+              <div class="input_field_max">
+                  <input type="number" name="amx" placeholder="اكبر مساحه" id="maxAreaInput">
+                  <ul class="suggestion_max_area">
+                  </ul>
+              </div>
+          </div>
+          <div class="rest_area_input">إعادة ضبط</div>
+      </div>
   </div>
-    <div class="select_price">
-        <p class="price_text">السعر</p>
-        <div class="price_input">
-            <div class="input_field">
-                <div class="input_field_min">
-                    <input type="number" name="pmi" placeholder="الحد الادني للسعر" id="minPriceInput">
-                    <ul class="suggestion_min_price">
-                </ul>
-                </div>
-                <span>-</span>
-                <div class="input_field_max">
-                    <input type="number" name="pmx" placeholder="الحد الاقصي للسعر" id="maxPriceInput">
-                    <ul class="suggestion_max_price">
-                    </ul>
-                </div>
-            </div>
-            <div class="rest_price_input">إعادة ضبط</div>
-        </div>
-    </div>
-    <div class="select_area">
-    <p class="area_text">المساحه <span>(متر مربع)</span></p>
-    <div class="area_input">
-        <div class="input_field">
-            <div class="input_field_min">
-                <input type="number" name="ami" placeholder="اقل مساحه" id="minAreaInput">
-                <ul class="suggestion_min_area">
-                </ul>
-            </div>
-            <span>-</span>
-            <div class="input_field_max">
-                <input type="number" name="amx" placeholder="اكبر مساحه" id="maxAreaInput">
-                <ul class="suggestion_max_area">
-                </ul>
-            </div>
-        </div>
-        <div class="rest_area_input">إعادة ضبط</div>
-    </div>
-</div>
-    <div class="submit_btn">
-        <button type="submit" value=""><i class="fa fa-search"></i></button>
-    </div>
-    `;
+      <div class="submit_btn">
+          <button type="submit" value=""><i class="fa fa-search"></i></button>
+      </div>
+      `;
+    }
   }
 }
 
@@ -321,10 +328,10 @@ window.addEventListener("resize", updateMenuAndSearchInputs);
 updateMenuAndSearchInputs();
 //SECTION - suggestions list for search input
 //NOTE -  get suggestions list from database and apend data in suggestion list
-const suggestions = [];
-const suggestions_price_buy = [];
-const suggestions_price_rent = [];
-const suggestions_min_area = [];
+let suggestions = [];
+let suggestions_price_buy = [];
+let suggestions_price_rent = [];
+let suggestions_min_area = [];
 $(document).ready(function () {
   // send ajax request to server
   $.ajax({
@@ -334,7 +341,7 @@ $(document).ready(function () {
       // console.log(response);
       let neighborhoods = JSON.parse(response);
       for (let index = 0; index < neighborhoods.length; index++) {
-        const element = neighborhoods[index];
+        let element = neighborhoods[index];
         suggestions.push(element.neighborhood_name);
       }
     },
@@ -351,7 +358,7 @@ $(document).ready(function () {
     success: function (response) {
       let categories = JSON.parse(response);
       for (let index = 0, i = 1; index < categories.length; index++, i++) {
-        const element = categories[index];
+        let element = categories[index];
         element.category_name;
         let option = $("<option value=" + i + "></option>").text(
           element.category_name
@@ -370,7 +377,7 @@ $(document).ready(function () {
     success: function (response) {
       let BuyPrice = JSON.parse(response);
       for (let index = 0; index < BuyPrice.length; index++) {
-        const element = BuyPrice[index];
+        let element = BuyPrice[index];
         suggestions_price_buy.push(element.price);
       }
     },
@@ -385,7 +392,7 @@ $(document).ready(function () {
     success: function (response) {
       let RentPrice = JSON.parse(response);
       for (let index = 0; index < RentPrice.length; index++) {
-        const element = RentPrice[index];
+        let element = RentPrice[index];
         suggestions_price_rent.push(element.price);
       }
     },
@@ -400,7 +407,7 @@ $(document).ready(function () {
     success: function (response) {
       let area = JSON.parse(response);
       for (let index = 0; index < area.length; index++) {
-        const element = area[index];
+        let element = area[index];
         suggestions_min_area.push(element.area);
       }
     },
@@ -410,9 +417,9 @@ $(document).ready(function () {
   });
 });
 function showSuggestions() {
-  const userInput = document.getElementById("searchInput").value.toLowerCase();
-  const suggestionList = document.getElementById("suggestionList");
-  const noSuggestionMessage = document.getElementById("noSuggestionMessage");
+  let userInput = document.getElementById("searchInput").value.toLowerCase();
+  let suggestionList = document.getElementById("suggestionList");
+  let noSuggestionMessage = document.getElementById("noSuggestionMessage");
   suggestionList.innerHTML = "";
   noSuggestionMessage.textContent = "";
 
@@ -420,12 +427,12 @@ function showSuggestions() {
     return;
   }
 
-  const matchingSuggestions = suggestions.filter((suggestion) =>
+  let matchingSuggestions = suggestions.filter((suggestion) =>
     suggestion.toLowerCase().includes(userInput)
   );
 
   matchingSuggestions.forEach((suggestion) => {
-    const li = document.createElement("li");
+    let li = document.createElement("li");
     li.textContent = suggestion;
     li.addEventListener("click", function () {
       document.getElementById("searchInput").value = suggestion;
@@ -450,7 +457,7 @@ let maxPriceInput = document.querySelector("#maxPriceInput");
 let price_text = document.querySelector(".price_text");
 if (minPriceInput) {
   minPriceInput.addEventListener("click", function () {
-    const suggestion_min_price_list = document.querySelector(
+    let suggestion_min_price_list = document.querySelector(
       ".suggestion_min_price"
     );
     suggestion_min_price_list.innerHTML = ""; // Clear previous suggestions
@@ -463,7 +470,7 @@ if (minPriceInput) {
     }
 
     suggestion.forEach((e) => {
-      const li = document.createElement("li");
+      let li = document.createElement("li");
       li.textContent = e;
       li.addEventListener("click", function () {
         minPriceInput.value = e;
@@ -475,7 +482,7 @@ if (minPriceInput) {
   });
 
   maxPriceInput.addEventListener("click", function () {
-    const suggestion_max_price_list = document.querySelector(
+    let suggestion_max_price_list = document.querySelector(
       ".suggestion_max_price"
     );
     suggestion_max_price_list.innerHTML = ""; // Clear previous suggestions
@@ -487,7 +494,7 @@ if (minPriceInput) {
       suggestion = suggestions_price_rent;
     }
 
-    const minValue = minPriceInput.value;
+    let minValue = minPriceInput.value;
     let upadated_list = [];
     if (minValue) {
       suggestion.forEach((e) => {
@@ -497,7 +504,7 @@ if (minPriceInput) {
       });
     }
     upadated_list.forEach((e) => {
-      const li = document.createElement("li");
+      let li = document.createElement("li");
       li.textContent = e;
       li.addEventListener("click", function () {
         maxPriceInput.value = e;
@@ -527,13 +534,13 @@ if (minPriceInput) {
   let area_text = document.querySelector(".area_text");
 
   minAreaInput.addEventListener("click", function () {
-    const suggestion_min_area_list = document.querySelector(
+    let suggestion_min_area_list = document.querySelector(
       ".suggestion_min_area"
     );
     suggestion_min_area_list.innerHTML = ""; // Clear previous suggestions
 
     suggestions_min_area.forEach((e) => {
-      const li = document.createElement("li");
+      let li = document.createElement("li");
       li.textContent = "m " + e;
       li.addEventListener("click", function () {
         minAreaInput.value = e;
@@ -545,12 +552,12 @@ if (minPriceInput) {
   });
 
   maxAreaInput.addEventListener("click", function () {
-    const suggestion_max_area_list = document.querySelector(
+    let suggestion_max_area_list = document.querySelector(
       ".suggestion_max_area"
     );
     suggestion_max_area_list.innerHTML = ""; // Clear previous suggestions
 
-    const minValue = minAreaInput.value;
+    let minValue = minAreaInput.value;
     let upadated_list = [];
     if (minValue) {
       suggestions_min_area.forEach((e) => {
@@ -560,7 +567,7 @@ if (minPriceInput) {
       });
     }
     upadated_list.forEach((e) => {
-      const li = document.createElement("li");
+      let li = document.createElement("li");
       li.textContent = "m " + e;
       li.addEventListener("click", function () {
         maxAreaInput.value = e;
@@ -627,16 +634,15 @@ if (minPriceInput) {
 
 //SECTION -  Animate property body
 window.addEventListener("scroll", function () {
-  const header = document.querySelector("header");
+  let header = document.querySelector("header");
   header.classList.toggle("sticky", window.scrollY);
-
-  const propertyBodies = document.querySelectorAll(".property-body");
-  const windowHeight = window.innerHeight;
-  const windowWidth = window.innerWidth;
+  let propertyBodies = document.querySelectorAll(".property-body");
+  let windowHeight = window.innerHeight;
+  let windowWidth = window.innerWidth;
 
   if (windowWidth > 730) {
     propertyBodies.forEach(function (body) {
-      const bodyTop = body.getBoundingClientRect().top;
+      let bodyTop = body.getBoundingClientRect().top;
 
       if (bodyTop < windowHeight) {
         body.classList.add("show");
@@ -650,7 +656,7 @@ window.addEventListener("scroll", function () {
 });
 
 $(document).ready(function () {
-  const btn = $(".up");
+  let btn = $(".up");
   //NOTE -  Button to go to the top of the page
   $(window).scroll(function () {
     if ($(window).scrollTop() >= 400) {
@@ -692,14 +698,14 @@ $(document).ready(function () {
   }).fail(function () {
     console.error("Failed to fetch visitor count.");
   });
-  const startBoxs = $(".stats .box .number");
-  const statsSection = $(".stats");
+  let startBoxs = $(".stats .box .number");
+  let statsSection = $(".stats");
   let started = false;
 
   function startCounter(el) {
-    const goal = parseInt(el.data("goal"));
+    let goal = parseInt(el.data("goal"));
     let count = 0;
-    const counter = setInterval(() => {
+    let counter = setInterval(() => {
       count++;
       el.text(count);
       if (count === goal) {

@@ -4,7 +4,18 @@ include  $config . 'propertyTable.php';
 $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
 $neighborhood = "";
 $property_id = (isset($_GET['PId']) ? $_GET['PId'] : 0);
+$DefultPage = '';
+if (isset($_SESSION['property_title'])) {
+  $pageTitel = $_SESSION['property_title'];
+} else {
+  $pageTitel = "Query";
+}
+$prop_details_page = '';
 
+include $templates . 'header.php';
+// <!-- Start Header -->
+include $templates . 'navbar.php';
+// <!-- End Header -->
 if ($property_id != 0) :
   // Get Property Details From Database
   $property_obj = new PropertyTable();
@@ -30,18 +41,7 @@ if ($property_id != 0) :
     }
   endif;
 endif;
-$DefultPage = '';
-if (isset($_SESSION['property_title'])) {
-  $pageTitel = $_SESSION['property_title'];
-} else {
-  $pageTitel = "Query";
-}
-$prop_details_page = '';
 ?>
-<?php include $templates . 'header.php' ?>
-<!-- Start Header -->
-<?php include $templates . 'navbar.php' ?>
-<!-- End Header -->
 <?php
 // get property details from database
 if (!isset($_GET['PId'])) {
@@ -161,6 +161,15 @@ if (!isset($_GET['PId'])) {
                 <i class="fa-solid fa-square-check"></i>
                 <p> عداد مياه</p>
               </div>
+              <div class="divTableCell Furnished">
+                <i class="fa-solid fa-square-check"></i>
+                <p> عداد غاز</p>
+              </div>
+
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell Furnished">
+              </div>
               <?php
               if ($property_data->Furnished) :
                 echo '
@@ -178,9 +187,6 @@ if (!isset($_GET['PId'])) {
               ';
               endif;
               ?>
-
-            </div>
-            <div class="divTableRow">
               <?php
               if ($property_data->for_student) :
                 echo '

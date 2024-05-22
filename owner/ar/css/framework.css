@@ -262,6 +262,9 @@
   border-radius: 6px;
   cursor: pointer;
 }
+.c-pointer {
+  cursor: pointer;
+}
 .flex-direction-column {
   flex-direction: column;
 }

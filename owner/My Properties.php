@@ -1,5 +1,5 @@
 <?php include 'init.php';
-$pageTitel = " | My Properties"
+$pageTitel = " Dashboard | My Properties"
 ?>
 <?php include $templates . 'header.php'; ?>
 <?php include $templates . 'navbar.php'; ?>
@@ -50,14 +50,14 @@ $prop_data = $prop_data->fetchAll(PDO::FETCH_OBJ);
         ?>
             <tr id="row_<?php echo $property->property_id ?>">
               <td>
-                <button data-owner="<?php echo $owner_id ?>" data-PropID="<?php echo $property->property_id ?>" class="delete-btn fs-14 bg-red c-white w-fit b-none btn-shape">حذف</button>
-                <a href="create listing.php?action=Edit&PropID=<?php echo $property->property_id ?>" class=" fs-14 bg-blue c-white w-fit b-none btn-shape">تعديل</a>
+                <button data-owner="<?php echo $owner_id ?>" data-PropID="<?php echo $property->property_id ?>" class="delete-btn fs-14 bg-red c-white w-fit b-none p-5 rad-6 c-pointer">حذف</button>
+                <a href="create listing.php?action=Edit&PropID=<?php echo $property->property_id ?>" class=" fs-14 bg-blue c-white w-fit b-none p-5 rad-6">تعديل</a>
               </td>
               <?php
               if ($property->active == 0) {
-                echo " <td>  <p class='fs-15 bg-red c-white p-10 rad-6'> قيد الانتظار </p></td>";
+                echo " <td>  <p class='fs-15 bg-red c-white p-5 rad-6'> قيد الانتظار </p></td>";
               } else {
-                echo " <td>  <p class='fs-15 bg-blue c-white p-10 rad-6'>مقبول</p></td>";
+                echo " <td>  <p class='fs-15 bg-blue c-white p-5 rad-6'>مقبول</p></td>";
               }
               ?>
               <td><?php echo $property->comments_num ?></td>
