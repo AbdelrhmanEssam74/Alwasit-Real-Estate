@@ -54,7 +54,7 @@ class PropertyTable extends DatabaseConnection
   }
 
   // method to get all properties of a specific type (optional: filtered by type and order)
-  public function getALLPropertiesFurnished($order = "ASC", $column = "uploaded_at")
+  public function getALLPropertiesFurnished($order = "ASC", $column = "uploaded_at", $s = 0)
   {
     $sql = "SELECT * FROM properties 
     INNER JOIN owners 
@@ -63,11 +63,14 @@ class PropertyTable extends DatabaseConnection
     ON favorites.fav_property_id = properties.property_id 
     WHERE properties.active = 1 
     AND properties.deleted = 0
-    AND properties.for_student = 1";
-
+    AND properties.Furnished = 1";
+    if ($s) {
+      $sql .= " AND properties.for_student = 1";
+    }
     if ($order != null) {
       $sql .= " ORDER BY `properties`.`$column` $order";
     }
+
     $stmt = $this->conn->prepare($sql);
     $stmt->execute();
     $properties = $stmt->fetchAll(PDO::FETCH_OBJ);

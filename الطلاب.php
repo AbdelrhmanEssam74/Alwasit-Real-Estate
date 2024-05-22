@@ -67,6 +67,7 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
       <div class="sort_by_btn">ترتيب حسب</div>
       <div class="sort_list">
         <a href="?q=d" data-link="الأحدث">الأحدث</a>
+        <a href="?q=s" data-link="الأحدث">للطلاب</a>
         <a href="?q=pa" data-link="اقل سعر">اقل سعر</a>
         <a href="?q=pd" data-link="اعلي سعر">اعلي سعر</a>
         <a href="?q=aa" data-link="اقل مساحة">اقل مساحة</a>
@@ -93,6 +94,9 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
       switch ($query) {
         case 'd':
           $data = $property_obj->getALLPropertiesFurnished("DESC");
+          break;
+        case 's':
+          $data = $property_obj->getALLPropertiesFurnished("ASC", "uploaded_at" , 1);
           break;
         case 'pa':
           $data = $property_obj->getALLPropertiesFurnished("ASC", "price");
