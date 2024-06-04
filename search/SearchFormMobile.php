@@ -1,15 +1,7 @@
-<?php include_once 'init.php';
+<?php 
+include_once 'init.php';
 include_once $config . 'config.php';
 include_once $config . 'search.php';
-var_dump($_GET);
-if (isset($_GET['c']) && isset($_GET['q']) && !isset($_GET['t']) && !isset($_GET['pmi']) && !isset($_GET['pmx']) && !isset($_GET['ami']) && !isset($_GET['amx'])) {
-  header("Location:SearchFormMobile.php?c=" . $_GET['c'] . "&q=" . $_GET['q']);
-  exit;
-}
-if (!isset($_GET['c']) || !isset($_GET['q']) || !isset($_GET['t']) || !isset($_GET['pmi']) || !isset($_GET['pmx']) || !isset($_GET['ami']) || !isset($_GET['amx'])) {
-  header("Location:" . $home);
-  exit;
-}
 $DefultPage = '';
 $search_page = "";
 $search_obj = new search;
@@ -17,24 +9,9 @@ $status_arr = [
   "1" => "للبيع",
   "2" => "للإيجار"
 ];
-// $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
-// echo "<pre>";
-// print_r($_GET);
-// echo "</pre>";
-// get min and max price from the database
-$miPrice = $search_obj->search("SELECT MIN(price) FROM `properties`  WHERE status LIKE '%" . ($status_arr[$_GET['c']]) . "%'")[0]->{"MIN(price)"};
-$maPrice = $search_obj->search("SELECT MAX(price) FROM `properties`  WHERE status LIKE '%" . ($status_arr[$_GET['c']]) . "%'")[0]->{"MAX(price)"};
-// get min and max area from the database
-$miArea = $search_obj->search("SELECT MIN(area) FROM `properties`  WHERE status LIKE '%" . ($status_arr[$_GET['c']]) . "%'")[0]->{"MIN(area)"};
-$maArea = $search_obj->search("SELECT MAX(area) FROM `properties`  WHERE status LIKE '%" . ($status_arr[$_GET['c']]) . "%'")[0]->{"MAX(area)"};
 
 $propertyStatus = (!empty($_GET['c'])) ? $_GET['c'] : "";           // Get the property status
 $searchQuery    = (!empty($_GET['q'])) ? $_GET['q'] : "";           // Get the search query
-$propertyType   = (!empty($_GET['t'])) ? $_GET['t'] : "";           // Get the property type
-$minPrice       = (!empty($_GET['pmi'])) ? $_GET['pmi'] : $miPrice; // Get the minimum price
-$maxPrice       = (!empty($_GET['pmx'])) ? $_GET['pmx'] : $maPrice; // Get the maximum price
-$minArea        = (!empty($_GET['ami'])) ? $_GET['ami'] : $miArea;  // Get the minimum area
-$maxArea        = (!empty($_GET['amx'])) ? $_GET['amx'] : $maArea;  // Get the maximum area
 
 $category_arr  = [];
 $categories = $search_obj->search("SELECT * FROM `categories` ORDER BY `categories`.`category_id` ASC");
@@ -160,15 +137,6 @@ include_once $templates . 'navbar.php';
 $query = "SELECT * FROM properties INNER JOIN owners ON properties.owner_id = owners.owner_id LEFT JOIN favorites ON favorites.fav_property_id = properties.property_id WHERE status LIKE '%" . ($status_arr[$propertyStatus]) . "%'";
 if (!empty($searchQuery)) {
   $query .= " AND neighborhood LIKE '%" . trim($searchQuery) . "%'";
-}
-if (!empty($propertyType) && $propertyType != "all") {
-  $query .= " AND type LIKE '%" . $category_arr[$propertyType] . "%'";
-}
-if (!empty($minPrice) && !empty($maxPrice)) {
-  $query .= " AND price BETWEEN " . $minPrice . " AND " . $maxPrice;
-}
-if (!empty($minArea) && !empty($maxArea)) {
-  $query .= " AND area BETWEEN " . $minArea . " AND " . $maxArea;
 }
 // Sorting configuration
 $sortOptions = array(

@@ -508,6 +508,23 @@ $(document).ready(function () {
       });
     });
   });
+  let btn = $(".up");
+  //NOTE -  Button to go to the top of the page
+  $(window).scroll(function () {
+    if ($(window).scrollTop() >= 400) {
+      btn.addClass("show");
+    } else {
+      btn.removeClass("show");
+    }
+  });
+  btn.click(function () {
+    $("html, body").animate(
+      {
+        scrollTop: 0,
+      },
+      "smooth"
+    );
+  });
   // display red heart for each favorite item
   if ($(".add_to_fav").attr("data-fav") === "1") {
     $(".add_to_fav").addClass("favorated");

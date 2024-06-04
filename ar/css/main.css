@@ -410,6 +410,7 @@ header nav ul {
   align-items: center;
   justify-content: center;
   color: #000000;
+  background-color: #fff;
 }
 
 .form_search .check_btn .toggle-rent::before {
@@ -424,6 +425,7 @@ header nav ul {
   align-items: center;
   justify-content: center;
   color: #000000;
+  background-color: #fff;
 }
 
 .toggle-radio:checked + .toggle-rent::before,
