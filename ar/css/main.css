@@ -1488,3 +1488,12 @@ input[type="number"]::-webkit-outer-spin-button {
     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
   }
 }
+#arrow {
+  background-color: #dddddd;
+  transition: 0.2s;
+  text-align: center;
+}
+#arrow:hover {
+  background-color: #3d3d3d;
+  color: #ffffff;
+}

@@ -41,12 +41,12 @@ if (isset($_SESSION['uID'])) {
     <nav class="navigation">
       <span id="menuicon"><i class="bx bx-menu toggle_menu black"></i></span>
       <ul id="menu" class="menu">
-        <li><a href="<?php echo $main_link ?>تواصل_معنا.php ">تواصل معنا</a></li>
+        <li><a href="<?php echo $main_link ?>تواصل_معنا.php">تواصل معنا</a></li>
         <li> <a href="<?php echo $main_link ?>عنا.php">عنا</a></li>
-        <li> <a href="<?php echo $main_link ?>عقارات_تجارية.php">تجارية</a></li>
-        <li> <a href="<?php echo $main_link ?>الطلاب.php">مفروش</a></li>
-        <li> <a href="<?php echo $main_link ?>عقارات_للإيجار.php">للإيجار</a></li>
-        <li> <a href="<?php echo $main_link ?>عقارات_للبيع.php">للبيع</a></li>
+        <li> <a href="<?php echo $main_link ?>عقارات_تجارية.php?page=1">تجارية</a></li>
+        <li> <a href="<?php echo $main_link ?>الطلاب.php?page=1">مفروش</a></li>
+        <li> <a href="<?php echo $main_link ?>عقارات_للإيجار.php?page=1">للإيجار</a></li>
+        <li> <a href="<?php echo $main_link ?>عقارات_للبيع.php?page=1">للبيع</a></li>
       </ul>
       <div class="logo"><a href="<?php echo $main_link ?>index.php"><img src="<?php echo $images ?>logo.png" alt="Logo"></a></div>
     </nav>

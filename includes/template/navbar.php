@@ -47,10 +47,10 @@ if (isset($_SESSION['uID'])) {
       <ul id="menu" class="menu">
         <li><a href="<?php echo $contactus ?>">تواصل معنا</a></li>
         <li> <a href="<?php echo $about ?>">عنا</a></li>
-        <li> <a href="<?php echo $commercial ?>">تجارية</a></li>
-        <li> <a href="<?php echo $students ?>">مفروش</a></li>
-        <li> <a href="<?php echo $forRent ?>">للإيجار</a></li>
-        <li> <a href="<?php echo $forBuy ?>">للبيع</a></li>
+        <li> <a href="<?php echo $commercial ?>?page=1">تجارية</a></li>
+        <li> <a href="<?php echo $students ?>?page=1">مفروش</a></li>
+        <li> <a href="<?php echo $forRent ?>?page=1">للإيجار</a></li>
+        <li> <a href="<?php echo $forBuy ?>?page=1">للبيع</a></li>
       </ul>
       <?php
       if (isset($contactus_page)) :

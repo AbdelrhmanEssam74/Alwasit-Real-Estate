@@ -1,7 +1,6 @@
 <?php include_once 'init.php';
 include_once $config . 'config.php';
 include_once $config . 'search.php';
-var_dump($_GET);
 if (isset($_GET['c']) && isset($_GET['q']) && !isset($_GET['t']) && !isset($_GET['pmi']) && !isset($_GET['pmx']) && !isset($_GET['ami']) && !isset($_GET['amx'])) {
   header("Location:SearchFormMobile.php?c=" . $_GET['c'] . "&q=" . $_GET['q']);
   exit;
@@ -17,10 +16,6 @@ $status_arr = [
   "1" => "للبيع",
   "2" => "للإيجار"
 ];
-// $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
-// echo "<pre>";
-// print_r($_GET);
-// echo "</pre>";
 // get min and max price from the database
 $miPrice = $search_obj->search("SELECT MIN(price) FROM `properties`  WHERE status LIKE '%" . ($status_arr[$_GET['c']]) . "%'")[0]->{"MIN(price)"};
 $maPrice = $search_obj->search("SELECT MAX(price) FROM `properties`  WHERE status LIKE '%" . ($status_arr[$_GET['c']]) . "%'")[0]->{"MAX(price)"};
@@ -237,7 +232,7 @@ $data = $search_obj->search($queryWithLimit); // Execute query with limit and of
     <div class="widgets">
       <?php
       // Shuffle the data randomly
-      shuffle($data);
+      // shuffle($data);
       if (!empty($data)) :
         foreach ($data as $prop) :
           $imgs = explode(",", $prop->img);
@@ -332,24 +327,76 @@ if (empty($data)) {
 <!-- End widget -->
 <!-- // Display pagination links -->
 <div class="pagination">
-  <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
-    <?php
-    $queryParams = $_GET;
-    $queryParams['page'] = $page;
-    $url = $_SERVER['REQUEST_URI'];
-    $urlParts = parse_url($url);
-    $query = isset($urlParts['query']) ? $urlParts['query'] : '';
-    parse_str($query, $existingParams);
-    $mergedParams = array_merge($existingParams, $queryParams);
-    $mergedQuery = http_build_query($mergedParams);
-    $url = $urlParts['path'] . '?' . $mergedQuery;
-    ?>
-    <?php if ($page == $currentPage) : ?>
-      <span class="current-page"><?php echo $page; ?></span>
-    <?php else : ?>
-      <a href="<?php echo $url; ?>"><?php echo $page; ?></a>
+  <?php if ($totalPages > 2) : ?>
+    <?php if ($currentPage > 1) : ?>
+      <?php
+      $queryParams = $_GET;
+      $queryParams['page'] = $currentPage - 1;
+      $url = $_SERVER['REQUEST_URI'];
+      $urlParts = parse_url($url);
+      $query = isset($urlParts['query']) ? $urlParts['query'] : '';
+      parse_str($query, $existingParams);
+      $mergedParams = array_merge($existingParams, $queryParams);
+      $mergedQuery = http_build_query($mergedParams);
+      $url = $urlParts['path'] . '?' . $mergedQuery;
+      ?>
+      <a href="<?php echo $url; ?>" id="arrow">&lt;</a>
     <?php endif; ?>
-  <?php endfor; ?>
+
+    <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+      <?php
+      $queryParams = $_GET;
+      $queryParams['page'] = $page;
+      $url = $_SERVER['REQUEST_URI'];
+      $urlParts = parse_url($url);
+      $query = isset($urlParts['query']) ? $urlParts['query'] : '';
+      parse_str($query, $existingParams);
+      $mergedParams = array_merge($existingParams, $queryParams);
+      $mergedQuery = http_build_query($mergedParams);
+      $url = $urlParts['path'] . '?' . $mergedQuery;
+      ?>
+      <?php if ($page == $currentPage) : ?>
+        <span class="current-page"><?php echo $page; ?></span>
+      <?php else : ?>
+        <a href="<?php echo $url; ?>"><?php echo $page; ?></a>
+      <?php endif; ?>
+    <?php endfor; ?>
+
+    <?php if ($currentPage < $totalPages) : ?>
+      <?php
+      $queryParams = $_GET;
+      $queryParams['page'] = $currentPage + 1;
+      $url = $_SERVER['REQUEST_URI'];
+      $urlParts = parse_url($url);
+      $query = isset($urlParts['query']) ? $urlParts['query'] : '';
+      parse_str($query, $existingParams);
+      $mergedParams = array_merge($existingParams, $queryParams);
+      $mergedQuery = http_build_query($mergedParams);
+      $url = $urlParts['path'] . '?' . $mergedQuery;
+      ?>
+      <a href="<?php echo $url; ?>" id="arrow">&gt;</a>
+    <?php endif; ?>
+  <?php else : ?>
+    <!-- Display all pages if there are 2 or fewer pages -->
+    <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+      <?php
+      $queryParams = $_GET;
+      $queryParams['page'] = $page;
+      $url = $_SERVER['REQUEST_URI'];
+      $urlParts = parse_url($url);
+      $query = isset($urlParts['query']) ? $urlParts['query'] : '';
+      parse_str($query, $existingParams);
+      $mergedParams = array_merge($existingParams, $queryParams);
+      $mergedQuery = http_build_query($mergedParams);
+      $url = $urlParts['path'] . '?' . $mergedQuery;
+      ?>
+      <?php if ($page == $currentPage) : ?>
+        <span class="current-page"><?php echo $page; ?></span>
+      <?php else : ?>
+        <a href="<?php echo $url; ?>"><?php echo $page; ?></a>
+      <?php endif; ?>
+    <?php endfor; ?>
+  <?php endif; ?>
 </div>
 <?php
 include  $templates . 'footer.php';
