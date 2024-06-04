@@ -881,6 +881,8 @@ input[type="number"]::-webkit-outer-spin-button {
   padding: 5px 10px;
   flex-direction: row-reverse;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .images-details .details-top .details-type {
@@ -1463,4 +1465,26 @@ input[type="number"]::-webkit-outer-spin-button {
   opacity: 0;
   transform: translateY(550px);
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+/*Small*/
+@media (max-width: 786px) {
+  /* Responsive */
+  .update-message {
+    transform: translateY(-200px);
+    right: 2%;
+  }
+  .update-message::after {
+    top: 15%;
+    right: 5%;
+  }
+  .update-message.show {
+    opacity: 1;
+    transform: translateY(100px);
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  }
+  .update-message.hide {
+    opacity: 0;
+    transform: translateY(-200px);
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  }
 }
