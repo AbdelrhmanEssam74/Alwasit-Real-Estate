@@ -94,4 +94,12 @@ class loginTable extends DatabaseConnection
     }
     return $prepare->rowCount();
   }
+  public function EmailVerification($e)
+  {
+    $qry = "SELECT `active` FROM `email_verification` WHERE email='" . $e . "'";
+    $prepare = $this->conn->prepare($qry);
+    $prepare->execute();
+    $data =  $prepare->fetchColumn();
+    return $data;
+  }
 }

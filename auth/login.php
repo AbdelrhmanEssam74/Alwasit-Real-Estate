@@ -17,12 +17,18 @@ $row_count = $userObj->checkIfUserExist($email);
 $user_id = $userObj->GetUserID();
 
 if ($userObj->checklogin($email)) {
-  header("location:../" . $login);
   $_SESSION['duplicate_login'] = true;
   $_SESSION['uID'] = $userObj->GetUserID();
+  header("location:../" . $login);
   exit();
 }
-
+// check if user verify his email or not
+if ($userObj->EmailVerification($email) === 0) {
+  $_SESSION['not_verified'] = true;
+  $_SESSION['uID'] = $userObj->GetUserID();
+  header("location:../" . $login);
+  exit();
+}
 // Check if user already logged in with "Remember Me" cookie
 if (isset($_COOKIE['rem'])) {
   if ($userObj->GetUserToken($user_id)['token'] === $_COOKIE['rem']) {
@@ -62,7 +68,7 @@ $user_data = [
 ];
 $insertQuery_user = "INSERT INTO `alwasit`.`login` (user_id, email, Password) 
                     VALUES (:id, :email, :pass)";
-$userObj->insert($insertQuery_user, $user_data);
+// $userObj->insert($insertQuery_user, $user_data);
 
 // alert user that he login
 $ip = "154.182.109.22"; // Get the IP address of the user
@@ -151,4 +157,4 @@ if (isset($_SESSION['HTTP_REFERER']) && strlen(strstr($_SESSION['HTTP_REFERER'],
   header("Location:" . $_SESSION['HTTP_REFERER']);
 else
   header("Location:../" . $home);
-exit();
+  exit();

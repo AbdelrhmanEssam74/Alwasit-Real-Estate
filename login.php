@@ -28,6 +28,10 @@ $user_id  = '';
 if (isset($_SESSION["uID"])) {
   $user_id = $_SESSION['uID'];
 }
+$not_verified = '';
+if (isset($_SESSION['not_verified']) && $_SESSION['not_verified'] == 1) {
+  $not_verified = $_SESSION['not_verified'];
+}
 session_unset();
 $_SESSION['HTTP_REFERER'] = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER']  : "";
 ?>
@@ -53,6 +57,28 @@ if (!empty($duplicate_login)) {
                 </div>
                 </div>
                 </div>
+        _END;
+}
+?>
+<?php
+if (!empty($not_verified)) {
+  echo <<< _END
+            <label class='alert-verified'>
+            <div class='overlay'></div>
+            <div class="alert error">
+              <span class="alertText">
+                <h4>قم بتأكيد البريد الإلكتروني</h4>
+                <p>تتبع هذه الخطوات</p>
+                <span> فتح بريدك الإلكتروني </span>
+                <br>
+                <span> ابحث عن رسالة التأكيد منا</span>
+                <br>
+                <span> انقر على رابط التأكيد في الرسالة</span>
+                <br>
+                <a href=""></a>
+              </span>
+            </div>
+          </label>
         _END;
 }
 ?>

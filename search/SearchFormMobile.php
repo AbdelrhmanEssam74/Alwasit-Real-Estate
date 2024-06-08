@@ -300,24 +300,76 @@ if (empty($data)) {
 <!-- End widget -->
 <!-- // Display pagination links -->
 <div class="pagination">
-  <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
-    <?php
-    $queryParams = $_GET;
-    $queryParams['page'] = $page;
-    $url = $_SERVER['REQUEST_URI'];
-    $urlParts = parse_url($url);
-    $query = isset($urlParts['query']) ? $urlParts['query'] : '';
-    parse_str($query, $existingParams);
-    $mergedParams = array_merge($existingParams, $queryParams);
-    $mergedQuery = http_build_query($mergedParams);
-    $url = $urlParts['path'] . '?' . $mergedQuery;
-    ?>
-    <?php if ($page == $currentPage) : ?>
-      <span class="current-page"><?php echo $page; ?></span>
-    <?php else : ?>
-      <a href="<?php echo $url; ?>"><?php echo $page; ?></a>
+  <?php if ($totalPages > 2) : ?>
+    <?php if ($currentPage > 1) : ?>
+      <?php
+      $queryParams = $_GET;
+      $queryParams['page'] = $currentPage - 1;
+      $url = $_SERVER['REQUEST_URI'];
+      $urlParts = parse_url($url);
+      $query = isset($urlParts['query']) ? $urlParts['query'] : '';
+      parse_str($query, $existingParams);
+      $mergedParams = array_merge($existingParams, $queryParams);
+      $mergedQuery = http_build_query($mergedParams);
+      $url = $urlParts['path'] . '?' . $mergedQuery;
+      ?>
+      <a href="<?php echo $url; ?>" id="arrow">&lt;</a>
     <?php endif; ?>
-  <?php endfor; ?>
+
+    <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+      <?php
+      $queryParams = $_GET;
+      $queryParams['page'] = $page;
+      $url = $_SERVER['REQUEST_URI'];
+      $urlParts = parse_url($url);
+      $query = isset($urlParts['query']) ? $urlParts['query'] : '';
+      parse_str($query, $existingParams);
+      $mergedParams = array_merge($existingParams, $queryParams);
+      $mergedQuery = http_build_query($mergedParams);
+      $url = $urlParts['path'] . '?' . $mergedQuery;
+      ?>
+      <?php if ($page == $currentPage) : ?>
+        <span class="current-page"><?php echo $page; ?></span>
+      <?php else : ?>
+        <a href="<?php echo $url; ?>"><?php echo $page; ?></a>
+      <?php endif; ?>
+    <?php endfor; ?>
+
+    <?php if ($currentPage < $totalPages) : ?>
+      <?php
+      $queryParams = $_GET;
+      $queryParams['page'] = $currentPage + 1;
+      $url = $_SERVER['REQUEST_URI'];
+      $urlParts = parse_url($url);
+      $query = isset($urlParts['query']) ? $urlParts['query'] : '';
+      parse_str($query, $existingParams);
+      $mergedParams = array_merge($existingParams, $queryParams);
+      $mergedQuery = http_build_query($mergedParams);
+      $url = $urlParts['path'] . '?' . $mergedQuery;
+      ?>
+      <a href="<?php echo $url; ?>" id="arrow">&gt;</a>
+    <?php endif; ?>
+  <?php else : ?>
+    <!-- Display all pages if there are 2 or fewer pages -->
+    <?php for ($page = 1; $page <= $totalPages; $page++) : ?>
+      <?php
+      $queryParams = $_GET;
+      $queryParams['page'] = $page;
+      $url = $_SERVER['REQUEST_URI'];
+      $urlParts = parse_url($url);
+      $query = isset($urlParts['query']) ? $urlParts['query'] : '';
+      parse_str($query, $existingParams);
+      $mergedParams = array_merge($existingParams, $queryParams);
+      $mergedQuery = http_build_query($mergedParams);
+      $url = $urlParts['path'] . '?' . $mergedQuery;
+      ?>
+      <?php if ($page == $currentPage) : ?>
+        <span class="current-page"><?php echo $page; ?></span>
+      <?php else : ?>
+        <a href="<?php echo $url; ?>"><?php echo $page; ?></a>
+      <?php endif; ?>
+    <?php endfor; ?>
+  <?php endif; ?>
 </div>
 <?php
 include  $templates . 'footer.php';

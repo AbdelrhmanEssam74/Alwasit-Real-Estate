@@ -87,6 +87,9 @@ $(document).ready(function () {
       },
     });
   });
+  $(".alert-verified .overlay").on("click" , function(){
+    $(".alert-verified").css("display" , "none");
+  })
 });
 //SECTION -  end form validation
 

@@ -108,11 +108,11 @@ $data_email = [
   "em" => $email,
   "code" => $activation_code,
   "active" => 0,
-  "activation_expir_at" => $next_day_formatted
+  "activation_expire_at" => $next_day_formatted
 ];
 
 $insertQuery_email = "INSERT INTO `alwasit`.`email_verification` (user_id, email, code, active , activation_expiry) 
-                VALUES (:id,:em, :code, :active , :activation_expir_at)";
+                VALUES (:id,:em, :code, :active , :activation_expire_at)";
 $email_obj->insert($insertQuery_email, $data_email);
 header("Location:../" . $verification_page . "?send=true");
 exit();
