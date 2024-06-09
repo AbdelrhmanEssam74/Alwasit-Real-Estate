@@ -16,12 +16,12 @@ $userObj = new loginTable();
 $row_count = $userObj->checkIfUserExist($email);
 $user_id = $userObj->GetUserID();
 
-if ($userObj->checklogin($email)) {
-  $_SESSION['duplicate_login'] = true;
-  $_SESSION['uID'] = $userObj->GetUserID();
-  header("location:../" . $login);
-  exit();
-}
+// if ($userObj->checklogin($email)) {
+//   $_SESSION['duplicate_login'] = true;
+//   $_SESSION['uID'] = $userObj->GetUserID();
+//   header("location:../" . $login);
+//   exit();
+// }
 // check if user verify his email or not
 if ($userObj->EmailVerification($email) === 0) {
   $_SESSION['not_verified'] = true;
@@ -68,7 +68,7 @@ $user_data = [
 ];
 $insertQuery_user = "INSERT INTO `alwasit`.`login` (user_id, email, Password) 
                     VALUES (:id, :email, :pass)";
-// $userObj->insert($insertQuery_user, $user_data);
+$userObj->insert($insertQuery_user, $user_data);
 
 // alert user that he login
 $ip = "154.182.109.22"; // Get the IP address of the user

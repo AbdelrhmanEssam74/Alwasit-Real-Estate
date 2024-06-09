@@ -216,7 +216,20 @@ $(function () {
       },
     });
   });
-
+  $(".show-old-pass").on("click", function () {
+    if ($("#currentpass").attr("type") === "password") {
+      $("#currentpass").attr("type", "text");
+    } else {
+      $("#currentpass").attr("type", "password");
+    }
+  });
+  $(".show-new-pass").on("click", function () {
+    if ($("#newpassword").attr("type") === "password") {
+      $("#newpassword").attr("type", "text");
+    } else {
+      $("#newpassword").attr("type", "password");
+    }
+  });
   // send ajax request to owner index file to check if the user has permission or not
   $(".checkOwner").on("click", function () {
     $.ajax({

@@ -454,6 +454,13 @@ header nav ul {
 .form-control {
   position: relative;
 }
+.form-control svg {
+  position: absolute;
+  top: 20%;
+  left: 7%;
+  cursor: pointer;
+  user-select: none;
+}
 
 .full_name {
   display: flex;
