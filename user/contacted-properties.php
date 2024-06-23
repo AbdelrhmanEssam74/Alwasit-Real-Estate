@@ -35,43 +35,43 @@ $properties_data = $properties_obj->getContactedProperties($user_id);
         <?php
         if (count($properties_data) > 0) :
         ?>
-          <table class="fl-table">
-            <thead>
-              <tr>
-                <th>الرقم المرجعي للعقار</th>
-                <th>العرض</th>
-                <th>الحالة</th>
-                <th>التاريخ</th>
-                <th>حذف</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach ($properties_data as $property) :
-                $timestamp = strtotime($property->offer_timestamp); // Convert string timestamp to integer
-                $formattedDate = date("Y-m-d", $timestamp);
-              ?>
-                <tr>
-                  <td><a href="<?php echo $main_link . "/property_details.php?PId=" . $property->property_id ?>"><?php echo $property->offer_property_id ?></a></td>
-                  <td><?php echo $property->offer_content ?></td>
-                  <td>
-                    <?php
-                    if ($property->offer_status == 0) :
-                      echo "<p class='status wating'>قيد الانتظار</p>";
-                    elseif ($property->offer_status == 1) :
-                      echo "<p class='status accepted'>تم القبول</p>";
-                    elseif ($property->offer_status == -1) :
-                      echo "<p class='status refused'>مرفوض</p>";
-                    endif;
-                    ?>
-                  </td>
-                  <td><?php echo $formattedDate ?></td>
-                  <td id="td-delete"><i data-uid="<?= $property->offer_user_id  ?>" data-pid="<?= $property->offer_property_id ?>" class=" delete-offer fa-solid fa-trash-can"></i></td>
-                </tr>
-              <?php
-              endforeach;
-              ?>
-            <tbody>
-          </table>
+          <?php foreach ($properties_data as $property) :
+            $timestamp = strtotime($property->offer_timestamp); // Convert string timestamp to integer
+            $formattedDate = date("Y-m-d", $timestamp);
+          ?>
+            <div class="offer_card">
+              <h3> تم ارسال عرض بخصوص عقار <a href="<?php echo $main_link . "/property_details.php?PId=" . $property->property_id ?>"><?php echo  $property->property_id ?></a> </h3>
+              <div class="content">
+                <div class="info">
+                  <div class="offer_content">
+                    <h4>محتوي العرض</h4>
+                    <div class="status">
+                      <?php
+                      if ($property->offer_status == 0) :
+                        echo "<p class='offer_status waiting'> قيد الانتظار</p>";
+                      elseif ($property->offer_status == 1) :
+                        echo "<p class='offer_status accepted'>تم القبول</p>";
+                      elseif ($property->offer_status == -1) :
+                        echo "<p class='offer_status refused'>مرفوض</p>";
+                      endif;
+                      ?>
+                      <p data-uid="<?= $property->offer_user_id  ?>" data-pid="<?= $property->offer_property_id ?>" class=" delete-offer"><i class="fa-regular fa-trash-can"></i></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="offer_text"><?php echo $property->offer_content ?></p>
+              <p class="posted_date">
+                <?php
+                $databaseTimestamp = $property->offer_timestamp;
+                $dateTime = date_create_from_format("Y-m-d H:i:s", $databaseTimestamp);
+                echo $dateTime->format("Y-m-d") . " <i class='fa-regular fa-clock'></i> ";
+                ?>
+              </p>
+            </div>
+          <?php
+          endforeach;
+          ?>
         <?php
         else :
           echo "<h2 class='no-query'>لم يتم الاستعلام عن اي عقار</h2>";
@@ -92,6 +92,7 @@ $properties_data = $properties_obj->getContactedProperties($user_id);
           <i class="fa-solid fa-heart"></i>
         </a>
         <a href="contacted-properties.php" class="sidebar__list-item is_active">
+          <?php echo " ( " . count($properties_data) . " ) " ?>
           <p>العقارات المتواصل بخصوصها</p>
           <i class="fa-solid fa-paperclip"></i>
         </a>
