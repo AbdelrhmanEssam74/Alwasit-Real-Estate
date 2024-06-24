@@ -285,6 +285,9 @@ $(document).ready(function () {
             success: function (data) {
               if (data == 1) {
                 showUpdateMessage("تم ارسال  العرض  بنجاح");
+                setInterval(() => {
+                  location.reload();
+                }, 1500);
               }
             },
             error: function (xhr, status, error) {
@@ -559,7 +562,7 @@ $(document).ready(function () {
       });
   });
   function showUpdateMessage(message) {
-    let updateMessage = $(".update-message2");
+    let updateMessage = $(".update-message");
     updateMessage.text(message).addClass("show").removeClass("hide");
 
     updateMessage.on("click", function () {

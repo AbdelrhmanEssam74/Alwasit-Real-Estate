@@ -50,7 +50,7 @@ if (!isset($_GET['PId'])) {
 }
 
 ?>
-<p class="update-message2"></p>
+<p class="update-message"></p>
 <!--start gallery-->
 <div class="modal-container modal-overlay">
   <div class="modal-content">
@@ -274,8 +274,10 @@ if (!isset($_GET['PId'])) {
           <?php
           //NOTE - Get the top 3 properties in the same neighborhood
           $properties = $property_obj->getALLProperties();
+          $i = 0;
           foreach ($properties as $prop) :
-            if ($prop->neighborhood == $neighborhood && $prop->property_id != $property_id) :
+            if ($prop->neighborhood == $neighborhood && $prop->property_id != $property_id && $i < 3) :
+              $i++;
               $main_img = explode(',', $prop->img)[0];
 
           ?>

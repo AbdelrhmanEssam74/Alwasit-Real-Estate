@@ -20,7 +20,7 @@ $user_id = (isset($_SESSION['uID'])) ? $_SESSION['uID'] : "";
 </div>
 <!-- End Landing -->
 <!-- start design-->
-<p class="success-message"></p>
+<p class="update-message"></p>
 <div class="modal-container overlay">
   <div class="modal-content">
     <label class="modal-close alert_close" for="modal-toggle">&#x2715;</label>

@@ -1437,8 +1437,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .update-message {
   position: fixed;
-  transform: translateY(550px);
-  right: 40%;
+  transform: translateX(200px);
+  bottom: 30px;
+  right: 0%;
   background-color: var(--green-color);
   color: #fff;
   padding: 15px 35px 15px 15px;
@@ -1458,17 +1459,16 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .update-message.show {
   opacity: 1;
-  transform: translateY(500px);
+  transform: translateX(-5px);
   transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 }
 .update-message.hide {
   opacity: 0;
-  transform: translateY(550px);
+  transform: translateX(200px);
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
 }
-/*Small*/
-@media (max-width: 786px) {
-  /* Responsive */
+
+/* @media (max-width: 786px) {
   .update-message {
     transform: translateY(-200px);
     right: 2%;
@@ -1487,7 +1487,7 @@ input[type="number"]::-webkit-outer-spin-button {
     transform: translateY(-200px);
     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
   }
-}
+} */
 #arrow {
   background-color: #dddddd;
   transition: 0.2s;

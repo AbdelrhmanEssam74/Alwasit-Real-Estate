@@ -153,8 +153,13 @@ $_SESSION['uID'] = $user_id;
 $_SESSION['email'] = $email;
 $_SESSION['fullName'] =  $userObj->GetUserFullName();
 // Redirect to the home page
-if (isset($_SESSION['HTTP_REFERER']) && strlen(strstr($_SESSION['HTTP_REFERER'], "rest-password.php")) == 0)
+if (isset($_SESSION['HTTP_REFERER']) && strlen(strstr($_SESSION['HTTP_REFERER'], "rest-password.php")) == 0) {
   header("Location:" . $_SESSION['HTTP_REFERER']);
-else
+  exit;
+} else if (isset($_SESSION['HTTP_REFERER']) && strlen(strstr($_SESSION['HTTP_REFERER'], "verification.php") == 0)) {
+  header("Location:" . $_SESSION['HTTP_REFERER']);
+  exit;
+} else {
   header("Location:../" . $home);
   exit();
+}

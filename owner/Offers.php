@@ -12,46 +12,37 @@ $offers_data = $offers_data->fetchAll(PDO::FETCH_OBJ);
 ?>
 <h1 class="p-relative txt-r">العروض</h1>
 <!-- Start Projects Table -->
-<div class="projects p-20 bg-white rad-10 m-20">
+<div class="projects p-20  rad-10 m-20">
   <div id="loadingIcon" style="display: none;">
-    <i class="fas fa-spinner fa-spin"></i> Loading...
+    <i class="fas fa-spinner fa-spin"></i> جاري التحميل
   </div>
-  <h2 class="mt-0 mb-20 txt-r">العروض</h2>
   <?php
   if (count($offers_data) > 0) :
   ?>
     <div class="responsive-table">
-      <table class="fs-15 w-full txt-c">
-        <thead>
-          <tr>
-            <td>عرض من</td>
-            <td>محتوي العرض</td>
-            <td>الرقم المرجعي للعقار</td>
-            <td>التاريخ</td>
-            <td>رفض | قبول</td>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          foreach ($offers_data as $offer) :
-            $timestamp = strtotime($offer->offer_timestamp); // Convert string timestamp to integer
-            $formattedDate = date("Y-m-d", $timestamp);
-          ?>
-            <tr id="row_<?php echo $offer->offer_user_id ?>">
-              <td><?php echo $offer->FullName ?></td>
-              <td><?php echo $offer->offer_content ?></td>
-              <td><a href="<?php echo $prop_details_page ?>?PId=<?php echo $offer->offer_property_id ?>"><?php echo $offer->offer_property_id ?></a></td>
-              <td><?php echo $formattedDate  ?></td>
-              <td>
-                <button data-userID="<?php echo $offer->offer_user_id ?>" data-PropID="<?php echo $offer->offer_property_id ?>" class="btn-shape b-none bg-blue c-white mr-10     acceptOffer">قبول</button>
-                <button data-userID="<?php echo $offer->offer_user_id ?>" data-PropID="<?php echo $offer->offer_property_id ?>" class="btn-shape b-none bg-red c-white refuseOffer">رفض</button>
-              </td>
-            </tr>
-          <?php
-          endforeach;
-          ?>
-        </tbody>
-      </table>
+      <?php
+      foreach ($offers_data as $offer) :
+        $timestamp = strtotime($offer->offer_timestamp); // Convert string timestamp to integer
+        $formattedDate = date("Y-m-d", $timestamp);
+      ?>
+        <div class="offer_card" id="row_<?php echo $offer->offer_user_id ?>">
+          <h3> عرض بخصوص عقار <a href="<?php echo $prop_details_page ?>?PId=<?php echo $offer->offer_property_id ?>"><?php echo $offer->offer_property_id ?></a></h3>
+          <p class="m-0 p-10"> عرض من : <span><?php echo $offer->FullName ?> </span></p>
+          <div class="offer_content">
+            <h4>محتوي العرض</h4>
+            <p class="offer_text m-0"><?php echo $offer->offer_content ?></p>
+            <p class="posted_date">
+              <i class='fa-regular fa-clock'></i> <?php echo $formattedDate  ?>
+            </p>
+          </div>
+          <div class="status">
+            <p data-userID="<?php echo $offer->offer_user_id ?>" data-PropID="<?php echo $offer->offer_property_id ?>" class='offer_status success  acceptOffer'>قبول</p>
+            <p data-userID="<?php echo $offer->offer_user_id ?>" data-PropID="<?php echo $offer->offer_property_id ?>" class="delete-offer refuseOffer">رفض</p>
+          </div>
+        </div>
+      <?php
+      endforeach;
+      ?>
     </div>
   <?php
   else :

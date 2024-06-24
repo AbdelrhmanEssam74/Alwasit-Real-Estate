@@ -1229,7 +1229,7 @@ textarea::placeholder {
   font-size: 20px;
 }
 
-.update-message2 {
+/* .update-message2 {
   position: fixed;
   transform: translateY(550px);
   right: 40%;
@@ -1259,7 +1259,7 @@ textarea::placeholder {
   opacity: 0;
   transform: translateY(550px);
   transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-}
+} */
 .divTableCell.Furnished p {
   margin-right: 20px;
 }
